@@ -13,3 +13,5 @@ TARGET=${TARGET:="develop"}
 
 ${PYTHON} ${PYTHONFLAGS} setup.py ${TARGET}
 [ $? != 0 ] && echo "ERROR!!!" && exit 1
+
+exit 0
