@@ -1,6 +1,2 @@
-[global]
-name=@PACKAGE@
-version=@VERSION@
-
 [install]
 home=@prefix@

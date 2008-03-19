@@ -19,5 +19,6 @@ AM_INIT_AUTOMAKE(kochanski, 0.0.1)
 AC_CONFIG_FILES([
 	Makefile
 	setup.cfg
+	setup.py
 ])
 AC_OUTPUT
