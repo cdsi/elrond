@@ -24,23 +24,21 @@ class Person(Persistable):
 
 class testcase(unittest.TestCase):
 
+	Benchmark.enabled = True
+	Benchmark.categories = set(['SET', 'GET'])
+
 	def setUp(self):
-		pass
-
-	def tearDown(self):
-		pass
-
-	def testDB(self):
 		print
-
-		Benchmark.enabled = True
-		Benchmark.categories = set(['SET', 'GET'])
 
 		self.db = DB()
 		self.db.path = os.environ['KOCHANSKI_DB']
 		self.db.name = 'kochanski.db'
 		self.db.open()
 
+	def tearDown(self):
+		self.db.close()
+
+	def testDB(self):
 		name = u'Guido von Rossum'
 
 		@Benchmark(category=['SET'])
@@ -57,5 +55,3 @@ class testcase(unittest.TestCase):
 
 		testSet(name)
 		self.assertEqual(name, testGet())
-
-		self.db.close()
