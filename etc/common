@@ -1,3 +1,7 @@
+KOCHANSKI_DEPENDS="		\
+	python			\
+"
+
 # kochanski
 
 KOCHANSKI_HOME=${TOPLEVEL:=${KOCHANSKI_HOME}}
@@ -26,23 +30,53 @@ export KOCHANSKI_DB
 KOCHANSKI_LOG=${KOCHANSKI_VAR}/log
 export KOCHANSKI_LOG
 
+KOCHANSKI_CONFIGUREFLAGS="--prefix=${KOCHANSKI_HOME}" 
+export KOCHANSKI_CONFIGUREFLAGS
+
+# system
+
 PATH=${KOCHANSKI_BIN}:${PATH}
 export PATH
 
 LD_LIBRARY_PATH=${KOCHANSKI_LIB}:${LD_LIBRARY_PATH}
 export LD_LIBRARY_PATH
 
-PYTHONPATH=${LD_LIBRARY_PATH}:${PYTHONPATH}
-PYTHONPATH=${KOCHANSKI_LIB}/python:${PYTHONPATH}
-export PYTHONPATH
+for x in ${KOCHANSKI_DEPENDS}; do
+	[ ! -d /opt/${x} ] && continue
 
-KOCHANSKI_CONFIGUREFLAGS="--prefix=${KOCHANSKI_HOME}" 
-export KOCHANSKI_CONFIGUREFLAGS
+	PATH="/opt/${x}/bin:/opt/${x}/sbin:${PATH}"
+	export PATH
+
+	LD_LIBRARY_PATH="/opt/${x}/lib:${LD_LIBRARY_PATH}"
+	export LD_LIBRARY_PATH
+done
 
 # python
 
-PYTHON=python
+PYTHON_HOME=/opt/python
+export PYTHON_HOME
+
+PATH=${PYTHON_HOME}/bin:${PATH}
+export PATH
+
+PYTHON="$(which python)"
+export PYTHON
+
 PYTHONFLAGS=
+export PYTHONFLAGS
+
+PYTHONPATH=${LD_LIBRARY_PATH}:${PYTHONPATH}
+PYTHONPATH=${KOCHANSKI_LIB}:${KOCHANSKI_LIB}/python:${PYTHONPATH}
+export PYTHONPATH
+
+for x in ${KOCHANSKI_DEPENDS}; do
+	[ ! -d /opt/${x} ] && continue
+
+	PYTHONPATH=/opt/${x}/lib:/opt/${x}/lib/python:${PYTHONPATH}
+	export PYTHONPATH
+done
+
+# extras
 
 KOCHANSKI_EXTRAS="		\
 "
