@@ -1,0 +1,4 @@
+setVerbose -1 -1
+openContainer kochanski.dbxml
+query 'collection("dbxml:kochanski.dbxml")'
+quit
