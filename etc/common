@@ -46,3 +46,10 @@ export CONFIGUREFLAGS
 
 PYTHON=python
 PYTHONFLAGS=
+
+KOCHANSKI_EXTRAS="		\
+"
+for x in ${KOCHANSKI_EXTRAS}; do
+	TOPLEVEL=${KOCHANSKI_HOME}/extras/${x}
+	. ${TOPLEVEL}/etc/common
+done
