@@ -1,8 +1,8 @@
 #!/bin/bash
 
-KOCHANSKI_HOME=$(dirname $0)/..
-export KOCHANSKI_HOME
+ELROND_HOME=$(dirname $0)/..
+export ELROND_HOME
 
-. ${KOCHANSKI_HOME}/etc/common
+. ${ELROND_HOME}/etc/common
 
 exec ${PYTHON} ${PYTHONFLAGS} $*

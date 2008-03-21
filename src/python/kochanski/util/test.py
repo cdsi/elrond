@@ -1,7 +1,7 @@
 import time
 import unittest
 
-from kochanski.util import Benchmark, Property
+from elrond.util import Benchmark, Property
 
 class Power(object):
 

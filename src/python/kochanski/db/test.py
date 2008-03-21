@@ -2,8 +2,8 @@ import random
 import os
 import unittest
 
-from kochanski.db import DB, Persistable, Int, Str
-from kochanski.util import Benchmark
+from elrond.db import DB, Persistable, Int, Str
+from elrond.util import Benchmark
 
 class Person(Persistable):
 	
@@ -31,8 +31,8 @@ class testcase(unittest.TestCase):
 		print
 
 		self.db = DB()
-		self.db.path = os.environ['KOCHANSKI_DB']
-		self.db.name = 'kochanski.db'
+		self.db.path = os.environ['ELROND_DB']
+		self.db.name = 'elrond.db'
 		self.db.open()
 
 	def tearDown(self):

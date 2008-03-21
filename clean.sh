@@ -1,14 +1,14 @@
 #!/bin/bash
 
-KOCHANSKI_HOME=$(dirname $0)
-. ${KOCHANSKI_HOME}/etc/common
+ELROND_HOME=$(dirname $0)
+. ${ELROND_HOME}/etc/common
 
-for x in ${KOCHANSKI_EXTRAS}; do
-	${KOCHANSKI_HOME}/extras/${x}/clean.sh $*
+for x in ${ELROND_EXTRAS}; do
+	${ELROND_HOME}/extras/${x}/clean.sh $*
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 done
 
-cd ${KOCHANSKI_HOME}
+cd ${ELROND_HOME}
 
 TARGET="$1"
 TARGET=${TARGET:="clean"}

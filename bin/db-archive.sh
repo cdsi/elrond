@@ -1,9 +1,9 @@
 #!/bin/bash
 
-KOCHANSKI_HOME=$(dirname $0)/..
-export KOCHANSKI_HOME
+ELROND_HOME=$(dirname $0)/..
+export ELROND_HOME
 
-. ${KOCHANSKI_HOME}/etc/common
+. ${ELROND_HOME}/etc/common
 
-exec dbxml_dump -h ${KOCHANSKI_DB} ${KOCHANSKI_DB}/kochanski.dbxml \
-	> ${KOCHANSKI_DB}/kochanski.`date +'%F-%s'`.dbxml
+exec dbxml_dump -h ${ELROND_DB} ${ELROND_DB}/elrond.dbxml \
+	> ${ELROND_DB}/elrond.`date +'%F-%s'`.dbxml
