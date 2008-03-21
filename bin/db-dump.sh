@@ -1,9 +1,9 @@
 #!/bin/bash
 
-KOCHANSKI_HOME=$(dirname $0)/..
-export KOCHANSKI_HOME
+ELROND_HOME=$(dirname $0)/..
+export ELROND_HOME
 
-. ${KOCHANSKI_HOME}/etc/common
+. ${ELROND_HOME}/etc/common
 
-sqlite3 -init ${KOCHANSKI_ETC}/db-dump.sql ${KOCHANSKI_DB}/kochanski.db \
+sqlite3 -init ${ELROND_ETC}/db-dump.sql ${ELROND_DB}/elrond.db \
 	'.exit'

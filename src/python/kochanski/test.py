@@ -1,7 +1,7 @@
 import unittest
 
-from kochanski.db import test as dbtest
-from kochanski.util import test as utiltest
+from elrond.db import test as dbtest
+from elrond.util import test as utiltest
 
 def testsuite():
 	__testsuite = unittest.TestSuite()

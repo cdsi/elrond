@@ -1,4 +1,4 @@
 setVerbose -1 -1
-openContainer kochanski.dbxml
-query 'collection("dbxml:kochanski.dbxml")'
+openContainer elrond.dbxml
+query 'collection("dbxml:elrond.dbxml")'
 quit

@@ -1,7 +1,7 @@
 # The Storm ORM. See also: https://storm.canonical.com/
 import storm.locals as Storm
 
-from kochanski.util import Benchmark, Object
+from elrond.util import Benchmark, Object
 
 class Float(Storm.Float):
 
