@@ -9,7 +9,7 @@ from elrond.util import Benchmark
 from elrond.util import Benchmark, Property
 
 class Person(Persistable):
-        
+
         __storm_table__ = 'person'
 
         id = Int(primary=True)
