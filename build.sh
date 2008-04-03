@@ -10,6 +10,11 @@ done
 
 cd ${ELROND_HOME}
 
+if [ -x ${ELROND_HOME}/build-local.sh ]; then
+        ${ELROND_HOME}/build-local.sh
+        [ $? != 0 ] && echo "ERROR!!!" && exit 1
+fi
+
 EVERYTHING=1
 OPTION=$1
 
@@ -32,8 +37,6 @@ case "${OPTION}" in
 		JUST_JAVA=1
 	;;
 esac
-
-[ -x build-setup.sh ] && ${ELROND_HOME}/build-setup.sh
 
 if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	[ "${FORCE:=0}" != "0" ] || [ ! -f Makefile.in ] && ./bootstrap.sh
