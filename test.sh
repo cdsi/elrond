@@ -10,13 +10,40 @@ done
 
 cd ${ELROND_HOME}
 
-TARGET="$1"
-TARGET=${TARGET:="test"}
+EVERYTHING=1
+OPTION=$1
 
-db-delete.sh
-db-create.sh
+case "${OPTION}" in
+	*backends)
+		EVERYTHING=0
+		BACKENDS=1
+	;;
+	*python)
+		EVERYTHING=0
+		JUST_PYTHON=1
+	;;
+	*java)
+		EVERYTHING=0
+		JUST_JAVA=1
+	;;
+	*extensions)
+		EVERYTHING=0
+		JUST_PYTHON=1
+		JUST_JAVA=1
+	;;
+esac
 
-${PYTHON} ${PYTHONFLAGS} setup.py ${TARGET}
-[ $? != 0 ] && echo "ERROR!!!" && exit 1
+if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
+	true # TODO:
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
+fi
+if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
+        python.sh setup.py test
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
+fi
+if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
+	[ -f build.xml ] && ant.sh test
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
+fi
 
 exit 0

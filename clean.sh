@@ -10,13 +10,38 @@ done
 
 cd ${ELROND_HOME}
 
-TARGET="$1"
-TARGET=${TARGET:="clean"}
+EVERYTHING=1
+OPTION=$1
 
-${PYTHON} ${PYTHONFLAGS} setup.py ${TARGET}
-[ $? != 0 ] && echo "ERROR!!!" && exit 1
+case "${OPTION}" in
+	*backends)
+		EVERYTHING=0
+		BACKENDS=1
+	;;
+	*python)
+		EVERYTHING=0
+		JUST_PYTHON=1
+	;;
+	*java)
+		EVERYTHING=0
+		JUST_JAVA=1
+	;;
+	*extensions)
+		EVERYTHING=0
+		JUST_PYTHON=1
+		JUST_JAVA=1
+	;;
+esac
 
-make -k uninstall distclean
-[ $? != 0 ] && echo "ERROR!!!" && exit 1
-
-exit 0
+if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
+	[ -f build.xml ] && ant.sh clean
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
+fi
+if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
+	python.sh setup.py clean
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
+fi
+if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
+	make.sh -k uninstall distclean
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
+fi
