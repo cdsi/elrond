@@ -5,4 +5,5 @@ export ELROND_HOME
 
 . ${ELROND_HOME}/etc/common
 
-exec dbxml -h ${ELROND_DB} -s ${ELROND_ETC}/db-test.dbxml
+sqlite3 -init ${ELROND_ETC}/db-test.sql ${ELROND_DB}/elrond.db \
+	'.exit'
