@@ -34,7 +34,10 @@ case "${OPTION}" in
 esac
 
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
-	[ -f build.xml ] && ant.sh clean
+        if [ -f build.xml ]; then
+                ant.sh clean
+                [ $? != 0 ] && echo "ERROR!!!" && exit 1
+        fi
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
