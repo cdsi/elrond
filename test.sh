@@ -8,8 +8,6 @@ for x in ${ELROND_EXTRAS}; do
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 done
 
-cd ${ELROND_HOME}
-
 EVERYTHING=1
 OPTION=$1
 
@@ -32,6 +30,8 @@ case "${OPTION}" in
 		JUST_JAVA=1
 	;;
 esac
+
+cd ${ELROND_HOME}
 
 if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	true # TODO:
