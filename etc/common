@@ -1,11 +1,6 @@
-ELROND_DEPENDS="		\
-	python			\
-"
-
 # elrond
 
 ELROND_HOME=${TOPLEVEL:=${ELROND_HOME}}
-
 ELROND_HOME=$(cd ${ELROND_HOME}; pwd)
 export ELROND_HOME
 
@@ -30,12 +25,59 @@ export ELROND_DB
 ELROND_LOG=${ELROND_VAR}/log
 export ELROND_LOG
 
+ELROND_RUN=${ELROND_VAR}/run
+export ELROND_RUN
+
+ELROND_WWW=${ELROND_HOME}/www
+export ELROND_WWW
+
 ELROND_CONFIGUREFLAGS="--prefix=${ELROND_HOME}" 
 export ELROND_CONFIGUREFLAGS
 
-# system
+LOGFILE=${ELROND_LOG}/elrond.log
+export LOGFILE
+
+function record
+{
+	date		>> ${LOGFILE}
+	echo "$1"	>> ${LOGFILE}
+}
+
+function recorde
+{
+	record	"$1"
+	echo	"$1"
+}
+
+ELROND_DEPENDS="                \
+	binutils		\
+	gcc			\
+	swig			\
+	cairo			\
+	glib			\
+	atk			\
+	pango			\
+	gtk+			\
+	libglade		\
+	python			\
+	ant			\
+	java			\
+	netbeans		\
+	dbxml			\
+	nttcp			\
+	pcre			\
+	lighttpd		\
+	openssl		        \
+	neon		        \
+	subversion		\
+"
+
+# native
 
 PATH=${ELROND_BIN}:${PATH}
+export PATH
+
+PATH=/sbin:/usr/sbin:${PATH}
 export PATH
 
 LD_LIBRARY_PATH=${ELROND_LIB}:${LD_LIBRARY_PATH}
@@ -51,18 +93,40 @@ for x in ${ELROND_DEPENDS}; do
 	export LD_LIBRARY_PATH
 done
 
+SVNHOST=dev.creativedigitalsys.com
+
+SVN=$(which svn)
+SVNFLAGS=
+
+CC=$(which gcc)
+export CC
+
+CFLAGS=${CFLAGS:="-O0 -std=gnu99 -Wall -Werror"}
+
+if [ ! "${DEBUG}" = "" ]; then
+	CFLAGS="${CFLAGS} -g"
+fi
+
+export CFLAGS
+
+MAKE=$(which make)
+export MAKE
+
+MAKEFLAGS=${MAKEFLAGS:="-k"}
+export MAKEFLAGS
+
+SWIG=$(which swig)
+export SWIG
+
+SWIGFLAGS=
+export SWIGFLAGS
+
 # python
-
-PYTHON_HOME=/opt/python
-export PYTHON_HOME
-
-PATH=${PYTHON_HOME}/bin:${PATH}
-export PATH
 
 PYTHON="$(which python)"
 export PYTHON
 
-PYTHONFLAGS=
+PYTHONFLAGS="-t"
 export PYTHONFLAGS
 
 PYTHONPATH=${LD_LIBRARY_PATH}:${PYTHONPATH}
@@ -76,10 +140,103 @@ for x in ${ELROND_DEPENDS}; do
 	export PYTHONPATH
 done
 
+# java
+
+CLASSPATH=
+
+for p in ${ELROND_HOME}/dist/*.jar ${ELROND_HOME}/lib/java/*.jar; do
+	CLASSPATH="${p}:${CLASSPATH}"
+        export CLASSPATH
+done
+
+for x in ${ELROND_DEPENDS}; do
+	[ ! -d /opt/${x} ] && continue
+
+	for p in /opt/${x}/lib/*.jar; do
+		CLASSPATH="${p}:${CLASSPATH}"
+                export CLASSPATH
+	done
+done
+
+CLASSPATH="${CLASSPATH}:/usr/share/java/commons-cli.jar"
+CLASSPATH="${CLASSPATH}:/usr/share/java/commons-daemon.jar"
+
+CLASSPATH="${CLASSPATH}:/opt/netbeans-6.0/java1/modules/ext/AbsoluteLayout.jar"
+CLASSPATH="${CLASSPATH}:/opt/netbeans-6.0/platform7/modules/ext/swing-layout-1.0.3.jar"
+CLASSPATH="${CLASSPATH}:/opt/netbeans-6.0/java1/modules/ext/junit-4.1.jar"
+
+export CLASSPATH
+
+XXX="${JAVA_HOME}"
+
+# Debian/Ubuntu & Fedora Core x86
+XXX="${XXX} /usr/lib/jvm/java-6-sun"
+
+# Debian/Ubuntu & Fedora Core ppc
+XXX="${XXX} /usr/lib/j2sdk1.6-ibm"
+
+# Yellowdog 3/4
+XXX="${XXX} /opt/java"
+
+for x in ${XXX}; do
+	[ ! -d ${x} ] && continue
+
+	JAVA_HOME=${x}
+	export JAVA_HOME
+
+	break
+done
+
+PATH=${JAVA_HOME}/bin:${PATH}
+export PATH
+
+JAVA=$(which java)
+export JAVA
+
+JAVAFLAGS=
+JAVAFLAGS="${JAVAFLAGS} -Delrond.home=${ELROND_HOME}"
+JAVAFLAGS="${JAVAFLAGS} -Djava.library.path=${LD_LIBRARY_PATH}"
+JAVAFLAGS="${JAVAFLAGS} \
+	-Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
+
+if [ ! "${DEBUG}" = "" ]; then
+	JAVAFLAGS="${JAVAFLAGS}"
+	# JAVAFLAGS="${JAVAFLAGS} -Dcom.sun.management.jmxremote"
+	# JAVAFLAGS="${JAVAFLAGS} -Xdebug -agentlib:jdwp=transport=dt_socket,server=y,address=8000"
+fi
+
+export JAVAFLAGS
+
+ANT=$(which ant)
+export ANT
+
+ANTFLAGS="-Dplatform.home=\"${JAVA_HOME}\" -emacs"
+
+if [ ! "${DEBUG}" = "" ]; then
+	ANTFLAGS="${ANTFLAGS} -Djavac.debug=true"
+fi
+
+export ANTFLAGS
+
+JSVC= # TODO: $(which jsvc)
+export JSVC
+
+JSVCFLAGS=
+JSVCFLAGS="${JSVCFLAGS} ${JAVAFLAGS}"
+JSVCFLAGS="${JSVCFLAGS} -cp ${CLASSPATH} -user ${USER}"
+export JSVCFLAGS
+
+NETBEANS=$(which netbeans)
+export NETBEANS
+
+NETBEANSFLAGS=
+export NETBEANSFLAGS
+
 # extras
 
-ELROND_EXTRAS="		\
+ELROND_EXTRAS="                 \
 "
+
 for x in ${ELROND_EXTRAS}; do
 	TOPLEVEL=${ELROND_HOME}/extras/${x}
 	. ${TOPLEVEL}/etc/common
