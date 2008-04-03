@@ -1,4 +1,0 @@
-setVerbose -1 -1
-openContainer elrond.dbxml
-query 'collection("dbxml:elrond.dbxml")'
-quit
