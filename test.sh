@@ -42,7 +42,10 @@ if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
-	[ -f build.xml ] && ant.sh test
+        if [ -f build.xml ]; then
+                ant.sh test
+                [ $? != 0 ] && echo "ERROR!!!" && exit 1
+        fi
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 
