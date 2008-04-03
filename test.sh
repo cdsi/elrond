@@ -4,7 +4,7 @@ ELROND_HOME=$(dirname $0)
 . ${ELROND_HOME}/etc/common
 
 for x in ${ELROND_EXTRAS}; do
-	${ELROND_HOME}/extras/${x}/test.sh $*
+	${ELROND_HOME}/extras/${x}/test.sh "$@"
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 done
 
