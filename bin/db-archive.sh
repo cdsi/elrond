@@ -5,5 +5,5 @@ export ELROND_HOME
 
 . ${ELROND_HOME}/etc/common
 
-exec dbxml_dump -h ${ELROND_DB} ${ELROND_DB}/elrond.dbxml \
-	> ${ELROND_DB}/elrond.`date +'%F-%s'`.dbxml
+sqlite3 -init ${ELROND_ETC}/db-archive.sql ${ELROND_DB}/elrond.db \
+	'.exit' > ${ELROND_DB}/elrond.`date +'%F-%s'`.sql
