@@ -8,9 +8,9 @@ export ELROND_HOME
 ARCHIVE=$1
 
 if [ "${ARCHIVE}" = "" ]; then
-	echo "Usage: `basename $0` [archive]"
+	echo "Usage: $(basename $0) archive"
 	exit 1
 fi
 
-exec dbxml_load -h ${ELROND_DB} ${ELROND_DB}/elrond.dbxml \
-	< ${ARCHIVE}
+sqlite3 -init ${ELROND_ETC}/db-restore.sql ${ELROND_DB}/elrond.db \
+        < ${ARCHIVE}
