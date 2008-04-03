@@ -12,5 +12,5 @@ if [ "${ARCHIVE}" = "" ]; then
 	exit 1
 fi
 
-sqlite3 -init ${ELROND_ETC}/db-restore.sql ${ELROND_DB}/elrond.db \
+sqlite3 -init ${ELROND_ETC}/elrond-db-restore.sql ${ELROND_DB}/elrond.db \
         < ${ARCHIVE}

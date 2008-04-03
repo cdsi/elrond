@@ -5,4 +5,4 @@ export ELROND_HOME
 
 . ${ELROND_HOME}/etc/common
 
-sqlite3 -init ${ELROND_ETC}/db-shell.sql ${ELROND_DB}/elrond.db
+sqlite3 -init ${ELROND_ETC}/elrond-db-shell.sql ${ELROND_DB}/elrond.db
