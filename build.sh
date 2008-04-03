@@ -35,18 +35,6 @@ esac
 
 [ -x build-setup.sh ] && ${ELROND_HOME}/build-setup.sh
 
-echo -n "Delete the database? [y/N] "
-read answer
-case "${answer}" in
-	[yY]*)
-		echo "Deleting: ${ELROND_DB}"
-		rm -f "${ELROND_DB}"/*
-	;;
-esac
-
-elrond-db-load.sh > ${ELROND_LOG}/db.log 2>&1
-[ $? != 0 ] && grep 'ERROR!!!' ${ELROND_LOG}/db.log && exit 1
-
 if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	[ "${FORCE:=0}" != "0" ] || [ ! -f Makefile.in ] && ./bootstrap.sh
 	[ "${FORCE:=0}" != "0" ] || [ ! -f Makefile    ] && ./run-configure.sh
