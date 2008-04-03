@@ -8,8 +8,6 @@ for x in ${ELROND_EXTRAS}; do
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 done
 
-cd ${ELROND_HOME}
-
 if [ -x ${ELROND_HOME}/build-local.sh ]; then
         ${ELROND_HOME}/build-local.sh
         [ $? != 0 ] && echo "ERROR!!!" && exit 1
@@ -37,6 +35,8 @@ case "${OPTION}" in
 		JUST_JAVA=1
 	;;
 esac
+
+cd ${ELROND_HOME}
 
 if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	[ "${FORCE:=0}" != "0" ] || [ ! -f Makefile.in ] && ./bootstrap.sh
