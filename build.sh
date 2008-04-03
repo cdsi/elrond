@@ -44,7 +44,7 @@ case "${answer}" in
 	;;
 esac
 
-db-load.sh > ${ELROND_LOG}/db.log 2>&1
+elrond-db-load.sh > ${ELROND_LOG}/db.log 2>&1
 [ $? != 0 ] && grep 'ERROR!!!' ${ELROND_LOG}/db.log && exit 1
 
 if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
