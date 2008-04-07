@@ -1,0 +1,2 @@
+uninstall-local:
+	@true

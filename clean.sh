@@ -48,3 +48,5 @@ if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	make.sh -k uninstall distclean
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
+
+exit 0
