@@ -29,8 +29,10 @@ esac
 cd ${ELROND_HOME}
 
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
-	[ -f build.xml ] && ant.sh clean
-	[ $? != 0 ] && echo "ERROR!!!" && exit 1
+        if [ -f build.xml ]; then
+                ant.sh clean
+                [ $? != 0 ] && echo "ERROR!!!" && exit 1
+        fi
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
 	python.sh setup.py clean
