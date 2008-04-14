@@ -5,6 +5,6 @@ ELROND_HOME=$(dirname $0)
 
 cd ${ELROND_HOME}
 
-aclocal
+aclocal -I ${ELROND_M4}
 automake --add-missing --copy --force-missing --foreign
 autoconf
