@@ -3,11 +3,6 @@
 ELROND_HOME=$(dirname $0)
 . ${ELROND_HOME}/etc/common
 
-for x in ${ELROND_EXTRAS}; do
-	${ELROND_HOME}/extras/${x}/clean.sh "$@"
-	[ $? != 0 ] && echo "ERROR!!!" && exit 1
-done
-
 EVERYTHING=1
 OPTION=$1
 
@@ -34,10 +29,7 @@ esac
 cd ${ELROND_HOME}
 
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
-        if [ -f build.xml ]; then
-                ant.sh clean
-                [ $? != 0 ] && echo "ERROR!!!" && exit 1
-        fi
+	[ -f build.xml ] && ant.sh clean
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
@@ -47,6 +39,16 @@ fi
 if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	make.sh -k uninstall distclean
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
+fi
+
+for x in ${ELROND_EXTRAS}; do
+	${ELROND_HOME}/extras/${x}/clean.sh "$@"
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
+done
+
+if [ -x ${ELROND_HOME}/clean-local.sh ]; then
+        ${ELROND_HOME}/clean-local.sh
+        [ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 
 exit 0

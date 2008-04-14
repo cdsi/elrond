@@ -8,6 +8,11 @@ for x in ${ELROND_EXTRAS}; do
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 done
 
+if [ -x ${ELROND_HOME}/test-local.sh ]; then
+        ${ELROND_HOME}/test-local.sh
+        [ $? != 0 ] && echo "ERROR!!!" && exit 1
+fi
+
 EVERYTHING=1
 OPTION=$1
 
@@ -42,10 +47,7 @@ if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
-        if [ -f build.xml ]; then
-                ant.sh test
-                [ $? != 0 ] && echo "ERROR!!!" && exit 1
-        fi
+	[ -f build.xml ] && ant.sh test
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 
