@@ -28,6 +28,11 @@ esac
 
 cd ${ELROND_HOME}
 
+for x in ${ELROND_EXTRAS}; do
+	${ELROND_HOME}/extras/${x}/clean.sh "$@"
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
+done
+
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
         if [ -f build.xml ]; then
                 ant.sh clean
@@ -42,11 +47,6 @@ if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	make.sh -k uninstall distclean
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
-
-for x in ${ELROND_EXTRAS}; do
-	${ELROND_HOME}/extras/${x}/clean.sh "$@"
-	[ $? != 0 ] && echo "ERROR!!!" && exit 1
-done
 
 if [ -x ${ELROND_HOME}/clean-local.sh ]; then
         ${ELROND_HOME}/clean-local.sh
