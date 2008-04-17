@@ -5,7 +5,6 @@ import os
 import time
 
 from elrond.db import DB, Persistable, Int, Str
-from elrond.util import Benchmark
 from elrond.util import Benchmark, Property
 
 class Person(Persistable):
