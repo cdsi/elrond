@@ -3,6 +3,11 @@
 ELROND_HOME=$(dirname $0)
 . ${ELROND_HOME}/etc/common
 
+for x in ${ELROND_EXTRAS}; do
+	${ELROND_HOME}/extras/${x}/clean.sh "$@"
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
+done
+
 EVERYTHING=1
 OPTION=$1
 
@@ -27,11 +32,6 @@ case "${OPTION}" in
 esac
 
 cd ${ELROND_HOME}
-
-for x in ${ELROND_EXTRAS}; do
-	${ELROND_HOME}/extras/${x}/clean.sh "$@"
-	[ $? != 0 ] && echo "ERROR!!!" && exit 1
-done
 
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
         if [ -f build.xml ]; then
