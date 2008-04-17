@@ -104,7 +104,7 @@ SVNFLAGS=
 CC=$(which gcc)
 export CC
 
-CFLAGS=${CFLAGS:="-O0 -std=gnu99 -Wall -Werror"}
+CFLAGS=${CFLAGS:="-O0 -std=c99 -Wall -Werror"}
 
 if [ ! "${DEBUG}" = "" ]; then
 	CFLAGS="${CFLAGS} -g"
