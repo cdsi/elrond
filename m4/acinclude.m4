@@ -1,14 +1,3 @@
-AC_DEFUN([GANDALF_CYGWIN], [
-	AC_REQUIRE([AC_CANONICAL_HOST])[]dnl
-	CYGWIN=0
-	case "${host_os}" in
-	*cygwin*)
-		CYGWIN=1
-	;;
-	esac
-	AM_CONDITIONAL(CYGWIN, test ${CYGWIN} = 1)
-])
-
 AC_DEFUN([GANDALF_WITH_SWIG], [
 	gandalf_withval=yes
 
@@ -79,9 +68,6 @@ AC_DEFUN([GANDALF_WITH_JAVA], [
 		AC_REQUIRE([AC_CANONICAL_HOST])[]dnl
 
 		case "${host_os}" in
-		*cygwin*)
-			JAVA_OS=win32
-		;;
 		*darwin*)
 			JAVA_OS=darwin
 		;;
