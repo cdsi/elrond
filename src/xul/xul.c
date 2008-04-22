@@ -1,6 +1,5 @@
 #include "common.h"
 
-#if 0
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>
 #endif                          /* HAVE_STDLIB_H */
@@ -8,7 +7,6 @@
 #ifdef HAVE_STDIO_H
 #include <stdio.h>
 #endif                          /* HAVE_STDIO_H */
-#endif
 
 #ifdef HAVE_STRING_H
 #include <string.h>

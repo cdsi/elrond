@@ -4,7 +4,6 @@
 #include <stdio.h>
 #endif                          /* HAVE_STDIO_H */
 
-#if 0
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>
 #endif                          /* HAVE_STDLIB_H */
@@ -12,7 +11,6 @@
 #ifdef HAVE_STRING_H
 #include <string.h>
 #endif                          /* HAVE_STRING_H */
-#endif
 
 #include "xul.h"
 
