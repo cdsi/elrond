@@ -1,3 +1,11 @@
+AC_DEFUN([XX_CHECK_GLIB], [
+        AM_PATH_GLIB_2_0([2.16.0])
+
+        if test "${GLIB_CFLAGS}" = "" || test "${GLIB_LIBS}" = ""; then
+                AC_MSG_ERROR([unable to locate glib or incorrect version])
+        fi
+])
+
 AC_DEFUN([GANDALF_WITH_SWIG], [
 	gandalf_withval=yes
 

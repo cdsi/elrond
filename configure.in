@@ -5,20 +5,42 @@ AC_PREREQ(2.59)
 AC_INIT
 AC_CONFIG_SRCDIR([configure.in])
 AM_INIT_AUTOMAKE(elrond, 0.0.1)
+AM_CONFIG_HEADER(src/include/config.h)
 
 # Checks for programs.
+AC_PROG_CXX
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_INSTALL
+AC_PROG_LIBTOOL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+AC_PROG_RANLIB
 
 # Checks for libraries.
+AC_CHECK_LIB(m, sqrt)
+XX_CHECK_GLIB
 
 # Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS([errno.h getopt.h math.h stdarg.h stdio.h stdlib.h string.h strings.h time.h unistd.h])
+AC_CHECK_HEADERS([sys/select.h sys/time.h sys/types.h])
+AC_CHECK_HEADERS([sys/ipc.h sys/sem.h sys/shm.h], [], [], [
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif                          /* HAVE_SYS_TYPES_H */
+])
 
 # Checks for typedefs, structures, and compiler characteristics.
 
 # Checks for library functions.
+AC_CHECK_FUNCS([atoff pow sqrt strdup])
 
 AC_CONFIG_FILES([
-	Makefile
 	setup.cfg
 	setup.py
+	Makefile
+	src/Makefile
+	src/xul/Makefile
 ])
 AC_OUTPUT

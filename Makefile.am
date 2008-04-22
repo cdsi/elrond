@@ -1,2 +1,1 @@
-uninstall-local:
-	@true
+SUBDIRS = src
