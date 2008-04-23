@@ -37,8 +37,11 @@ typedef enum {
 #define xul_verbose_log_8(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_8, __VA_ARGS__)
 #define xul_verbose_log_9(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_9, __VA_ARGS__)
 
+#define xul_verbose_handler_f GLogFunc
+
 typedef struct {
         xul_verbose_level_e level;
+        xul_verbose_handler_f handler;
         FILE *fp;
 } xul_verbose_t;
 
@@ -54,12 +57,16 @@ typedef struct {
 
 #define XUL_APIEXPORT
 
-XUL_APIEXPORT xul_t *xul_init();
-XUL_APIEXPORT void xul_delete(xul_t *);
+XUL_APIEXPORT xul_verbose_level_e xul_verbose_level_conv(xul_t *, gint);
 XUL_APIEXPORT xul_verbose_level_e xul_verbose_level_get(xul_t *);
 XUL_APIEXPORT void xul_verbose_level_set(xul_t *, xul_verbose_level_e);
 XUL_APIEXPORT void xul_verbose_output_open(xul_t *, const gchar *);
 XUL_APIEXPORT void xul_verbose_output_close(xul_t *);
+XUL_APIEXPORT void xul_verbose_handler_default(const gchar *, GLogLevelFlags, const gchar *, gpointer);
+XUL_APIEXPORT xul_verbose_handler_f xul_verbose_handler_get(xul_t *);
+XUL_APIEXPORT void xul_verbose_handler_set(xul_t *, xul_verbose_handler_f);
+XUL_APIEXPORT xul_t *xul_init();
+XUL_APIEXPORT void xul_delete(xul_t *);
 
 #endif                          /* XUL_H */
 
