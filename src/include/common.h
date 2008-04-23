@@ -13,9 +13,6 @@
 #define atoff(x)	strtof(x, NULL)
 #endif                          /* ! HAVE_ATOFF */
 
-#include <stdint.h>
-#include <glib.h>
-
 #endif                          /* ! COMMON_H */
 
 /*

@@ -37,6 +37,10 @@ main(int argc, char **argv)
 
         xul_t *xul = xul_init();
 
+        xul_verbose_output_open(xul, "xultool.log");
+        xul_verbose_level_set(xul, XUL_VERBOSE_LEVEL_WARNING);
+        xul_verbose_warning("xul 0x%lX", (unsigned long)xul);
+
         xul_delete(xul);
 }
 
