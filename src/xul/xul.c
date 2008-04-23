@@ -19,22 +19,6 @@
  * XUL Verbose API
  */
 
-xul_verbose_t *
-verbose_alloc()
-{
-        xul_verbose_t *verbose = (xul_verbose_t *) malloc(sizeof(xul_verbose_t));
-
-        memset(verbose, 0, sizeof(xul_verbose_t));
-
-        return verbose;
-}
-
-void
-verbose_free(xul_verbose_t * verbose)
-{
-        free(verbose);
-}
-
 XUL_APIEXPORT int32_t
 xul_verbose_level_get(xul_t * xul)
 {
@@ -76,6 +60,23 @@ xul_verbose_output_close(xul_t * xul)
         xul->rc = XUL_SUCCESS;
 }
 
+xul_verbose_t *
+verbose_alloc()
+{
+        xul_verbose_t *verbose = (xul_verbose_t *) malloc(sizeof(xul_verbose_t));
+
+        memset(verbose, 0, sizeof(xul_verbose_t));
+        verbose->level = XUL_VERBOSE_LEVEL_0;
+
+        return verbose;
+}
+
+void
+verbose_free(xul_verbose_t * verbose)
+{
+        free(verbose);
+}
+
 void
 verbose_handler(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer data)
 {
@@ -97,7 +98,7 @@ verbose_init(xul_t * xul)
         g_assert(XUL_IS_VALID(xul));
 
         xul->verbose->fp = stdout;
-        g_log_set_handler("XUL", G_LOG_LEVEL_MASK, verbose_handler, xul);
+        g_log_set_handler(XUL_VERBOSE_DOMAIN, G_LOG_LEVEL_MASK, verbose_handler, xul);
 }
 
 void
@@ -105,7 +106,7 @@ verbose_delete(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        fclose(xul->verbose->fp);
+        xul_verbose_output_close(xul);
 }
 
 /*
@@ -119,6 +120,7 @@ xul_alloc()
 
         memset(xul, 0, sizeof(xul_t));
         xul->magic = XUL_MAGIC;
+
         xul->verbose = verbose_alloc();
 
         return xul;
@@ -130,6 +132,7 @@ xul_free(xul_t * xul)
         g_assert(XUL_IS_VALID(xul));
 
         verbose_free(xul->verbose);
+
         free(xul);
 }
 
@@ -149,6 +152,7 @@ xul_delete(xul_t * xul)
         g_assert(XUL_IS_VALID(xul));
 
         verbose_delete(xul);
+
         xul_free(xul);
 }
 
