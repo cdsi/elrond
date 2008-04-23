@@ -22,6 +22,50 @@
  */
 
 XUL_APIEXPORT xul_verbose_level_e
+xul_verbose_level_conv(xul_t * xul, gint verbose)
+{
+        xul_verbose_level_e level = XUL_VERBOSE_LEVEL_0;
+
+        switch (verbose) {
+        case 0:
+                level = XUL_VERBOSE_LEVEL_0;
+                break;
+        case 1:
+                level = XUL_VERBOSE_LEVEL_1;
+                break;
+        case 2:
+                level = XUL_VERBOSE_LEVEL_2;
+                break;
+        case 3:
+                level = XUL_VERBOSE_LEVEL_3;
+                break;
+        case 4:
+                level = XUL_VERBOSE_LEVEL_4;
+                break;
+        case 5:
+                level = XUL_VERBOSE_LEVEL_5;
+                break;
+        case 6:
+                level = XUL_VERBOSE_LEVEL_6;
+                break;
+        case 7:
+                level = XUL_VERBOSE_LEVEL_7;
+                break;
+        case 8:
+                level = XUL_VERBOSE_LEVEL_8;
+                break;
+        case 9:
+                level = XUL_VERBOSE_LEVEL_9;
+                break;
+        default:
+                level = XUL_VERBOSE_LEVEL_0;
+                break;
+        }
+
+        return level;
+}
+
+XUL_APIEXPORT xul_verbose_level_e
 xul_verbose_level_get(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
@@ -62,6 +106,37 @@ xul_verbose_output_close(xul_t * xul)
         xul->rc = XUL_SUCCESS;
 }
 
+XUL_APIEXPORT void
+xul_verbose_handler_default(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer data)
+{
+        xul_t *xul = (xul_t *) data;
+
+        g_assert(XUL_IS_VALID(xul));
+
+        if (xul->verbose->level < level) {
+                return;
+        }
+
+        fprintf(xul->verbose->fp, "%s\n", message);
+        fflush(xul->verbose->fp);
+}
+
+XUL_APIEXPORT xul_verbose_handler_f
+xul_verbose_handler_get(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        return xul->verbose->handler;
+}
+
+XUL_APIEXPORT void
+xul_verbose_handler_set(xul_t * xul, xul_verbose_handler_f handler)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        g_log_set_handler(XUL_VERBOSE_DOMAIN, G_LOG_LEVEL_MASK, handler, xul);
+}
+
 xul_verbose_t *
 verbose_alloc()
 {
@@ -80,27 +155,12 @@ verbose_free(xul_verbose_t * verbose)
 }
 
 void
-verbose_handler(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer data)
-{
-        xul_t *xul = (xul_t *) data;
-
-        g_assert(XUL_IS_VALID(xul));
-
-        if (xul->verbose->level < level) {
-                return;
-        }
-
-        fprintf(xul->verbose->fp, "[%s] %s\n", domain, message);
-        fflush(xul->verbose->fp);
-}
-
-void
 verbose_init(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
 
         xul->verbose->fp = stdout;
-        g_log_set_handler(XUL_VERBOSE_DOMAIN, G_LOG_LEVEL_MASK, verbose_handler, xul);
+        xul_verbose_handler_set(xul, xul_verbose_handler_default);
 }
 
 void
