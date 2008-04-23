@@ -12,6 +12,8 @@
 #include <string.h>
 #endif                          /* HAVE_STRING_H */
 
+#include <glib.h>
+
 #define XUL_EXPORT_SYMBOLS 1
 #include "xul.h"
 
@@ -19,7 +21,7 @@
  * XUL Verbose API
  */
 
-XUL_APIEXPORT int32_t
+XUL_APIEXPORT xul_verbose_level_e
 xul_verbose_level_get(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
@@ -28,7 +30,7 @@ xul_verbose_level_get(xul_t * xul)
 }
 
 XUL_APIEXPORT void
-xul_verbose_level_set(xul_t * xul, int32_t level)
+xul_verbose_level_set(xul_t * xul, xul_verbose_level_e level)
 {
         g_assert(XUL_IS_VALID(xul));
 
@@ -36,7 +38,7 @@ xul_verbose_level_set(xul_t * xul, int32_t level)
 }
 
 XUL_APIEXPORT void
-xul_verbose_output_open(xul_t * xul, const char *filename)
+xul_verbose_output_open(xul_t * xul, const gchar * filename)
 {
         g_assert(XUL_IS_VALID(xul));
 
