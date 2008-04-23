@@ -1,10 +1,9 @@
 #ifndef XUL_H
 #define XUL_H 1
 
-#include <stdint.h>
 #include <glib.h>
 
-#define XUL_MAGIC 0x1EADBEEF
+#define XUL_MAGIC 0xDEADBEEF
 
 typedef enum {
         XUL_SUCCESS = 0,
@@ -44,7 +43,7 @@ typedef struct {
 } xul_verbose_t;
 
 typedef struct {
-        uint32_t magic;
+        guint32 magic;
         xul_rc_e rc;
         xul_verbose_t *verbose;
 } xul_t;
@@ -57,9 +56,9 @@ typedef struct {
 
 XUL_APIEXPORT xul_t *xul_init();
 XUL_APIEXPORT void xul_delete(xul_t *);
-XUL_APIEXPORT int32_t xul_verbose_level_get(xul_t *);
-XUL_APIEXPORT void xul_verbose_level_set(xul_t *, int32_t);
-XUL_APIEXPORT void xul_verbose_output_open(xul_t *, const char *);
+XUL_APIEXPORT xul_verbose_level_e xul_verbose_level_get(xul_t *);
+XUL_APIEXPORT void xul_verbose_level_set(xul_t *, xul_verbose_level_e);
+XUL_APIEXPORT void xul_verbose_output_open(xul_t *, const gchar *);
 XUL_APIEXPORT void xul_verbose_output_close(xul_t *);
 
 #endif                          /* XUL_H */
