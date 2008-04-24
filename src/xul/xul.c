@@ -82,9 +82,25 @@ xul_verbose_level_set(xul_t * xul, xul_verbose_level_e level)
 }
 
 XUL_APIEXPORT void
+xul_verbose_output_close(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        if (!xul->verbose->fp) {
+                return;
+        }
+
+        fclose(xul->verbose->fp);
+
+        xul->rc = XUL_SUCCESS;
+}
+
+XUL_APIEXPORT void
 xul_verbose_output_open(xul_t * xul, const gchar * filename)
 {
         g_assert(XUL_IS_VALID(xul));
+
+        xul_verbose_output_close(xul);
 
         xul->verbose->fp = fopen(filename, "a+");
 
@@ -92,16 +108,6 @@ xul_verbose_output_open(xul_t * xul, const gchar * filename)
                 xul->rc = XUL_EFOPEN;
                 return;
         }
-
-        xul->rc = XUL_SUCCESS;
-}
-
-XUL_APIEXPORT void
-xul_verbose_output_close(xul_t * xul)
-{
-        g_assert(XUL_IS_VALID(xul));
-
-        fclose(xul->verbose->fp);
 
         xul->rc = XUL_SUCCESS;
 }
@@ -137,6 +143,12 @@ xul_verbose_handler_set(xul_t * xul, xul_verbose_handler_f handler)
         g_log_set_handler(XUL_VERBOSE_DOMAIN, G_LOG_LEVEL_MASK, handler, xul);
 }
 
+void
+verbose_free(xul_verbose_t * verbose)
+{
+        free(verbose);
+}
+
 xul_verbose_t *
 verbose_alloc()
 {
@@ -149,21 +161,6 @@ verbose_alloc()
 }
 
 void
-verbose_free(xul_verbose_t * verbose)
-{
-        free(verbose);
-}
-
-void
-verbose_init(xul_t * xul)
-{
-        g_assert(XUL_IS_VALID(xul));
-
-        xul->verbose->fp = stdout;
-        xul_verbose_handler_set(xul, xul_verbose_handler_default);
-}
-
-void
 verbose_delete(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
@@ -171,9 +168,28 @@ verbose_delete(xul_t * xul)
         xul_verbose_output_close(xul);
 }
 
+void
+verbose_init(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        xul_verbose_handler_set(xul, xul_verbose_handler_default);
+        xul_verbose_output_open(xul, "/dev/stdout");
+}
+
 /*
  * XUL API
  */
+
+void
+xul_free(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        verbose_free(xul->verbose);
+
+        free(xul);
+}
 
 xul_t *
 xul_alloc()
@@ -188,14 +204,14 @@ xul_alloc()
         return xul;
 }
 
-void
-xul_free(xul_t * xul)
+XUL_APIEXPORT void
+xul_delete(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        verbose_free(xul->verbose);
+        verbose_delete(xul);
 
-        free(xul);
+        xul_free(xul);
 }
 
 XUL_APIEXPORT xul_t *
@@ -206,16 +222,6 @@ xul_init()
         verbose_init(xul);
 
         return xul;
-}
-
-XUL_APIEXPORT void
-xul_delete(xul_t * xul)
-{
-        g_assert(XUL_IS_VALID(xul));
-
-        verbose_delete(xul);
-
-        xul_free(xul);
 }
 
 /*
