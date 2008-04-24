@@ -46,9 +46,14 @@ typedef struct {
 } xul_verbose_t;
 
 typedef struct {
+        GKeyFile *keyfile;
+} xul_prefs_t;
+
+typedef struct {
         guint32 magic;
         xul_rc_e rc;
         xul_verbose_t *verbose;
+        xul_prefs_t *prefs;
         gpointer *userdata;
 } xul_t;
 
@@ -61,11 +66,15 @@ typedef struct {
 XUL_APIEXPORT xul_verbose_level_e xul_verbose_level_conv(xul_t *, gint);
 XUL_APIEXPORT xul_verbose_level_e xul_verbose_level_get(xul_t *);
 XUL_APIEXPORT void xul_verbose_level_set(xul_t *, xul_verbose_level_e);
-XUL_APIEXPORT void xul_verbose_output_open(xul_t *, const gchar *);
 XUL_APIEXPORT void xul_verbose_output_close(xul_t *);
+XUL_APIEXPORT void xul_verbose_output_open(xul_t *, const gchar *);
 XUL_APIEXPORT void xul_verbose_handler_default(const gchar *, GLogLevelFlags, const gchar *, gpointer);
 XUL_APIEXPORT xul_verbose_handler_f xul_verbose_handler_get(xul_t *);
 XUL_APIEXPORT void xul_verbose_handler_set(xul_t *, xul_verbose_handler_f);
+XUL_APIEXPORT void xul_prefs_close(xul_t *);
+XUL_APIEXPORT void xul_prefs_open(xul_t *, const gchar *);
+XUL_APIEXPORT guint32 xul_prefs_guint32_get(xul_t *, const gchar *, const gchar *);
+XUL_APIEXPORT void xul_prefs_guint32_set(xul_t *, const gchar *, const gchar *, guint32);
 XUL_APIEXPORT gpointer *xul_userdata_get(xul_t *);
 XUL_APIEXPORT void xul_userdata_set(xul_t *, gpointer *);
 XUL_APIEXPORT xul_t *xul_init();

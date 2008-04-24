@@ -96,13 +96,13 @@ xul_verbose_output_close(xul_t * xul)
 }
 
 XUL_APIEXPORT void
-xul_verbose_output_open(xul_t * xul, const gchar * filename)
+xul_verbose_output_open(xul_t * xul, const gchar * output)
 {
         g_assert(XUL_IS_VALID(xul));
 
         xul_verbose_output_close(xul);
 
-        xul->verbose->fp = fopen(filename, "a+");
+        xul->verbose->fp = fopen(output, "a+");
 
         if (!xul->verbose->fp) {
                 xul->rc = XUL_EFOPEN;
@@ -178,7 +178,85 @@ verbose_init(xul_t * xul)
         g_assert(XUL_IS_VALID(xul));
 
         xul_verbose_handler_set(xul, xul_verbose_handler_default);
+        xul_verbose_level_set(xul, XUL_VERBOSE_LEVEL_0);
         xul_verbose_output_open(xul, "/dev/stdout");
+}
+
+/*
+ * XUL Prefs API
+ */
+
+XUL_APIEXPORT void
+xul_prefs_close(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        /* NOOP */
+}
+
+XUL_APIEXPORT void
+xul_prefs_open(xul_t * xul, const gchar * keyfile)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        GError *error = NULL;
+
+        if (!g_key_file_load_from_file(xul->prefs->keyfile, keyfile, G_KEY_FILE_NONE, &error)) {
+                xul->rc = XUL_ERROR;
+                return;
+        }
+
+        xul->rc = XUL_SUCCESS;
+}
+
+XUL_APIEXPORT guint32
+xul_prefs_guint32_get(xul_t * xul, const gchar * group, const gchar * key)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        return g_key_file_get_integer(xul->prefs->keyfile, group, key, NULL);
+}
+
+XUL_APIEXPORT void
+xul_prefs_guint32_set(xul_t * xul, const gchar * group, const gchar * key, guint32 value)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        return g_key_file_set_integer(xul->prefs->keyfile, group, key, value);
+}
+
+void
+prefs_free(xul_prefs_t * prefs)
+{
+        g_key_file_free(prefs->keyfile);
+        free(prefs);
+}
+
+xul_prefs_t *
+prefs_alloc()
+{
+        xul_prefs_t *prefs = (xul_prefs_t *) malloc(sizeof(xul_prefs_t));
+
+        memset(prefs, 0, sizeof(xul_prefs_t));
+        prefs->keyfile = g_key_file_new();
+
+        return prefs;
+}
+
+void
+prefs_delete(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        xul_prefs_close(xul);
+}
+
+void
+prefs_init(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        /* NOOP */
 }
 
 /*
@@ -207,6 +285,7 @@ xul_free(xul_t * xul)
         g_assert(XUL_IS_VALID(xul));
 
         verbose_free(xul->verbose);
+        prefs_free(xul->prefs);
 
         free(xul);
 }
@@ -220,6 +299,7 @@ xul_alloc()
         xul->magic = XUL_MAGIC;
 
         xul->verbose = verbose_alloc();
+        xul->prefs = prefs_alloc();
 
         return xul;
 }
@@ -230,6 +310,7 @@ xul_delete(xul_t * xul)
         g_assert(XUL_IS_VALID(xul));
 
         verbose_delete(xul);
+        prefs_delete(xul);
 
         xul_free(xul);
 }
@@ -240,6 +321,7 @@ xul_init()
         xul_t *xul = xul_alloc();
 
         verbose_init(xul);
+        prefs_init(xul);
 
         return xul;
 }

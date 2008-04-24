@@ -85,23 +85,22 @@ main(int argc, char **argv)
                 exit(1);
         }
 
-        const gchar *output = g_strconcat(getenv("ELROND_LOG"), G_DIR_SEPARATOR_S, "xultool.log", NULL);
-
         xul_t *xul = xul_init();
 
         xul_userdata_set(xul, (gpointer *) & userdata);
 
+        const gchar *prefs = g_strconcat(getenv("ELROND_ETC"), G_DIR_SEPARATOR_S, "xultool.ini", NULL);
+
+        xul_prefs_open(xul, prefs);
+
+        guint32 iqvals = xul_prefs_guint32_get(xul, "data", "iqvals");
+
+        xul_verbose_log_0("iqvals = 0x%08X", iqvals);
+
         xul_verbose_handler_set(xul, verbose_handler_redacted);
-        xul_verbose_level_set(xul, XUL_VERBOSE_LEVEL_0);
-
-        xul_verbose_output_open(xul, "/dev/stdout");
-        xul_verbose_log_0("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0x%lX", (unsigned long)xul);
-
-        xul_verbose_output_open(xul, "/dev/stderr");
-        xul_verbose_log_0("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0x%lX", (unsigned long)xul);
-
-        xul_verbose_handler_set(xul, xul_verbose_handler_default);
         xul_verbose_level_set(xul, xul_verbose_level_conv(xul, verbose));
+
+        const gchar *output = g_strconcat(getenv("ELROND_LOG"), G_DIR_SEPARATOR_S, "xultool.log", NULL);
 
         xul_verbose_output_open(xul, output);
         xul_verbose_log_5("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0x%lX", (unsigned long)xul);
