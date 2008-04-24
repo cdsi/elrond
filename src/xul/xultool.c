@@ -85,6 +85,8 @@ main(int argc, char **argv)
                 exit(1);
         }
 
+        const gchar *output = g_strconcat(getenv("ELROND_LOG"), G_DIR_SEPARATOR_S, "xultool.log", NULL);
+
         xul_t *xul = xul_init();
 
         xul_userdata_set(xul, (gpointer *) & userdata);
@@ -101,9 +103,7 @@ main(int argc, char **argv)
         xul_verbose_handler_set(xul, xul_verbose_handler_default);
         xul_verbose_level_set(xul, xul_verbose_level_conv(xul, verbose));
 
-        xul_verbose_output_open(xul,
-                                (const gchar *)g_strconcat(getenv("ELROND_LOG"), G_DIR_SEPARATOR_S,
-                                                           "xultool.log", NULL));
+        xul_verbose_output_open(xul, output);
         xul_verbose_log_5("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0x%lX", (unsigned long)xul);
 
         xul_delete(xul);
