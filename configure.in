@@ -37,11 +37,11 @@ AC_CHECK_HEADERS([sys/ipc.h sys/sem.h sys/shm.h], [], [], [
 AC_CHECK_FUNCS([atoff pow sqrt strdup])
 
 AC_CONFIG_FILES([
-	setup.cfg
-	setup.py
-	Makefile
+        setup.cfg
+        setup.py
+        Makefile
         etc/xultool.ini
-	src/Makefile
-	src/xul/Makefile
+        src/Makefile
+        src/xul/Makefile
 ])
 AC_OUTPUT
