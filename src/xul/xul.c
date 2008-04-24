@@ -113,9 +113,9 @@ xul_verbose_output_open(xul_t * xul, const gchar * filename)
 }
 
 XUL_APIEXPORT void
-xul_verbose_handler_default(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer data)
+xul_verbose_handler_default(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer __xul)
 {
-        xul_t *xul = (xul_t *) data;
+        xul_t *xul = (xul_t *) __xul;
 
         g_assert(XUL_IS_VALID(xul));
 

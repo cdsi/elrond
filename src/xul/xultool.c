@@ -23,9 +23,9 @@ typedef struct {
 userdata_t userdata;
 
 void
-verbose_handler_redacted(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer data)
+verbose_handler_redacted(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer __xul)
 {
-        xul_t *xul = (xul_t *) data;
+        xul_t *xul = (xul_t *) __xul;
 
         g_assert(XUL_IS_VALID(xul));
 
