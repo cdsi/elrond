@@ -119,7 +119,11 @@ xul_verbose_handler_default(const gchar * domain, GLogLevelFlags level, const gc
 
         g_assert(XUL_IS_VALID(xul));
 
-        if (xul->verbose->level < level) {
+        if (xul_verbose_level_get(xul) < level) {
+                return;
+        }
+
+        if (!xul->verbose->fp) {
                 return;
         }
 
