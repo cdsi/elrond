@@ -29,7 +29,11 @@ verbose_handler_redacted(const gchar * domain, GLogLevelFlags level, const gchar
 
         g_assert(XUL_IS_VALID(xul));
 
-        if (xul->verbose->level < level) {
+        if (xul_verbose_level_get(xul) < level) {
+                return;
+        }
+
+        if (!xul->verbose->fp) {
                 return;
         }
 
@@ -97,7 +101,9 @@ main(int argc, char **argv)
         xul_verbose_handler_set(xul, xul_verbose_handler_default);
         xul_verbose_level_set(xul, xul_verbose_level_conv(xul, verbose));
 
-        xul_verbose_output_open(xul, "xultool.log");
+        xul_verbose_output_open(xul,
+                                (const gchar *)g_strconcat(getenv("ELROND_LOG"), G_DIR_SEPARATOR_S,
+                                                           "xultool.log", NULL));
         xul_verbose_log_5("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0x%lX", (unsigned long)xul);
 
         xul_delete(xul);
