@@ -49,6 +49,7 @@ typedef struct {
         guint32 magic;
         xul_rc_e rc;
         xul_verbose_t *verbose;
+        gpointer *userdata;
 } xul_t;
 
 #define XUL_IS_VALID(x) ((x) && ((x)->magic == XUL_MAGIC))
@@ -65,6 +66,8 @@ XUL_APIEXPORT void xul_verbose_output_close(xul_t *);
 XUL_APIEXPORT void xul_verbose_handler_default(const gchar *, GLogLevelFlags, const gchar *, gpointer);
 XUL_APIEXPORT xul_verbose_handler_f xul_verbose_handler_get(xul_t *);
 XUL_APIEXPORT void xul_verbose_handler_set(xul_t *, xul_verbose_handler_f);
+XUL_APIEXPORT gpointer *xul_userdata_get(xul_t *);
+XUL_APIEXPORT void xul_userdata_set(xul_t *, gpointer *);
 XUL_APIEXPORT xul_t *xul_init();
 XUL_APIEXPORT void xul_delete(xul_t *);
 

@@ -16,6 +16,12 @@
 
 #include "xul.h"
 
+typedef struct {
+        gint32 counter;
+} userdata_t;
+
+userdata_t userdata;
+
 void
 verbose_handler_redacted(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer data)
 {
@@ -46,7 +52,9 @@ verbose_handler_redacted(const gchar * domain, GLogLevelFlags level, const gchar
                 }
         }
 
-        fprintf(xul->verbose->fp, "%s\n", buffer);
+        userdata_t *userdata = (userdata_t *) xul_userdata_get(xul);
+
+        fprintf(xul->verbose->fp, "[%04d] %s\n", userdata->counter++, buffer);
         fflush(xul->verbose->fp);
 
         free(buffer);
@@ -74,6 +82,8 @@ main(int argc, char **argv)
         }
 
         xul_t *xul = xul_init();
+
+        xul_userdata_set(xul, (gpointer *) & userdata);
 
         xul_verbose_handler_set(xul, verbose_handler_redacted);
         xul_verbose_level_set(xul, XUL_VERBOSE_LEVEL_0);
