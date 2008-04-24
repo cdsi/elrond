@@ -29,15 +29,19 @@ verbose_handler_redacted(const gchar * domain, GLogLevelFlags level, const gchar
 
         gchar *buffer = g_strdup(message);
 
-        for (int i = 0; buffer[i] != '\0'; i++) {
+        for (int i = 0; buffer[i]; i++) {
                 switch (g_ascii_toupper(buffer[i])) {
                 case 'A':
                 case 'E':
                 case 'I':
                 case 'O':
                 case 'U':
-                case 'Y':
                         buffer[i] = '.';
+                        break;
+                case 'Y':
+                        if (!(i % 2)) {
+                                buffer[i] = '.';
+                        }
                         break;
                 }
         }
@@ -71,23 +75,20 @@ main(int argc, char **argv)
 
         xul_t *xul = xul_init();
 
-        xul_verbose_handler_set(xul, xul_verbose_handler_default);
-        xul_verbose_output_open(xul, "/dev/stdout");
-
-        xul_verbose_level_set(xul, XUL_VERBOSE_LEVEL_0);
-        xul_verbose_log_0("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0x%lX", (unsigned long)xul);
-
         xul_verbose_handler_set(xul, verbose_handler_redacted);
-        xul_verbose_output_open(xul, "/dev/stderr");
+        xul_verbose_level_set(xul, XUL_VERBOSE_LEVEL_0);
 
-        xul_verbose_level_set(xul, xul_verbose_level_conv(xul, verbose));
-        xul_verbose_log_5("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0x%lX", (unsigned long)xul);
+        xul_verbose_output_open(xul, "/dev/stdout");
+        xul_verbose_log_0("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0x%lX", (unsigned long)xul);
+
+        xul_verbose_output_open(xul, "/dev/stderr");
+        xul_verbose_log_0("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0x%lX", (unsigned long)xul);
 
         xul_verbose_handler_set(xul, xul_verbose_handler_default);
-        xul_verbose_output_open(xul, "xultool.log");
+        xul_verbose_level_set(xul, xul_verbose_level_conv(xul, verbose));
 
-        xul_verbose_level_set(xul, XUL_VERBOSE_LEVEL_0);
-        xul_verbose_log_0("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0x%lX", (unsigned long)xul);
+        xul_verbose_output_open(xul, "xultool.log");
+        xul_verbose_log_5("ABCDEFGHIJKLMNOPQRSTUVWXYZ 0x%lX", (unsigned long)xul);
 
         xul_delete(xul);
 }
