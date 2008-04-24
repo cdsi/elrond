@@ -181,6 +181,22 @@ verbose_init(xul_t * xul)
  * XUL API
  */
 
+XUL_APIEXPORT gpointer *
+xul_userdata_get(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        return xul->userdata;
+}
+
+XUL_APIEXPORT void
+xul_userdata_set(xul_t * xul, gpointer * userdata)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        xul->userdata = userdata;
+}
+
 void
 xul_free(xul_t * xul)
 {
