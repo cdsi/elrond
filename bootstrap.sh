@@ -6,7 +6,7 @@ ELROND_HOME=$(dirname $0)
 cd ${ELROND_HOME}
 
 libtoolize --automake --copy --force
-aclocal -I ${ELROND_M4}
+aclocal -I /opt/libtool/share/aclocal -I /opt/pkg-config/share/aclocal -I /opt/glib/share/aclocal -I ${ELROND_M4}
 autoheader
 automake --add-missing --copy --force-missing --foreign
 autoconf
