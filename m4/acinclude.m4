@@ -4,6 +4,15 @@ AC_DEFUN([XX_CHECK_GLIB], [
         if test "${GLIB_CFLAGS}" = "" || test "${GLIB_LIBS}" = ""; then
                 AC_MSG_ERROR([unable to locate glib or incorrect version])
         fi
+
+        PKG_CHECK_MODULES(GMODULE, gmodule-2.0 >= 2.16.0)
+
+        if test "${GMODULE_CFLAGS}" = "" || test "${GMODULE_LIBS}" = ""; then
+                AC_MSG_ERROR([unable to locate gmodule or incorrect version])
+        fi
+
+        AC_SUBST(GMODULE_CFLAGS)
+        AC_SUBST(GMODULE_LIBS)
 ])
 
 AC_DEFUN([GANDALF_WITH_SWIG], [
