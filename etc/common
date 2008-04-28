@@ -53,8 +53,15 @@ function recorde
 }
 
 ELROND_DEPENDS="                \
+        m4		        \
+        autoconf		\
+        automake		\
+        libtool		        \
 	binutils		\
+        gmp 		        \
+        mpfr		        \
 	gcc			\
+        pkg-config              \
 	swig			\
 	cairo			\
 	glib			\
@@ -94,6 +101,9 @@ for x in ${ELROND_DEPENDS}; do
 
 	LD_LIBRARY_PATH="/opt/${x}/lib:${LD_LIBRARY_PATH}"
 	export LD_LIBRARY_PATH
+
+        PKG_CONFIG_PATH="/opt/${x}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+        export PKG_CONFIG_PATH
 done
 
 SVNHOST=dev.creativedigitalsys.com
