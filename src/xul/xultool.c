@@ -90,12 +90,15 @@ main(int argc, char **argv)
         xul_userdata_set(xul, (gpointer *) & userdata);
 
         const gchar *prefs = g_strconcat(getenv("ELROND_ETC"), G_DIR_SEPARATOR_S, "xultool.ini", NULL);
+
         xul_prefs_open(xul, prefs);
 
         guint32 iqvals = xul_prefs_guint32_get(xul, "data", "iqvals");
+
         xul_verbose_log_0("iqvals = 0x%08X", iqvals);
 
         const gchar *output = g_strconcat(getenv("ELROND_LOG"), G_DIR_SEPARATOR_S, "xultool.log", NULL);
+
         xul_verbose_output_open(xul, output);
 
         xul_verbose_handler_set(xul, verbose_handler_redacted);

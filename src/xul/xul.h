@@ -2,6 +2,7 @@
 #define XUL_H 1
 
 #include <glib.h>
+#include <glib/gstdio.h>
 
 #define XUL_MAGIC 0xDEADBEEF
 
@@ -50,10 +51,15 @@ typedef struct {
 } xul_prefs_t;
 
 typedef struct {
+        GTimeVal tv;
+} xul_time_t;
+
+typedef struct {
         guint32 magic;
         xul_rc_e rc;
         xul_verbose_t *verbose;
         xul_prefs_t *prefs;
+        xul_time_t *time;
         gpointer *userdata;
 } xul_t;
 
@@ -75,6 +81,8 @@ XUL_APIEXPORT void xul_prefs_close(xul_t *);
 XUL_APIEXPORT void xul_prefs_open(xul_t *, const gchar *);
 XUL_APIEXPORT guint32 xul_prefs_guint32_get(xul_t *, const gchar *, const gchar *);
 XUL_APIEXPORT void xul_prefs_guint32_set(xul_t *, const gchar *, const gchar *, guint32);
+XUL_APIEXPORT gdouble xul_xtime(xul_t *, gdouble);
+XUL_APIEXPORT gdouble xul_xtime_overhead(xul_t *);
 XUL_APIEXPORT gpointer *xul_userdata_get(xul_t *);
 XUL_APIEXPORT void xul_userdata_set(xul_t *, gpointer *);
 XUL_APIEXPORT xul_t *xul_init();

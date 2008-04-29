@@ -66,8 +66,8 @@ export PATH
 LD_LIBRARY_PATH=${ELROND_LIB}:${LD_LIBRARY_PATH}
 export LD_LIBRARY_PATH
 
-ACLOCALFLAGS="-I ${ELROND_SHARE}/aclocal"
-export ACLOCALFLAGS
+ELROND_ACLOCALFLAGS="-I ${ELROND_SHARE}/aclocal"
+export ELROND_ACLOCALFLAGS
 
 for x in ${ELROND_DEPENDS}; do
 	[ ! -d /opt/${x} ] && continue
@@ -83,7 +83,7 @@ for x in ${ELROND_DEPENDS}; do
 
         ACLOCAL="/opt/${x}/share/aclocal"
         [ ! -d ${ACLOCAL} ] && continue
-        ACLOCALFLAGS="-I ${ACLOCAL} ${ACLOCALFLAGS}"
+        ELROND_ACLOCALFLAGS="-I ${ACLOCAL} ${ELROND_ACLOCALFLAGS}"
 done
 
 SVNHOST=dev.creativedigitalsys.com
