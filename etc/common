@@ -4,9 +4,6 @@ ELROND_HOME=${TOPLEVEL:=${ELROND_HOME}}
 ELROND_HOME=$(cd ${ELROND_HOME}; pwd)
 export ELROND_HOME
 
-ELROND_M4=${ELROND_HOME}/m4
-export ELROND_M4
-
 ELROND_BIN=${ELROND_HOME}/bin
 export ELROND_BIN
 
@@ -34,6 +31,12 @@ export ELROND_RUN
 ELROND_WWW=${ELROND_HOME}/www
 export ELROND_WWW
 
+ELROND_SHARE=${ELROND_HOME}/share
+export ELROND_SHARE
+
+ELROND_DEPENDS="$(cat ${ELROND_SHARE}/depends.list)"
+export ELROND_DEPENDS
+
 ELROND_CONFIGUREFLAGS="--prefix=${ELROND_HOME}" 
 export ELROND_CONFIGUREFLAGS
 
@@ -52,36 +55,6 @@ function recorde
 	echo	"$1"
 }
 
-ELROND_DEPENDS="                \
-	m4		        \
-	autoconf	        \
-	automake	        \
-	libtool 	        \
-	binutils		\
-	gmp			\
-	mpfr			\
-	gcc			\
-	swig			\
-	ant			\
-	java			\
-	freetype		\
-	fontconfig		\
-	cairo			\
-	glib			\
-	atk			\
-	pango			\
-	gtk+			\
-	libglade		\
-	python			\
-	dbxml			\
-	nttcp			\
-	pcre			\
-	lighttpd		\
-	subversion		\
-	valgrind		\
-	netbeans		\
-"
-
 # native
 
 PATH=${ELROND_BIN}:${PATH}
@@ -92,6 +65,9 @@ export PATH
 
 LD_LIBRARY_PATH=${ELROND_LIB}:${LD_LIBRARY_PATH}
 export LD_LIBRARY_PATH
+
+ACLOCALFLAGS="-I ${ELROND_SHARE}/aclocal"
+export ACLOCALFLAGS
 
 for x in ${ELROND_DEPENDS}; do
 	[ ! -d /opt/${x} ] && continue
@@ -104,6 +80,10 @@ for x in ${ELROND_DEPENDS}; do
 
         PKG_CONFIG_PATH="/opt/${x}/lib/pkgconfig:${PKG_CONFIG_PATH}"
         export PKG_CONFIG_PATH
+
+        ACLOCAL="/opt/${x}/share/aclocal"
+        [ ! -d ${ACLOCAL} ] && continue
+        ACLOCALFLAGS="-I ${ACLOCAL} ${ACLOCALFLAGS}"
 done
 
 SVNHOST=dev.creativedigitalsys.com
