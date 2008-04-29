@@ -13,6 +13,7 @@
 #endif                          /* HAVE_STRING_H */
 
 #include <glib.h>
+#include <glib/gstdio.h>
 
 #define XUL_EXPORT_SYMBOLS 1
 #include "xul.h"
@@ -102,7 +103,7 @@ xul_verbose_output_open(xul_t * xul, const gchar * output)
 
         xul_verbose_output_close(xul);
 
-        xul->verbose->fp = fopen(output, "a+");
+        xul->verbose->fp = g_fopen(output, "a+");
 
         if (!xul->verbose->fp) {
                 xul->rc = XUL_EFOPEN;
@@ -260,6 +261,42 @@ prefs_init(xul_t * xul)
 }
 
 /*
+ * XUL Time API
+ */
+
+void
+time_free(xul_time_t * time)
+{
+        free(time);
+}
+
+xul_time_t *
+time_alloc()
+{
+        xul_time_t *time = (xul_time_t *) malloc(sizeof(xul_time_t));
+
+        memset(time, 0, sizeof(xul_time_t));
+
+        return time;
+}
+
+void
+time_delete(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        /* NOOP */
+}
+
+void
+time_init(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        /* NOOP */
+}
+
+/*
  * XUL API
  */
 
@@ -286,6 +323,7 @@ xul_free(xul_t * xul)
 
         verbose_free(xul->verbose);
         prefs_free(xul->prefs);
+        time_free(xul->time);
 
         free(xul);
 }
@@ -300,6 +338,7 @@ xul_alloc()
 
         xul->verbose = verbose_alloc();
         xul->prefs = prefs_alloc();
+        xul->time = time_alloc();
 
         return xul;
 }
@@ -311,6 +350,7 @@ xul_delete(xul_t * xul)
 
         verbose_delete(xul);
         prefs_delete(xul);
+        time_delete(xul);
 
         xul_free(xul);
 }
@@ -322,6 +362,7 @@ xul_init()
 
         verbose_init(xul);
         prefs_init(xul);
+        time_init(xul);
 
         return xul;
 }
