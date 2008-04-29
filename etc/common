@@ -53,16 +53,19 @@ function recorde
 }
 
 ELROND_DEPENDS="                \
-        m4		        \
-        autoconf		\
-        automake		\
-        libtool		        \
+	m4		        \
+	autoconf	        \
+	automake	        \
+	libtool 	        \
 	binutils		\
-        gmp 		        \
-        mpfr		        \
+	gmp			\
+	mpfr			\
 	gcc			\
-        pkg-config              \
 	swig			\
+	ant			\
+	java			\
+	freetype		\
+	fontconfig		\
 	cairo			\
 	glib			\
 	atk			\
@@ -70,16 +73,13 @@ ELROND_DEPENDS="                \
 	gtk+			\
 	libglade		\
 	python			\
-	ant			\
-	java			\
-	netbeans		\
 	dbxml			\
 	nttcp			\
 	pcre			\
 	lighttpd		\
-	openssl		        \
-	neon		        \
 	subversion		\
+	valgrind		\
+	netbeans		\
 "
 
 # native
