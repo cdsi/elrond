@@ -33,8 +33,9 @@ xul_xtime_overhead(xul_t * xul)
 
         gint32 i = 0;
 
-        while (xul_xtime(xul, 0) < t1)
+        while (xul_xtime(xul, 0) < t1) {
                 i++;
+        }
 
         return t1 = .2 / (gdouble) i;
 }
