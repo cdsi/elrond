@@ -93,7 +93,7 @@ main(int argc, char **argv)
 
         xul_prefs_open(xul, prefs);
 
-        guint32 iqvals = xul_prefs_guint32_get(xul, "data", "iqvals");
+        guint32 iqvals = xul_prefs_guhex32_get(xul, "data", "iqvals");
 
         xul_verbose_log_0("iqvals = 0x%08X", iqvals);
 

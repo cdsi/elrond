@@ -13,6 +13,7 @@
 #endif                          /* HAVE_STRING_H */
 
 #include <glib.h>
+#include <glib/gprintf.h>
 #include <glib/gstdio.h>
 
 #define XUL_EXPORT_SYMBOLS 1
@@ -210,20 +211,148 @@ xul_prefs_open(xul_t * xul, const gchar * keyfile)
         xul->rc = XUL_SUCCESS;
 }
 
-XUL_APIEXPORT guint32
-xul_prefs_guint32_get(xul_t * xul, const gchar * group, const gchar * key)
+XUL_APIEXPORT gint64
+xul_prefs_gint64_get(xul_t * xul, const gchar * group, const gchar * key)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        return g_key_file_get_integer(xul->prefs->keyfile, group, key, NULL);
+        return g_ascii_strtoll(g_key_file_get_string(xul->prefs->keyfile, group, key, NULL), NULL, 10);
+}
+
+XUL_APIEXPORT void
+xul_prefs_gint64_set(xul_t * xul, const gchar * group, const gchar * key, gint64 value)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        gchar buffer[64];
+
+        g_snprintf(buffer, sizeof(buffer), "%lld", value);
+
+        g_key_file_set_string(xul->prefs->keyfile, group, key, buffer);
+}
+
+XUL_APIEXPORT guint64
+xul_prefs_guint64_get(xul_t * xul, const gchar * group, const gchar * key)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        return g_ascii_strtoull(g_key_file_get_string(xul->prefs->keyfile, group, key, NULL), NULL, 10);
+}
+
+XUL_APIEXPORT void
+xul_prefs_guint64_set(xul_t * xul, const gchar * group, const gchar * key, guint64 value)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        gchar buffer[64];
+
+        g_snprintf(buffer, sizeof(buffer), "%llu", value);
+
+        g_key_file_set_string(xul->prefs->keyfile, group, key, buffer);
+}
+
+XUL_APIEXPORT gint32
+xul_prefs_gint32_get(xul_t * xul, const gchar * group, const gchar * key)
+{
+        return (gint32) xul_prefs_gint64_get(xul, group, key);
+}
+
+XUL_APIEXPORT void
+xul_prefs_gint32_set(xul_t * xul, const gchar * group, const gchar * key, gint32 value)
+{
+        xul_prefs_gint64_set(xul, group, key, (gint64) value);
+}
+
+XUL_APIEXPORT guint32
+xul_prefs_guint32_get(xul_t * xul, const gchar * group, const gchar * key)
+{
+        return (guint32) xul_prefs_guint64_get(xul, group, key);
 }
 
 XUL_APIEXPORT void
 xul_prefs_guint32_set(xul_t * xul, const gchar * group, const gchar * key, guint32 value)
 {
+        xul_prefs_guint64_set(xul, group, key, (guint64) value);
+}
+
+XUL_APIEXPORT gint64
+xul_prefs_ghex64_get(xul_t * xul, const gchar * group, const gchar * key)
+{
         g_assert(XUL_IS_VALID(xul));
 
-        return g_key_file_set_integer(xul->prefs->keyfile, group, key, value);
+        return g_ascii_strtoll(g_key_file_get_string(xul->prefs->keyfile, group, key, NULL), NULL, 16);
+}
+
+XUL_APIEXPORT void
+xul_prefs_ghex64_set(xul_t * xul, const gchar * group, const gchar * key, gint64 value)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        gchar buffer[64];
+
+        g_snprintf(buffer, sizeof(buffer), "0x%0llX", value);
+
+        g_key_file_set_string(xul->prefs->keyfile, group, key, buffer);
+}
+
+XUL_APIEXPORT guint64
+xul_prefs_guhex64_get(xul_t * xul, const gchar * group, const gchar * key)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        return g_ascii_strtoull(g_key_file_get_string(xul->prefs->keyfile, group, key, NULL), NULL, 16);
+}
+
+XUL_APIEXPORT void
+xul_prefs_guhex64_set(xul_t * xul, const gchar * group, const gchar * key, guint64 value)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        gchar buffer[64];
+
+        g_snprintf(buffer, sizeof(buffer), "0x%0llX", value);
+
+        g_key_file_set_string(xul->prefs->keyfile, group, key, buffer);
+}
+
+XUL_APIEXPORT gint32
+xul_prefs_ghex32_get(xul_t * xul, const gchar * group, const gchar * key)
+{
+        return (gint32) xul_prefs_ghex64_get(xul, group, key);
+}
+
+XUL_APIEXPORT void
+xul_prefs_ghex32_set(xul_t * xul, const gchar * group, const gchar * key, gint32 value)
+{
+        xul_prefs_ghex64_set(xul, group, key, (gint64) value);
+}
+
+XUL_APIEXPORT guint32
+xul_prefs_guhex32_get(xul_t * xul, const gchar * group, const gchar * key)
+{
+        return (guint32) xul_prefs_guhex64_get(xul, group, key);
+}
+
+XUL_APIEXPORT void
+xul_prefs_guhex32_set(xul_t * xul, const gchar * group, const gchar * key, guint32 value)
+{
+        xul_prefs_guhex64_set(xul, group, key, (guint64) value);
+}
+
+XUL_APIEXPORT gdouble
+xul_prefs_gdouble_get(xul_t * xul, const gchar * group, const gchar * key)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        return g_key_file_get_double(xul->prefs->keyfile, group, key, NULL);
+}
+
+XUL_APIEXPORT void
+xul_prefs_gdouble_set(xul_t * xul, const gchar * group, const gchar * key, gdouble value)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        g_key_file_set_double(xul->prefs->keyfile, group, key, value);
 }
 
 void
