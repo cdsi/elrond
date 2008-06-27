@@ -1,3 +1,4 @@
+import linecache
 import os
 import time
 
@@ -5,11 +6,9 @@ from ConfigParser import SafeConfigParser
 from threading import Lock
 
 def Property(f):
-
         return property(**f())
 
 class Object(object):
-
         pass
 
 class Benchmark(Object):
@@ -118,6 +117,29 @@ class Prefs(Object):
 
         def __init__(self):
                 self.__parser = SafeConfigParser()
+
+#
+# see: http://www.dalkescientific.com/writings/diary/archive/2005/04/20/tracing_python_code.html
+#
+
+class Trace(Object):
+
+        enabled = False
+
+        @classmethod
+        def trace(self, frame, event, arg):
+                if not self.enabled:
+                        return self.trace
+
+                if event == "line":
+                        file = frame.f_globals["__file__"]
+                        if (file.endswith(".pyc") or file.endswith(".pyo")):
+                                file = file[:-1]
+                        lineno = frame.f_lineno
+                        line = linecache.getline(file, lineno)
+                        print "%s:%s: %s" % (file, lineno, line.rstrip())
+
+                return self.trace
 
 # Local Variables:
 # indent-tabs-mode: nil
