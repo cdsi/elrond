@@ -28,6 +28,8 @@ xul_xtime(xul_t * xul, gdouble offset)
 XUL_APIEXPORT gdouble
 xul_xtime_overhead(xul_t * xul)
 {
+        g_assert(XUL_IS_VALID(xul));
+
         gdouble t0 = xul_xtime(xul, 0);
         gdouble t1 = t0 + .2;
 
