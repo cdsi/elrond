@@ -5,6 +5,10 @@
 #include "config.h"
 #endif                          /* HAVE_CONFIG_H */
 
+#ifdef HAVE_INTTYPES_H
+#include <inttypes.h>
+#endif                          /* HAVE_INTTYPES_H */
+
 #ifndef HAVE_AHEXTOI
 #define ahextoi(x)	strtol(x, (char **)NULL, 16)
 #endif                          /* ! HAVE_AHEXTOI */
