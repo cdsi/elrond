@@ -105,35 +105,30 @@ main(int argc, char **argv)
         xul_prefs_open(xul, prefs);
 
         gint64 int64 = xul_prefs_guint64_get(xul, "data", "int64");
+        xul_verbose_log_0("int64 = %" PRId64, int64);
 
-        xul_verbose_log_0("int64 = 0x%lld", int64);
         guint64 uint64 = xul_prefs_guint64_get(xul, "data", "uint64");
-
-        xul_verbose_log_0("uint64 = 0x%llu", uint64);
+        xul_verbose_log_0("uint64 = %" PRIu64, uint64);
 
         gint32 int32 = xul_prefs_guint32_get(xul, "data", "int32");
+        xul_verbose_log_0("int32 = %" PRId32, int32);
 
-        xul_verbose_log_0("int32 = 0x%d", int32);
         guint32 uint32 = xul_prefs_guint32_get(xul, "data", "uint32");
-
-        xul_verbose_log_0("uint32 = 0x%u", uint32);
+        xul_verbose_log_0("uint32 = %" PRIu32, uint32);
 
         gint64 hex64 = xul_prefs_guhex64_get(xul, "data", "hex64");
+        xul_verbose_log_0("hex64 = 0x%08" PRIX64, hex64);
 
-        xul_verbose_log_0("hex64 = 0x%08llX", hex64);
         guint64 uhex64 = xul_prefs_guhex64_get(xul, "data", "uhex64");
-
-        xul_verbose_log_0("uhex64 = 0x%08llX", uhex64);
+        xul_verbose_log_0("uhex64 = 0x%08" PRIX64, uhex64);
 
         gint32 hex32 = xul_prefs_guhex32_get(xul, "data", "hex32");
+        xul_verbose_log_0("hex32 = 0x%08" PRIX32, hex32);
 
-        xul_verbose_log_0("hex32 = 0x%08X", hex32);
         guint32 uhex32 = xul_prefs_guhex32_get(xul, "data", "uhex32");
-
-        xul_verbose_log_0("uhex32 = 0x%08X", uhex32);
+        xul_verbose_log_0("uhex32 = 0x%08" PRIX32, uhex32);
 
         gdouble dubell = xul_prefs_gdouble_get(xul, "data", "double");
-
         xul_verbose_log_0("double = %lf", dubell);
 
         xul_delete(xul);

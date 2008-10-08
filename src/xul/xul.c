@@ -226,7 +226,7 @@ xul_prefs_gint64_set(xul_t * xul, const gchar * group, const gchar * key, gint64
 
         gchar buffer[64];
 
-        g_snprintf(buffer, sizeof(buffer), "%lld", value);
+        g_snprintf(buffer, sizeof(buffer), "%" PRId64, value);
 
         g_key_file_set_string(xul->prefs->keyfile, group, key, buffer);
 }
@@ -246,7 +246,7 @@ xul_prefs_guint64_set(xul_t * xul, const gchar * group, const gchar * key, guint
 
         gchar buffer[64];
 
-        g_snprintf(buffer, sizeof(buffer), "%llu", value);
+        g_snprintf(buffer, sizeof(buffer), "%" PRIu64, value);
 
         g_key_file_set_string(xul->prefs->keyfile, group, key, buffer);
 }
@@ -290,7 +290,7 @@ xul_prefs_ghex64_set(xul_t * xul, const gchar * group, const gchar * key, gint64
 
         gchar buffer[64];
 
-        g_snprintf(buffer, sizeof(buffer), "0x%0llX", value);
+        g_snprintf(buffer, sizeof(buffer), "0x%0" PRIX64, value);
 
         g_key_file_set_string(xul->prefs->keyfile, group, key, buffer);
 }
@@ -310,7 +310,7 @@ xul_prefs_guhex64_set(xul_t * xul, const gchar * group, const gchar * key, guint
 
         gchar buffer[64];
 
-        g_snprintf(buffer, sizeof(buffer), "0x%0llX", value);
+        g_snprintf(buffer, sizeof(buffer), "0x%0" PRIX64, value);
 
         g_key_file_set_string(xul->prefs->keyfile, group, key, buffer);
 }
