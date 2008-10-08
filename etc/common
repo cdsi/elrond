@@ -120,6 +120,11 @@ PYTHON="$(which python)"
 export PYTHON
 
 PYTHONFLAGS="-tt"
+
+if [ ! "$DEBUG" = "" ]; then
+   PYTHONFLAGS="${PYTHONFLAGS} -m trace -t"
+fi
+
 export PYTHONFLAGS
 
 PYTHONPATH=${LD_LIBRARY_PATH}:${PYTHONPATH}
