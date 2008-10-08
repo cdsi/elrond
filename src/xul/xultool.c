@@ -86,7 +86,7 @@ main(int argc, char **argv)
 
         if (!g_option_context_parse(context, &argc, &argv, &error)) {
                 fprintf(stderr, "ERROR: %s\n", error->message);
-                exit(1);
+                return 1;
         }
 
         xul_t *xul = xul_init();
@@ -132,6 +132,8 @@ main(int argc, char **argv)
         xul_verbose_log_0("double = %lf", dubell);
 
         xul_delete(xul);
+
+        return 0;
 }
 
 /*
