@@ -249,7 +249,7 @@ export JSVCFLAGS
 
 # extras
 
-ELROND_EXTRAS="                      \
+ELROND_EXTRAS=" \
 "
 
 for x in ${ELROND_EXTRAS}; do
