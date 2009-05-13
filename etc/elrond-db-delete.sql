@@ -1,1 +1,1 @@
-DROP TABLE person;
+DROP TABLE elrond;

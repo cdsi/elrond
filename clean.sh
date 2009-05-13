@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ELROND_HOME=$(dirname $0)
 . ${ELROND_HOME}/etc/common
@@ -34,10 +34,10 @@ esac
 cd ${ELROND_HOME}
 
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
-        if [ -f build.xml ]; then
-                ant.sh clean
-                [ $? != 0 ] && echo "ERROR!!!" && exit 1
-        fi
+	if [ -f build.xml ]; then
+		ant.sh clean
+		[ $? != 0 ] && echo "ERROR!!!" && exit 1
+	fi
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
 	python.sh setup.py clean
@@ -49,8 +49,8 @@ if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 fi
 
 if [ -x ${ELROND_HOME}/clean-local.sh ]; then
-        ${ELROND_HOME}/clean-local.sh
-        [ $? != 0 ] && echo "ERROR!!!" && exit 1
+	${ELROND_HOME}/clean-local.sh
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 
 exit 0

@@ -1,13 +1,11 @@
-#ifndef COMMON_H
-#define COMMON_H 1
+#ifndef ELROND_COMMON_H
+#define ELROND_COMMON_H 1
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif                          /* HAVE_CONFIG_H */
 
-#ifdef HAVE_INTTYPES_H
-#include <inttypes.h>
-#endif                          /* HAVE_INTTYPES_H */
+#define APIEXPORT
 
 #ifndef HAVE_AHEXTOI
 #define ahextoi(x)	strtol(x, (char **)NULL, 16)
@@ -17,7 +15,7 @@
 #define atoff(x)	strtof(x, NULL)
 #endif                          /* ! HAVE_ATOFF */
 
-#endif                          /* ! COMMON_H */
+#endif                          /* ! ELROND_COMMON_H */
 
 /*
  * $Id:$

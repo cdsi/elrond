@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ELROND_HOME=$(dirname $0)
 . ${ELROND_HOME}/etc/common
@@ -9,8 +9,8 @@ for x in ${ELROND_EXTRAS}; do
 done
 
 if [ -x ${ELROND_HOME}/build-local.sh ]; then
-        ${ELROND_HOME}/build-local.sh
-        [ $? != 0 ] && echo "ERROR!!!" && exit 1
+	${ELROND_HOME}/build-local.sh
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 
 EVERYTHING=1
@@ -50,10 +50,11 @@ if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
-        if [ -f build.xml ]; then
-                ant.sh jar
-                [ $? != 0 ] && echo "ERROR!!!" && exit 1
-        fi
+	if [ -f build.xml ]; then
+		ant.sh jar
+		[ $? != 0 ] && echo "ERROR!!!" && exit 1
+	fi
+	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 
 exit 0

@@ -1,2 +1,2 @@
 .mode line
-SELECT * FROM person;
+SELECT * FROM elrond;
