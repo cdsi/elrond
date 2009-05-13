@@ -1,4 +1,4 @@
-#include "common.h"
+#include "elrond_common.h"
 
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>

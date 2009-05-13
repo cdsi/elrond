@@ -1,4 +1,4 @@
-#include "common.h"
+#include "elrond_common.h"
 
 #ifdef HAVE_STDIO_H
 #include <stdio.h>
