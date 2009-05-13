@@ -10,6 +10,8 @@ AM_CONFIG_HEADER(src/include/config.h)
 XX_ENABLE_PYTHON
 XX_ENABLE_JAVA
 
+XX_REQUIRE_XUL
+
 # Checks for programs.
 AC_PROG_CXX
 AC_PROG_CC
@@ -22,8 +24,6 @@ AC_PROG_RANLIB
 
 # Checks for libraries.
 AC_CHECK_LIB(m, sqrt)
-XX_CHECK_GLIB
-XX_CHECK_XUL
 
 # Checks for header files.
 AC_HEADER_STDC
