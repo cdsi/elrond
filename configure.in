@@ -7,6 +7,9 @@ AC_CONFIG_SRCDIR([configure.in])
 AM_INIT_AUTOMAKE(elrond, 0.0.1)
 AM_CONFIG_HEADER(src/include/config.h)
 
+XX_ENABLE_PYTHON
+XX_ENABLE_JAVA
+
 # Checks for programs.
 AC_PROG_CXX
 AC_PROG_CC
@@ -20,10 +23,11 @@ AC_PROG_RANLIB
 # Checks for libraries.
 AC_CHECK_LIB(m, sqrt)
 XX_CHECK_GLIB
+XX_CHECK_XUL
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([errno.h getopt.h inttypes.h math.h stdarg.h stdio.h stdlib.h string.h strings.h time.h unistd.h])
+AC_CHECK_HEADERS([errno.h getopt.h math.h stdarg.h stdio.h stdlib.h string.h strings.h time.h unistd.h])
 AC_CHECK_HEADERS([sys/select.h sys/time.h sys/types.h])
 AC_CHECK_HEADERS([sys/ipc.h sys/sem.h sys/shm.h], [], [], [
 #ifdef HAVE_SYS_TYPES_H
@@ -34,13 +38,13 @@ AC_CHECK_HEADERS([sys/ipc.h sys/sem.h sys/shm.h], [], [], [
 # Checks for typedefs, structures, and compiler characteristics.
 
 # Checks for library functions.
-AC_CHECK_FUNCS([atoff pow sqrt strdup])
+AC_CHECK_FUNCS([atoff mkstemp pow sqrt strdup])
 
 AC_CONFIG_FILES([
         setup.cfg
         setup.py
-        Makefile
         etc/xultool.ini
+        Makefile
         src/Makefile
         src/xul/Makefile
 ])

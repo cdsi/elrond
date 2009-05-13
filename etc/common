@@ -1,38 +1,41 @@
 # elrond
 
-ELROND_HOME=${TOPLEVEL:=${ELROND_HOME}}
-ELROND_HOME=$(cd ${ELROND_HOME}; pwd)
+ELROND_HOME=${TOPLEVEL:="${ELROND_HOME}"}
+ELROND_HOME=$(cd "${ELROND_HOME}"; pwd)
 export ELROND_HOME
 
-ELROND_BIN=${ELROND_HOME}/bin
+ELROND_BIN="${ELROND_HOME}"/bin
 export ELROND_BIN
 
-ELROND_ETC=${ELROND_HOME}/etc
+ELROND_ETC="${ELROND_HOME}"/etc
 export ELROND_ETC
 
-ELROND_LIB=${ELROND_HOME}/lib
+ELROND_LIB="${ELROND_HOME}"/lib
 export ELROND_LIB
 
-ELROND_SRC=${ELROND_HOME}/src
+ELROND_SHARE="${ELROND_HOME}"/share
+export ELROND_SHARE
+
+ELROND_SRC="${ELROND_HOME}"/src
 export ELROND_SRC
 
-ELROND_VAR=${ELROND_HOME}/var
+ELROND_VAR="${ELROND_HOME}"/var
 export ELROND_VAR
 
-ELROND_DB=${ELROND_VAR}/db
+ELROND_DATA="${ELROND_VAR}"/data
+export ELROND_DATA
+
+ELROND_DB="${ELROND_VAR}"/db
 export ELROND_DB
 
-ELROND_LOG=${ELROND_VAR}/log
+ELROND_LOG="${ELROND_VAR}"/log
 export ELROND_LOG
 
-ELROND_RUN=${ELROND_VAR}/run
+ELROND_RUN="${ELROND_VAR}"/run
 export ELROND_RUN
 
-ELROND_WWW=${ELROND_HOME}/www
+ELROND_WWW="${ELROND_HOME}"/www
 export ELROND_WWW
-
-ELROND_SHARE=${ELROND_HOME}/share
-export ELROND_SHARE
 
 ELROND_DEPENDS="$(cat ${ELROND_SHARE}/depends.list)"
 export ELROND_DEPENDS
@@ -40,43 +43,43 @@ export ELROND_DEPENDS
 ELROND_CONFIGUREFLAGS="--prefix=${ELROND_HOME}" 
 export ELROND_CONFIGUREFLAGS
 
-LOGFILE=${ELROND_LOG}/elrond.log
-export LOGFILE
+ELROND_LOGFILE="${ELROND_LOG}"/elrond.log
+export ELROND_LOGFILE
 
 function record
 {
-	date		>> ${LOGFILE}
-	echo "$1"	>> ${LOGFILE}
+        date            >> "${ELROND_LOGFILE}"
+        echo "$1"       >> "${ELROND_LOGFILE}"
 }
 
 function recorde
 {
-	record	"$1"
-	echo	"$1"
+        record  "$1"
+        echo    "$1"
 }
 
 # native
 
-PATH=${ELROND_BIN}:${PATH}
+PATH="${ELROND_BIN}":"${PATH}"
 export PATH
 
-PATH=/sbin:/usr/sbin:${PATH}
+PATH=/sbin:/usr/sbin:"${PATH}"
 export PATH
 
-LD_LIBRARY_PATH=${ELROND_LIB}:${LD_LIBRARY_PATH}
+LD_LIBRARY_PATH="${ELROND_LIB}":"${LD_LIBRARY_PATH}"
 export LD_LIBRARY_PATH
 
 ELROND_ACLOCALFLAGS="-I ${ELROND_SHARE}/aclocal"
 export ELROND_ACLOCALFLAGS
 
 for x in ${ELROND_DEPENDS}; do
-	[ ! -d /opt/${x} ] && continue
+        [ ! -d /opt/${x} ] && continue
 
-	PATH="/opt/${x}/bin:/opt/${x}/sbin:${PATH}"
-	export PATH
+        PATH="/opt/${x}/bin:/opt/${x}/sbin:${PATH}"
+        export PATH
 
-	LD_LIBRARY_PATH="/opt/${x}/lib:${LD_LIBRARY_PATH}"
-	export LD_LIBRARY_PATH
+        LD_LIBRARY_PATH="/opt/${x}/lib:${LD_LIBRARY_PATH}"
+        export LD_LIBRARY_PATH
 
         PKG_CONFIG_PATH="/opt/${x}/lib/pkgconfig:${PKG_CONFIG_PATH}"
         export PKG_CONFIG_PATH
@@ -87,9 +90,13 @@ for x in ${ELROND_DEPENDS}; do
 done
 
 SVNHOST=dev.creativedigitalsys.com
+export SVNHOST
 
 SVN=$(which svn)
+export SVN
+
 SVNFLAGS=
+export SVNFLAGS
 
 CC=$(which gcc)
 export CC
@@ -97,7 +104,7 @@ export CC
 CFLAGS=${CFLAGS:="-O0 -std=c99 -Wall -Werror"}
 
 if [ ! "${DEBUG}" = "" ]; then
-	CFLAGS="${CFLAGS} -g"
+        CFLAGS="${CFLAGS} -g"
 fi
 
 export CFLAGS
@@ -132,36 +139,52 @@ PYTHONPATH=${ELROND_LIB}:${ELROND_LIB}/python:${PYTHONPATH}
 export PYTHONPATH
 
 for x in ${ELROND_DEPENDS}; do
-	[ ! -d /opt/${x} ] && continue
+        [ ! -d /opt/${x} ] && continue
 
-	PYTHONPATH=/opt/${x}/lib:/opt/${x}/lib/python:${PYTHONPATH}
-	export PYTHONPATH
+        PYTHONPATH=/opt/${x}/lib:/opt/${x}/lib/python:${PYTHONPATH}
+        export PYTHONPATH
 done
 
 # java
 
+NETBEANS_HOME=/usr/share/netbeans
+if [ -d /opt/netbeans ]; then
+        NETBEANS_HOME=/opt/netbeans
+fi
+export NETBEANS_HOME
+
+NETBEANS=netbeans
+export NETBEANS
+
+NETBEANSFLAGS=
+export NETBEANSFLAGS
+
+PATH=${NETBEANS_HOME}/bin:${PATH}
+export PATH
+
 CLASSPATH=
 
-for p in ${ELROND_HOME}/dist/*.jar ${ELROND_HOME}/lib/java/*.jar; do
-	CLASSPATH="${p}:${CLASSPATH}"
-        export CLASSPATH
+for x in ${ELROND_HOME}/dist/*.jar ${ELROND_HOME}/lib/java/*.jar; do
+        CLASSPATH="${x}:${CLASSPATH}"
 done
 
-for x in ${ELROND_DEPENDS}; do
-	[ ! -d /opt/${x} ] && continue
-
-	for p in /opt/${x}/lib/*.jar; do
-		CLASSPATH="${p}:${CLASSPATH}"
-                export CLASSPATH
-	done
+for x in ${EXTRAS}; do
+        for y in /opt/${x}/lib/*.jar; do
+                CLASSPATH="${y}:${CLASSPATH}"
+        done
 done
 
-CLASSPATH="${CLASSPATH}:/usr/share/java/commons-cli.jar"
-CLASSPATH="${CLASSPATH}:/usr/share/java/commons-daemon.jar"
+JAVA_MODULES="                                                          \
+        /usr/share/java/commons-cli.jar                                 \
+        /usr/share/java/commons-daemon.jar                              \
+        ${NETBEANS_HOME}/java2/modules/ext/AbsoluteLayout.jar           \
+        ${NETBEANS_HOME}/platform9/modules/ext/swing-layout-1.0.3.jar   \
+        ${NETBEANS_HOME}/platform9/modules/ext/junit-4.5.jar            \
+"
 
-CLASSPATH="${CLASSPATH}:/opt/netbeans-6.0/java1/modules/ext/AbsoluteLayout.jar"
-CLASSPATH="${CLASSPATH}:/opt/netbeans-6.0/platform7/modules/ext/swing-layout-1.0.3.jar"
-CLASSPATH="${CLASSPATH}:/opt/netbeans-6.0/java1/modules/ext/junit-4.1.jar"
+for x in ${JAVA_MODULES}; do
+        CLASSPATH="${x}:${CLASSPATH}"
+done
 
 export CLASSPATH
 
@@ -177,12 +200,12 @@ XXX="${XXX} /usr/lib/j2sdk1.6-ibm"
 XXX="${XXX} /opt/java"
 
 for x in ${XXX}; do
-	[ ! -d ${x} ] && continue
+        [ ! -d ${x} ] && continue
 
-	JAVA_HOME=${x}
-	export JAVA_HOME
+        JAVA_HOME=${x}
+        export JAVA_HOME
 
-	break
+        break
 done
 
 PATH=${JAVA_HOME}/bin:${PATH}
@@ -195,12 +218,12 @@ JAVAFLAGS=
 JAVAFLAGS="${JAVAFLAGS} -Delrond.home=${ELROND_HOME}"
 JAVAFLAGS="${JAVAFLAGS} -Djava.library.path=${LD_LIBRARY_PATH}"
 JAVAFLAGS="${JAVAFLAGS} \
-	-Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
+        -Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
 
 if [ ! "${DEBUG}" = "" ]; then
-	JAVAFLAGS="${JAVAFLAGS}"
-	# JAVAFLAGS="${JAVAFLAGS} -Dcom.sun.management.jmxremote"
-	# JAVAFLAGS="${JAVAFLAGS} -Xdebug -agentlib:jdwp=transport=dt_socket,server=y,address=8000"
+        JAVAFLAGS="${JAVAFLAGS}"
+        # JAVAFLAGS="${JAVAFLAGS} -Dcom.sun.management.jmxremote"
+        # JAVAFLAGS="${JAVAFLAGS} -Xdebug -agentlib:jdwp=transport=dt_socket,server=y,address=8000"
 fi
 
 export JAVAFLAGS
@@ -211,7 +234,7 @@ export ANT
 ANTFLAGS="-Dplatform.home=\"${JAVA_HOME}\" -emacs"
 
 if [ ! "${DEBUG}" = "" ]; then
-	ANTFLAGS="${ANTFLAGS} -Djavac.debug=true"
+        ANTFLAGS="${ANTFLAGS} -Djavac.debug=true"
 fi
 
 export ANTFLAGS
@@ -224,18 +247,13 @@ JSVCFLAGS="${JSVCFLAGS} ${JAVAFLAGS}"
 JSVCFLAGS="${JSVCFLAGS} -cp ${CLASSPATH} -user ${USER}"
 export JSVCFLAGS
 
-NETBEANS=$(which netbeans)
-export NETBEANS
-
-NETBEANSFLAGS=
-export NETBEANSFLAGS
-
 # extras
 
-ELROND_EXTRAS="                 \
+ELROND_EXTRAS="                      \
 "
 
 for x in ${ELROND_EXTRAS}; do
-	TOPLEVEL=${ELROND_HOME}/extras/${x}
-	. ${TOPLEVEL}/etc/common
+        TOPLEVEL=${ELROND_HOME}/extras/${x}
+        . ${TOPLEVEL}/etc/common
 done
+
