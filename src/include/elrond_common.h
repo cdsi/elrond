@@ -2,7 +2,7 @@
 #define ELROND_COMMON_H 1
 
 #ifdef HAVE_CONFIG_H
-#include "config.h"
+#include "elrond_config.h"
 #endif                          /* HAVE_CONFIG_H */
 
 #define APIEXPORT
