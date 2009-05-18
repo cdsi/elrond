@@ -1,5 +1,5 @@
 lib_LTLIBRARIES = libxul.la
-libxul_la_SOURCES = xul.c xtime.c
+libxul_la_SOURCES = xul.c xtime.c xtrace.c
 libxul_la_CFLAGS = $(GLIB_CFLAGS)
 libxul_la_LIBADD = $(GLIB_LIBS)
 
