@@ -97,12 +97,13 @@ XUL_APIEXPORT gdouble xul_prefs_gdouble_get(xul_t *, const gchar *, const gchar 
 XUL_APIEXPORT void xul_prefs_gdouble_set(xul_t *, const gchar *, const gchar *, gdouble);
 XUL_APIEXPORT void xul_prefs_close(xul_t *);
 XUL_APIEXPORT void xul_prefs_open(xul_t *, const gchar *);
-XUL_APIEXPORT gdouble xul_xtime(xul_t *, gdouble);
-XUL_APIEXPORT gdouble xul_xtime_overhead(xul_t *);
 XUL_APIEXPORT gpointer *xul_userdata_get(xul_t *);
 XUL_APIEXPORT void xul_userdata_set(xul_t *, gpointer *);
 XUL_APIEXPORT xul_t *xul_init();
 XUL_APIEXPORT void xul_delete(xul_t *);
+
+#include "xtime.h"
+#include "xtrace.h"
 
 #endif                          /* XUL_H */
 
