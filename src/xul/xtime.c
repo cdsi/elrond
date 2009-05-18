@@ -14,12 +14,6 @@ xul_xtime(xul_t * xul, gdouble offset)
 
         g_get_current_time(&tv);
 
-        if (offset < 0) {
-                xul->time->tv.tv_sec = tv.tv_sec;
-                xul->time->tv.tv_usec = tv.tv_usec;
-                return (gdouble) 0;
-        }
-
         /* return current time in seconds minus an offset as a gdouble */
         return (gdouble) (tv.tv_sec - xul->time->tv.tv_sec) +
           ((gdouble) (tv.tv_usec - xul->time->tv.tv_usec) / 1.e6) - offset;
