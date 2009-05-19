@@ -15,29 +15,6 @@
 #define XUL_EXPORT_SYMBOLS 1
 #include "xul.h"
 
-XUL_APIEXPORT void
-xul_prefs_close(xul_t * xul)
-{
-        g_assert(XUL_IS_VALID(xul));
-
-        /* NOOP */
-}
-
-XUL_APIEXPORT void
-xul_prefs_open(xul_t * xul, const gchar * keyfile)
-{
-        g_assert(XUL_IS_VALID(xul));
-
-        GError *error = NULL;
-
-        if (!g_key_file_load_from_file(xul->prefs->keyfile, keyfile, G_KEY_FILE_NONE, &error)) {
-                xul->rc = XUL_ERROR;
-                return;
-        }
-
-        xul->rc = XUL_SUCCESS;
-}
-
 XUL_APIEXPORT gint64
 xul_prefs_gint64_get(xul_t * xul, const gchar * group, const gchar * key)
 {
@@ -180,6 +157,29 @@ xul_prefs_gdouble_set(xul_t * xul, const gchar * group, const gchar * key, gdoub
         g_assert(XUL_IS_VALID(xul));
 
         g_key_file_set_double(xul->prefs->keyfile, group, key, value);
+}
+
+XUL_APIEXPORT void
+xul_prefs_close(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        /* NOOP */
+}
+
+XUL_APIEXPORT void
+xul_prefs_open(xul_t * xul, const gchar * keyfile)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        GError *error = NULL;
+
+        if (!g_key_file_load_from_file(xul->prefs->keyfile, keyfile, G_KEY_FILE_NONE, &error)) {
+                xul->rc = XUL_ERROR;
+                return;
+        }
+
+        xul->rc = XUL_SUCCESS;
 }
 
 void
