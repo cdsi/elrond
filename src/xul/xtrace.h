@@ -5,7 +5,7 @@
  * XUL Trace Public API
  */
 
-XUL_APIEXPORT void xul_trace(xul_t *, const char *, ...);
+XUL_APIEXPORT void xul_trace(xul_t *, const gchar *, ...);
 
 #endif                          /* XTRACE_H */
 
