@@ -15,7 +15,7 @@
 #include "xul.h"
 
 typedef struct {
-        gint32 counter;
+        guint32 counter;
 } userdata_t;
 
 userdata_t userdata;
@@ -59,7 +59,7 @@ verbose_handler_redacted(const gchar * domain, GLogLevelFlags level, const gchar
 
         userdata_t *userdata = (userdata_t *) xul_userdata_get(xul);
 
-        g_fprintf(xul->verbose->fp, "[%04X] %s\n", userdata->counter++, buffer);
+        g_fprintf(xul->verbose->fp, "[%08" G_GINT32_MODIFIER "X] %s\n", userdata->counter++, buffer);
         fflush(xul->verbose->fp);
 
         free(buffer);
