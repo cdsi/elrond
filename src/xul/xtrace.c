@@ -8,24 +8,27 @@
 #include "xul.h"
 
 /*
- * http://www.gnome.org/~federico/news-2006-03.html#timeline-tools
+ * Please see: http://www.gnome.org/~federico/news-2006-03.html#timeline-tools
  */
 
 XUL_APIEXPORT void
-xul_xtrace(xul_t * xul, const char *format, ...)
+xul_trace(xul_t * xul, const gchar * format, ...)
 {
+        g_assert(XUL_IS_VALID(xul));
+
         va_list args;
-        char *formatted, *str;
+        gchar *formatted;
+        gchar *cp;
 
         va_start(args, format);
         formatted = g_strdup_vprintf(format, args);
         va_end(args);
 
-        str = g_strdup_printf("MARK: %s: %s", g_get_prgname(), formatted);
+        cp = g_strdup_printf("MARK: %s: %s", g_get_prgname(), formatted);
         g_free(formatted);
 
-        access(str, F_OK);
-        g_free(str);
+        access(cp, F_OK);
+        g_free(cp);
 }
 
 /*

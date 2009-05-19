@@ -72,7 +72,6 @@ typedef struct {
  * XUL Public API
  */
 
-XUL_APIEXPORT void xul_trace(xul_t *, const gchar *, ...);
 XUL_APIEXPORT gpointer *xul_userdata_get(xul_t *);
 XUL_APIEXPORT void xul_userdata_set(xul_t *, gpointer *);
 XUL_APIEXPORT void xul_delete(xul_t *);
@@ -81,6 +80,7 @@ XUL_APIEXPORT void xul_init(xul_t *);
 
 #include "xprefs.h"
 #include "xtime.h"
+#include "xtrace.h"
 #include "xverbose.h"
 
 #endif                          /* XUL_H */
