@@ -1,8 +1,21 @@
 #ifndef XTIME_H
 #define XTIME_H 1
 
-XUL_APIEXPORT gdouble xul_xtime(xul_t *, gdouble);
-XUL_APIEXPORT gdouble xul_xtime_overhead(xul_t *);
+/*
+ * XUL Time Public API
+ */
+
+XUL_APIEXPORT gdouble xul_time(xul_t *, gdouble);
+XUL_APIEXPORT gdouble xul_time0(xul_t *);
+XUL_APIEXPORT gdouble xul_time_overhead(xul_t *);
+
+/*
+ * XUL Time Private API
+ */
+
+void xul_time_delete(xul_t *);
+xul_time_t *xul_time_new();
+void xul_time_init(xul_t *);
 
 #endif                          /* XTIME_H */
 
