@@ -1,6 +1,10 @@
 #ifndef XTRACE_H
 #define XTRACE_H 1
 
+/*
+ * XUL Trace Public API
+ */
+
 XUL_APIEXPORT void xul_xtrace(xul_t *, const char *, ...);
 
 #endif                          /* XTRACE_H */
