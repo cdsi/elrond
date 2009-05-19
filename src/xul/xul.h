@@ -5,13 +5,28 @@
 #include <glib/gprintf.h>
 #include <glib/gstdio.h>
 
-typedef enum {
-        XUL_SUCCESS = 0,
-        XUL_ERROR = 1,
-        XUL_EFOPEN = 2,
-} xul_rc_e;
+typedef gboolean xul_rc_t;
 
-#define XUL_IS_SUCCESS(x) ((x) && ((x)->rc == XUL_SUCCESS))
+#define XUL_SUCCESS FALSE
+#define XUL_FAILURE TRUE
+
+#define XUL_ERROR xul_error_domain_create("xul")
+
+typedef enum {
+        XUL_ERROR_FILEIO,       /* (f)open failed */
+        XUL_ERROR_FAILED,       /* unexplained fatal error */
+} xul_error_code_e;
+
+typedef GError xul_error_raw_t;
+typedef GQuark xul_error_domain_t;
+
+typedef struct {
+        xul_error_raw_t *rawerror;
+        guint32 magic;
+} xul_error_t;
+
+#define XUL_ERROR_MAGIC 0xABCDEFFE
+#define XUL_ERROR_IS_VALID(x) ((x) && ((x)->magic == XUL_ERROR_MAGIC))
 
 typedef struct {
         GKeyFile *keyfile;
@@ -55,7 +70,7 @@ typedef struct {
 #define XUL_VERBOSE_IS_VALID(x) ((x) && ((x)->magic == XUL_VERBOSE_MAGIC))
 
 typedef struct {
-        xul_rc_e rc;
+        xul_error_t *error;
         xul_prefs_t *prefs;
         xul_time_t *time;
         xul_verbose_t *verbose;
@@ -78,6 +93,7 @@ XUL_APIEXPORT void xul_delete(xul_t *);
 XUL_APIEXPORT xul_t *xul_new();
 XUL_APIEXPORT void xul_init(xul_t *);
 
+#include "xerror.h"
 #include "xprefs.h"
 #include "xtime.h"
 #include "xtrace.h"
