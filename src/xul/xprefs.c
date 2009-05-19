@@ -167,19 +167,22 @@ xul_prefs_close(xul_t * xul)
         /* NOOP */
 }
 
-XUL_APIEXPORT void
+XUL_APIEXPORT xul_rc_t
 xul_prefs_open(xul_t * xul, const gchar * keyfile)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        GError *error = NULL;
+        xul_error_raw_t *rawerror = NULL;
 
-        if (!g_key_file_load_from_file(xul->prefs->keyfile, keyfile, G_KEY_FILE_NONE, &error)) {
-                xul->rc = XUL_ERROR;
-                return;
+        if (g_key_file_load_from_file(xul->prefs->keyfile, keyfile, G_KEY_FILE_NONE, &rawerror)) {
+                return XUL_SUCCESS;
         }
 
-        xul->rc = XUL_SUCCESS;
+        g_prefix_error(&rawerror, "Unable to open %s: ", keyfile);
+
+        xul_error_add_raw(xul, rawerror);
+
+        return XUL_FAILURE;
 }
 
 void

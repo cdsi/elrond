@@ -8,13 +8,13 @@
 #include <stdio.h>
 #endif                          /* HAVE_STDIO_H */
 
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif                          /* HAVE_UNISTD_H */
-
 #ifdef HAVE_STRING_H
 #include <string.h>
 #endif                          /* HAVE_STRING_H */
+
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif                          /* HAVE_UNISTD_H */
 
 #define XUL_EXPORT_SYMBOLS 1
 #include "xul.h"
@@ -59,6 +59,7 @@ xul_delete(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
 
+        xul_error_delete(xul);
         xul_prefs_delete(xul);
         xul_time_delete(xul);
         xul_verbose_delete(xul);
@@ -71,6 +72,7 @@ xul_new()
 {
         xul_t *xul = xul_alloc();
 
+        xul->error = xul_error_new();
         xul->prefs = xul_prefs_new();
         xul->time = xul_time_new();
         xul->verbose = xul_verbose_new();
@@ -83,6 +85,7 @@ xul_init(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
 
+        xul_error_init(xul);
         xul_prefs_init(xul);
         xul_time_init(xul);
         xul_verbose_init(xul);

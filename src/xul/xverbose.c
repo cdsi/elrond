@@ -12,6 +12,10 @@
 #include <string.h>
 #endif                          /* HAVE_STRING_H */
 
+#ifdef HAVE_ERRNO_H
+#include <errno.h>
+#endif                          /* HAVE_ERRNO_H */
+
 #define XUL_EXPORT_SYMBOLS 1
 #include "xul.h"
 
@@ -87,11 +91,9 @@ xul_verbose_output_close(xul_t * xul)
         }
 
         fclose(xul->verbose->fp);
-
-        xul->rc = XUL_SUCCESS;
 }
 
-XUL_APIEXPORT void
+XUL_APIEXPORT xul_rc_t
 xul_verbose_output_open(xul_t * xul, const gchar * output)
 {
         g_assert(XUL_IS_VALID(xul));
@@ -100,12 +102,13 @@ xul_verbose_output_open(xul_t * xul, const gchar * output)
 
         xul->verbose->fp = g_fopen(output, "a+");
 
-        if (!xul->verbose->fp) {
-                xul->rc = XUL_EFOPEN;
-                return;
+        if (xul->verbose->fp) {
+                return XUL_SUCCESS;
         }
 
-        xul->rc = XUL_SUCCESS;
+        xul_error_add(xul, XUL_ERROR, XUL_ERROR_FILEIO, "Unable to open %s: %s", output, g_strerror(errno));
+
+        return XUL_FAILURE;
 }
 
 XUL_APIEXPORT void
