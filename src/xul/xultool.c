@@ -12,9 +12,6 @@
 #include <string.h>
 #endif                          /* HAVE_STRING_H */
 
-#include <glib.h>
-#include <glib/gprintf.h>
-
 #include "xul.h"
 
 typedef struct {
@@ -89,7 +86,8 @@ main(int argc, char **argv)
                 return 1;
         }
 
-        xul_t *xul = xul_init();
+        xul_t *xul = xul_new();
+        xul_init(xul);
 
         xul_userdata_set(xul, (gpointer *) & userdata);
 
