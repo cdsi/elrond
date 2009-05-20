@@ -54,7 +54,6 @@ if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
 		ant.sh jar
 		[ $? != 0 ] && echo "ERROR!!!" && exit 1
 	fi
-	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 
 exit 0
