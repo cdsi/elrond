@@ -5,10 +5,10 @@
 #include <glib/gprintf.h>
 #include <glib/gstdio.h>
 
-typedef gboolean xul_rc_t;
-
-#define XUL_SUCCESS FALSE
-#define XUL_FAILURE TRUE
+typedef enum {
+        XUL_SUCCESS = 0,
+        XUL_FAILURE,
+} xul_rc_e;
 
 #define XUL_ERROR xul_error_domain_create("xul")
 

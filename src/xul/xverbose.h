@@ -22,7 +22,7 @@ XUL_APIEXPORT xul_verbose_level_e xul_verbose_level_conv(xul_t *, gint);
 XUL_APIEXPORT xul_verbose_level_e xul_verbose_level_get(xul_t *);
 XUL_APIEXPORT void xul_verbose_level_set(xul_t *, xul_verbose_level_e);
 XUL_APIEXPORT void xul_verbose_output_close(xul_t *);
-XUL_APIEXPORT xul_rc_t xul_verbose_output_open(xul_t *, const gchar *);
+XUL_APIEXPORT xul_rc_e xul_verbose_output_open(xul_t *, const gchar *);
 XUL_APIEXPORT void xul_verbose_handler_default(const gchar *, GLogLevelFlags, const gchar *, gpointer);
 XUL_APIEXPORT xul_verbose_handler_f xul_verbose_handler_get(xul_t *);
 XUL_APIEXPORT void xul_verbose_handler_set(xul_t *, xul_verbose_handler_f);

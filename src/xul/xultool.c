@@ -89,7 +89,7 @@ main(int argc, char **argv)
         xul_t *xul = xul_new();
         xul_init(xul);
 
-        xul_rc_t rc;
+        xul_rc_e rc;
 
         xul_userdata_set(xul, (gpointer *) & userdata);
 
