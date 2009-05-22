@@ -167,7 +167,7 @@ xul_prefs_close(xul_t * xul)
         /* NOOP */
 }
 
-XUL_APIEXPORT xul_rc_t
+XUL_APIEXPORT xul_rc_e
 xul_prefs_open(xul_t * xul, const gchar * keyfile)
 {
         g_assert(XUL_IS_VALID(xul));

@@ -93,7 +93,7 @@ xul_verbose_output_close(xul_t * xul)
         fclose(xul->verbose->fp);
 }
 
-XUL_APIEXPORT xul_rc_t
+XUL_APIEXPORT xul_rc_e
 xul_verbose_output_open(xul_t * xul, const gchar * output)
 {
         g_assert(XUL_IS_VALID(xul));
