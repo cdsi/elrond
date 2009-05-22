@@ -14,6 +14,13 @@
 
 #include "xul.h"
 
+#define XULTOOL_ERROR xul_error_domain_create("xultool")
+
+typedef enum {
+        XULTOOL_ERROR_FOO,
+        XULTOOL_ERROR_BAR,
+} xultool_error_e;
+
 typedef struct {
         guint32 counter;
 } userdata_t;
@@ -21,7 +28,7 @@ typedef struct {
 userdata_t userdata;
 
 void
-verbose_handler_redacted(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer __xul)
+verbose_filter_redacted(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer __xul)
 {
         xul_t *xul = (xul_t *) __xul;
 
@@ -65,6 +72,22 @@ verbose_handler_redacted(const gchar * domain, GLogLevelFlags level, const gchar
         free(buffer);
 }
 
+xul_rc_e
+test_foo(xul_t * xul)
+{
+        xul_error_add(xul, XULTOOL_ERROR, XULTOOL_ERROR_FOO, "FOO FAILED");
+
+        return XUL_FAILURE;
+}
+
+xul_rc_e
+test_bar(xul_t * xul)
+{
+        xul_error_add(xul, XULTOOL_ERROR, XULTOOL_ERROR_BAR, "BAR FAILED");
+
+        return XUL_FAILURE;
+}
+
 int
 main(int argc, char **argv)
 {
@@ -93,18 +116,18 @@ main(int argc, char **argv)
 
         xul_userdata_set(xul, (gpointer *) & userdata);
 
+        xul_verbose_level_set(xul, xul_verbose_level_conv(xul, verbose));
+        xul_verbose_filter_set(xul, verbose_filter_redacted);
+
         const gchar *output = g_strconcat(getenv("ELROND_LOG"), G_DIR_SEPARATOR_S, "xultool.log", NULL);
 
-        rc = xul_verbose_output_open(xul, output);
+        rc = xul_verbose_log_open(xul, output);
         if (rc) {
                 if (XUL_IS_ERROR(xul)) {
                         g_fprintf(stderr, "ERROR: %s\n", xul_error_message_get(xul));
                 }
                 return 1;
         }
-
-        xul_verbose_handler_set(xul, verbose_handler_redacted);
-        xul_verbose_level_set(xul, xul_verbose_level_conv(xul, verbose));
 
         const gchar *prefs = g_strconcat(getenv("ELROND_ETC"), G_DIR_SEPARATOR_S, "xultool.ini", NULL);
 
@@ -142,6 +165,22 @@ main(int argc, char **argv)
 
         gdouble dubell = xul_prefs_gdouble_get(xul, "data", "double");
         xul_verbose_log_0("double = %lf", dubell);
+
+        rc = test_foo(xul);
+        if (rc) {
+                if (XUL_IS_ERROR(xul)) {
+                        g_fprintf(stderr, "ERROR: %s\n", xul_error_message_get(xul));
+                        xul_error_clear(xul);
+                }
+        }
+
+        rc = test_bar(xul);
+        if (rc) {
+                if (XUL_IS_ERROR(xul)) {
+                        g_fprintf(stderr, "ERROR: %s\n", xul_error_message_get(xul));
+                        xul_error_clear(xul);
+                }
+        }
 
         xul_delete(xul);
 

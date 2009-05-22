@@ -82,37 +82,7 @@ xul_verbose_level_set(xul_t * xul, xul_verbose_level_e level)
 }
 
 XUL_APIEXPORT void
-xul_verbose_output_close(xul_t * xul)
-{
-        g_assert(XUL_IS_VALID(xul));
-
-        if (!xul->verbose->fp) {
-                return;
-        }
-
-        fclose(xul->verbose->fp);
-}
-
-XUL_APIEXPORT xul_rc_e
-xul_verbose_output_open(xul_t * xul, const gchar * output)
-{
-        g_assert(XUL_IS_VALID(xul));
-
-        xul_verbose_output_close(xul);
-
-        xul->verbose->fp = g_fopen(output, "a+");
-
-        if (xul->verbose->fp) {
-                return XUL_SUCCESS;
-        }
-
-        xul_error_add(xul, XUL_ERROR, XUL_ERROR_FILEIO, "Unable to open %s: %s", output, g_strerror(errno));
-
-        return XUL_FAILURE;
-}
-
-XUL_APIEXPORT void
-xul_verbose_handler_default(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer __xul)
+xul_verbose_filter_default(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer __xul)
 {
         xul_t *xul = (xul_t *) __xul;
 
@@ -126,24 +96,54 @@ xul_verbose_handler_default(const gchar * domain, GLogLevelFlags level, const gc
                 return;
         }
 
-        fprintf(xul->verbose->fp, "%s\n", message);
+        g_fprintf(xul->verbose->fp, "%s\n", message);
         fflush(xul->verbose->fp);
 }
 
-XUL_APIEXPORT xul_verbose_handler_f
-xul_verbose_handler_get(xul_t * xul)
+XUL_APIEXPORT xul_verbose_filter_f
+xul_verbose_filter_get(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        return xul->verbose->handler;
+        return xul->verbose->filter;
 }
 
 XUL_APIEXPORT void
-xul_verbose_handler_set(xul_t * xul, xul_verbose_handler_f handler)
+xul_verbose_filter_set(xul_t * xul, xul_verbose_filter_f filter)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        g_log_set_handler(XUL_VERBOSE_DOMAIN, G_LOG_LEVEL_MASK, handler, xul);
+        g_log_set_handler(XUL_VERBOSE_DOMAIN, G_LOG_LEVEL_MASK, filter, xul);
+}
+
+XUL_APIEXPORT void
+xul_verbose_log_close(xul_t * xul)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        if (!xul->verbose->fp) {
+                return;
+        }
+
+        fclose(xul->verbose->fp);
+}
+
+XUL_APIEXPORT xul_rc_e
+xul_verbose_log_open(xul_t * xul, const gchar * output)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        xul_verbose_log_close(xul);
+
+        xul->verbose->fp = g_fopen(output, "a+");
+
+        if (xul->verbose->fp) {
+                return XUL_SUCCESS;
+        }
+
+        xul_error_add(xul, XUL_ERROR, XUL_ERROR_FILEIO, "Unable to open %s: %s", output, g_strerror(errno));
+
+        return XUL_FAILURE;
 }
 
 void
@@ -176,7 +176,7 @@ xul_verbose_delete(xul_t * xul)
         xul_verbose_t *verbose = xul->verbose;
         g_assert(XUL_VERBOSE_IS_VALID(verbose));
 
-        xul_verbose_output_close(xul);
+        xul_verbose_log_close(xul);
 
         xul_verbose_free(xul);
 }
@@ -197,9 +197,9 @@ xul_verbose_init(xul_t * xul)
         xul_verbose_t *verbose = xul->verbose;
         g_assert(XUL_VERBOSE_IS_VALID(verbose));
 
-        xul_verbose_handler_set(xul, xul_verbose_handler_default);
+        xul_verbose_filter_set(xul, xul_verbose_filter_default);
         xul_verbose_level_set(xul, XUL_VERBOSE_LEVEL_0);
-        xul_verbose_output_open(xul, "/dev/stdout");
+        xul_verbose_log_open(xul, "/dev/stdout");
 }
 
 /*

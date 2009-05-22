@@ -5,29 +5,6 @@
 #include <glib/gprintf.h>
 #include <glib/gstdio.h>
 
-typedef enum {
-        XUL_SUCCESS = 0,
-        XUL_FAILURE,
-} xul_rc_e;
-
-#define XUL_ERROR xul_error_domain_create("xul")
-
-typedef enum {
-        XUL_ERROR_FILEIO,       /* (f)open failed */
-        XUL_ERROR_FAILED,       /* unexplained fatal error */
-} xul_error_code_e;
-
-typedef GError xul_error_raw_t;
-typedef GQuark xul_error_domain_t;
-
-typedef struct {
-        xul_error_raw_t *rawerror;
-        guint32 magic;
-} xul_error_t;
-
-#define XUL_ERROR_MAGIC 0xABCDEFFE
-#define XUL_ERROR_IS_VALID(x) ((x) && ((x)->magic == XUL_ERROR_MAGIC))
-
 typedef struct {
         GKeyFile *keyfile;
         guint32 magic;
@@ -57,11 +34,12 @@ typedef enum {
         XUL_VERBOSE_LEVEL_9 = 1 << (G_LOG_LEVEL_USER_SHIFT + 9),
 } xul_verbose_level_e;
 
-#define xul_verbose_handler_f GLogFunc
+#define xul_verbose_filter_f GLogFunc
 
 typedef struct {
+        gboolean enabled;
         xul_verbose_level_e level;
-        xul_verbose_handler_f handler;
+        xul_verbose_filter_f filter;
         FILE *fp;
         guint32 magic;
 } xul_verbose_t;
@@ -69,11 +47,35 @@ typedef struct {
 #define XUL_VERBOSE_MAGIC 0xDEADBABE
 #define XUL_VERBOSE_IS_VALID(x) ((x) && ((x)->magic == XUL_VERBOSE_MAGIC))
 
+typedef enum {
+        XUL_SUCCESS = 0,
+        XUL_FAILURE,
+} xul_rc_e;
+
+#define XUL_ERROR xul_error_domain_create("xul")
+
+typedef enum {
+        XUL_ERROR_FILEIO,       /* (f)open failed */
+        XUL_ERROR_FAILED,       /* unexplained fatal error */
+} xul_error_code_e;
+
+typedef GError xul_error_raw_t;
+typedef GQuark xul_error_domain_t;
+
 typedef struct {
-        xul_error_t *error;
+        xul_verbose_t *verbose;
+        xul_error_raw_t *rawerror;
+        guint32 magic;
+} xul_error_t;
+
+#define XUL_ERROR_MAGIC 0xABCDEFFE
+#define XUL_ERROR_IS_VALID(x) ((x) && ((x)->magic == XUL_ERROR_MAGIC))
+
+typedef struct {
         xul_prefs_t *prefs;
         xul_time_t *time;
         xul_verbose_t *verbose;
+        xul_error_t *error;
         gpointer *userdata;
         guint32 magic;
 } xul_t;

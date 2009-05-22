@@ -180,7 +180,7 @@ xul_prefs_open(xul_t * xul, const gchar * keyfile)
 
         g_prefix_error(&rawerror, "Unable to open %s: ", keyfile);
 
-        xul_error_add_raw(xul, rawerror);
+        xul_error_raw(xul, rawerror);
 
         return XUL_FAILURE;
 }

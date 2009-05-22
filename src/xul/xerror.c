@@ -12,6 +12,10 @@
 #include <string.h>
 #endif                          /* HAVE_STRING_H */
 
+#ifdef HAVE_ERRNO_H
+#include <errno.h>
+#endif                          /* HAVE_ERRNO_H */
+
 #define XUL_EXPORT_SYMBOLS 1
 #include "xul.h"
 
@@ -33,7 +37,7 @@ xul_error_clear(xul_t * xul)
 }
 
 APIEXPORT void
-xul_error_add_raw(xul_t * xul, xul_error_raw_t * rawerror)
+xul_error_raw(xul_t * xul, xul_error_raw_t * rawerror)
 {
         g_assert(XUL_IS_VALID(xul));
 
@@ -71,7 +75,7 @@ xul_error_add(xul_t * xul, xul_error_domain_t domain, xul_error_code_e code, con
 
         g_free(formatted);
 
-        xul_error_add_raw(xul, rawerror);
+        xul_error_raw(xul, rawerror);
 }
 
 APIEXPORT const gchar *
@@ -119,6 +123,8 @@ xul_error_delete(xul_t * xul)
         xul_error_t *error = xul->error;
         g_assert(XUL_ERROR_IS_VALID(error));
 
+        /* xul_error_verbose_delete(xul); */
+
         xul_error_clear(xul);
         xul_error_free(xul);
 }
@@ -127,6 +133,8 @@ xul_error_t *
 xul_error_new()
 {
         xul_error_t *error = xul_error_alloc();
+
+        error->verbose = xul_verbose_new();
 
         return error;
 }
@@ -138,6 +146,8 @@ xul_error_init(xul_t * xul)
 
         xul_error_t *error = xul->error;
         g_assert(XUL_ERROR_IS_VALID(error));
+
+        /* xul_error_verbose_init(xul); */
 }
 
 /*
