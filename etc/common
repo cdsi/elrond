@@ -126,6 +126,9 @@ export SWIGFLAGS
 
 # python
 
+PYTHON_HOME=/opt/python
+export PYTHON_HOME
+
 PYTHON="$(which python)"
 export PYTHON
 
