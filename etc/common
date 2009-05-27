@@ -220,11 +220,11 @@ export PATH
 JAVA=$(which java)
 export JAVA
 
-JAVAFLAGS=
-JAVAFLAGS="${JAVAFLAGS} -Delrond.home=${ELROND_HOME}"
-JAVAFLAGS="${JAVAFLAGS} -Djava.library.path=${LD_LIBRARY_PATH}"
-JAVAFLAGS="${JAVAFLAGS} \
-        -Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
+# JAVAFLAGS=
+# JAVAFLAGS="${JAVAFLAGS} -Delrond.home=${ELROND_HOME}"
+# JAVAFLAGS="${JAVAFLAGS} -Djava.library.path=${LD_LIBRARY_PATH}"
+# JAVAFLAGS="${JAVAFLAGS} \
+#         -Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
 
 if [ ! "${DEBUG}" = "" ]; then
         JAVAFLAGS="${JAVAFLAGS}"
@@ -232,7 +232,7 @@ if [ ! "${DEBUG}" = "" ]; then
         # JAVAFLAGS="${JAVAFLAGS} -Xdebug -agentlib:jdwp=transport=dt_socket,server=y,address=8000"
 fi
 
-export JAVAFLAGS
+# export JAVAFLAGS
 
 ANT=$(which ant)
 export ANT
