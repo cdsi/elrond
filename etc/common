@@ -174,7 +174,7 @@ for x in ${ELROND_HOME}/dist/*.jar ${ELROND_HOME}/lib/java/*.jar; do
         CLASSPATH="${x}:${CLASSPATH}"
 done
 
-for x in ${EXTRAS}; do
+for x in ${ELROND_DEPENDS}; do
         for y in /opt/${x}/lib/*.jar; do
                 CLASSPATH="${y}:${CLASSPATH}"
         done
