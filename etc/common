@@ -168,7 +168,7 @@ export NETBEANSFLAGS
 PATH=${NETBEANS_HOME}/bin:${PATH}
 export PATH
 
-CLASSPATH=
+# CLASSPATH=
 
 for x in ${ELROND_HOME}/dist/*.jar ${ELROND_HOME}/lib/java/*.jar; do
         CLASSPATH="${x}:${CLASSPATH}"
