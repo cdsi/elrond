@@ -12,6 +12,6 @@ case "${answer}" in
 esac
 
 elrond-db-load.sh
-[ $? != 0 ] && exit 1
+# TODO: [ $? != 0 ] && exit 1
 
 exit 0
