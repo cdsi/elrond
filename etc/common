@@ -40,9 +40,6 @@ export ELROND_RUN
 ELROND_WWW="${ELROND_HOME}"/www
 export ELROND_WWW
 
-ELROND_DEPENDS="$(cat ${ELROND_SHARE}/depends.list)"
-export ELROND_DEPENDS
-
 ELROND_CONFIGUREFLAGS="--prefix=${ELROND_HOME}" 
 export ELROND_CONFIGUREFLAGS
 
@@ -61,6 +58,14 @@ elrond_recorde()
         echo            "$1"
 }
 
+# depends
+
+DEPENDS_HOME="${ELROND_SHARE}"
+. "${DEPENDS_HOME}"/depends
+
+ELROND_ACLOCALFLAGS="${DEPENDS_ACLOCALFLAGS} -I ${DEPENDS_HOME}/aclocal"
+export ELROND_ACLOCALFLAGS
+
 # native
 
 PATH="${ELROND_BIN}":"${PATH}"
@@ -71,26 +76,6 @@ export PATH
 
 LD_LIBRARY_PATH="${ELROND_LIB}":"${LD_LIBRARY_PATH}"
 export LD_LIBRARY_PATH
-
-ELROND_ACLOCALFLAGS="-I ${ELROND_SHARE}/aclocal"
-export ELROND_ACLOCALFLAGS
-
-for x in ${ELROND_DEPENDS}; do
-        [ ! -d /opt/${x} ] && continue
-
-        PATH="/opt/${x}/bin:/opt/${x}/sbin:${PATH}"
-        export PATH
-
-        LD_LIBRARY_PATH="/opt/${x}/lib:${LD_LIBRARY_PATH}"
-        export LD_LIBRARY_PATH
-
-        PKG_CONFIG_PATH="/opt/${x}/lib/pkgconfig:${PKG_CONFIG_PATH}"
-        export PKG_CONFIG_PATH
-
-        ACLOCAL="/opt/${x}/share/aclocal"
-        [ ! -d ${ACLOCAL} ] && continue
-        ELROND_ACLOCALFLAGS="-I ${ACLOCAL} ${ELROND_ACLOCALFLAGS}"
-done
 
 SVNHOST=dev.creativedigitalsys.com
 export SVNHOST
@@ -144,13 +129,6 @@ PYTHONPATH=${LD_LIBRARY_PATH}:${PYTHONPATH}
 PYTHONPATH=${ELROND_LIB}:${ELROND_LIB}/python:${PYTHONPATH}
 export PYTHONPATH
 
-for x in ${ELROND_DEPENDS}; do
-        [ ! -d /opt/${x} ] && continue
-
-        PYTHONPATH=/opt/${x}/lib:/opt/${x}/lib/python:${PYTHONPATH}
-        export PYTHONPATH
-done
-
 # java
 
 NETBEANS_HOME=/usr/share/netbeans
@@ -172,12 +150,6 @@ export PATH
 
 for x in ${ELROND_HOME}/dist/*.jar ${ELROND_HOME}/lib/java/*.jar; do
         CLASSPATH="${x}:${CLASSPATH}"
-done
-
-for x in ${ELROND_DEPENDS}; do
-        for y in /opt/${x}/lib/*.jar; do
-                CLASSPATH="${y}:${CLASSPATH}"
-        done
 done
 
 JAVA_MODULES="                                                          \
