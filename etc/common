@@ -58,11 +58,6 @@ elrond_recorde()
         echo            "$1"
 }
 
-# depends
-
-DEPENDS_HOME="${ELROND_SHARE}"
-. "${DEPENDS_HOME}"/depends
-
 # native
 
 PATH="${ELROND_BIN}":"${PATH}"
@@ -74,10 +69,17 @@ export LD_LIBRARY_PATH
 PYTHONPATH=${ELROND_LIB}:${ELROND_LIB}/python:${PYTHONPATH}
 export PYTHONPATH
 
+# depends
+
+DEPENDS_HOME="${ELROND_SHARE}"
+. "${DEPENDS_HOME}"/depends
+
+# elrond
+
 ELROND_ACLOCALFLAGS="${ACLOCALFLAGS} -I ${DEPENDS_HOME}/aclocal"
 export ELROND_ACLOCALFLAGS
 
-ELROND_CLASSPATH=
+ELROND_CLASSPATH=${CLASSPATH}
 
 for x in ${ELROND_HOME}/dist/*.jar ${ELROND_HOME}/lib/java/*.jar; do
         ELROND_CLASSPATH="${x}:${ELROND_CLASSPATH}"
@@ -97,7 +99,7 @@ done
 
 export ELROND_CLASSPATH
 
-ELROND_JAVAFLAGS="${JAVAFLAGS} -Delrond.home=${ELROND_HOME} -cp ${GANANDALF_CLASSPATH} \
+ELROND_JAVAFLAGS="${JAVAFLAGS} -Delrond.home=${ELROND_HOME} -cp ${ELROND_CLASSPATH} \
 	-Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
 export ELROND_JAVAFLAGS
 
