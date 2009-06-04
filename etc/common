@@ -37,7 +37,7 @@ export ELROND_LOG
 ELROND_RUN="${ELROND_VAR}"/run
 export ELROND_RUN
 
-ELROND_WWW="${ELROND_HOME}"/www
+ELROND_WWW="${ELROND_VAR}"/www
 export ELROND_WWW
 
 ELROND_CONFIGUREFLAGS="--prefix=${ELROND_HOME}" 
@@ -54,7 +54,7 @@ elrond_record()
 
 elrond_recorde()
 {
-        elrond_record   "$1"
+        elrond_record  "$1"
         echo            "$1"
 }
 
@@ -63,93 +63,24 @@ elrond_recorde()
 DEPENDS_HOME="${ELROND_SHARE}"
 . "${DEPENDS_HOME}"/depends
 
-ELROND_ACLOCALFLAGS="${DEPENDS_ACLOCALFLAGS} -I ${DEPENDS_HOME}/aclocal"
-export ELROND_ACLOCALFLAGS
-
 # native
 
 PATH="${ELROND_BIN}":"${PATH}"
 export PATH
 
-PATH=/sbin:/usr/sbin:"${PATH}"
-export PATH
-
 LD_LIBRARY_PATH="${ELROND_LIB}":"${LD_LIBRARY_PATH}"
 export LD_LIBRARY_PATH
 
-SVNHOST=dev.creativedigitalsys.com
-export SVNHOST
-
-SVN=$(which svn)
-export SVN
-
-SVNFLAGS=
-export SVNFLAGS
-
-CC=$(which gcc)
-export CC
-
-CFLAGS=${CFLAGS:="-O0 -std=c99 -Wall -Werror"}
-
-if [ ! "${DEBUG}" = "" ]; then
-        CFLAGS="${CFLAGS} -g"
-fi
-
-export CFLAGS
-
-MAKE=$(which make)
-export MAKE
-
-MAKEFLAGS=${MAKEFLAGS:="-k"}
-export MAKEFLAGS
-
-SWIG=$(which swig)
-export SWIG
-
-SWIGFLAGS=
-export SWIGFLAGS
-
-# python
-
-PYTHON_HOME=/opt/python
-export PYTHON_HOME
-
-PYTHON="$(which python)"
-export PYTHON
-
-PYTHONFLAGS="-tt"
-
-if [ ! "$DEBUG" = "" ]; then
-   PYTHONFLAGS="${PYTHONFLAGS} -m trace -t"
-fi
-
-export PYTHONFLAGS
-
-PYTHONPATH=${LD_LIBRARY_PATH}:${PYTHONPATH}
 PYTHONPATH=${ELROND_LIB}:${ELROND_LIB}/python:${PYTHONPATH}
 export PYTHONPATH
 
-# java
+ELROND_ACLOCALFLAGS="${ACLOCALFLAGS} -I ${DEPENDS_HOME}/aclocal"
+export ELROND_ACLOCALFLAGS
 
-NETBEANS_HOME=/usr/share/netbeans
-if [ -d /opt/netbeans ]; then
-        NETBEANS_HOME=/opt/netbeans
-fi
-export NETBEANS_HOME
-
-NETBEANS=netbeans
-export NETBEANS
-
-NETBEANSFLAGS=
-export NETBEANSFLAGS
-
-PATH=${NETBEANS_HOME}/bin:${PATH}
-export PATH
-
-# CLASSPATH=
+ELROND_CLASSPATH=
 
 for x in ${ELROND_HOME}/dist/*.jar ${ELROND_HOME}/lib/java/*.jar; do
-        CLASSPATH="${x}:${CLASSPATH}"
+        ELROND_CLASSPATH="${x}:${ELROND_CLASSPATH}"
 done
 
 JAVA_MODULES="                                                          \
@@ -161,69 +92,14 @@ JAVA_MODULES="                                                          \
 "
 
 for x in ${JAVA_MODULES}; do
-        CLASSPATH="${x}:${CLASSPATH}"
+        ELROND_CLASSPATH="${x}:${ELROND_CLASSPATH}"
 done
 
-export CLASSPATH
+export ELROND_CLASSPATH
 
-XXX="${JAVA_HOME}"
-
-# Debian/Ubuntu & Fedora Core x86
-XXX="${XXX} /usr/lib/jvm/java-6-sun"
-
-# Debian/Ubuntu & Fedora Core ppc
-XXX="${XXX} /usr/lib/j2sdk1.6-ibm"
-
-# Yellowdog 3/4
-XXX="${XXX} /opt/java"
-
-for x in ${XXX}; do
-        [ ! -d ${x} ] && continue
-
-        JAVA_HOME=${x}
-        export JAVA_HOME
-
-        break
-done
-
-PATH=${JAVA_HOME}/bin:${PATH}
-export PATH
-
-JAVA=$(which java)
-export JAVA
-
-# JAVAFLAGS=
-# JAVAFLAGS="${JAVAFLAGS} -Delrond.home=${ELROND_HOME}"
-# JAVAFLAGS="${JAVAFLAGS} -Djava.library.path=${LD_LIBRARY_PATH}"
-# JAVAFLAGS="${JAVAFLAGS} \
-#         -Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
-
-if [ ! "${DEBUG}" = "" ]; then
-        JAVAFLAGS="${JAVAFLAGS}"
-        # JAVAFLAGS="${JAVAFLAGS} -Dcom.sun.management.jmxremote"
-        # JAVAFLAGS="${JAVAFLAGS} -Xdebug -agentlib:jdwp=transport=dt_socket,server=y,address=8000"
-fi
-
-# export JAVAFLAGS
-
-ANT=$(which ant)
-export ANT
-
-ANTFLAGS="-Dplatform.home=\"${JAVA_HOME}\" -emacs"
-
-if [ ! "${DEBUG}" = "" ]; then
-        ANTFLAGS="${ANTFLAGS} -Djavac.debug=true"
-fi
-
-export ANTFLAGS
-
-JSVC= # TODO: $(which jsvc)
-export JSVC
-
-JSVCFLAGS=
-JSVCFLAGS="${JSVCFLAGS} ${JAVAFLAGS}"
-JSVCFLAGS="${JSVCFLAGS} -cp ${CLASSPATH} -user ${USER}"
-export JSVCFLAGS
+ELROND_JAVAFLAGS="${JAVAFLAGS} -Delrond.home=${ELROND_HOME} -cp ${GANANDALF_CLASSPATH} \
+	-Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
+export ELROND_JAVAFLAGS
 
 # extras
 
@@ -234,4 +110,3 @@ for x in ${ELROND_EXTRAS}; do
         TOPLEVEL=${ELROND_HOME}/extras/${x}
         . ${TOPLEVEL}/etc/common
 done
-
