@@ -48,14 +48,14 @@ export ELROND_LOGFILE
 
 elrond_record()
 {
-        date            >> "${ELROND_LOGFILE}"
-        echo "$1"       >> "${ELROND_LOGFILE}"
+        date                    >> "${ELROND_LOGFILE}"
+        echo "$@"               >> "${ELROND_LOGFILE}"
 }
 
 elrond_recorde()
 {
-        elrond_record  "$1"
-        echo            "$1"
+        elrond_record           "$@"
+        echo                    "$@"
 }
 
 PATH="${ELROND_BIN}":"${PATH}"
