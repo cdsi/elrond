@@ -42,16 +42,16 @@ if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	[ "${FORCE:=0}" != "0" ] || [ ! -f Makefile.in ] && ./bootstrap.sh
 	[ "${FORCE:=0}" != "0" ] || [ ! -f Makefile    ] && ./run-configure.sh
 
-	make.sh tags install
+	${ELROND_BIN}/make.sh tags install
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
-	python.sh setup.py develop
+	${ELROND_BIN}/python.sh setup.py develop
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
 	if [ -f build.xml ]; then
-		ant.sh jar
+		${ELROND_BIN}/ant.sh jar
 		[ $? != 0 ] && echo "ERROR!!!" && exit 1
 	fi
 fi

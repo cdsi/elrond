@@ -43,12 +43,12 @@ if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
-	python.sh setup.py test
+	${ELROND_BIN}/python.sh setup.py test
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
 	if [ -f build.xml ]; then
-		ant.sh test
+		${ELROND_BIN}/ant.sh test
 		[ $? != 0 ] && echo "ERROR!!!" && exit 1
 	fi
 fi
