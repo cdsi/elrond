@@ -106,6 +106,9 @@ ELROND_JAVAFLAGS="${JAVAFLAGS} -Delrond.home=${ELROND_HOME} -cp ${ELROND_CLASSPA
 	-Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
 export ELROND_JAVAFLAGS
 
+ELROND_ANTFLAGS=
+export ELROND_ANTFLAGS
+
 # extras
 
 ELROND_EXTRAS=" \

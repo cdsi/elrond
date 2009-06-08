@@ -35,16 +35,16 @@ cd ${ELROND_HOME}
 
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then
 	if [ -f build.xml ]; then
-		ant.sh clean
+		${ELROND_BIN}/ant.sh clean
 		[ $? != 0 ] && echo "ERROR!!!" && exit 1
 	fi
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
-	python.sh setup.py clean
+	${ELROND_BIN}/python.sh setup.py clean
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
-	make.sh -k uninstall distclean
+	${ELROND_BIN}/make.sh -k uninstall distclean
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 
