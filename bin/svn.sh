@@ -5,4 +5,5 @@ export ELROND_HOME
 
 . ${ELROND_HOME}/etc/common
 
-exec ${SVN} ${SVNFLAGS} "$@"
+elrond_record ${SVN} ${SVNFLAGS} ${ELROND_SVNFLAGS} "$@"
+exec ${SVN} ${SVNFLAGS} ${ELROND_SVNFLAGS} "$@"
