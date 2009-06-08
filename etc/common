@@ -67,9 +67,21 @@ export LD_LIBRARY_PATH
 PYTHONPATH="${ELROND_LIB}":"${ELROND_LIB}"/python:"${PYTHONPATH}"
 export PYTHONPATH
 
-for x in "${ELROND_HOME}"/dist/*.jar "${ELROND_LIB}"/java/*.jar; do
-        CLASSPATH="${x}":"${CLASSPATH}"
-done
+if [ -d "${ELROND_HOME}"/dist ]; then
+	JARFILES="$(find "${ELROND_HOME}"/dist -name "*.jar")"
+	for jarfile in ${JARFILES}; do
+		CLASSPATH="${jarfile}":"${CLASSPATH}"
+		export CLASSPATH
+	done
+fi
+
+if [ -d "${ELROND_LIB}"/java ]; then
+	JARFILES="$(find "${ELROND_LIB}"/java -name "*.jar")"
+	for jarfile in ${JARFILES}; do
+		CLASSPATH="${jarfile}":"${CLASSPATH}"
+		export CLASSPATH
+	done
+fi
 
 DEPENDS_HOME="${ELROND_SHARE}"
 . "${DEPENDS_HOME}"/depends
@@ -86,23 +98,7 @@ export ELROND_MAKEFLAGS
 ELROND_PYTHONFLAGS=
 export ELROND_PYTHONFLAGS
 
-ELROND_CLASSPATH="${CLASSPATH}"
-
-JAVA_MODULES="                                                          \
-        /usr/share/java/commons-cli.jar                                 \
-        /usr/share/java/commons-daemon.jar                              \
-        ${NETBEANS_HOME}/java2/modules/ext/AbsoluteLayout.jar           \
-        ${NETBEANS_HOME}/platform9/modules/ext/swing-layout-1.0.3.jar   \
-        ${NETBEANS_HOME}/platform9/modules/ext/junit-4.5.jar            \
-"
-
-for x in ${JAVA_MODULES}; do
-        ELROND_CLASSPATH="${x}:${ELROND_CLASSPATH}"
-done
-
-export ELROND_CLASSPATH
-
-ELROND_JAVAFLAGS="${JAVAFLAGS} -Delrond.home=${ELROND_HOME} -cp ${ELROND_CLASSPATH} \
+ELROND_JAVAFLAGS="${JAVAFLAGS} -Delrond.home=${ELROND_HOME} \
 	-Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
 export ELROND_JAVAFLAGS
 
