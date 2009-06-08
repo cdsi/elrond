@@ -58,32 +58,35 @@ elrond_recorde()
         echo            "$1"
 }
 
-# native
-
 PATH="${ELROND_BIN}":"${PATH}"
 export PATH
 
 LD_LIBRARY_PATH="${ELROND_LIB}":"${LD_LIBRARY_PATH}"
 export LD_LIBRARY_PATH
 
-PYTHONPATH=${ELROND_LIB}:${ELROND_LIB}/python:${PYTHONPATH}
+PYTHONPATH="${ELROND_LIB}":"${ELROND_LIB}"/python:"${PYTHONPATH}"
 export PYTHONPATH
 
-# depends
+for x in "${ELROND_HOME}"/dist/*.jar "${ELROND_LIB}"/java/*.jar; do
+        CLASSPATH="${x}":"${CLASSPATH}"
+done
 
 DEPENDS_HOME="${ELROND_SHARE}"
 . "${DEPENDS_HOME}"/depends
 
-# elrond
+ELROND_SVNFLAGS=
+export ELROND_SVNFLAGS
 
 ELROND_ACLOCALFLAGS="${ACLOCALFLAGS} -I ${DEPENDS_HOME}/aclocal"
 export ELROND_ACLOCALFLAGS
 
-ELROND_CLASSPATH=${CLASSPATH}
+ELROND_MAKEFLAGS=
+export ELROND_MAKEFLAGS
 
-for x in ${ELROND_HOME}/dist/*.jar ${ELROND_HOME}/lib/java/*.jar; do
-        ELROND_CLASSPATH="${x}:${ELROND_CLASSPATH}"
-done
+ELROND_PYTHONFLAGS=
+export ELROND_PYTHONFLAGS
+
+ELROND_CLASSPATH="${CLASSPATH}"
 
 JAVA_MODULES="                                                          \
         /usr/share/java/commons-cli.jar                                 \

@@ -5,4 +5,5 @@ export ELROND_HOME
 
 . ${ELROND_HOME}/etc/common
 
+elrond_record ${NETBEANS} ${NETBEANSFLAGS} "$@"
 exec ${NETBEANS} ${NETBEANSFLAGS} "$@"

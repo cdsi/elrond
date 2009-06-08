@@ -7,5 +7,5 @@ export ELROND_HOME
 
 elrond-db-create.sh
 
-sqlite3 -init ${ELROND_ETC}/elrond-db-load.sql ${ELROND_DB}/elrond.db \
+exec ${ELROND_BIN}/sqlite3.sh -init ${ELROND_ETC}/elrond-db-load.sql ${ELROND_DB}/elrond.db \
 	'.exit'

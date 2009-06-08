@@ -5,4 +5,5 @@ export ELROND_HOME
 
 . ${ELROND_HOME}/etc/common
 
-exec ${PYTHON} ${PYTHONFLAGS} "$@"
+elrond_record ${PYTHON} ${PYTHONFLAGS} ${ELROND_PYTHONFLAGS} "$@"
+exec ${PYTHON} ${PYTHONFLAGS} ${ELROND_PYTHONFLAGS} "$@"

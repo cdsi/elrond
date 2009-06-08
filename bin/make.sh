@@ -5,4 +5,5 @@ export ELROND_HOME
 
 . ${ELROND_HOME}/etc/common
 
-exec ${MAKE} ${MAKEFLAGS} "$@"
+elrond_record ${MAKE} ${MAKEFLAGS} ${ELROND_MAKEFLAGS} "$@"
+exec ${MAKE} ${MAKEFLAGS} ${ELROND_MAKEFLAGS} "$@"
