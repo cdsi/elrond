@@ -1,3 +1,6 @@
+from __future__ import division
+from __future__ import with_statement
+
 # The Storm ORM. See also: https://storm.canonical.com/
 import storm.locals as Storm
 
