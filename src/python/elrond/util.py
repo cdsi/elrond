@@ -139,6 +139,8 @@ class Prefs(Object):
         def __init__(self):
                 self.__parser = SafeConfigParser()
 
+# $Id:$
+#
 # Local Variables:
 # indent-tabs-mode: nil
 # python-continuation-offset: 2
