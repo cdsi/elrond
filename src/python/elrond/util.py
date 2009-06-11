@@ -1,3 +1,6 @@
+from __future__ import division
+from __future__ import with_statement
+
 import os
 import time
 
@@ -8,7 +11,26 @@ def Property(f):
         return property(**f())
 
 class Object(object):
-        pass
+
+        def to_bool(self, value):
+                if value.strip().upper() == 'TRUE':
+                        return True
+                return False
+
+        def readlines(self, filename):
+                lines = []
+
+                try:
+                        with open(filename, 'r') as fd:
+                                lines = [line.strip() for line in fd.readlines()]
+                except:
+                        pass
+
+                return lines
+
+        def writelines(self, filename, lines):
+                with open(filename, 'w') as fd:
+                        fd.writelines([line + "\n" for line in lines])
 
 class Benchmark(Object):
 
