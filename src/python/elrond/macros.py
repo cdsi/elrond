@@ -1,3 +1,6 @@
+from __future__ import division
+from __future__ import with_statement
+
 def clamp(x, l=None, u=None):
         """return value limited by lower and/or upper bounds"""
 
