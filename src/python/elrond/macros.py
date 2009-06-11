@@ -8,6 +8,8 @@ def clamp(x, l=None, u=None):
 
         return x
 
+# $Id:$
+#
 # Local Variables:
 # indent-tabs-mode: nil
 # python-continuation-offset: 2

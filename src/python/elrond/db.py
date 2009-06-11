@@ -73,6 +73,8 @@ class DB(Object):
                 self.path = ''
                 self.name = ''
 
+# $Id:$
+#
 # Local Variables:
 # indent-tabs-mode: nil
 # python-continuation-offset: 2

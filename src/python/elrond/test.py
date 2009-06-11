@@ -120,6 +120,8 @@ def testsuite():
         __testsuite.addTest(unittest.TestLoader().loadTestsFromTestCase(UtilTestCase))
         return __testsuite
 
+# $Id:$
+#
 # Local Variables:
 # indent-tabs-mode: nil
 # python-continuation-offset: 2
