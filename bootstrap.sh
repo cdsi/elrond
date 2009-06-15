@@ -6,7 +6,7 @@ ELROND_HOME=$(dirname $0)
 cd ${ELROND_HOME}
 
 libtoolize --automake --copy --force
-aclocal ${ELROND_ACLOCALFLAGS}
+aclocal ${ACLOCALFLAGS} ${ELROND_ACLOCALFLAGS}
 autoheader
 automake --add-missing --copy --force-missing --foreign
 autoconf
