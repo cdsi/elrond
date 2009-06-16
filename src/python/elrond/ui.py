@@ -99,6 +99,10 @@ class Widget(Object):
                 except:
                         pass
 
+        def on_toggled(self, widget, index):
+                i = widget.get_iter(index)
+                widget.set(i, 1, not widget.get_value(i, 1))
+
         def on_changed(self, widget):
                 section, key = widget.get_name().split("__")
 
