@@ -99,6 +99,8 @@ class Widget(Object):
                 except:
                         pass
 
+        # This pertains to a treeview/liststore with the checkbox set as userdata
+        # (passed in as the widget parameter).
         def on_toggled(self, widget, index):
                 i = widget.get_iter(index)
                 widget.set(i, 1, not widget.get_value(i, 1))
