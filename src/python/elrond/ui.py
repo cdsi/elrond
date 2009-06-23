@@ -107,16 +107,26 @@ class Widget(Object):
 
         def on_changed(self, widget):
                 section, key = widget.get_name().split("__")
+                
+                value = None
 
-                try:
-                        value = widget.get_text()
-                except:
-                        try:
-                                value = widget.get_active()
-                        except:
-                                print 'ERROR! Unable to get value of %s' % (type(widget))
+                # order is important...
+                attrs = [
+                        'get_text',
+                        'get_active_text',
+                        'get_active',
+                ]
 
-                self.props[section][key] = value
+                for attr in attrs:
+                        if hasattr(widget, attr):
+                                value = getattr(widget, attr)()
+                                break
+
+                if value is not None:
+                        self.prefs[section][key] = value
+                        self.prefs.write()
+                else:
+                        print 'ERROR! Unable to get value of %s' % (type(widget))
 
         def draw(self):
                 while gtk.events_pending():
@@ -164,10 +174,10 @@ class Widget(Object):
                 self.widget = self.builder.get_object(name)
 
         def loaddb(self, path, name):
-                self.props = ConfigObj(path + os.sep + name + '.ini')
+                self.prefs = ConfigObj(path + os.sep + name + '.ini')
 
-                for section in self.props.keys():
-                        for key, value in self.props[section].items():
+                for section in self.prefs.keys():
+                        for key, value in self.prefs[section].items():
                                 try:
                                         widget = self.builder.get_object(section + '__' + key)
 
@@ -175,7 +185,9 @@ class Widget(Object):
                                                 widget.set_active(self.to_bool(value))
 
                                         if type(widget) == gtk.ComboBox:
-                                                widget.set_active(int(value))
+                                                model = widget.get_model()
+                                                i = [row[0] for row in model].index(value)
+                                                widget.set_active(i)
 
                                         if type(widget) == gtk.Entry:
                                                 widget.set_text(value)
