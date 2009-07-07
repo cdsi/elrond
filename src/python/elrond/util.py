@@ -7,8 +7,24 @@ import time
 from ConfigParser import SafeConfigParser
 from threading import Lock
 
+from decorator import decorator
+
 def Property(f):
         return property(**f())
+
+class APIDepricatedError(Exception):
+        pass
+
+class APINotImplementedError(Exception):
+        pass
+
+@decorator
+def APIDepricated(f, *args, **kwargs):
+        raise APIDepricatedError('ERROR: "%s" has been depricated and soon will be removed!' % (f))
+
+@decorator
+def APINotImplemented(f, *args, **kwargs):
+        raise APINotImplementedError('ERROR: "%s" has not been implemented!' % (f))
 
 class Object(object):
 
