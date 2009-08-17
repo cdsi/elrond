@@ -1,6 +1,13 @@
 from __future__ import division
 from __future__ import with_statement
 
+import thread
+import threading
+
+import gobject
+
+from elrond.util import Object
+
 class Task(Object):
         """http://unpythonic.blogspot.com/2007/08/using-threads-in-pygtk.html
         """

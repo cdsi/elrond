@@ -3,7 +3,6 @@ from __future__ import with_statement
 
 import os
 import thread
-import threading
 import time
 
 from configobj import ConfigObj
