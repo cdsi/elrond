@@ -11,50 +11,8 @@ from configobj import ConfigObj
 import gobject
 import gtk
 
+from elrond.concurrent import Task
 from elrond.util import Object
-
-class Task(Object):
-        """http://unpythonic.blogspot.com/2007/08/using-threads-in-pygtk.html
-        """
-
-        def __loop(self, rc):
-                if rc is None:
-                        rc = ()
-                if not isinstance(rc, tuple):
-                        rc = (rc,)
-                self.callback(*rc)
-
-        def __start(self, *args, **kwargs):
-                for rc in self.generator(*args, **kwargs):
-                        if self.callback is not None:
-                                gobject.idle_add(self.__loop, rc)
-                if self.complete is not None:
-                        gobject.idle_add(self.complete)
-
-        def start(self, *args, **kwargs):
-                if self.__running:
-                        return
-
-                self.__running = True
-                thread = threading.Thread(target=self.__start, args=args, kwargs=kwargs)
-                thread.start()
-
-        def stop(self):
-                if not self.__running:
-                        return
-
-                self.__running = False
-
-        def kill(self):
-                self.stop()
-                thread.exit()
-
-        def __init__(self, generator, callback=None, complete=None):
-                self.generator = generator
-                self.callback = callback
-                self.complete = complete
-
-                self.__running = False
 
 class Chooser(gtk.FileChooserDialog):
 
@@ -204,6 +162,138 @@ class Widget(Object):
 
         def __init__(self):
                 gobject.threads_init()
+
+class Console(Widget):
+
+        def clear(self):
+                self.__buffer.set_text('')
+                self.draw()
+
+        def on_clear(self, widget):
+                self.clear()
+
+        def append(self, text):
+                # end_iter is updated by the draw calls so don't attempt to re-use it...
+
+                self.__buffer.insert(self.__buffer.get_end_iter(), text)
+                self.draw()
+
+                self.__textview.scroll_to_iter(self.__buffer.get_end_iter(), 0)
+                self.draw()
+
+        def appendln(self, text):
+                self.append(text + "\n")
+
+        def write(self, text):
+                self.clear()
+                self.append(text)
+
+        def writeln(self, text):
+                self.write(text + "\n")
+
+        def __init__(self):
+                Widget.__init__(self)
+
+                path = os.environ['ELROND_ETC']
+                name = 'console'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+                self.__textview = self.builder.get_object('textview')
+                self.__buffer = self.__textview.get_buffer()
+
+class Dialog(Widget):
+
+        @apply
+        def labels():
+
+                def fget(self):
+                        return self.__labels
+
+                def fset(self, value):
+                        self.__labels = value
+                        labels = self.__labels.split(':')
+
+                        self.__table = self.builder.get_object('table')
+                        self.__table.resize(len(labels), 2)
+
+                        self.__entries = []
+
+                        for i, text in enumerate(labels):
+                                label = gtk.Label(text + ':')
+                                label.set_justify(gtk.JUSTIFY_LEFT)
+                                label.show()
+
+                                self.__table.attach(label, 0, 1, i, i + 1)
+
+                                entry = gtk.Entry()
+                                entry.set_editable(False)
+                                entry.show()
+
+                                self.__entries.append(entry)
+
+                                self.__table.attach(entry, 1, 2, i, i + 1)
+
+                def fdel(self):
+                        del self.__labels
+
+                return property(**locals())
+
+        def __play(self):
+                while self.__running:
+                        try:
+                                with open(self.socket, 'r') as fd:
+                                        while self.__running:
+                                                # TODO: readline needs a timeout
+                                                line = fd.readline()
+                                                print 'something... anything...'
+                                                if line == '':
+                                                        break
+
+                                                data = line.strip().split(':')
+
+                                                for i, text in enumerate(data):
+                                                        if text == '':
+                                                                continue
+
+                                                        entry = self.__entries[i]
+                                                        entry.set_text(text)
+
+                                                self.draw()
+
+                                                yield
+                        except:
+                                pass
+
+        def play(self):
+                if self.__running:
+                        return
+
+                self.__running = True
+                self.__task.start()
+
+        def stop(self):
+                self.__running = False
+                self.__task.stop()
+
+        def kill(self):
+                self.stop()
+                self.__task.kill()
+
+        def __init__(self):
+                Widget.__init__(self)
+
+                path = os.environ['ELROND_ETC']
+                name = 'dialog'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+                gtk.quit_add(0, self.kill)
+
+                self.__task = Task(self.__play)
+                self.stop()
 
 # $Id:$
 #
