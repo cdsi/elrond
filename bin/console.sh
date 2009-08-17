@@ -14,8 +14,8 @@ case "${OPTION}" in
         ;;
 esac
 
-if [ ! -f "${FARAMIR_ETC}"/console.ini ]; then
-        cp "${FARAMIR_ETC}"/console.ini.in "${FARAMIR_ETC}"/console.ini
+if [ ! -f "${ELROND_ETC}"/console.ini ]; then
+        cp "${ELROND_ETC}"/console.ini.in "${ELROND_ETC}"/console.ini
 fi
 
 exec python.sh "${ELROND_BIN}"/console.py "$@"

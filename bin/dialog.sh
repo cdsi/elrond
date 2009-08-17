@@ -14,8 +14,8 @@ case "${OPTION}" in
         ;;
 esac
 
-if [ ! -f "${FARAMIR_ETC}"/dialog.ini ]; then
-        cp "${FARAMIR_ETC}"/dialog.ini.in "${FARAMIR_ETC}"/dialog.ini
+if [ ! -f "${ELROND_ETC}"/dialog.ini ]; then
+        cp "${ELROND_ETC}"/dialog.ini.in "${ELROND_ETC}"/dialog.ini
 fi
 
 exec python.sh "${ELROND_BIN}"/dialog.py "$@"
