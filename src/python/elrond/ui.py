@@ -11,7 +11,7 @@ from configobj import ConfigObj
 import gobject
 import gtk
 
-from elrond.concurrent import Task
+from elrond.tasks import Task
 from elrond.util import Object
 
 class Chooser(gtk.FileChooserDialog):
