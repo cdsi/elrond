@@ -1,6 +1,7 @@
 from __future__ import division
 from __future__ import with_statement
 
+import math
 import os
 import thread
 import time
@@ -365,12 +366,7 @@ class Plane(Widget):
                         gc.set_line_attributes(1, gtk.gdk.LINE_SOLID,
                                                gtk.gdk.CAP_NOT_LAST, gtk.gdk.JOIN_MITER)
 
-                # TODO:
-                filename = os.environ['FARAMIR_SRC'] + os.sep + 'pc-sim' + os.sep + 'CDS_Perf_Run_Mult_Tgts.txt'
-                lines = self.readlines(filename)
-                boresight = int(float(lines[1]))
-
-                look_left = boresight + 45
+                look_left = self.boresight + 45
                 if look_left > 360:
                         look_left = look_left - 360
                 intersects(look_left)
@@ -399,6 +395,8 @@ class Plane(Widget):
 
                 self.__drawingarea = self.builder.get_object('drawingarea')
                 self.__layout = self.__drawingarea.create_pango_layout('')
+
+                self.boresight = 0
 
 class Dialog(Widget):
 
