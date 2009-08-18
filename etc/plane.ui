@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkWindow" id="plane">
+    <property name="title" translatable="yes">PC-Sim Visual Analysis Tool</property>
+    <property name="default_width">600</property>
+    <property name="default_height">400</property>
+    <property name="deletable">False</property>
+    <child>
+      <object class="GtkVBox" id="vbox">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkToolbar" id="toolbar">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkToolButton" id="clear_toolbutton">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Clear</property>
+                <property name="stock_id">gtk-clear</property>
+                <signal name="clicked" handler="on_clear"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkAlignment" id="alignment">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkDrawingArea" id="drawingarea">
+                <property name="visible">True</property>
+                <signal name="expose_event" handler="on_drawingarea_expose_event"/>
+                <signal name="realize" handler="on_drawingarea_realize"/>
+                <signal name="configure_event" handler="on_drawingarea_configure_event"/>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStatusbar" id="statusbar">
+            <property name="visible">True</property>
+            <property name="spacing">2</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

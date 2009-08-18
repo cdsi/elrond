@@ -202,6 +202,204 @@ class Console(Widget):
                 self.__textview = self.builder.get_object('textview')
                 self.__buffer = self.__textview.get_buffer()
 
+class Plane(Widget):
+
+        def plot(self, x, y, z, color='white', name=None, text=None, vector=None):
+                x_limit = 40000
+                y_limit = 40000
+
+                # TODO:
+                z_pixel = 15
+
+                x_scale = abs(self.__w / x_limit)
+                x_pixel = int(self.__w_half + (x * x_scale)) - int(z_pixel / 2)
+
+                y_scale = abs(self.__h / y_limit)
+                y_pixel = int(self.__h_half - (y * y_scale)) - int(z_pixel / 2)
+
+                gc = self.__drawingarea.window.new_gc()
+                gc.set_foreground(gc.get_colormap().alloc_color(color))
+
+                self.__pixmap.draw_arc(gc, True, x_pixel, y_pixel, z_pixel, z_pixel, 0, 360 * 64)
+
+                gc = self.__drawingarea.get_style().fg_gc[gtk.STATE_NORMAL]
+
+                if not name == None:
+                        self.__layout.set_text(name)
+                        self.__pixmap.draw_layout(gc, x_pixel, y_pixel + z_pixel, self.__layout)
+                        text = '%s: (%d,%d) %s' % (name, x, y, text)
+
+                if not text == None:
+                        self.__layout.set_text(text)
+                        self.__pixmap.draw_layout(gc, self.__legend_x, self.__legend_y, self.__layout)
+                        self.__legend_y -= 20 # TODO: text height in pixels
+
+                if not vector == None:
+                        x_center = x_pixel + int(z_pixel / 2)
+                        y_center = y_pixel + int(z_pixel / 2)
+                        x_vector = int(x_center + (vector[0] * x_scale * 10))
+                        y_vector = int(y_center - (vector[1] * y_scale * 10))
+                        self.__pixmap.draw_line(gc, x_center, y_center, x_vector, y_vector)
+
+                self.__drawingarea.queue_draw()
+                self.draw()
+
+        def saveas(self):
+                pass
+
+        def on_saveas(self, widget):
+                self.saveas()
+
+        def clear(self):
+                self.__drawingarea.queue_resize()
+
+        def on_clear(self, widget):
+                self.clear()
+
+        def on_drawingarea_configure_event(self, widget, event):
+                x, y, self.__w, self.__h = widget.get_allocation()
+
+                # keep drawingarea square...
+
+                if self.__w > self.__h:
+                        self.__w = self.__h
+                else:
+                        self.__h = self.__w
+
+                self.__w_half = int(self.__w / 2) # DEMO: 0
+                self.__h_half = int(self.__h / 2)
+
+                self.__legend_x = 15
+                self.__legend_y = self.__h - 25
+
+                self.__pixmap = gtk.gdk.Pixmap(widget.window, self.__w, self.__h)
+
+                # draw grid...
+
+                gc = widget.get_style().white_gc
+                self.__pixmap.draw_rectangle(gc, True, 0, 0, self.__w, self.__h)
+
+                gc = self.__drawingarea.window.new_gc()
+                gc.set_foreground(gc.get_colormap().alloc_color('#CFFCFFCFF'))
+
+                x_incr = int(self.__w / 20)
+
+                x = self.__w_half
+                while True:
+                        self.__pixmap.draw_line(gc, x, 0, x, self.__h)
+                        x -= x_incr
+                        if x < 0:
+                                break
+
+                x = self.__w_half
+                while True:
+                        self.__pixmap.draw_line(gc, x, 0, x, self.__h)
+                        x += x_incr
+                        if x > self.__w:
+                                break
+
+                y_incr = int(self.__h / 20)
+
+                y = self.__h_half
+                while True:
+                        self.__pixmap.draw_line(gc, 0, y, self.__w, y)
+                        y -= y_incr
+                        if y < 0:
+                                break
+
+                y = self.__h_half
+                while True:
+                        self.__pixmap.draw_line(gc, 0, y, self.__w, y)
+                        y += y_incr
+                        if y > self.__h:
+                                break
+
+                # draw cross-hairs...
+
+                gc = widget.get_style().black_gc
+
+                self.__pixmap.draw_line(gc, self.__w_half, 0, self.__w_half, self.__h)
+                self.__pixmap.draw_line(gc, 0, self.__h_half, self.__w, self.__h_half)
+
+                # draw radar field-of-view...
+
+                def intersects(theta):
+
+                        gc = widget.get_style().black_gc
+
+                        gc.set_line_attributes(3, gtk.gdk.LINE_DOUBLE_DASH,
+                                               gtk.gdk.CAP_NOT_LAST, gtk.gdk.JOIN_MITER)
+
+                        if theta == 0:
+                                x_intersect = self.__w
+                                y_intersect = self.__h_half
+                        elif theta > 0 and theta < 90:
+                                phe = math.radians(90 - theta)
+                                x_intersect = self.__w_half + int(self.__h_half * math.tan(phe))
+                                y_intersect = 0
+                        elif theta >= 90 and theta < 180:
+                                phe = math.radians(90 - (180 - theta))
+                                x_intersect = self.__w_half - int(self.__h_half * math.tan(phe))
+                                y_intersect = 0
+                        elif theta == 180:
+                                x_intersect = 0
+                                y_intersect = self.__h_half
+                        elif theta > 180 and theta < 270:
+                                phe = math.radians(270 - theta)
+                                x_intersect = self.__w_half - int(self.__h_half * math.tan(phe))
+                                y_intersect = self.__h
+                        elif theta >= 270 and theta < 360:
+                                phe = math.radians(90 - (360 - theta))
+                                x_intersect = self.__w_half + int(self.__h_half * math.tan(phe))
+                                y_intersect = self.__h
+                        elif theta == 360:
+                                x_intersect = self.__w
+                                y_intersect = self.__h_half
+                        else:
+                                return
+
+                        self.__pixmap.draw_line(gc,
+                                                self.__w_half, self.__h_half,
+                                                x_intersect, y_intersect)
+
+                        gc.set_line_attributes(1, gtk.gdk.LINE_SOLID,
+                                               gtk.gdk.CAP_NOT_LAST, gtk.gdk.JOIN_MITER)
+
+                # TODO:
+                filename = os.environ['FARAMIR_SRC'] + os.sep + 'pc-sim' + os.sep + 'CDS_Perf_Run_Mult_Tgts.txt'
+                lines = self.readlines(filename)
+                boresight = int(float(lines[1]))
+
+                look_left = boresight + 45
+                if look_left > 360:
+                        look_left = look_left - 360
+                intersects(look_left)
+
+                look_right = look_left - 90
+                if look_right < 0:
+                        look_right = 360 + look_right
+                intersects(look_right)
+
+        def on_drawingarea_expose_event(self, widget, event):
+                x, y, width, height = event.area
+                gc = widget.get_style().fg_gc[gtk.STATE_NORMAL]
+                widget.window.draw_drawable(gc, self.__pixmap, x, y, x, y, width, height)
+
+        def on_drawingarea_realize(self, widget):
+                pass
+
+        def __init__(self):
+                Widget.__init__(self)
+
+                path = os.environ['ELROND_ETC']
+                name = 'plane'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+                self.__drawingarea = self.builder.get_object('drawingarea')
+                self.__layout = self.__drawingarea.create_pango_layout('')
+
 class Dialog(Widget):
 
         @apply
