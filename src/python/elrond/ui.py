@@ -106,6 +106,10 @@ class Widget(Object):
                 gtk.main()
                 
         def exit(self):
+                if self.embedded:
+                        self.hide()
+                        return
+
                 gtk.main_quit()
                 thread.exit()
 
@@ -173,25 +177,33 @@ class Widget(Object):
                         widgets = self.builder.get_objects()
 
                         if self.__mode == 'expert':
-                                for widget in widgets:
-                                        name = widget.get_name()
-                                        if name.endswith('expert'):
-                                                widget.set_visible(True)
-                                        if name.endswith('novice'):
-                                                widget.set_visible(False)
+                                expert = True
+                                novice = False
 
                         if self.__mode == 'novice':
-                                for widget in widgets:
-                                        name = widget.get_name()
-                                        if name.endswith('expert'):
-                                                widget.set_visible(False)
-                                        if name.endswith('novice'):
-                                                widget.set_visible(True)
+                                expert = False
+                                novice = True
+
+                        for widget in widgets:
+                                if not hasattr(widget, 'name'):
+                                        continue
+
+                                name = widget.name
+
+                                if name.endswith('expert'):
+                                        if not expert:
+                                                widget.hide()
+
+                                if name.endswith('novice'):
+                                        if not novice:
+                                                widget.hide()
 
                 return locals()
 
         def __init__(self):
                 gobject.threads_init()
+
+                self.embedded = False
 
 class Console(Widget):
 
