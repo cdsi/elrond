@@ -2,12 +2,11 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
-  <object class="GtkWindow" id="console">
-    <property name="title" translatable="yes">PC-Sim Output Display Tool</property>
+  <object class="GtkWindow" id="elrond-plane">
+    <property name="title" translatable="yes">PC-Sim Visual Analysis Tool</property>
     <property name="default_width">600</property>
     <property name="default_height">400</property>
-    <property name="deletable">False</property>
-    <signal name="destroy" handler="on_hide"/>
+    <signal name="destroy" handler="on_exit"/>
     <child>
       <object class="GtkVBox" id="vbox">
         <property name="visible">True</property>
@@ -33,17 +32,14 @@
           </packing>
         </child>
         <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow">
+          <object class="GtkAlignment" id="alignment">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hscrollbar_policy">automatic</property>
-            <property name="vscrollbar_policy">automatic</property>
             <child>
-              <object class="GtkTextView" id="textview">
+              <object class="GtkDrawingArea" id="drawingarea">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="editable">False</property>
-                <property name="cursor_visible">False</property>
+                <signal name="expose_event" handler="on_drawingarea_expose_event"/>
+                <signal name="realize" handler="on_drawingarea_realize"/>
+                <signal name="configure_event" handler="on_drawingarea_configure_event"/>
               </object>
             </child>
           </object>
