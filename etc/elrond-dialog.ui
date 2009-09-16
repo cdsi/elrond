@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
-  <object class="GtkWindow" id="dialog">
+  <object class="GtkWindow" id="elrond-dialog">
     <signal name="destroy" handler="on_exit"/>
     <child>
       <object class="GtkVBox" id="vbox">

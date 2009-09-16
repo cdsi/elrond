@@ -237,7 +237,7 @@ class Console(Widget):
                 Widget.__init__(self)
 
                 path = os.environ['ELROND_ETC']
-                name = 'console'
+                name = 'elrond-console'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
@@ -430,7 +430,7 @@ class Plane(Widget):
                 Widget.__init__(self)
 
                 path = os.environ['ELROND_ETC']
-                name = 'plane'
+                name = 'elrond-plane'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
@@ -522,7 +522,7 @@ class Dialog(Widget):
                 Widget.__init__(self)
 
                 path = os.environ['ELROND_ETC']
-                name = 'dialog'
+                name = 'elrond-dialog'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
