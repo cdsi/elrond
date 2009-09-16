@@ -12,7 +12,7 @@ import gobject
 import gtk
 
 from elrond.tasks import Task
-from elrond.util import Object
+from elrond.util import Object, Property
 
 class Chooser(gtk.FileChooserDialog):
 
@@ -86,15 +86,15 @@ class Widget(Object):
                 else:
                         print 'ERROR! Unable to get value of %s' % (type(widget))
 
-        def draw(self):
-                while gtk.events_pending():
-                        gtk.main_iteration()
-
         def spin(self, interval=1):
                 while True:
                         self.draw()
                         time.sleep(interval)
                         yield
+
+        def draw(self):
+                while gtk.events_pending():
+                        gtk.main_iteration()
 
         def show(self):
                 self.widget.show()
@@ -159,6 +159,36 @@ class Widget(Object):
                                         widget.toggled()
                                 except:
                                         pass
+
+        @Property
+        def mode():
+                doc = """Controls which UI widgets are shown."""
+
+                def fget(self):
+                        return self.__mode
+
+                def fset(self, mode):
+                        self.__mode = mode
+
+                        widgets = self.builder.get_objects()
+
+                        if self.__mode == 'expert':
+                                for widget in widgets:
+                                        name = widget.get_name()
+                                        if name.endswith('expert'):
+                                                widget.set_visible(True)
+                                        if name.endswith('novice'):
+                                                widget.set_visible(False)
+
+                        if self.__mode == 'novice':
+                                for widget in widgets:
+                                        name = widget.get_name()
+                                        if name.endswith('expert'):
+                                                widget.set_visible(False)
+                                        if name.endswith('novice'):
+                                                widget.set_visible(True)
+
+                return locals()
 
         def __init__(self):
                 gobject.threads_init()
@@ -267,7 +297,7 @@ class Plane(Widget):
                 else:
                         self.__h = self.__w
 
-                self.__w_half = int(self.__w / 2) # DEMO: 0
+                self.__w_half = int(self.__w / 2)
                 self.__h_half = int(self.__h / 2)
 
                 self.__legend_x = 15
