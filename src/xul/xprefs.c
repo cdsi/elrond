@@ -159,6 +159,58 @@ xul_prefs_gdouble_set(xul_t * xul, const gchar * group, const gchar * key, gdoub
         g_key_file_set_double(xul->prefs->keyfile, group, key, value);
 }
 
+XUL_APIEXPORT gboolean
+xul_prefs_gboolean_get(xul_t * xul, const gchar * group, const gchar * key)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        gchar *tmp = g_key_file_get_string(xul->prefs->keyfile, group, key, NULL);
+
+        if (!g_ascii_strcasecmp(tmp, "TRUE")) {
+                g_free(tmp);
+                return TRUE;
+        }
+
+        if (!g_ascii_strcasecmp(tmp, "FALSE")) {
+                g_free(tmp);
+                return FALSE;
+        }
+
+        g_free(tmp);
+
+        return g_key_file_get_boolean(xul->prefs->keyfile, group, key, NULL);
+}
+
+XUL_APIEXPORT void
+xul_prefs_gboolean_set(xul_t * xul, const gchar * group, const gchar * key, gboolean value)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        g_key_file_set_string(xul->prefs->keyfile, group, key, value ? "TRUE" : "FALSE");
+}
+
+XUL_APIEXPORT const gchar *
+xul_prefs_gstring_get(xul_t * xul, const gchar * group, const gchar * key, gchar * value, gsize length)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        gchar *tmp = g_key_file_get_string(xul->prefs->keyfile, group, key, NULL);
+
+        g_strlcpy(value, tmp, length);
+
+        g_free(tmp);
+
+        return (const gchar *)value;
+}
+
+XUL_APIEXPORT void
+xul_prefs_gstring_set(xul_t * xul, const gchar * group, const gchar * key, const gchar * value, gsize length)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        g_key_file_set_string(xul->prefs->keyfile, group, key, value);
+}
+
 XUL_APIEXPORT void
 xul_prefs_close(xul_t * xul)
 {

@@ -27,6 +27,10 @@ typedef struct {
 
 userdata_t userdata;
 
+#define BUFFER_LENGTH 128
+
+gchar g_buffer[BUFFER_LENGTH];
+
 void
 verbose_filter_redacted(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer __xul)
 {
@@ -165,6 +169,12 @@ main(int argc, char **argv)
 
         gdouble dubell = xul_prefs_gdouble_get(xul, "data", "double");
         xul_verbose_log_0("double = %lf", dubell);
+
+        gboolean bool = xul_prefs_gboolean_get(xul, "data", "boolean");
+        xul_verbose_log_0("boolean = %s", bool ? "TRUE" : "FALSE");
+
+        const gchar *string = xul_prefs_gstring_get(xul, "data", "string", &g_buffer[0], sizeof(g_buffer));
+        xul_verbose_log_0("string = %s", string);
 
         rc = test_foo(xul);
         if (rc) {

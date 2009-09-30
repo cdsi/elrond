@@ -17,3 +17,7 @@ hex32=0xBABECAFE
 uhex32=0xDEADFACE
 # double
 double=1234567890.0987654321
+# boolean
+boolean=True
+# string
+string=A woman drove me to drink, and I didn't even have the decency to thank her. -- W.C. Fields
