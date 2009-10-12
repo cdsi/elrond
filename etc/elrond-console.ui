@@ -14,7 +14,42 @@
           <object class="GtkToolbar" id="toolbar">
             <property name="visible">True</property>
             <child>
-              <object class="GtkToolButton" id="clear_toolbutton">
+              <object class="GtkToolButton" id="save">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Save</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-save</property>
+                <signal name="clicked" handler="on_save"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="saveas">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Save As...</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-save-as</property>
+                <signal name="clicked" handler="on_saveas"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparatorToolItem" id="separator">
+                <property name="visible">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="clear">
                 <property name="visible">True</property>
                 <property name="label" translatable="yes">Clear</property>
                 <property name="stock_id">gtk-clear</property>
