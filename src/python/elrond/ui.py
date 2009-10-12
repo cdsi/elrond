@@ -8,7 +8,6 @@ import time
 
 from configobj import ConfigObj
 
-import gobject
 import gtk
 
 from elrond.tasks import Task
@@ -201,7 +200,7 @@ class Widget(Object):
                 return locals()
 
         def __init__(self):
-                gobject.threads_init()
+                gtk.gdk.threads_init()
 
                 self.embedded = False
 
@@ -303,7 +302,9 @@ class Console(Playable):
                                                 if line == '':
                                                         break
 
+                                                gtk.gdk.threads_enter()
                                                 self.append(line)
+                                                gtk.gdk.threads_leave()
 
                                                 yield
                         except:
