@@ -73,7 +73,7 @@ class Widget(Object):
                         'get_text',
                         'get_active_text',
                         'get_active',
-                ]
+                        ]
 
                 for attr in attrs:
                         if hasattr(widget, attr):
@@ -205,14 +205,51 @@ class Widget(Object):
 
                 self.embedded = False
 
-class Console(Widget):
+class SaveAs(Widget):
 
-        def clear(self):
-                self.__buffer.set_text('')
-                self.draw()
+        def on_cancel(self, widget):
+                self.exit()
 
-        def on_clear(self, widget):
-                self.clear()
+        def on_ok(self, widget):
+                self.exit()
+
+        def __init__(self):
+                Widget.__init__(self)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-saveas'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+                self.__filename = None
+
+class Playable(Widget):
+
+        def play(self):
+                if self.is_running:
+                        return
+
+                self.is_running = True
+                self.__task.start()
+
+        def stop(self):
+                self.is_running = False
+                self.__task.stop()
+
+        def kill(self):
+                self.stop()
+                self.__task.kill()
+
+        def __init__(self, play):
+                Widget.__init__(self)
+
+                gtk.quit_add(0, self.kill)
+
+                self.__task = Task(play)
+                self.stop()
+
+class Console(Playable):
 
         def append(self, text):
                 # end_iter is updated by the draw calls so don't attempt to re-use it...
@@ -233,8 +270,47 @@ class Console(Widget):
         def writeln(self, text):
                 self.write(text + "\n")
 
+        def save(self):
+                pass
+
+        def saveas(self):
+                # TODO: self.__filename = ???
+                self.save()
+
+        def clear(self):
+                self.__buffer.set_text('')
+                self.draw()
+
+        def on_save(self, widget):
+                if self.__filename is not None:
+                        self.save()
+                else:
+                        self.saveas()
+
+        def on_saveas(self, widget):
+                self.saveas()
+
+        def on_clear(self, widget):
+                self.clear()
+
+        def __play(self):
+                while self.is_running:
+                        try:
+                                with open(self.socket, 'r') as fd:
+                                        while self.is_running:
+                                                # TODO: readline needs a timeout
+                                                line = fd.readline()
+                                                if line == '':
+                                                        break
+
+                                                self.append(line)
+
+                                                yield
+                        except:
+                                pass
+
         def __init__(self):
-                Widget.__init__(self)
+                Playable.__init__(self, self.__play)
 
                 path = os.environ['ELROND_ETC']
                 name = 'elrond-console'
@@ -244,6 +320,79 @@ class Console(Widget):
 
                 self.__textview = self.builder.get_object('textview')
                 self.__buffer = self.__textview.get_buffer()
+
+                self.__filename = None
+
+class Dialog(Playable):
+
+        @apply
+        def labels():
+
+                def fget(self):
+                        return self.__labels
+
+                def fset(self, value):
+                        self.__labels = value
+                        labels = self.__labels.split(':')
+
+                        self.__table = self.builder.get_object('table')
+                        self.__table.resize(len(labels), 2)
+
+                        self.__entries = []
+
+                        for i, text in enumerate(labels):
+                                label = gtk.Label(text + ':')
+                                label.set_justify(gtk.JUSTIFY_LEFT)
+                                label.show()
+
+                                self.__table.attach(label, 0, 1, i, i + 1)
+
+                                entry = gtk.Entry()
+                                entry.set_editable(False)
+                                entry.show()
+
+                                self.__entries.append(entry)
+
+                                self.__table.attach(entry, 1, 2, i, i + 1)
+
+                def fdel(self):
+                        del self.__labels
+
+                return property(**locals())
+
+        def __play(self):
+                while self.is_running:
+                        try:
+                                with open(self.socket, 'r') as fd:
+                                        while self.is_running:
+                                                # TODO: readline needs a timeout
+                                                line = fd.readline()
+                                                if line == '':
+                                                        break
+
+                                                data = line.strip().split(':')
+
+                                                for i, text in enumerate(data):
+                                                        if text == '':
+                                                                continue
+
+                                                        entry = self.__entries[i]
+                                                        entry.set_text(text)
+
+                                                self.draw()
+
+                                                yield
+                        except:
+                                pass
+
+        def __init__(self):
+                Playable.__init__(self, self.__play)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-dialog'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
 
 class Plane(Widget):
 
@@ -439,98 +588,6 @@ class Plane(Widget):
                 self.__layout = self.__drawingarea.create_pango_layout('')
 
                 self.boresight = 0
-
-class Dialog(Widget):
-
-        @apply
-        def labels():
-
-                def fget(self):
-                        return self.__labels
-
-                def fset(self, value):
-                        self.__labels = value
-                        labels = self.__labels.split(':')
-
-                        self.__table = self.builder.get_object('table')
-                        self.__table.resize(len(labels), 2)
-
-                        self.__entries = []
-
-                        for i, text in enumerate(labels):
-                                label = gtk.Label(text + ':')
-                                label.set_justify(gtk.JUSTIFY_LEFT)
-                                label.show()
-
-                                self.__table.attach(label, 0, 1, i, i + 1)
-
-                                entry = gtk.Entry()
-                                entry.set_editable(False)
-                                entry.show()
-
-                                self.__entries.append(entry)
-
-                                self.__table.attach(entry, 1, 2, i, i + 1)
-
-                def fdel(self):
-                        del self.__labels
-
-                return property(**locals())
-
-        def __play(self):
-                while self.__running:
-                        try:
-                                with open(self.socket, 'r') as fd:
-                                        while self.__running:
-                                                # TODO: readline needs a timeout
-                                                line = fd.readline()
-                                                print 'something... anything...'
-                                                if line == '':
-                                                        break
-
-                                                data = line.strip().split(':')
-
-                                                for i, text in enumerate(data):
-                                                        if text == '':
-                                                                continue
-
-                                                        entry = self.__entries[i]
-                                                        entry.set_text(text)
-
-                                                self.draw()
-
-                                                yield
-                        except:
-                                pass
-
-        def play(self):
-                if self.__running:
-                        return
-
-                self.__running = True
-                self.__task.start()
-
-        def stop(self):
-                self.__running = False
-                self.__task.stop()
-
-        def kill(self):
-                self.stop()
-                self.__task.kill()
-
-        def __init__(self):
-                Widget.__init__(self)
-
-                path = os.environ['ELROND_ETC']
-                name = 'elrond-dialog'
-
-                self.loadui(path, name)
-                self.loaddb(path, name)
-
-                gtk.quit_add(0, self.kill)
-
-                self.__task = Task(self.__play)
-                self.stop()
 
 # $Id:$
 #
