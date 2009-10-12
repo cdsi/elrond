@@ -18,4 +18,6 @@ if [ ! -f "${ELROND_ETC}"/elrond-console.ini ]; then
         cp "${ELROND_ETC}"/elrond-console.ini.in "${ELROND_ETC}"/elrond-console.ini
 fi
 
+echo $$ > "${ELROND_RUN}"/elrond-console.pid
+
 exec python.sh "${ELROND_BIN}"/elrond-console.py "$@"
