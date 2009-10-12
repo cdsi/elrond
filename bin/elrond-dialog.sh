@@ -18,4 +18,6 @@ if [ ! -f "${ELROND_ETC}"/elrond-dialog.ini ]; then
         cp "${ELROND_ETC}"/elrond-dialog.ini.in "${ELROND_ETC}"/elrond-dialog.ini
 fi
 
+echo $$ > "${ELROND_RUN}"/elrond-dialog.pid
+
 exec python.sh "${ELROND_BIN}"/elrond-dialog.py "$@"
