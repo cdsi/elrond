@@ -1,10 +1,23 @@
 #!/usr/bin/env python
 
+from optparse import OptionParser
+
 from elrond.ui import Plane
 
 if __name__ == '__main__':
+        op = OptionParser('%prog [options]')
+
+        op.add_option('--socket', action='store', dest='socket',
+                      help='The named pipe created by mkfifo')
+
+        (options, args) = op.parse_args()
+
+        if options.socket == None:
+                op.error('--socket=... is required')
 
         plane = Plane()
+
+        plane.socket = socket
 
         plane.show()
         plane.run()
