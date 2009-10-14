@@ -19,8 +19,6 @@ if __name__ == '__main__':
 
         console.socket = options.socket
 
-        console.play()
-
         console.show()
         console.run()
 

@@ -24,8 +24,6 @@ if __name__ == '__main__':
         dialog.socket = options.socket
         dialog.labels = options.labels
 
-        dialog.play()
-
         dialog.show()
         dialog.run()
 
