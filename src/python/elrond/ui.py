@@ -206,11 +206,27 @@ class Widget(Object):
 
 class SaveAs(Widget):
 
-        def on_cancel(self, widget):
+        def get_selection(self, path=None, filename=None):
+                if filename is None:
+                        filename = '.PHONY'
+
+                if path is not None:
+                        filename = path + os.sep + filename
+
+                self.widget.set_filename(filename)
+
+                self.show()
+
+        def __callback(self, filename):
+                if self.callback is not None:
+                        self.callback(filename)
                 self.exit()
 
+        def on_cancel(self, widget):
+                self.__callback(None)
+
         def on_ok(self, widget):
-                self.exit()
+                self.__callback(self.widget.get_filename())
 
         def __init__(self):
                 Widget.__init__(self)
@@ -221,16 +237,20 @@ class SaveAs(Widget):
                 self.loadui(path, name)
                 self.loaddb(path, name)
 
-                self.__filename = None
+                self.callback = None
 
 class Playable(Widget):
 
-        def play(self):
+        def __play(self):
                 if self.is_running:
                         return
 
                 self.is_running = True
                 self.__task.start()
+
+        def run(self):
+                self.__play()
+                Widget.run(self)
 
         def stop(self):
                 self.is_running = False
@@ -269,25 +289,27 @@ class Console(Playable):
         def writeln(self, text):
                 self.write(text + "\n")
 
-        def save(self):
-                pass
+        def __save(self, filename):
+                if filename is None:
+                        return
 
-        def saveas(self):
-                # TODO: self.__filename = ???
-                self.save()
+                self.__filename = filename
+
+                with open(self.__filename, 'w') as fd:
+                        fd.write(self.__buffer.get_text(*self.__buffer.get_bounds()))
+
+        def on_save(self, widget):
+                if self.__filename is None:
+                        self.__chooser.get_selection()
+                else:
+                        self.__save(self.__filename)
+
+        def on_saveas(self, widget):
+                self.__chooser.get_selection(filename=self.__filename)
 
         def clear(self):
                 self.__buffer.set_text('')
                 self.draw()
-
-        def on_save(self, widget):
-                if self.__filename is not None:
-                        self.save()
-                else:
-                        self.saveas()
-
-        def on_saveas(self, widget):
-                self.saveas()
 
         def on_clear(self, widget):
                 self.clear()
@@ -321,6 +343,10 @@ class Console(Playable):
 
                 self.__textview = self.builder.get_object('textview')
                 self.__buffer = self.__textview.get_buffer()
+
+                self.__chooser = SaveAs()
+                self.__chooser.embedded = True
+                self.__chooser.callback = self.__save
 
                 self.__filename = None
 
