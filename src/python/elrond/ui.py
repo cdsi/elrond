@@ -276,7 +276,7 @@ class Console(Playable):
                 self.__buffer.insert(self.__buffer.get_end_iter(), text)
                 self.draw()
 
-                self.__textview.scroll_to_iter(self.__buffer.get_end_iter(), 0)
+                self.__textview.scroll_to_mark(self.__buffer.get_insert(), 0)
                 self.draw()
 
         def appendln(self, text):
