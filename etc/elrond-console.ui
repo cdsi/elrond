@@ -3,7 +3,6 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkWindow" id="elrond-console">
-    <property name="title" translatable="yes">PC-Sim Output Display Tool</property>
     <property name="default_width">600</property>
     <property name="default_height">400</property>
     <signal name="destroy" handler="on_exit"/>
