@@ -12,6 +12,11 @@ if __name__ == '__main__':
         op.add_option('--labels', action='store', dest='labels',
                       help='label1:label2:label3 etc...')
 
+        op.add_option('--title', action='store', dest='title', default=None,
+                      help='The dialog window title.')
+        op.add_option('--embedded', action='store', dest='embedded', default=False,
+                      help='When enabled the dialog window is not closable.')
+
         (options, args) = op.parse_args()
 
         if options.socket == None:
@@ -23,6 +28,9 @@ if __name__ == '__main__':
 
         dialog.socket = options.socket
         dialog.labels = options.labels
+
+        dialog.title = options.title
+        dialog.embedded = options.embedded
 
         dialog.show()
         dialog.run()

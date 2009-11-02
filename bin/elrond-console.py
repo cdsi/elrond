@@ -10,6 +10,11 @@ if __name__ == '__main__':
         op.add_option('--socket', action='store', dest='socket',
                       help='The named pipe created by mkfifo')
 
+        op.add_option('--title', action='store', dest='title', default=None,
+                      help='The console window title.')
+        op.add_option('--embedded', action='store', dest='embedded', default=False,
+                      help='When enabled the console window is not closable.')
+
         (options, args) = op.parse_args()
 
         if options.socket == None:
@@ -18,6 +23,9 @@ if __name__ == '__main__':
         console = Console()
 
         console.socket = options.socket
+
+        console.title = options.title
+        console.embedded = options.embedded
 
         console.show()
         console.run()

@@ -164,6 +164,23 @@ class Widget(Object):
                                         pass
 
         @Property
+        def title():
+                """Allow applications to get/set the widget title."""
+
+                def fget(self):
+                        return self.__title
+
+                def fset(self, title):
+                        self.__title = title
+
+                        try:
+                                self.wiget.set_title(self.__title)
+                        except:
+                                pass
+
+                return locals()
+
+        @Property
         def mode():
                 """Controls which UI widgets are shown."""
 
@@ -201,6 +218,8 @@ class Widget(Object):
 
         def __init__(self):
                 gtk.gdk.threads_init()
+
+                self.__title = None
 
                 self.embedded = False
 
