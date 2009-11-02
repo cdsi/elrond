@@ -165,7 +165,7 @@ class Widget(Object):
 
         @Property
         def mode():
-                doc = """Controls which UI widgets are shown."""
+                """Controls which UI widgets are shown."""
 
                 def fget(self):
                         return self.__mode
