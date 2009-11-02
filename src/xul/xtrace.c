@@ -17,18 +17,16 @@ xul_trace(xul_t * xul, const gchar * format, ...)
         g_assert(XUL_IS_VALID(xul));
 
         va_list args;
-        gchar *formatted;
-        gchar *cp;
 
         va_start(args, format);
-        formatted = g_strdup_vprintf(format, args);
+        gchar *formatted = g_strdup_vprintf(format, args);
         va_end(args);
 
-        cp = g_strdup_printf("MARK: %s: %s", g_get_prgname(), formatted);
-        g_free(formatted);
+        gchar *message = g_strdup_printf("MARK: %s: %s", g_get_prgname(), formatted);
+        access(message, F_OK);
 
-        access(cp, F_OK);
-        g_free(cp);
+        g_free(formatted);
+        g_free(message);
 }
 
 /*
