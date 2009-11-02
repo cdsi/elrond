@@ -65,7 +65,7 @@ class Power(object):
 
         @Property
         def dB():
-                doc = """The power measurement in dB."""
+                """The power measurement in dB."""
 
                 def fget(self):
                         return self.__dB
