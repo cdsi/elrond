@@ -83,3 +83,4 @@ src/xul/xultool
 src/xul/xultool-xultool.o
 TAGS
 var/db/elrond.db
+var/log/elrond.log
