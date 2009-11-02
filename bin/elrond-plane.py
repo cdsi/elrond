@@ -10,6 +10,11 @@ if __name__ == '__main__':
         op.add_option('--socket', action='store', dest='socket',
                       help='The named pipe created by mkfifo')
 
+        op.add_option('--title', action='store', dest='title', default=None,
+                      help='The plane window title.')
+        op.add_option('--embedded', action='store', dest='embedded', default=False,
+                      help='When enabled the plane window is not closable.')
+
         (options, args) = op.parse_args()
 
         if options.socket == None:
@@ -18,6 +23,9 @@ if __name__ == '__main__':
         plane = Plane()
 
         plane.socket = socket
+
+        plane.title = options.title
+        plane.embedded = options.embedded
 
         plane.show()
         plane.run()
