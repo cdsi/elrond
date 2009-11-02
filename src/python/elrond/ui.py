@@ -107,10 +107,9 @@ class Widget(Object):
         def exit(self):
                 if self.embedded:
                         self.hide()
-                        return
-
-                gtk.main_quit()
-                thread.exit()
+                else:
+                        gtk.main_quit()
+                        thread.exit()
 
         def on_draw(self, widget):
                 self.draw()
