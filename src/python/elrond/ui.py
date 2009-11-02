@@ -180,6 +180,24 @@ class Widget(Object):
                 return locals()
 
         @Property
+        def deletable():
+                """Allow applications to remove the close button on windows."""
+
+                def fget(self):
+                        return self.__deletable
+
+                def fset(self, deletable):
+                        self.__deletable = self.to_bool(deletable)
+
+                        try:
+                                # TODO:
+                                self.widget.set_deletable(self.__deletable)
+                        except:
+                                pass
+
+                return locals()
+
+        @Property
         def mode():
                 """Controls which UI widgets are shown."""
 

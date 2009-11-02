@@ -12,8 +12,8 @@ if __name__ == '__main__':
 
         op.add_option('--title', action='store', dest='title', default=None,
                       help='The plane window title.')
-        op.add_option('--embedded', action='store_true', dest='embedded',
-                      help='When enabled the plane window is not closable.')
+        op.add_option('--deletable', action='store', dest='deletable', default=True,
+                      help='When disabled the plane window is not closable.')
 
         (options, args) = op.parse_args()
 
@@ -25,7 +25,7 @@ if __name__ == '__main__':
         plane.socket = socket
 
         plane.title = options.title
-        plane.embedded = options.embedded
+        dialog.deletable = options.deletable
 
         plane.show()
         plane.run()
