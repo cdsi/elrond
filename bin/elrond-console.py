@@ -7,7 +7,7 @@ from elrond.ui import Console
 if __name__ == '__main__':
         op = OptionParser('%prog [options]')
 
-        op.add_option('--socket', action='store', dest='socket',
+        op.add_option('--socket', action='store', dest='socket', default=None,
                       help='The named pipe created by mkfifo')
 
         op.add_option('--title', action='store', dest='title', default=None,
