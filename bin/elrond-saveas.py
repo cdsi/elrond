@@ -4,14 +4,14 @@ import os
 
 from elrond.ui import SaveAs
 
-def selection_cb(selection):
+def callback(selection):
         print 'selection =', selection
 
 if __name__ == '__main__':
 
         chooser = SaveAs()
 
-        chooser.callback = selection_cb
+        chooser.callback = callback
         chooser.get_selection(path=os.environ['ELROND_HOME'], filename='build.sh')
 
         chooser.show()
