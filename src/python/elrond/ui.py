@@ -173,7 +173,7 @@ class Widget(Object):
                         self.__title = title
 
                         try:
-                                self.wiget.set_title(self.__title)
+                                self.widget.set_title(self.__title)
                         except:
                                 pass
 
