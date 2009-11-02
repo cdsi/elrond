@@ -12,7 +12,7 @@ if __name__ == '__main__':
 
         op.add_option('--title', action='store', dest='title', default=None,
                       help='The plane window title.')
-        op.add_option('--embedded', action='store', dest='embedded', default=False,
+        op.add_option('--embedded', action='store_true', dest='embedded',
                       help='When enabled the plane window is not closable.')
 
         (options, args) = op.parse_args()
