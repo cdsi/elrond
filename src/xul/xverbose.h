@@ -7,20 +7,27 @@
  * XUL Verbose Public API
  */
 
-#define xul_verbose_log_0(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_0, __VA_ARGS__)
-#define xul_verbose_log_1(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_1, __VA_ARGS__)
-#define xul_verbose_log_2(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_2, __VA_ARGS__)
-#define xul_verbose_log_3(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_3, __VA_ARGS__)
-#define xul_verbose_log_4(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_4, __VA_ARGS__)
-#define xul_verbose_log_5(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_5, __VA_ARGS__)
-#define xul_verbose_log_6(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_6, __VA_ARGS__)
-#define xul_verbose_log_7(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_7, __VA_ARGS__)
-#define xul_verbose_log_8(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_8, __VA_ARGS__)
-#define xul_verbose_log_9(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_LEVEL_9, __VA_ARGS__)
+#define xul_verbose_log_0x0000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0000, __VA_ARGS__)
+#define xul_verbose_log_0x0001(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0001, __VA_ARGS__)
+#define xul_verbose_log_0x0002(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0002, __VA_ARGS__)
+#define xul_verbose_log_0x0004(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0004, __VA_ARGS__)
+#define xul_verbose_log_0x0008(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0008, __VA_ARGS__)
+#define xul_verbose_log_0x0010(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0010, __VA_ARGS__)
+#define xul_verbose_log_0x0020(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0020, __VA_ARGS__)
+#define xul_verbose_log_0x0040(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0040, __VA_ARGS__)
+#define xul_verbose_log_0x0080(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0080, __VA_ARGS__)
+#define xul_verbose_log_0x0100(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0100, __VA_ARGS__)
+#define xul_verbose_log_0x0200(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0200, __VA_ARGS__)
+#define xul_verbose_log_0x0400(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0400, __VA_ARGS__)
+#define xul_verbose_log_0x0800(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0800, __VA_ARGS__)
+#define xul_verbose_log_0x1000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x1000, __VA_ARGS__)
+#define xul_verbose_log_0x2000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x2000, __VA_ARGS__)
+#define xul_verbose_log_0x4000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x4000, __VA_ARGS__)
+#define xul_verbose_log_0x8000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x8000, __VA_ARGS__)
 
-XUL_APIEXPORT xul_verbose_level_e xul_verbose_level_conv(xul_t *, gint);
-XUL_APIEXPORT xul_verbose_level_e xul_verbose_level_get(xul_t *);
-XUL_APIEXPORT void xul_verbose_level_set(xul_t *, xul_verbose_level_e);
+XUL_APIEXPORT xul_verbose_mask_e xul_verbose_mask_conv(xul_t *, gint);
+XUL_APIEXPORT xul_verbose_mask_e xul_verbose_mask_get(xul_t *);
+XUL_APIEXPORT void xul_verbose_mask_set(xul_t *, xul_verbose_mask_e);
 XUL_APIEXPORT void xul_verbose_filter_default(const gchar *, GLogLevelFlags, const gchar *, gpointer);
 XUL_APIEXPORT xul_verbose_filter_f xul_verbose_filter_get(xul_t *);
 XUL_APIEXPORT void xul_verbose_filter_set(xul_t *, xul_verbose_filter_f);
