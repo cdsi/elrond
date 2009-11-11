@@ -25,6 +25,8 @@
 #define xul_verbose_log_0x4000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x4000, __VA_ARGS__)
 #define xul_verbose_log_0x8000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x8000, __VA_ARGS__)
 
+#define xul_verbose_log xul_verbose_log_0x0000
+
 XUL_APIEXPORT xul_verbose_mask_e xul_verbose_mask_conv(xul_t *, guint32);
 XUL_APIEXPORT xul_verbose_mask_e xul_verbose_mask_get(xul_t *);
 XUL_APIEXPORT void xul_verbose_mask_set(xul_t *, xul_verbose_mask_e);

@@ -22,7 +22,7 @@ typedef struct {
 #define XUL_TIME_IS_VALID(x) ((x) && ((x)->magic == XUL_TIME_MAGIC))
 
 typedef enum {
-        XUL_VERBOSE_MASK_0x0000 = 0,
+        XUL_VERBOSE_MASK_0x0000 = G_LOG_LEVEL_DEBUG,
         XUL_VERBOSE_MASK_0x0001 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0000),
         XUL_VERBOSE_MASK_0x0002 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0001),
         XUL_VERBOSE_MASK_0x0004 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0002),
