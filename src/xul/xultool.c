@@ -40,8 +40,10 @@ verbose_filter_redacted(const gchar * domain, GLogLevelFlags masks, const gchar 
 
         g_assert(XUL_IS_VALID(xul));
 
-        if (!(xul_verbose_mask_get(xul) & masks)) {
-                return;
+        if (masks != XUL_VERBOSE_MASK_0x0000) {
+                if (!(xul_verbose_mask_get(xul) & masks)) {
+                        return;
+                }
         }
 
         if (!xul->verbose->fp) {
@@ -97,7 +99,7 @@ test_bar(xul_t * xul)
 int
 main(int argc, char **argv)
 {
-        static guint32 verbose = XUL_VERBOSE_MASK_0x0000;
+        static guint32 verbose = 0;
 
         static GOptionEntry entries[] = {
                 {"verbose", 'v', 0, G_OPTION_ARG_INT, &verbose, "[0x0000..0xFFFF (default is 0)]", NULL},
@@ -134,6 +136,8 @@ main(int argc, char **argv)
                 }
                 return 1;
         }
+
+        xul_verbose_log("verbose mask = 0x%0" G_GINT32_MODIFIER "X", verbose);
 
         const gchar *prefs = g_strconcat(getenv("ELROND_ETC"), G_DIR_SEPARATOR_S, "xultool.ini", NULL);
 

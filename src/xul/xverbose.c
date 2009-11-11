@@ -58,8 +58,10 @@ xul_verbose_filter_default(const gchar * domain, GLogLevelFlags masks, const gch
 
         g_assert(XUL_IS_VALID(xul));
 
-        if (!(xul_verbose_mask_get(xul) & masks)) {
-                return;
+        if (masks != XUL_VERBOSE_MASK_0x0000) {
+                if (!(xul_verbose_mask_get(xul) & masks)) {
+                        return;
+                }
         }
 
         if (!xul->verbose->fp) {
