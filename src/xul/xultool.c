@@ -97,7 +97,7 @@ test_bar(xul_t * xul)
 int
 main(int argc, char **argv)
 {
-        static gint verbose = 0;
+        static guint32 verbose = XUL_VERBOSE_MASK_0x0000;
 
         static GOptionEntry entries[] = {
                 {"verbose", 'v', 0, G_OPTION_ARG_INT, &verbose, "[0x0000..0xFFFF (default is 0)]", NULL},

@@ -20,61 +20,16 @@
 #include "xul.h"
 
 XUL_APIEXPORT xul_verbose_mask_e
-xul_verbose_mask_conv(xul_t * xul, gint verbose)
+xul_verbose_mask_conv(xul_t * xul, guint32 verbose)
 {
         g_assert(XUL_IS_VALID(xul));
 
         xul_verbose_mask_e mask = XUL_VERBOSE_MASK_0x0000;
 
-        switch (verbose) {
-        case 0x0001:
-                mask = XUL_VERBOSE_MASK_0x0001;
-                break;
-        case 0x0002:
-                mask = XUL_VERBOSE_MASK_0x0002;
-                break;
-        case 0x0004:
-                mask = XUL_VERBOSE_MASK_0x0004;
-                break;
-        case 0x0008:
-                mask = XUL_VERBOSE_MASK_0x0008;
-                break;
-        case 0x0010:
-                mask = XUL_VERBOSE_MASK_0x0010;
-                break;
-        case 0x0020:
-                mask = XUL_VERBOSE_MASK_0x0020;
-                break;
-        case 0x0040:
-                mask = XUL_VERBOSE_MASK_0x0040;
-                break;
-        case 0x0080:
-                mask = XUL_VERBOSE_MASK_0x0080;
-                break;
-        case 0x0100:
-                mask = XUL_VERBOSE_MASK_0x0100;
-                break;
-        case 0x0200:
-                mask = XUL_VERBOSE_MASK_0x0200;
-                break;
-        case 0x0400:
-                mask = XUL_VERBOSE_MASK_0x0400;
-                break;
-        case 0x0800:
-                mask = XUL_VERBOSE_MASK_0x0800;
-                break;
-        case 0x1000:
-                mask = XUL_VERBOSE_MASK_0x1000;
-                break;
-        case 0x2000:
-                mask = XUL_VERBOSE_MASK_0x2000;
-                break;
-        case 0x4000:
-                mask = XUL_VERBOSE_MASK_0x4000;
-                break;
-        case 0x8000:
-                mask = XUL_VERBOSE_MASK_0x8000;
-                break;
+        for (guint32 i = 0; i < 32; i++) {
+                if (verbose & (0x0001 << i)) {
+                        mask |= 1 << (G_LOG_LEVEL_USER_SHIFT + i);
+                }
         }
 
         return mask;
