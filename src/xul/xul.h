@@ -22,23 +22,30 @@ typedef struct {
 #define XUL_TIME_IS_VALID(x) ((x) && ((x)->magic == XUL_TIME_MAGIC))
 
 typedef enum {
-        XUL_VERBOSE_LEVEL_0 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0),
-        XUL_VERBOSE_LEVEL_1 = 1 << (G_LOG_LEVEL_USER_SHIFT + 1),
-        XUL_VERBOSE_LEVEL_2 = 1 << (G_LOG_LEVEL_USER_SHIFT + 2),
-        XUL_VERBOSE_LEVEL_3 = 1 << (G_LOG_LEVEL_USER_SHIFT + 3),
-        XUL_VERBOSE_LEVEL_4 = 1 << (G_LOG_LEVEL_USER_SHIFT + 4),
-        XUL_VERBOSE_LEVEL_5 = 1 << (G_LOG_LEVEL_USER_SHIFT + 5),
-        XUL_VERBOSE_LEVEL_6 = 1 << (G_LOG_LEVEL_USER_SHIFT + 6),
-        XUL_VERBOSE_LEVEL_7 = 1 << (G_LOG_LEVEL_USER_SHIFT + 7),
-        XUL_VERBOSE_LEVEL_8 = 1 << (G_LOG_LEVEL_USER_SHIFT + 8),
-        XUL_VERBOSE_LEVEL_9 = 1 << (G_LOG_LEVEL_USER_SHIFT + 9),
-} xul_verbose_level_e;
+        XUL_VERBOSE_MASK_0x0000 = 0,
+        XUL_VERBOSE_MASK_0x0001 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0000),
+        XUL_VERBOSE_MASK_0x0002 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0001),
+        XUL_VERBOSE_MASK_0x0004 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0002),
+        XUL_VERBOSE_MASK_0x0008 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0003),
+        XUL_VERBOSE_MASK_0x0010 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0004),
+        XUL_VERBOSE_MASK_0x0020 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0005),
+        XUL_VERBOSE_MASK_0x0040 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0006),
+        XUL_VERBOSE_MASK_0x0080 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0007),
+        XUL_VERBOSE_MASK_0x0100 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0008),
+        XUL_VERBOSE_MASK_0x0200 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0009),
+        XUL_VERBOSE_MASK_0x0400 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x000A),
+        XUL_VERBOSE_MASK_0x0800 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x000B),
+        XUL_VERBOSE_MASK_0x1000 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x000C),
+        XUL_VERBOSE_MASK_0x2000 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x000D),
+        XUL_VERBOSE_MASK_0x4000 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x000E),
+        XUL_VERBOSE_MASK_0x8000 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x000F),
+} xul_verbose_mask_e;
 
 #define xul_verbose_filter_f GLogFunc
 
 typedef struct {
         gboolean enabled;
-        xul_verbose_level_e level;
+        xul_verbose_mask_e mask;
         xul_verbose_filter_f filter;
         FILE *fp;
         guint32 magic;

@@ -19,76 +19,91 @@
 #define XUL_EXPORT_SYMBOLS 1
 #include "xul.h"
 
-XUL_APIEXPORT xul_verbose_level_e
-xul_verbose_level_conv(xul_t * xul, gint verbose)
+XUL_APIEXPORT xul_verbose_mask_e
+xul_verbose_mask_conv(xul_t * xul, gint verbose)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        xul_verbose_level_e level = XUL_VERBOSE_LEVEL_0;
+        xul_verbose_mask_e mask = XUL_VERBOSE_MASK_0x0000;
 
         switch (verbose) {
-        case 0:
-                level = XUL_VERBOSE_LEVEL_0;
+        case 0x0001:
+                mask = XUL_VERBOSE_MASK_0x0001;
                 break;
-        case 1:
-                level = XUL_VERBOSE_LEVEL_1;
+        case 0x0002:
+                mask = XUL_VERBOSE_MASK_0x0002;
                 break;
-        case 2:
-                level = XUL_VERBOSE_LEVEL_2;
+        case 0x0004:
+                mask = XUL_VERBOSE_MASK_0x0004;
                 break;
-        case 3:
-                level = XUL_VERBOSE_LEVEL_3;
+        case 0x0008:
+                mask = XUL_VERBOSE_MASK_0x0008;
                 break;
-        case 4:
-                level = XUL_VERBOSE_LEVEL_4;
+        case 0x0010:
+                mask = XUL_VERBOSE_MASK_0x0010;
                 break;
-        case 5:
-                level = XUL_VERBOSE_LEVEL_5;
+        case 0x0020:
+                mask = XUL_VERBOSE_MASK_0x0020;
                 break;
-        case 6:
-                level = XUL_VERBOSE_LEVEL_6;
+        case 0x0040:
+                mask = XUL_VERBOSE_MASK_0x0040;
                 break;
-        case 7:
-                level = XUL_VERBOSE_LEVEL_7;
+        case 0x0080:
+                mask = XUL_VERBOSE_MASK_0x0080;
                 break;
-        case 8:
-                level = XUL_VERBOSE_LEVEL_8;
+        case 0x0100:
+                mask = XUL_VERBOSE_MASK_0x0100;
                 break;
-        case 9:
-                level = XUL_VERBOSE_LEVEL_9;
+        case 0x0200:
+                mask = XUL_VERBOSE_MASK_0x0200;
                 break;
-        default:
-                level = XUL_VERBOSE_LEVEL_0;
+        case 0x0400:
+                mask = XUL_VERBOSE_MASK_0x0400;
+                break;
+        case 0x0800:
+                mask = XUL_VERBOSE_MASK_0x0800;
+                break;
+        case 0x1000:
+                mask = XUL_VERBOSE_MASK_0x1000;
+                break;
+        case 0x2000:
+                mask = XUL_VERBOSE_MASK_0x2000;
+                break;
+        case 0x4000:
+                mask = XUL_VERBOSE_MASK_0x4000;
+                break;
+        case 0x8000:
+                mask = XUL_VERBOSE_MASK_0x8000;
                 break;
         }
 
-        return level;
+        return mask;
 }
 
-XUL_APIEXPORT xul_verbose_level_e
-xul_verbose_level_get(xul_t * xul)
+XUL_APIEXPORT xul_verbose_mask_e
+xul_verbose_mask_get(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        return xul->verbose->level;
+        return xul->verbose->mask;
 }
 
 XUL_APIEXPORT void
-xul_verbose_level_set(xul_t * xul, xul_verbose_level_e level)
+xul_verbose_mask_set(xul_t * xul, xul_verbose_mask_e mask)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        xul->verbose->level = level;
+        xul->verbose->mask = mask;
 }
 
 XUL_APIEXPORT void
-xul_verbose_filter_default(const gchar * domain, GLogLevelFlags level, const gchar * message, gpointer __xul)
+xul_verbose_filter_default(const gchar * domain, GLogLevelFlags masks, const gchar * message, gpointer __xul)
 {
         xul_t *xul = (xul_t *) __xul;
 
         g_assert(XUL_IS_VALID(xul));
 
-        if (xul_verbose_level_get(xul) < level) {
+        if (!(xul_verbose_mask_get(xul) & masks)) {
                 return;
         }
 
@@ -198,7 +213,7 @@ xul_verbose_init(xul_t * xul)
         g_assert(XUL_VERBOSE_IS_VALID(verbose));
 
         xul_verbose_filter_set(xul, xul_verbose_filter_default);
-        xul_verbose_level_set(xul, XUL_VERBOSE_LEVEL_0);
+        xul_verbose_mask_set(xul, XUL_VERBOSE_MASK_0x0000);
         xul_verbose_log_open(xul, "/dev/stdout");
 }
 
