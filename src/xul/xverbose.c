@@ -169,8 +169,8 @@ xul_verbose_init(xul_t * xul)
         xul_verbose_t *verbose = xul->verbose;
         g_assert(XUL_VERBOSE_IS_VALID(verbose));
 
-        xul_verbose_filter_set(xul, xul_verbose_filter_default);
         xul_verbose_mask_set(xul, XUL_VERBOSE_MASK_0x0000);
+        xul_verbose_filter_set(xul, xul_verbose_filter_default);
         xul_verbose_log_open(xul, "/dev/stdout");
 }
 
