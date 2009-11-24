@@ -149,25 +149,25 @@ main(int argc, char **argv)
                 return 1;
         }
 
-        gint64 int64 = xul_prefs_guint64_get(xul, "data", "int64");
+        gint64 int64 = xul_prefs_gint64_get(xul, "data", "int64");
         xul_verbose_log_prefs("int64 = %" G_GINT64_FORMAT, int64);
 
         guint64 uint64 = xul_prefs_guint64_get(xul, "data", "uint64");
         xul_verbose_log_prefs("uint64 = %" G_GUINT64_FORMAT, uint64);
 
-        gint32 int32 = xul_prefs_guint32_get(xul, "data", "int32");
+        gint32 int32 = xul_prefs_gint32_get(xul, "data", "int32");
         xul_verbose_log_prefs("int32 = %" G_GINT32_FORMAT, int32);
 
         guint32 uint32 = xul_prefs_guint32_get(xul, "data", "uint32");
         xul_verbose_log_prefs("uint32 = %" G_GUINT32_FORMAT, uint32);
 
-        gint64 hex64 = xul_prefs_guhex64_get(xul, "data", "hex64");
+        gint64 hex64 = xul_prefs_ghex64_get(xul, "data", "hex64");
         xul_verbose_log_prefs("hex64 = 0x%0" G_GINT64_MODIFIER "X", hex64);
 
         guint64 uhex64 = xul_prefs_guhex64_get(xul, "data", "uhex64");
         xul_verbose_log_prefs("uhex64 = 0x%0" G_GINT64_MODIFIER "X", uhex64);
 
-        gint32 hex32 = xul_prefs_guhex32_get(xul, "data", "hex32");
+        gint32 hex32 = xul_prefs_ghex32_get(xul, "data", "hex32");
         xul_verbose_log_prefs("hex32 = 0x%0" G_GINT32_MODIFIER "X", hex32);
 
         guint32 uhex32 = xul_prefs_guhex32_get(xul, "data", "uhex32");
