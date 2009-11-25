@@ -19,13 +19,13 @@
 #define XUL_EXPORT_SYMBOLS 1
 #include "xul.h"
 
-APIEXPORT xul_error_domain_t
+XUL_APIEXPORT xul_error_domain_t
 xul_error_domain_create(const gchar * name)
 {
         return g_quark_from_static_string(name);
 }
 
-APIEXPORT void
+XUL_APIEXPORT void
 xul_error_clear(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
@@ -36,7 +36,7 @@ xul_error_clear(xul_t * xul)
         g_clear_error(&error->rawerror);
 }
 
-APIEXPORT void
+XUL_APIEXPORT void
 xul_error_raw(xul_t * xul, xul_error_raw_t * rawerror)
 {
         g_assert(XUL_IS_VALID(xul));
@@ -56,7 +56,7 @@ xul_error_raw(xul_t * xul, xul_error_raw_t * rawerror)
         }
 }
 
-APIEXPORT void
+XUL_APIEXPORT void
 xul_error_add(xul_t * xul, xul_error_domain_t domain, xul_error_code_e code, const gchar * format, ...)
 {
         g_assert(XUL_IS_VALID(xul));
@@ -78,7 +78,7 @@ xul_error_add(xul_t * xul, xul_error_domain_t domain, xul_error_code_e code, con
         xul_error_raw(xul, rawerror);
 }
 
-APIEXPORT const gchar *
+XUL_APIEXPORT const gchar *
 xul_error_message_get(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
