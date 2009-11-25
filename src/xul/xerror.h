@@ -9,11 +9,11 @@
  * XUL Error Public API
  */
 
-APIEXPORT xul_error_domain_t xul_error_domain_create(const gchar *);
-APIEXPORT void xul_error_clear(xul_t *);
-APIEXPORT void xul_error_raw(xul_t *, xul_error_raw_t *);
-APIEXPORT void xul_error_add(xul_t *, xul_error_domain_t, xul_error_code_e, const gchar *, ...);
-APIEXPORT const gchar *xul_error_message_get(xul_t *);
+XUL_APIEXPORT xul_error_domain_t xul_error_domain_create(const gchar *);
+XUL_APIEXPORT void xul_error_clear(xul_t *);
+XUL_APIEXPORT void xul_error_raw(xul_t *, xul_error_raw_t *);
+XUL_APIEXPORT void xul_error_add(xul_t *, xul_error_domain_t, xul_error_code_e, const gchar *, ...);
+XUL_APIEXPORT const gchar *xul_error_message_get(xul_t *);
 
 /*
  * XUL Error Private API

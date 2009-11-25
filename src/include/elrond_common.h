@@ -5,8 +5,6 @@
 #include "elrond_config.h"
 #endif                          /* HAVE_CONFIG_H */
 
-#define APIEXPORT
-
 #ifndef HAVE_AHEXTOI
 #define ahextoi(x)	strtol(x, (char **)NULL, 16)
 #endif                          /* ! HAVE_AHEXTOI */
