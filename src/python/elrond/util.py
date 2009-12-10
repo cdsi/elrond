@@ -29,9 +29,16 @@ def APINotImplemented(f, *args, **kwargs):
 class Object(object):
 
         def to_bool(self, value):
-                if value.strip().upper() == 'TRUE':
-                        return True
-                return False
+                if isinstance(value, bool):
+                        return value
+
+                if isinstance(value, str):
+                        if value.strip().upper() == 'FALSE':
+                                return False
+                        if value.strip().upper() == 'TRUE':
+                                return True
+
+                raise
 
         def readlines(self, filename):
                 lines = []
