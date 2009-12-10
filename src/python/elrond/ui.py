@@ -8,6 +8,7 @@ import time
 
 from configobj import ConfigObj
 
+import gobject
 import gtk
 
 from elrond.tasks import Task
@@ -234,7 +235,7 @@ class Widget(Object):
                 return locals()
 
         def __init__(self):
-                gtk.gdk.threads_init()
+                gobject.threads_init()
 
                 self.__title = None
 
