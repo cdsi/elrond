@@ -382,6 +382,7 @@ class Console(Playable):
                 self.__buffer = self.__textview.get_buffer()
 
                 self.__chooser = SaveAs()
+                self.__chooser.deletable = False
                 self.__chooser.embedded = True
                 self.__chooser.callback = self.__save
 
