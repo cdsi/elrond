@@ -4,31 +4,30 @@ from optparse import OptionParser
 
 from elrond.ui import Plane
 
-if __name__ == '__main__':
-        op = OptionParser('%prog [options]')
+op = OptionParser('%prog [options]')
 
-        op.add_option('--socket', action='store', dest='socket',
-                      help='The named pipe created by mkfifo')
+op.add_option('--socket', action='store', dest='socket',
+              help='The named pipe created by mkfifo')
 
-        op.add_option('--title', action='store', dest='title', default=None,
-                      help='The plane window title.')
-        op.add_option('--deletable', action='store', dest='deletable', default=True,
-                      help='When disabled the plane window is not closable.')
+op.add_option('--title', action='store', dest='title', default=None,
+              help='The plane window title.')
+op.add_option('--deletable', action='store', dest='deletable', default=True,
+              help='When disabled the plane window is not closable.')
 
-        (options, args) = op.parse_args()
+(options, args) = op.parse_args()
 
-        if options.socket == None:
-                op.error('--socket=... is required')
+if options.socket == None:
+        op.error('--socket=... is required')
 
-        plane = Plane()
+plane = Plane()
 
-        plane.socket = socket
+plane.socket = socket
 
-        plane.title = options.title
-        dialog.deletable = options.deletable
+plane.title = options.title
+dialog.deletable = options.deletable
 
-        plane.show()
-        plane.run()
+plane.show()
+plane.run()
 
 # $Id:$
 #

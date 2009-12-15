@@ -4,31 +4,30 @@ from optparse import OptionParser
 
 from elrond.ui import Console
 
-if __name__ == '__main__':
-        op = OptionParser('%prog [options]')
+op = OptionParser('%prog [options]')
 
-        op.add_option('--socket', action='store', dest='socket', default=None,
-                      help='The named pipe created by mkfifo')
+op.add_option('--socket', action='store', dest='socket', default=None,
+              help='The named pipe created by mkfifo')
 
-        op.add_option('--title', action='store', dest='title', default=None,
-                      help='The console window title.')
-        op.add_option('--deletable', action='store', dest='deletable', default=True,
-                      help='When disabled the console window is not closable.')
+op.add_option('--title', action='store', dest='title', default=None,
+              help='The console window title.')
+op.add_option('--deletable', action='store', dest='deletable', default=True,
+              help='When disabled the console window is not closable.')
 
-        (options, args) = op.parse_args()
+(options, args) = op.parse_args()
 
-        if options.socket == None:
-                op.error('--socket=... is required')
+if options.socket == None:
+        op.error('--socket=... is required')
 
-        console = Console()
+console = Console()
 
-        console.socket = options.socket
+console.socket = options.socket
 
-        console.title = options.title
-        console.deletable = options.deletable
+console.title = options.title
+console.deletable = options.deletable
 
-        console.show()
-        console.run()
+console.show()
+console.run()
 
 # $Id:$
 #

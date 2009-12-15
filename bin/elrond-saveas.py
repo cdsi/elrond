@@ -7,15 +7,13 @@ from elrond.ui import SaveAs
 def callback(selection):
         print 'selection =', selection
 
-if __name__ == '__main__':
+chooser = SaveAs()
 
-        chooser = SaveAs()
+chooser.callback = callback
+chooser.get_selection(path=os.environ['ELROND_HOME'], filename='build.sh')
 
-        chooser.callback = callback
-        chooser.get_selection(path=os.environ['ELROND_HOME'], filename='build.sh')
-
-        chooser.show()
-        chooser.run()
+chooser.show()
+chooser.run()
 
 # $Id:$
 #
