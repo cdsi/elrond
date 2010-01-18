@@ -126,7 +126,7 @@ xul_verbose_free(xul_t * xul)
         xul_verbose_t *verbose = xul->verbose;
         g_assert(XUL_VERBOSE_IS_VALID(verbose));
 
-        free(verbose);
+        g_free(verbose);
 }
 
 xul_verbose_t *

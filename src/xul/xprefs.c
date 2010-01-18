@@ -245,7 +245,7 @@ xul_prefs_free(xul_t * xul)
         xul_prefs_t *prefs = xul->prefs;
         g_assert(XUL_PREFS_IS_VALID(prefs));
 
-        free(prefs);
+        g_free(prefs);
 }
 
 xul_prefs_t *

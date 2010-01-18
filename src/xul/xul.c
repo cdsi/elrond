@@ -40,7 +40,7 @@ xul_free(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        free(xul);
+        g_free(xul);
 }
 
 xul_t *
