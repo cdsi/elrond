@@ -8,8 +8,8 @@
 XUL_APIEXPORT gdouble xul_time(xul_t *, gdouble);
 XUL_APIEXPORT gdouble xul_time0(xul_t *);
 XUL_APIEXPORT gdouble xul_time_overhead(xul_t *);
-XUL_APIEXPORT const gchar * xul_time_iso8601_r(xul_t *, gchar *, gsize);
-XUL_APIEXPORT const gchar * xul_time_iso8601(xul_t *);
+XUL_APIEXPORT const gchar *xul_time_iso8601_r(xul_t *, gchar *, gsize);
+XUL_APIEXPORT const gchar *xul_time_iso8601(xul_t *);
 
 /*
  * XUL Time Private API

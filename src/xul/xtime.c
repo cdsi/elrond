@@ -59,7 +59,7 @@ xul_time_overhead(xul_t * xul)
 }
 
 XUL_APIEXPORT const gchar *
-xul_time_iso8601_r(xul_t *xul, gchar *buffer, gsize bufferlen)
+xul_time_iso8601_r(xul_t * xul, gchar * buffer, gsize bufferlen)
 {
         g_assert(XUL_IS_VALID(xul));
 
@@ -72,13 +72,13 @@ xul_time_iso8601_r(xul_t *xul, gchar *buffer, gsize bufferlen)
 
         const gchar *message = g_time_val_to_iso8601(&tv);
         g_snprintf(buffer, bufferlen, "%s", message);
-        g_free((gpointer)message);
+        g_free((gpointer) message);
 
         return buffer;
 }
 
 XUL_APIEXPORT const gchar *
-xul_time_iso8601(xul_t *xul)
+xul_time_iso8601(xul_t * xul)
 {
         static gchar buffer[256];
 
