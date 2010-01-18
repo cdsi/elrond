@@ -120,6 +120,10 @@ main(int argc, char **argv)
         xul_t *xul = xul_new();
         xul_init(xul);
 
+        gchar buffer[256];
+
+        g_fprintf(stdout, "[%s]\n", xul_time_iso8601_r(xul, &buffer[0], sizeof(buffer)));
+
         xul_rc_e rc;
 
         xul_userdata_set(xul, (gpointer *) & userdata);
@@ -197,6 +201,8 @@ main(int argc, char **argv)
                         xul_error_clear(xul);
                 }
         }
+
+        g_fprintf(stdout, "[%s]\n", xul_time_iso8601_r(xul, &buffer[0], sizeof(buffer)));
 
         xul_delete(xul);
 
