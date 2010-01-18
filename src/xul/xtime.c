@@ -58,6 +58,33 @@ xul_time_overhead(xul_t * xul)
         return t1 = .2 / (gdouble) i;
 }
 
+XUL_APIEXPORT const gchar *
+xul_time_iso8601_r(xul_t *xul, gchar *buffer, gsize bufferlen)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        xul_time_t *xtime = xul->time;
+        g_assert(XUL_TIME_IS_VALID(xtime));
+
+        GTimeVal tv;
+
+        g_get_current_time(&tv);
+
+        const gchar *message = g_time_val_to_iso8601(&tv);
+        g_snprintf(buffer, bufferlen, "%s", message);
+        g_free((gpointer)message);
+
+        return buffer;
+}
+
+XUL_APIEXPORT const gchar *
+xul_time_iso8601(xul_t *xul)
+{
+        static gchar buffer[256];
+
+        return xul_time_iso8601_r(xul, &buffer[0], sizeof(buffer));
+}
+
 void
 xul_time_free(xul_t * xul)
 {
