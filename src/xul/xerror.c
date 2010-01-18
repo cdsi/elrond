@@ -101,7 +101,7 @@ xul_error_free(xul_t * xul)
         xul_error_t *error = xul->error;
         g_assert(XUL_ERROR_IS_VALID(error));
 
-        free(error);
+        g_free(error);
 }
 
 xul_error_t *

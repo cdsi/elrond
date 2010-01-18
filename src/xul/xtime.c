@@ -93,7 +93,7 @@ xul_time_free(xul_t * xul)
         xul_time_t *xtime = xul->time;
         g_assert(XUL_TIME_IS_VALID(xtime));
 
-        free(xtime);
+        g_free(xtime);
 }
 
 xul_time_t *

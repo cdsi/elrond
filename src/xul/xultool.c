@@ -77,7 +77,7 @@ verbose_filter_redacted(const gchar * domain, GLogLevelFlags masks, const gchar 
         g_fprintf(xul->verbose->fp, "[%08" G_GINT32_MODIFIER "X] %s\n", userdata->counter++, buffer);
         fflush(xul->verbose->fp);
 
-        free(buffer);
+        g_free(buffer);
 }
 
 xul_rc_e
