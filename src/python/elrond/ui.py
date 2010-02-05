@@ -158,6 +158,9 @@ class Widget(Object):
                                         if type(widget) == gtk.SpinButton:
                                                 widget.set_value(float(value))
 
+                                        if type(widget) == gtk.ToggleToolButton:
+                                                widget.set_active(self.to_bool(value))
+
                                         widget.toggled()
                                 except:
                                         pass
