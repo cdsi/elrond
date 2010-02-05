@@ -47,7 +47,7 @@ class Widget(Object):
                 widget = self.builder.get_object(key)
                 widget.set_sensitive(value)
 
-                if value == True:
+                if value:
                         return
 
                 try:
