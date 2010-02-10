@@ -5,10 +5,29 @@
   <object class="GtkWindow" id="elrond-window">
     <signal name="destroy" handler="on_exit"/>
     <child>
-      <object class="GtkAlignment" id="container">
+      <object class="GtkVBox" id="vbox">
         <property name="visible">True</property>
+        <property name="orientation">vertical</property>
         <child>
-          <placeholder/>
+          <object class="GtkAlignment" id="container">
+            <property name="visible">True</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStatusbar" id="statusbar">
+            <property name="visible">True</property>
+            <property name="spacing">2</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">1</property>
+          </packing>
         </child>
       </object>
     </child>
