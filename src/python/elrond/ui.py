@@ -245,6 +245,21 @@ class Widget(Object):
 
 class Window(Widget):
 
+        def show(self):
+                if self.__widget:
+                        self.__widget.show()
+                Widget.show(self)
+                
+        def hide(self):
+                if self.__widget:
+                        self.__widget.hide()
+                Widget.hide(self)
+                
+        def draw(self):
+                if self.__widget:
+                        self.__widget.draw()
+                Widget.draw(self)
+                
         def __init__(self, widget=None):
                 Widget.__init__(self)
 
@@ -256,7 +271,9 @@ class Window(Widget):
 
                 if widget:
                         container = self.builder.get_object('container')
-                        container.add(widget)
+                        container.add(widget.widget)
+
+                self.__widget = widget
 
 class SaveAs(Widget):
 
