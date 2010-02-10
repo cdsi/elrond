@@ -243,6 +243,21 @@ class Widget(Object):
 
                 self.embedded = False
 
+class Window(Widget):
+
+        def __init__(self, widget=None):
+                Widget.__init__(self)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-window'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+                if widget:
+                        container = self.builder.get_object('container')
+                        container.add(widget)
+
 class SaveAs(Widget):
 
         def get_selection(self, path=None, filename=None):
