@@ -14,7 +14,6 @@ op.add_option('--deletable', action='store', dest='deletable', default=True,
 (options, args) = op.parse_args()
 
 window = Window()
-
 window.title = options.title
 window.deletable = options.deletable
 
