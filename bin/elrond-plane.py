@@ -2,7 +2,7 @@
 
 from optparse import OptionParser
 
-from elrond.ui import Plane
+from elrond.ui import Plane, Window
 
 op = OptionParser('%prog [options]')
 
@@ -20,14 +20,14 @@ if options.socket == None:
         op.error('--socket=... is required')
 
 plane = Plane()
+plane.socket = options.socket
 
-plane.socket = socket
+window = Window(widget=plane)
+window.title = options.title
+window.deletable = options.deletable
 
-plane.title = options.title
-dialog.deletable = options.deletable
-
-plane.show()
-plane.run()
+window.show()
+window.run()
 
 # $Id:$
 #

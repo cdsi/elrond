@@ -2,7 +2,7 @@
 
 from optparse import OptionParser
 
-from elrond.ui import Console
+from elrond.ui import Console, Window
 
 op = OptionParser('%prog [options]')
 
@@ -20,14 +20,14 @@ if options.socket == None:
         op.error('--socket=... is required')
 
 console = Console()
-
 console.socket = options.socket
 
-console.title = options.title
-console.deletable = options.deletable
+window = Window(widget=console)
+window.title = options.title
+window.deletable = options.deletable
 
-console.show()
-console.run()
+window.show()
+window.run()
 
 # $Id:$
 #
