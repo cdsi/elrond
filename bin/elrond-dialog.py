@@ -2,7 +2,7 @@
 
 from optparse import OptionParser
 
-from elrond.ui import Dialog
+from elrond.ui import Dialog, Window
 
 op = OptionParser('%prog [options]')
 
@@ -24,15 +24,15 @@ if options.labels == None:
         op.error('--labels=... is required')
 
 dialog = Dialog()
-
 dialog.socket = options.socket
 dialog.labels = options.labels
 
-dialog.title = options.title
-dialog.deletable = options.deletable
+window = Window(widget=dialog)
+window.title = options.title
+window.deletable = options.deletable
 
-dialog.show()
-dialog.run()
+window.show()
+window.run()
 
 # $Id:$
 #
