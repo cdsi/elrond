@@ -312,32 +312,30 @@ class SaveAs(Widget):
 
 class Playable(Widget):
 
-        def __play(self):
-                if self.is_running:
-                        return
+        def play(self, callback):
+                if self.__is_running:
+                        raise
 
-                self.is_running = True
-                self.__task.start()
+                self.__task = Task(self.__tasklette)
 
-        def run(self):
-                self.__play()
-                Widget.run(self)
+                self.__is_running = True
+                self.__task.start(callback)
 
         def stop(self):
-                self.is_running = False
+                self.__is_running = False
                 self.__task.stop()
 
         def kill(self):
                 self.stop()
                 self.__task.kill()
 
-        def __init__(self, play):
+        def __init__(self, tasklette):
                 Widget.__init__(self)
 
                 gtk.quit_add(0, self.kill)
 
-                self.__task = Task(play)
-                self.stop()
+                self.__tasklette = tasklette
+                self.__is_running = False
 
 class Console(Playable):
 
@@ -385,26 +383,14 @@ class Console(Playable):
         def on_clear(self, widget):
                 self.clear()
 
-        def __play(self):
-                while self.is_running:
-                        try:
-                                with open(self.socket, 'r') as fd:
-                                        while self.is_running:
-                                                # TODO: readline needs a timeout
-                                                line = fd.readline()
-                                                if line == '':
-                                                        break
-
-                                                gtk.gdk.threads_enter()
-                                                self.append(line)
-                                                gtk.gdk.threads_leave()
-
-                                                yield
-                        except:
-                                pass
+        def __tasklette(self, callback):
+                for line in callback():
+                        gtk.gdk.threads_enter()
+                        self.append(line)
+                        gtk.gdk.threads_leave()
 
         def __init__(self):
-                Playable.__init__(self, self.__play)
+                Playable.__init__(self, self.__tasklette)
 
                 path = os.environ['ELROND_ETC']
                 name = 'elrond-console'
@@ -459,33 +445,21 @@ class Dialog(Playable):
 
                 return property(**locals())
 
-        def __play(self):
-                while self.is_running:
-                        try:
-                                with open(self.socket, 'r') as fd:
-                                        while self.is_running:
-                                                # TODO: readline needs a timeout
-                                                line = fd.readline()
-                                                if line == '':
-                                                        break
+        def __tasklette(self, callback):
+                for line in callback():
+                        data = line.strip().split(':')
 
-                                                data = line.strip().split(':')
+                        for i, text in enumerate(data):
+                                if text == '':
+                                        continue
 
-                                                for i, text in enumerate(data):
-                                                        if text == '':
-                                                                continue
+                                entry = self.__entries[i]
+                                entry.set_text(text)
 
-                                                        entry = self.__entries[i]
-                                                        entry.set_text(text)
-
-                                                self.draw()
-
-                                                yield
-                        except:
-                                pass
+                                self.draw()
 
         def __init__(self):
-                Playable.__init__(self, self.__play)
+                Playable.__init__(self, self.__tasklette)
 
                 path = os.environ['ELROND_ETC']
                 name = 'elrond-dialog'

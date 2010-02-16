@@ -4,6 +4,15 @@ from optparse import OptionParser
 
 from elrond.ui import Dialog, Window
 
+def callback():
+        while True:
+                try:
+                        with open(socket, 'r') as fd:
+                                # TODO: readline needs a timeout
+                                yield fd.readline()
+                except:
+                        pass
+
 op = OptionParser('%prog [options]')
 
 op.add_option('--socket', action='store', dest='socket',
@@ -23,13 +32,16 @@ if options.socket == None:
 if options.labels == None:
         op.error('--labels=... is required')
 
+socket = options.socket
+
 dialog = Dialog()
-dialog.socket = options.socket
 dialog.labels = options.labels
 
 window = Window(widget=dialog)
 window.title = options.title
 window.deletable = options.deletable
+
+dialog.play(callback)
 
 window.show()
 window.run()

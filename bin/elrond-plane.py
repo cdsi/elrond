@@ -4,6 +4,15 @@ from optparse import OptionParser
 
 from elrond.ui import Plane, Window
 
+def callback():
+        while True:
+                try:
+                        with open(socket, 'r') as fd:
+                                # TODO: readline needs a timeout
+                                yield fd.readline()
+                except:
+                        pass
+
 op = OptionParser('%prog [options]')
 
 op.add_option('--socket', action='store', dest='socket',
@@ -19,12 +28,15 @@ op.add_option('--deletable', action='store', dest='deletable', default=True,
 if options.socket == None:
         op.error('--socket=... is required')
 
+socket = options.socket
+
 plane = Plane()
-plane.socket = options.socket
 
 window = Window(widget=plane)
 window.title = options.title
 window.deletable = options.deletable
+
+plane.play(callback)
 
 window.show()
 window.run()
