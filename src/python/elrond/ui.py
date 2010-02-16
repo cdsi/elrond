@@ -312,14 +312,14 @@ class SaveAs(Widget):
 
 class Playable(Widget):
 
-        def play(self, callback):
+        def play(self, *args, **kwargs):
                 if self.__is_running:
                         raise
 
                 self.__task = Task(self.__tasklette)
 
                 self.__is_running = True
-                self.__task.start(callback)
+                self.__task.start(*args, **kwargs)
 
         def stop(self):
                 self.__is_running = False
