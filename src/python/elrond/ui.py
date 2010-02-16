@@ -386,8 +386,13 @@ class Console(Playable):
         def __tasklette(self, callback):
                 for line in callback():
                         gtk.gdk.threads_enter()
-                        self.append(line)
-                        gtk.gdk.threads_leave()
+
+                        try:
+                                self.append(line)
+                        except:
+                                continue
+                        finally:
+                                gtk.gdk.threads_leave()
 
         def __init__(self):
                 Playable.__init__(self, self.__tasklette)
@@ -453,10 +458,15 @@ class Dialog(Playable):
                                 if text == '':
                                         continue
 
-                                entry = self.__entries[i]
-                                entry.set_text(text)
+                                gtk.gdk.threads_enter()
 
-                                self.draw()
+                                try:
+                                        entry = self.__entries[i]
+                                        entry.set_text(text)
+                                except:
+                                        continue
+                                finally:
+                                        gtk.gdk.threads_leave()
 
         def __init__(self):
                 Playable.__init__(self, self.__tasklette)
