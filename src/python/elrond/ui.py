@@ -383,8 +383,8 @@ class Console(Playable):
         def on_clear(self, widget):
                 self.clear()
 
-        def __tasklette(self, callback):
-                for line in callback():
+        def __tasklette(self, producer):
+                for line in producer():
                         gtk.gdk.threads_enter()
 
                         try:
@@ -450,8 +450,8 @@ class Dialog(Playable):
 
                 return property(**locals())
 
-        def __tasklette(self, callback):
-                for line in callback():
+        def __tasklette(self, producer):
+                for line in producer():
                         data = line.strip().split(':')
 
                         for i, text in enumerate(data):
