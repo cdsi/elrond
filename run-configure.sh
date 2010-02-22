@@ -16,7 +16,7 @@ case "${OPTION}" in
 	;;
 esac
 
-./configure --disable-static ${ELROND_CONFIGUREFLAGS} ${EXTENSIONFLAGS}
+./configure --disable-static --enable-gtk-doc ${ELROND_CONFIGUREFLAGS} ${EXTENSIONFLAGS}
 [ $? != 0 ] && echo "ERROR!!!" && exit 1
 
 exit 0

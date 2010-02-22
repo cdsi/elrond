@@ -7,6 +7,9 @@ export ELROND_HOME
 ELROND_BIN="${ELROND_HOME}"/bin
 export ELROND_BIN
 
+ELROND_DOC="${ELROND_HOME}"/doc
+export ELROND_DOC
+
 ELROND_ETC="${ELROND_HOME}"/etc
 export ELROND_ETC
 
