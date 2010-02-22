@@ -25,9 +25,7 @@ docs/ref/xul/xul.hierarchy
 docs/ref/xul/xul.interfaces
 docs/ref/xul/xul-overrides.txt
 docs/ref/xul/xul.prerequisites
-docs/ref/xul/xul-sections.txt
 docs/ref/xul/xul.signals
-docs/ref/xul/xul.types
 docs/ref/xul/xul-undeclared.txt
 docs/ref/xul/xul-undocumented.txt
 etc/xultool.ini
@@ -54,7 +52,6 @@ Makefile
 Makefile.in
 setup.cfg
 setup.py
-share/gtk-doc
 src/include/elrond_config.h
 src/include/elrond_config.h.in
 src/include/stamp-h1
