@@ -5,7 +5,7 @@ ELROND_HOME=$(dirname $0)
 
 cd ${ELROND_HOME}
 
-gtkdocize --flavour no-tmpl
+gtkdocize --copy --flavour no-tmpl
 libtoolize --automake --copy --force
 aclocal ${ACLOCALFLAGS} ${ELROND_ACLOCALFLAGS}
 autoheader
