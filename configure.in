@@ -12,6 +12,7 @@ XX_ENABLE_PYTHON
 XX_ENABLE_JAVA
 
 XX_REQUIRE_XUL
+GTK_DOC_CHECK(1.11)
 
 # Checks for programs.
 AC_PROG_CXX
@@ -48,5 +49,8 @@ AC_CONFIG_FILES([
         Makefile
         src/Makefile
         src/xul/Makefile
+        docs/Makefile
+        docs/ref/Makefile
+        docs/ref/xul/Makefile
 ])
 AC_OUTPUT
