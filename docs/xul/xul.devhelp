@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="xul Reference Manual" link="index.html" author="" name="xul">
+  <chapters>
+    <sub name="[Insert title here]" link="ch01.html">
+      <sub name="xul" link="xul-xul.html"/>
+      <sub name="xerror" link="xul-xerror.html"/>
+      <sub name="xverbose" link="xul-xverbose.html"/>
+      <sub name="xtime" link="xul-xtime.html"/>
+      <sub name="xprefs" link="xul-xprefs.html"/>
+    </sub>
+    <sub name="Object Hierarchy" link="object-tree.html"/>
+    <sub name="API Index" link="api-index-full.html"/>
+  </chapters>
+  <functions>
+    <function name="xul_prefs_t" link="xul-xul.html#xul-prefs-t"/>
+    <function name="XUL_PREFS_MAGIC" link="xul-xul.html#XUL-PREFS-MAGIC--CAPS"/>
+    <function name="xul_time_t" link="xul-xul.html#xul-time-t"/>
+    <function name="XUL_TIME_MAGIC" link="xul-xul.html#XUL-TIME-MAGIC--CAPS"/>
+    <function name="enum xul_verbose_mask_e" link="xul-xul.html#xul-verbose-mask-e"/>
+    <function name="xul_verbose_filter_f" link="xul-xul.html#xul-verbose-filter-f"/>
+    <function name="xul_verbose_t" link="xul-xul.html#xul-verbose-t"/>
+    <function name="XUL_VERBOSE_MAGIC" link="xul-xul.html#XUL-VERBOSE-MAGIC--CAPS"/>
+    <function name="XUL_VERBOSE_IS_VALID()" link="xul-xul.html#XUL-VERBOSE-IS-VALID--CAPS"/>
+    <function name="enum xul_rc_e" link="xul-xul.html#xul-rc-e"/>
+    <function name="XUL_ERROR" link="xul-xul.html#XUL-ERROR--CAPS"/>
+    <function name="enum xul_error_code_e" link="xul-xul.html#xul-error-code-e"/>
+    <function name="xul_error_raw_t" link="xul-xul.html#xul-error-raw-t"/>
+    <function name="xul_error_domain_t" link="xul-xul.html#xul-error-domain-t"/>
+    <function name="xul_error_t" link="xul-xul.html#xul-error-t"/>
+    <function name="XUL_ERROR_MAGIC" link="xul-xul.html#XUL-ERROR-MAGIC--CAPS"/>
+    <function name="XUL_ERROR_IS_VALID()" link="xul-xul.html#XUL-ERROR-IS-VALID--CAPS"/>
+    <function name="xul_t" link="xul-xul.html#xul-t"/>
+    <function name="XUL_MAGIC" link="xul-xul.html#XUL-MAGIC--CAPS"/>
+    <function name="XUL_IS_VALID()" link="xul-xul.html#XUL-IS-VALID--CAPS"/>
+    <function name="XUL_APIEXPORT" link="xul-xul.html#XUL-APIEXPORT--CAPS"/>
+    <function name="XUL_ERROR_VERBOSE_DOMAIN" link="xul-xerror.html#XUL-ERROR-VERBOSE-DOMAIN--CAPS"/>
+    <function name="xul_error_delete ()" link="xul-xerror.html#xul-error-delete"/>
+    <function name="xul_error_new ()" link="xul-xerror.html#xul-error-new"/>
+    <function name="xul_error_init ()" link="xul-xerror.html#xul-error-init"/>
+    <function name="XUL_VERBOSE_DOMAIN" link="xul-xverbose.html#XUL-VERBOSE-DOMAIN--CAPS"/>
+    <function name="xul_verbose_log_0x0000()" link="xul-xverbose.html#xul-verbose-log-0x0000"/>
+    <function name="xul_verbose_log_0x0001()" link="xul-xverbose.html#xul-verbose-log-0x0001"/>
+    <function name="xul_verbose_log_0x0002()" link="xul-xverbose.html#xul-verbose-log-0x0002"/>
+    <function name="xul_verbose_log_0x0004()" link="xul-xverbose.html#xul-verbose-log-0x0004"/>
+    <function name="xul_verbose_log_0x0008()" link="xul-xverbose.html#xul-verbose-log-0x0008"/>
+    <function name="xul_verbose_log_0x0010()" link="xul-xverbose.html#xul-verbose-log-0x0010"/>
+    <function name="xul_verbose_log_0x0020()" link="xul-xverbose.html#xul-verbose-log-0x0020"/>
+    <function name="xul_verbose_log_0x0040()" link="xul-xverbose.html#xul-verbose-log-0x0040"/>
+    <function name="xul_verbose_log_0x0080()" link="xul-xverbose.html#xul-verbose-log-0x0080"/>
+    <function name="xul_verbose_log_0x0100()" link="xul-xverbose.html#xul-verbose-log-0x0100"/>
+    <function name="xul_verbose_log_0x0200()" link="xul-xverbose.html#xul-verbose-log-0x0200"/>
+    <function name="xul_verbose_log_0x0400()" link="xul-xverbose.html#xul-verbose-log-0x0400"/>
+    <function name="xul_verbose_log_0x0800()" link="xul-xverbose.html#xul-verbose-log-0x0800"/>
+    <function name="xul_verbose_log_0x1000()" link="xul-xverbose.html#xul-verbose-log-0x1000"/>
+    <function name="xul_verbose_log_0x2000()" link="xul-xverbose.html#xul-verbose-log-0x2000"/>
+    <function name="xul_verbose_log_0x4000()" link="xul-xverbose.html#xul-verbose-log-0x4000"/>
+    <function name="xul_verbose_log_0x8000()" link="xul-xverbose.html#xul-verbose-log-0x8000"/>
+    <function name="xul_verbose_log" link="xul-xverbose.html#xul-verbose-log"/>
+    <function name="xul_verbose_delete ()" link="xul-xverbose.html#xul-verbose-delete"/>
+    <function name="xul_verbose_new ()" link="xul-xverbose.html#xul-verbose-new"/>
+    <function name="xul_verbose_init ()" link="xul-xverbose.html#xul-verbose-init"/>
+    <function name="xul_time_delete ()" link="xul-xtime.html#xul-time-delete"/>
+    <function name="xul_time_new ()" link="xul-xtime.html#xul-time-new"/>
+    <function name="xul_time_init ()" link="xul-xtime.html#xul-time-init"/>
+    <function name="xul_prefs_delete ()" link="xul-xprefs.html#xul-prefs-delete"/>
+    <function name="xul_prefs_new ()" link="xul-xprefs.html#xul-prefs-new"/>
+    <function name="xul_prefs_init ()" link="xul-xprefs.html#xul-prefs-init"/>
+  </functions>
+</book>
