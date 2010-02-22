@@ -52,5 +52,6 @@ AC_CONFIG_FILES([
         docs/Makefile
         docs/ref/Makefile
         docs/ref/xul/Makefile
+        docs/ref/xul/xul-docs.sgml
 ])
 AC_OUTPUT
