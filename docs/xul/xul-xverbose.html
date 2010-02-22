@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>xverbose</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
+<link rel="home" href="index.html" title="xul Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="xul-xerror.html" title="xerror">
+<link rel="next" href="xul-xtime.html" title="xtime">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="xul-xerror.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">xul Reference Manual</th>
+<td><a accesskey="n" href="xul-xtime.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#xul-xverbose.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#xul-xverbose.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="xverbose">
+<a name="xul-xverbose"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="xul-xverbose.top_of_page"></a>xverbose</span></h2>
+<p>xverbose</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="xul-xverbose.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#define             <a
+href="../xul/xul-xverbose.html#XUL-VERBOSE-DOMAIN--CAPS"
+>XUL_VERBOSE_DOMAIN</a>
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0000"
+>xul_verbose_log_0x0000</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0001"
+>xul_verbose_log_0x0001</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0002"
+>xul_verbose_log_0x0002</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0004"
+>xul_verbose_log_0x0004</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0008"
+>xul_verbose_log_0x0008</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0010"
+>xul_verbose_log_0x0010</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0020"
+>xul_verbose_log_0x0020</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0040"
+>xul_verbose_log_0x0040</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0080"
+>xul_verbose_log_0x0080</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0100"
+>xul_verbose_log_0x0100</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0200"
+>xul_verbose_log_0x0200</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0400"
+>xul_verbose_log_0x0400</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x0800"
+>xul_verbose_log_0x0800</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x1000"
+>xul_verbose_log_0x1000</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x2000"
+>xul_verbose_log_0x2000</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x4000"
+>xul_verbose_log_0x4000</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log-0x8000"
+>xul_verbose_log_0x8000</a>              (...)
+#define             <a
+href="../xul/xul-xverbose.html#xul-verbose-log"
+>xul_verbose_log</a>
+void                <a
+href="../xul/xul-xverbose.html#xul-verbose-delete"
+>xul_verbose_delete</a>                  (<a
+href="../xul/xul-xul.html#xul-t"
+>xul_t</a> *);
+<a
+href="../xul/xul-xul.html#xul-verbose-t"
+>xul_verbose_t</a> *     <a
+href="../xul/xul-xverbose.html#xul-verbose-new"
+>xul_verbose_new</a>                     ();
+void                <a
+href="../xul/xul-xverbose.html#xul-verbose-init"
+>xul_verbose_init</a>                    (<a
+href="../xul/xul-xul.html#xul-t"
+>xul_t</a> *);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="xul-xverbose.description"></a><h2>Description</h2>
+</div>
+<div class="refsect1" title="Details">
+<a name="xul-xverbose.details"></a><h2>Details</h2>
+<div class="refsect2" title="XUL_VERBOSE_DOMAIN">
+<a name="XUL-VERBOSE-DOMAIN--CAPS"></a><h3>XUL_VERBOSE_DOMAIN</h3>
+<pre class="programlisting">#define XUL_VERBOSE_DOMAIN "XUL"
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0000()">
+<a name="xul-verbose-log-0x0000"></a><h3>xul_verbose_log_0x0000()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0000, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0001()">
+<a name="xul-verbose-log-0x0001"></a><h3>xul_verbose_log_0x0001()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0001(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0001, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0002()">
+<a name="xul-verbose-log-0x0002"></a><h3>xul_verbose_log_0x0002()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0002(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0002, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0004()">
+<a name="xul-verbose-log-0x0004"></a><h3>xul_verbose_log_0x0004()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0004(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0004, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0008()">
+<a name="xul-verbose-log-0x0008"></a><h3>xul_verbose_log_0x0008()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0008(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0008, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0010()">
+<a name="xul-verbose-log-0x0010"></a><h3>xul_verbose_log_0x0010()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0010(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0010, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0020()">
+<a name="xul-verbose-log-0x0020"></a><h3>xul_verbose_log_0x0020()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0020(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0020, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0040()">
+<a name="xul-verbose-log-0x0040"></a><h3>xul_verbose_log_0x0040()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0040(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0040, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0080()">
+<a name="xul-verbose-log-0x0080"></a><h3>xul_verbose_log_0x0080()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0080(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0080, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0100()">
+<a name="xul-verbose-log-0x0100"></a><h3>xul_verbose_log_0x0100()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0100(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0100, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0200()">
+<a name="xul-verbose-log-0x0200"></a><h3>xul_verbose_log_0x0200()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0200(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0200, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0400()">
+<a name="xul-verbose-log-0x0400"></a><h3>xul_verbose_log_0x0400()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0400(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0400, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x0800()">
+<a name="xul-verbose-log-0x0800"></a><h3>xul_verbose_log_0x0800()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x0800(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x0800, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x1000()">
+<a name="xul-verbose-log-0x1000"></a><h3>xul_verbose_log_0x1000()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x1000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x1000, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x2000()">
+<a name="xul-verbose-log-0x2000"></a><h3>xul_verbose_log_0x2000()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x2000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x2000, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x4000()">
+<a name="xul-verbose-log-0x4000"></a><h3>xul_verbose_log_0x4000()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x4000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x4000, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log_0x8000()">
+<a name="xul-verbose-log-0x8000"></a><h3>xul_verbose_log_0x8000()</h3>
+<pre class="programlisting">#define xul_verbose_log_0x8000(...) g_log(XUL_VERBOSE_DOMAIN, XUL_VERBOSE_MASK_0x8000, __VA_ARGS__)
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_log">
+<a name="xul-verbose-log"></a><h3>xul_verbose_log</h3>
+<pre class="programlisting">#define xul_verbose_log xul_verbose_log_0x0000
+</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_delete ()">
+<a name="xul-verbose-delete"></a><h3>xul_verbose_delete ()</h3>
+<pre class="programlisting">void                xul_verbose_delete                  (<a
+href="../xul/xul-xul.html#xul-t"
+>xul_t</a> *);</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_new ()">
+<a name="xul-verbose-new"></a><h3>xul_verbose_new ()</h3>
+<pre class="programlisting"><a
+href="../xul/xul-xul.html#xul-verbose-t"
+>xul_verbose_t</a> *     xul_verbose_new                     ();</pre>
+</div>
+<hr>
+<div class="refsect2" title="xul_verbose_init ()">
+<a name="xul-verbose-init"></a><h3>xul_verbose_init ()</h3>
+<pre class="programlisting">void                xul_verbose_init                    (<a
+href="../xul/xul-xul.html#xul-t"
+>xul_t</a> *);</pre>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>
