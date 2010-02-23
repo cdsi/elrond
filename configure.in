@@ -48,9 +48,8 @@ AC_CONFIG_FILES([
         etc/xultool.ini
         Makefile
         src/Makefile
-        src/ref/Makefile
-        src/ref/xul/Makefile
-        src/ref/xul/xul-docs.sgml
         src/xul/Makefile
+        src/xul/ref/Makefile
+        src/xul/ref/xul-docs.sgml
 ])
 AC_OUTPUT

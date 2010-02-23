@@ -1,1 +1,1 @@
-SUBDIRS = ref xul
+SUBDIRS = xul
