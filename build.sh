@@ -42,7 +42,7 @@ if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	[ "${FORCE:=0}" != "0" ] || [ ! -f Makefile.in ] && ./bootstrap.sh
 	[ "${FORCE:=0}" != "0" ] || [ ! -f Makefile    ] && ./run-configure.sh
 
-	HTML_DIR="${ELROND_REF}" ${ELROND_BIN}/make.sh tags install
+	${ELROND_BIN}/make.sh tags install
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
