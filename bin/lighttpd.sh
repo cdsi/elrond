@@ -21,7 +21,6 @@ case "${OPTION}" in
 	[ -f ${ELROND_RUN}/lighttpd.pid ] && \
 	    kill $(cat ${ELROND_RUN}/lighttpd.pid)
 	;;
-                
     *make-cert)
 	/usr/sbin/make-ssl-cert /usr/share/ssl-cert/ssleay.cnf \
 	    ${ELROND_ETC}/lighttpd.pem --force-overwrite
