@@ -25,7 +25,8 @@ AC_PROG_MAKE_SET
 AC_PROG_RANLIB
 
 # Checks for libraries.
-AC_CHECK_LIB(m, sqrt)
+AC_CHECK_LIB([m], [sqrt])
+AC_CHECK_LIB([rt], [clock_nanosleep])
 
 # Checks for header files.
 AC_HEADER_STDC
@@ -40,7 +41,9 @@ AC_CHECK_HEADERS([sys/ipc.h sys/sem.h sys/shm.h], [], [], [
 # Checks for typedefs, structures, and compiler characteristics.
 
 # Checks for library functions.
-AC_CHECK_FUNCS([atoff mkstemp pow sqrt strdup])
+AC_CHECK_FUNCS([atoff mkstemp strdup])
+AC_CHECK_FUNCS([cos sin sqrt pow])
+AC_CHECK_FUNCS([clock_gettime clock_settime clock_nanosleep])
 
 AC_CONFIG_FILES([
         setup.cfg
