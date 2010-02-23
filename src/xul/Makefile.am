@@ -1,3 +1,5 @@
+SUBDIRS = ref
+
 lib_LTLIBRARIES = libxul.la
 libxul_la_SOURCES = xul.c xerror.c xprefs.c xtime.c xtrace.c xverbose.c
 libxul_la_CFLAGS = $(GLIB_CFLAGS)
