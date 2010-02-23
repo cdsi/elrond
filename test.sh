@@ -43,7 +43,7 @@ if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
-        nosetests --with-xunit --with-coverage --cover-erase --cover-html --cover-package=elrond -w "${ELROND_SRC}"/python/elrond
+        "${ELROND_BIN}"/nosetests.sh
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then

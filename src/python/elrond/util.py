@@ -1,7 +1,6 @@
 from __future__ import division
 from __future__ import with_statement
 
-import os
 import time
 
 from ConfigParser import SafeConfigParser
@@ -38,7 +37,7 @@ class Object(object):
                         if value.strip().upper() == 'TRUE':
                                 return True
 
-                raise
+                raise TypeError
 
         def readlines(self, filename):
                 lines = []
@@ -105,7 +104,8 @@ class Lockable(Object):
 
         def __init__(self, lock='DEFAULT'):
                 self.__lock = lock
-                if self.__lock not in self.__locks: self.__locks[self.__lock] = Lock()
+                if self.__lock not in self.__locks:
+                        self.__locks[self.__lock] = Lock()
 
 #
 # see: http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/426406
