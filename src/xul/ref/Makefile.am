@@ -1,5 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 
+HTML_DIR=$(ELROND_REF)
+
 # This is a blank Makefile.am for using gtk-doc.
 # Copy this to your project's API docs directory and modify the variables to
 # suit your project. See the GTK+ Makefiles in gtk+/docs/reference for examples
