@@ -1,8 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='@PACKAGE@', version='@VERSION@',
-      packages=find_packages('src/python'), package_dir={'': 'src/python'},
-      test_suite='elrond.test.testsuite')
+      packages=find_packages('src/python'), package_dir={'': 'src/python'})
 
 # Local Variables:
 # indent-tabs-mode: nil

@@ -8,7 +8,7 @@ import os
 import time
 
 from elrond.db import DB, Persistable, Int, Str
-from elrond.util import Benchmark, Property
+from elrond.util import Benchmark, Object, Property
 
 class Person(Persistable):
 
@@ -95,6 +95,20 @@ class UtilTestCase(unittest.TestCase):
 
                 for i in range(0, 5):
                         testSleep()
+
+        def testObject(self):
+                print
+
+                o = Object()
+
+                self.assertEquals(True, o.to_bool(True))
+                self.assertEquals(False, o.to_bool(False))
+
+                self.assertEquals(True, o.to_bool("True"))
+                self.assertEquals(False, o.to_bool("False"))
+
+                self.assertRaises(TypeError, o.to_bool, 42)
+                self.assertRaises(TypeError, o.to_bool, "FOOBAR")
 
         def testProperty(self):
                 print
