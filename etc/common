@@ -104,6 +104,12 @@ export ELROND_MAKEFLAGS
 ELROND_PYTHONFLAGS=
 export ELROND_PYTHONFLAGS
 
+ELROND_PYLINTFLAGS=--rcfile="${ELROND_ETC}"/pylintrc
+export ELROND_PYLINTFLAGS
+
+ELROND_NOSETESTSFLAGS="--cover-html --cover-html-dir=${ELROND_LOG}/cover --cover-package=elrond -w ${ELROND_SRC}/python/elrond"
+export ELROND_NOSETESTSFLAGS
+
 ELROND_JAVAFLAGS="-Delrond.home=${ELROND_HOME} \
 	-Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
 export ELROND_JAVAFLAGS
