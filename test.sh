@@ -39,7 +39,7 @@ esac
 cd ${ELROND_HOME}
 
 if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
-        "${ELROND_BIN}"/make.sh coverage-report
+        "${ELROND_BIN}"/make.sh coverage-report # TODO: test-report
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
