@@ -43,6 +43,9 @@ export ELROND_RUN
 ELROND_WWW="${ELROND_VAR}"/www
 export ELROND_WWW
 
+ELROND_BUILD="${ELROND_HOME}"/build
+export ELROND_BUILD
+
 ELROND_REF="${ELROND_DOC}"/ref
 export ELROND_REF
 
@@ -107,7 +110,8 @@ export ELROND_PYTHONFLAGS
 ELROND_PYLINTFLAGS=--rcfile="${ELROND_ETC}"/pylintrc
 export ELROND_PYLINTFLAGS
 
-ELROND_NOSETESTSFLAGS="--cover-html --cover-html-dir=${ELROND_LOG}/cover --cover-package=elrond -w ${ELROND_SRC}/python/elrond"
+ELROND_NOSETESTSFLAGS="--xunit-file=${ELROND_BUILD}/test-report-python.xml \
+        --cover-html --cover-html-dir=${ELROND_BUILD}/cover --cover-package=elrond -w ${ELROND_SRC}/python/elrond"
 export ELROND_NOSETESTSFLAGS
 
 ELROND_JAVAFLAGS="-Delrond.home=${ELROND_HOME} \
