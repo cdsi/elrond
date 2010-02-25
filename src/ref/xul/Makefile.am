@@ -1,3 +1,5 @@
+include $(top_srcdir)/share/Makefile.decl
+
 ## Process this file with automake to produce Makefile.in
 
 HTML_DIR=$(ELROND_REF)
