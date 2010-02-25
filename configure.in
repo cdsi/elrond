@@ -49,7 +49,7 @@ AC_CHECK_FUNCS([clock_gettime clock_settime clock_nanosleep])
 AC_CONFIG_FILES([
         setup.cfg
         setup.py
-        etc/xultool.ini
+        etc/xultest.ini
         Makefile
         src/Makefile
         src/xul/Makefile
