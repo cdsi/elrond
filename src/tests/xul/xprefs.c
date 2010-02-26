@@ -81,7 +81,7 @@ test_xprefs(void)
 
         const gchar *string;
 
-        string = xul_prefs_gstring_get(xul, "xultest", "string", &g_buffer[0], sizeof(g_buffer));
+        string = xul_prefs_gstring_get(g_xul, "xultest", "string", &g_buffer[0], sizeof(g_buffer));
 
         g_assert_cmpstr(string, ==, g_quote);
         g_assert_cmpstr(string, ==, g_buffer);
