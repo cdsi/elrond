@@ -8,16 +8,18 @@ int32=-1073741824
 # 2^31
 uint32=2147483648
 # 64-bits
-hex64=0xBABECAFEBABECAFE
+hex64=0x7ABECAFEBABECAFE
 # 64-bits
 uhex64=0xDEADFACEDEADFACE
 # 32-bits
-hex32=0xBABECAFE
+hex32=0x7ABECAFE
 # 32-bits
 uhex32=0xDEADFACE
 # double
 double=1234567890.0987654321
 # boolean
-boolean=True
+true=True
+# boolean
+false=False
 # string
 string=A woman drove me to drink, and I didn't even have the decency to thank her. -- W.C. Fields
