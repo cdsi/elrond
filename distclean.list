@@ -2,14 +2,13 @@ aclocal.m4
 autom4te.cache
 bin/xultest
 bin/xultool
-build
 config.guess
 config.log
 config.status
 config.sub
 configure
 depcomp
-etc/xultool.ini
+etc/xultest.ini
 gtk-doc.make
 install-sh
 lib/libxul.la
@@ -32,7 +31,14 @@ src/include/elrond_config.h.in
 src/include/stamp-h1
 src/Makefile
 src/Makefile.in
+src/python/elrond/cover
+src/python/elrond/.coverage
+src/python/elrond/db.pyc
 src/python/elrond.egg-info
+src/python/elrond/__init__.pyc
+src/python/elrond/test.pyc
+src/python/elrond/util.pyc
+src/python/elrond/www/__init__.pyc
 src/ref/Makefile
 src/ref/Makefile.in
 src/ref/xul/html
@@ -59,7 +65,9 @@ src/TAGS
 src/tests/Makefile
 src/tests/Makefile.in
 src/tests/TAGS
+src/tests/xul/coverage
 src/tests/xul/.deps
+src/tests/xul/lcov.info
 src/tests/xul/.libs
 src/tests/xul/Makefile
 src/tests/xul/Makefile.in
@@ -83,5 +91,6 @@ src/xul/TAGS
 src/xul/xultool
 src/xul/xultool-xultool.o
 TAGS
+test-report-python.xml
 var/db/elrond.db
 var/log/elrond.log
