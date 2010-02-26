@@ -13,8 +13,8 @@
 #define BUFFER_LENGTH 128
 gchar g_buffer[BUFFER_LENGTH];
 
-static const gchar *g_quote = \
-        "A woman drove me to drink, and I didn't even have the decency to thank her. -- W.C. Fields";
+static const gchar *g_quote =
+  "A woman drove me to drink, and I didn't even have the decency to thank her. -- W.C. Fields";
 
 xul_t *g_xul;
 
@@ -44,7 +44,7 @@ test_xprefs(void)
         rc = xul_prefs_open(g_xul, prefs);
         g_assert(!rc);
 
-        /*
+        /* 
          * TODO: Test that the correct errors are raised when:
          *
          * 1. xultest.ini does not exist.
@@ -54,11 +54,11 @@ test_xprefs(void)
          *
          * For example 1 & 2 would be handled like:
 
-        if (rc) {
-                if (XUL_IS_ERROR(g_xul)) {
-                        g_fprintf(stderr, "ERROR: %s\n", xul_error_message_get(g_xul));
-                }
-        }
+         if (rc) {
+         if (XUL_IS_ERROR(g_xul)) {
+         g_fprintf(stderr, "ERROR: %s\n", xul_error_message_get(g_xul));
+         }
+         }
 
          */
 
