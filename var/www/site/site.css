@@ -1,0 +1,32 @@
+body
+{
+	font-family: Verdana, Arial, Helvetica, Sans-Serif;
+	margin: 0px auto;
+	width: 780px;
+}
+
+h1
+{
+	font-size: +5em;
+	font-weight: bold;
+}
+
+h2
+{
+	font-size: +2em;
+	font-weight: normal;
+}
+
+#content, #footer
+{
+	margin: 20px;
+	padding: 20px;
+}
+
+#footer
+{
+	font-size: -2em;
+	font-weight: normal;
+	clear: both;
+	text-align: center;
+}
