@@ -16,7 +16,7 @@
 
   <chapter>
     <title>[Insert title here]</title>
-        <xi:include href="xml/xul.xml"/>
+    <xi:include href="xml/xul.xml"/>
     <xi:include href="xml/xerror.xml"/>
     <xi:include href="xml/xverbose.xml"/>
     <xi:include href="xml/xtime.xml"/>
