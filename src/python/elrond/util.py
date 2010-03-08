@@ -5,12 +5,9 @@ import os
 import time
 
 from configobj import ConfigObj
-from validate import Validator
-
-from ConfigParser import SafeConfigParser
-from threading import Lock
-
 from decorator import decorator
+from threading import Lock
+from validate import Validator
 
 def Property(f):
         return property(**f())
