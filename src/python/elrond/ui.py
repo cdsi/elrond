@@ -6,12 +6,10 @@ import os
 import thread
 import time
 
-from configobj import ConfigObj
-
 import gtk
 
 from elrond.tasks import Task
-from elrond.util import Object, Property
+from elrond.util import Object, Preferences, Property
 
 class Chooser(gtk.FileChooserDialog):
 
@@ -134,7 +132,7 @@ class Widget(Object):
                 self.widget = self.builder.get_object(name)
 
         def loaddb(self, path, name):
-                self.prefs = ConfigObj(path + os.sep + name + '.ini')
+                self.prefs = Preferences(path + os.sep + name + '.ini')
 
                 for section in self.prefs.keys():
                         for key, value in self.prefs[section].items():

@@ -1,7 +1,11 @@
 from __future__ import division
 from __future__ import with_statement
 
+import os
 import time
+
+from configobj import ConfigObj
+from validate import Validator
 
 from ConfigParser import SafeConfigParser
 from threading import Lock
@@ -106,6 +110,23 @@ class Lockable(Object):
                 self.__lock = lock
                 if self.__lock not in self.__locks:
                         self.__locks[self.__lock] = Lock()
+
+class Preferences(ConfigObj):
+
+        def conv_hex(value):
+                return int(value, 16)
+
+        fdict = {
+                'hex': conv_hex,
+        }
+
+        def __init__(self, prefsname):
+                specsname = prefsname + '.spec'
+                if os.path.exists(specsname):
+                        ConfigObj.__init__(self, prefsname, configspec=specsname)
+                        self.validate(Validator(self.fdict))
+                else:
+                        ConfigObj.__init__(self, prefsname)
 
 #
 # see: http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/426406
