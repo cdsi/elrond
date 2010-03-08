@@ -128,61 +128,6 @@ class Preferences(ConfigObj):
                 else:
                         ConfigObj.__init__(self, prefsname)
 
-#
-# see: http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/426406
-#
-
-class Section(Object):
-
-        def __getattr__(self, name):
-                value = self.__parser.get(self.__name, name)
-                if isinstance(value, str):
-                        xvalue = value
-                        if value.upper() ==  "TRUE": xvalue = True
-                        if value.upper() == "FALSE": xvalue = False
-                        value = xvalue
-                return value
-
-        def __init__(self, name, parser):
-                self.__name = name
-                self.__parser = parser
-
-class Prefs(Object):
-
-        def __getattr__(self, name):
-                if name in self.__parser.sections():
-                        return Section(name, self.__parser)
-                else:
-                        return None
-
-        def __str__(self):
-                p = self.__parser
-                result = []
-                result.append('<prefs %s>' % self.__prefsname)
-                for s in p.sections():
-                        result.append('[%s]' % s)
-                        for o in p.options(s):
-                                result.append('%s=%s' % (o, p.get(s, o)))
-                return '\n'.join(result)
-
-        def get(self, section, option):
-                self.__parser.set(section, option)
-
-        def set(self, section, option, value):
-                self.__parser.set(section, option, str(value))
-
-        def open(self, prefspath, prefsname):
-                self.__prefsname = prefspath + '/' + prefsname
-                self.__parser.read(self.__prefsname)
-
-        def write(self):
-                fp = open(self.__prefsname, 'w')
-                self.__parser.write(fp)
-                fp.close()
-
-        def __init__(self):
-                self.__parser = SafeConfigParser()
-
 # $Id:$
 #
 # Local Variables:
