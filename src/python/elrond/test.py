@@ -8,7 +8,7 @@ import os
 import time
 
 from elrond.db import DB, Persistable, Int, Str
-from elrond.util import Benchmark, Object, Property
+from elrond.util import Benchmark, Object, Preferences, Property
 
 class Person(Persistable):
 
@@ -130,6 +130,9 @@ class UtilTestCase(unittest.TestCase):
 
                 testSet(dB)
                 self.assertAlmostEqual(dB, testGet())
+
+        def testPreferences(self):
+                print
 
 def testsuite():
         __testsuite = unittest.TestSuite()
