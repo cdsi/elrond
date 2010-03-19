@@ -8,6 +8,7 @@ import os
 import time
 
 from elrond.db import DB, Persistable, Int, Str
+from elrond.util import APIDepricated, APIDepricatedError, APINotImplemented, APINotImplementedError
 from elrond.util import Benchmark, Object, Preferences, Property
 
 class Person(Persistable):
@@ -82,6 +83,20 @@ class UtilTestCase(unittest.TestCase):
 
         def tearDown(self):
                 pass
+
+        def testExceptions(self):
+                print
+
+                @APIDepricated
+                def __APIDepricated():
+                        pass
+
+                @APINotImplemented
+                def __APINotImplemented():
+                        pass
+
+                self.assertRaises(APIDepricatedError, __APIDepricated)
+                self.assertRaises(APINotImplementedError, __APINotImplemented)
 
         def testBenchmark(self):
                 print
