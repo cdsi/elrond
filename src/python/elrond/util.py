@@ -9,6 +9,9 @@ from decorator import decorator
 from threading import Lock
 from validate import Validator
 
+def is_almost_equal(x1, x2, tolerance=1e-6):
+        return math.fabs(x1 - x2) < tolerance
+
 def Property(f):
         return property(**f())
 
