@@ -113,20 +113,17 @@ class Lockable(Object):
 
 class Preferences(ConfigObj):
 
-        def conv_hex(value):
-                return int(value, 16)
+        def __conv(section, key):
+                value = section[key]
 
-        fdict = {
-                'hex': conv_hex,
-        }
+                if isinstance(value, str):
+                        if value[:2] == '0x':
+                                section[key] = int(value, 16)
 
         def __init__(self, prefsname):
-                specsname = prefsname + '.spec'
-                if os.path.exists(specsname):
-                        ConfigObj.__init__(self, prefsname, configspec=specsname)
-                        self.validate(Validator(self.fdict))
-                else:
-                        ConfigObj.__init__(self, prefsname)
+                ConfigObj.__init__(self, prefsname)
+
+                self.walk(self.__conv, call_on_sections=True)
 
 # $Id:$
 #
