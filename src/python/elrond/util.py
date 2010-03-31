@@ -12,6 +12,21 @@ from validate import Validator
 def is_almost_equal(x1, x2, tolerance=1e-6):
         return math.fabs(x1 - x2) < tolerance
 
+HEXFILT = ''.join([(len(repr(chr(x))) == 3) and chr(x) or '.' for x in range(256)])
+
+def hexdump(src, size, length=8):
+        """http://code.activestate.com/recipes/142812/"""
+
+        result = []
+
+        for i in xrange(0, size, length):
+                sub1 = src[i:i + length]
+                hexa = ' '.join(['%02X' % ord(x) for x in sub1])
+                sub2 = sub1.translate(HEXFILT)
+                result.append('%04X   %-*s   %s\n' % (i, length * 3, hexa, sub2))
+
+        return ''.join(result)
+
 def Property(f):
         return property(**f())
 
