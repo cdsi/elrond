@@ -128,7 +128,7 @@ class Lockable(Object):
 
 class Preferences(ConfigObj):
 
-        def __conv(section, key):
+        def __conv(self, section, key):
                 value = section[key]
 
                 if isinstance(value, str):
