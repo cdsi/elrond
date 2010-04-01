@@ -6,7 +6,7 @@ import threading
 
 import gobject
 
-from elrond.util import Object
+from elrond.util import APIDepricated, Object
 
 class Task(Object):
         """http://unpythonic.blogspot.com/2007/08/using-threads-in-pygtk.html
@@ -23,29 +23,27 @@ class Task(Object):
 
         def __start(self, *args, **kwargs):
                 for rc in self.__producer(*args, **kwargs):
-                        if not self.__is_running:
+                        if not self.running:
                                 break
                         gobject.idle_add(self.__loop, rc)
                 if self.__complete:
                         gobject.idle_add(self.__complete)
 
         def start(self, *args, **kwargs):
-                if self.__is_running:
+                if self.running:
                         return
 
-                self.__is_running = True
+                self.running = True
 
                 thread = threading.Thread(target=self.__start, args=args, kwargs=kwargs)
                 thread.start()
 
+        @APIDepricated
         def stop(self):
-                if not self.__is_running:
-                        return
-
-                self.__is_running = False
+                self.running = False
 
         def kill(self):
-                self.stop()
+                self.running = False
                 thread.exit()
 
         def __init__(self, producer, callback=None, complete=None):
@@ -53,7 +51,7 @@ class Task(Object):
                 self.__callback = callback
                 self.__complete = complete
 
-                self.__is_running = False
+                self.running = False
 
 # $Id:$
 #
