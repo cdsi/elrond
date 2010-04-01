@@ -13,24 +13,28 @@ class Task(Object):
         """
 
         def __loop(self, rc):
-                if rc is None:
+                if not self.__callback:
+                        return
+                if not rc:
                         rc = ()
                 if not isinstance(rc, tuple):
                         rc = (rc,)
-                self.callback(*rc)
+                self.__callback(*rc)
 
         def __start(self, *args, **kwargs):
-                for rc in self.generator(*args, **kwargs):
-                        if self.callback is not None:
-                                gobject.idle_add(self.__loop, rc)
-                if self.complete is not None:
-                        gobject.idle_add(self.complete)
+                for rc in self.__producer(*args, **kwargs):
+                        if not self.__is_running:
+                                break
+                        gobject.idle_add(self.__loop, rc)
+                if self.__complete:
+                        gobject.idle_add(self.__complete)
 
         def start(self, *args, **kwargs):
                 if self.__is_running:
                         return
 
                 self.__is_running = True
+
                 thread = threading.Thread(target=self.__start, args=args, kwargs=kwargs)
                 thread.start()
 
@@ -44,10 +48,10 @@ class Task(Object):
                 self.stop()
                 thread.exit()
 
-        def __init__(self, generator, callback=None, complete=None):
-                self.generator = generator
-                self.callback = callback
-                self.complete = complete
+        def __init__(self, producer, callback=None, complete=None):
+                self.__producer = producer
+                self.__callback = callback
+                self.__complete = complete
 
                 self.__is_running = False
 
