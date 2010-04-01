@@ -107,8 +107,11 @@ class Widget(Object):
                         self.hide()
                 else:
                         gtk.main_quit()
-                        thread.exit()
-
+                        try:
+                                thread.exit()
+                        except SystemExit:
+                                pass
+                                
         def on_draw(self, widget):
                 self.draw()
 
