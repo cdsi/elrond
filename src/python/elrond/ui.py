@@ -102,6 +102,9 @@ class Widget(Object):
         def run(self):
                 gtk.main()
                 
+        def delete(self):
+                pass
+
         def exit(self):
                 if self.embedded:
                         self.hide()
@@ -111,6 +114,8 @@ class Widget(Object):
                                 thread.exit()
                         except SystemExit:
                                 pass
+                        finally:
+                                self.delete()
                                 
         def on_draw(self, widget):
                 self.draw()
@@ -261,6 +266,10 @@ class Window(Widget):
                         self.__widget.draw()
                 Widget.draw(self)
                 
+        def delete(self):
+                if self.__widget:
+                        self.__widget.delete()
+
         def __init__(self, widget=None):
                 Widget.__init__(self)
 
