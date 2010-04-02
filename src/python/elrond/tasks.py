@@ -44,7 +44,10 @@ class Task(Object):
 
         def kill(self):
                 self.running = False
-                thread.exit()
+                try:
+                        thread.exit()
+                except SystemExit:
+                        pass
 
         def __init__(self, producer, callback=None, complete=None):
                 self.__producer = producer
