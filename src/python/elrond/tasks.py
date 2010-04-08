@@ -38,6 +38,10 @@ class Task(Object):
                 thread = threading.Thread(target=self.__start, args=args, kwargs=kwargs)
                 thread.start()
 
+        @APIDepricated
+        def stop(self):
+                self.running = False
+
         def kill(self):
                 self.running = False
                 try:
