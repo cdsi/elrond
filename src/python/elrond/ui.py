@@ -333,7 +333,7 @@ class Playable(Widget):
 
         def stop(self):
                 self.__is_running = False
-                self.__task.stop()
+                self.__task.running = False
 
         def kill(self):
                 self.stop()
