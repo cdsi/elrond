@@ -22,27 +22,23 @@ class Task(Object):
                 self.__callback(*rc)
 
         def __start(self, *args, **kwargs):
+                self.__running = True
                 for rc in self.__producer(*args, **kwargs):
-                        if not self.running:
+                        if not self.__running:
                                 break
                         gobject.idle_add(self.__loop, rc)
                 if self.__complete:
                         gobject.idle_add(self.__complete)
 
         def start(self, *args, **kwargs):
-                if self.running:
-                        return
-
-                self.running = True
-
                 thread = threading.Thread(target=self.__start, args=args, kwargs=kwargs)
                 thread.start()
 
         def stop(self):
-                self.running = False
+                self.__running = False
 
         def kill(self):
-                self.running = False
+                self.stop()
                 try:
                         thread.exit()
                 except SystemExit:
@@ -52,8 +48,6 @@ class Task(Object):
                 self.__producer = producer
                 self.__callback = callback
                 self.__complete = complete
-
-                self.running = False
 
 # $Id:$
 #
