@@ -11,6 +11,8 @@ from elrond.db import DB, Persistable, Int, Str
 from elrond.util import APIDepricated, APIDepricatedError, APINotImplemented, APINotImplementedError
 from elrond.util import Benchmark, Object, Preferences, Property
 
+from elrond.static import *
+
 class Person(Persistable):
 
         __storm_table__ = 'person'
@@ -75,6 +77,25 @@ class Power(object):
                         self.__dB = dB
 
                 return locals()
+
+class StaticTestCase(unittest.TestCase):
+
+        def testAll(self):
+
+                self.assertEquals(reverse_bits(0x01, nbits=4), 0x08)
+                self.assertEquals(reverse_bits(0x08, nbits=4), 0x01)
+
+                self.assertEquals(reverse_bits(0x10, nbits=8), 0x08)
+                self.assertEquals(reverse_bits(0x80, nbits=8), 0x01)
+
+                self.assertEquals(reverse_bits(0x0101, nbits=16), 0x8080)
+                self.assertEquals(reverse_bits(0x0808, nbits=16), 0x1010)
+
+                self.assertEquals(reverse_bits(0x01010101), 0x80808080)
+                self.assertEquals(reverse_bits(0x08080808), 0x10101010)
+
+                self.assertEquals(reverse_bits(0x0101010101010101, nbits=64), 0x8080808080808080)
+                self.assertEquals(reverse_bits(0x0808080808080808, nbits=64), 0x1010101010101010)
 
 class UtilTestCase(unittest.TestCase):
 
@@ -152,6 +173,7 @@ class UtilTestCase(unittest.TestCase):
 def testsuite():
         __testsuite = unittest.TestSuite()
         __testsuite.addTest(unittest.TestLoader().loadTestsFromTestCase(DBTestCase))
+        __testsuite.addTest(unittest.TestLoader().loadTestsFromTestCase(StaticTestCase))
         __testsuite.addTest(unittest.TestLoader().loadTestsFromTestCase(UtilTestCase))
         return __testsuite
 
