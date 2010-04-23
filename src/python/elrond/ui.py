@@ -95,15 +95,20 @@ class Widget(Object):
 
         def show(self):
                 self.widget.show()
+                if self.__subwidget:
+                        self.__subwidget.show()
 
         def hide(self):
                 self.widget.hide()
+                if self.__subwidget:
+                        self.__subwidget.hide()
 
         def run(self):
                 gtk.main()
                 
         def delete(self):
-                pass
+                if self.__subwidget:
+                        self.__subwidget.delete()
 
         def exit(self):
                 if self.embedded:
@@ -138,6 +143,10 @@ class Widget(Object):
                 self.builder.connect_signals(self)
 
                 self.widget = self.builder.get_object(name)
+
+                if self.__subwidget:
+                        container = self.builder.get_object('container')
+                        container.add(self.__subwidget.widget)
 
         def loaddb(self, path, name):
                 self.prefs = Preferences(path + os.sep + name + '.ini')
@@ -242,8 +251,10 @@ class Widget(Object):
 
                 return locals()
 
-        def __init__(self):
+        def __init__(self, widget=None):
                 gtk.gdk.threads_init()
+
+                self.__subwidget = widget
 
                 self.__title = None
 
@@ -251,39 +262,18 @@ class Widget(Object):
 
 class Window(Widget):
 
-        def show(self):
-                if self.__widget:
-                        self.__widget.show()
-                Widget.show(self)
-                
-        def hide(self):
-                if self.__widget:
-                        self.__widget.hide()
-                Widget.hide(self)
-                
-        def draw(self):
-                if self.__widget:
-                        self.__widget.draw()
-                Widget.draw(self)
-                
         def delete(self):
                 if self.__widget:
                         self.__widget.delete()
 
-        def __init__(self, widget=None):
-                Widget.__init__(self)
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
 
                 path = os.environ['ELROND_ETC']
                 name = 'elrond-window'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
-
-                if widget:
-                        container = self.builder.get_object('container')
-                        container.add(widget.widget)
-
-                self.__widget = widget
 
 class SaveAs(Widget):
 
@@ -309,8 +299,8 @@ class SaveAs(Widget):
         def on_ok(self, widget):
                 self.__callback(self.widget.get_filename())
 
-        def __init__(self):
-                Widget.__init__(self)
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
 
                 path = os.environ['ELROND_ETC']
                 name = 'elrond-saveas'
@@ -668,8 +658,8 @@ class Plane(Widget):
         def on_drawingarea_realize(self, widget):
                 pass
 
-        def __init__(self):
-                Widget.__init__(self)
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
 
                 path = os.environ['ELROND_ETC']
                 name = 'elrond-plane'
