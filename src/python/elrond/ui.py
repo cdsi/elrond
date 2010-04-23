@@ -25,7 +25,7 @@ class Colors(Object):
         RED = gtk.gdk.Color(red=0xFFFF, green=0x0000, blue=0x0000)
         GREEN = gtk.gdk.Color(red=0x0000, green=0xFFFF, blue=0x0000)
         BLUE = gtk.gdk.Color(red=0x0000, green=0xFFFF, blue=0xFFFF)
-        YELLOW = gtk.gdk.Color(red=0xFFFF, green=0xFFFF, blue=0xFFFF)
+        YELLOW = gtk.gdk.Color(red=0xFFFF, green=0xFFFF, blue=0x0000)
 
         SUCCESS = GREEN
         WARNING = YELLOW
