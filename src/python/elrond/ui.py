@@ -275,10 +275,6 @@ class Widget(Object):
 
 class Window(Widget):
 
-        def delete(self):
-                if self.__widget:
-                        self.__widget.delete()
-
         def __init__(self, *args, **kwargs):
                 Widget.__init__(self, *args, **kwargs)
 
