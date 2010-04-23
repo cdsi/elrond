@@ -18,6 +18,19 @@ class Chooser(gtk.FileChooserDialog):
                 gtk.FileChooserDialog.__init__(self, title=None, action=gtk.FILE_CHOOSER_ACTION_OPEN,
                                                buttons=buttons)
 
+class Colors(Object):
+
+        BLACK = gtk.gdk.Color(red=0x0000, green=0x0000, blue=0x0000)
+        WHITE = gtk.gdk.Color(red=0xFFFF, green=0xFFFF, blue=0xFFFF)
+        RED = gtk.gdk.Color(red=0xFFFF, green=0x0000, blue=0x0000)
+        GREEN = gtk.gdk.Color(red=0x0000, green=0xFFFF, blue=0x0000)
+        BLUE = gtk.gdk.Color(red=0x0000, green=0xFFFF, blue=0xFFFF)
+        YELLOW = gtk.gdk.Color(red=0xFFFF, green=0xFFFF, blue=0xFFFF)
+
+        SUCCESS = GREEN
+        WARNING = YELLOW
+        ERROR = RED
+
 class Widget(Object):
 
         def get_filename(self, option, default):
