@@ -1,13 +1,18 @@
 import os
 
 from elrond.ui import SaveAs
+from elrond.util import Object
 
-def callback(selection):
-        print 'selection =', selection
+class Callback(Object):
+
+        def f(self, selection):
+                print 'selection =', selection
+
+callback = Callback()
 
 chooser = SaveAs()
+chooser.callback = callback.f
 
-chooser.callback = callback
 chooser.get_selection(path=os.environ['ELROND_HOME'], filename='build.sh')
 
 chooser.show()

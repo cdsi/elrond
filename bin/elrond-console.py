@@ -1,34 +1,43 @@
-#!/usr/bin/env python
-
 from optparse import OptionParser
 
 from elrond.ui import Console, Window
+from elrond.util import Object
 
-def callback():
-        while True:
-                try:
-                        with open(socket, 'r') as fd:
-                                # TODO: readline needs a timeout
-                                yield fd.readline()
-                except:
-                        pass
+class Callback(Object):
+
+        def f(self):
+                # This will block indefinitely until something is written to the pipe.
+                # As soon as something is written to the pipe, and this writer closes (or exits)
+                # (e.g. echo "foo:bar" > /path/to/socket) then the open call will terminate.
+                # This is why we loop indefinitely. If the socket is opened by a long-lived
+                # application, then this is not an issue. And since there is no timeout on this
+                # "read", there is no way to cleanly terminate this application.
+                while True:
+                        for line in open(self.socket, 'r'):
+                                yield line
+
+        def __init__(self, *args, **kwargs):
+                Object.__init__(self, *args, **kwargs)
+
+                self.socket = None
 
 op = OptionParser('%prog [options]')
 
-op.add_option('--socket', action='store', dest='socket', default=None,
+op.add_option('--socket', action='store', dest='socket',
               help='The named pipe created by mkfifo')
 
 op.add_option('--title', action='store', dest='title', default=None,
-              help='The console window title.')
+              help='The window title.')
 op.add_option('--deletable', action='store', dest='deletable', default=True,
-              help='When disabled the console window is not closable.')
+              help='When disabled the window is not closable.')
 
 (options, args) = op.parse_args()
 
 if options.socket == None:
         op.error('--socket=... is required')
 
-socket = options.socket
+callback = Callback()
+callback.socket = options.socket
 
 console = Console()
 
@@ -36,7 +45,7 @@ window = Window(widget=console)
 window.title = options.title
 window.deletable = options.deletable
 
-console.play(callback)
+console.play(callback.f)
 
 window.show()
 window.run()
