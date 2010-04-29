@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import os
 
 from elrond.ui import SaveAs
