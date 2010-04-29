@@ -322,7 +322,7 @@ class SaveAs(Widget):
 
 class YesNo(Widget):
 
-        def get_answer(self, question=None):
+        def get_answer(self, question):
                 widget = self.builder.get_object('textview')
                 widget.modify_font(pango.FontDescription('terminus 12'))
 
