@@ -33,7 +33,7 @@ op.add_option('--deletable', action='store', dest='deletable', default=True,
 
 (options, args) = op.parse_args()
 
-if options.socket == None:
+if not options.socket:
         op.error('--socket=... is required')
 
 callback = Callback()
