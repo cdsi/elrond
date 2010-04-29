@@ -22,7 +22,7 @@ op.add_option('--deletable', action='store', dest='deletable', default=True,
 
 (options, args) = op.parse_args()
 
-if options.question == None:
+if not options.question:
         op.error('--question=... is required')
 
 callback = Callback()
