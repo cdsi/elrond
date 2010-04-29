@@ -7,6 +7,7 @@ import thread
 import time
 
 import gtk
+import pango
 
 from elrond.tasks import Task
 from elrond.util import Object, Preferences, Property
@@ -313,6 +314,39 @@ class SaveAs(Widget):
 
                 path = os.environ['ELROND_ETC']
                 name = 'elrond-saveas'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+                self.callback = None
+
+class YesNo(Widget):
+
+        def get_answer(self, question=None):
+                widget = self.builder.get_object('textview')
+                widget.modify_font(pango.FontDescription('terminus 12'))
+
+                widget = self.builder.get_object('textbuffer')
+                widget.set_text(question)
+
+                self.show()
+
+        def __callback(self, answer):
+                if self.callback is not None:
+                        self.callback(answer)
+                self.exit()
+
+        def on_no(self, widget):
+                self.__callback(False)
+
+        def on_yes(self, widget):
+                self.__callback(True)
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-yesno'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
