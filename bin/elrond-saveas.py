@@ -7,6 +7,7 @@ class Callback(Object):
 
         def f(self, selection):
                 print 'selection =', selection
+                chooser.exit()
 
 callback = Callback()
 

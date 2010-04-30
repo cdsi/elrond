@@ -9,6 +9,7 @@ class Callback(Object):
 
         def f(self, answer):
                 print 'answer =', answer
+                window.exit()
 
 op = OptionParser('%prog [options]')
 
