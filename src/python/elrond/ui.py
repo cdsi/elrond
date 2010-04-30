@@ -301,7 +301,6 @@ class SaveAs(Widget):
         def __callback(self, filename):
                 if self.callback is not None:
                         self.callback(filename)
-                self.exit()
 
         def on_cancel(self, widget):
                 self.__callback(None)
@@ -334,7 +333,6 @@ class YesNo(Widget):
         def __callback(self, answer):
                 if self.callback is not None:
                         self.callback(answer)
-                self.exit()
 
         def on_no(self, widget):
                 self.__callback(False)
