@@ -328,6 +328,9 @@ class YesNo(Widget):
                 widget = self.builder.get_object('textbuffer')
                 widget.set_text(question)
 
+                widget = self.builder.get_object('yes-button')
+                widget.grab_focus()
+
                 self.show()
 
         def __callback(self, answer):
