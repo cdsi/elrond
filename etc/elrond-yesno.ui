@@ -53,7 +53,7 @@
             <property name="spacing">6</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="no">
+              <object class="GtkButton" id="no-button">
                 <property name="label">gtk-no</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -68,7 +68,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="yes">
+              <object class="GtkButton" id="yes-button">
                 <property name="label">gtk-yes</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
