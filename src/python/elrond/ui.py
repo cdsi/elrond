@@ -323,7 +323,7 @@ class YesNo(Widget):
 
         def get_answer(self, question):
                 widget = self.builder.get_object('textview')
-                widget.modify_font(pango.FontDescription('monospace 28'))
+                widget.modify_font(pango.FontDescription('monospace 12'))
 
                 widget = self.builder.get_object('textbuffer')
                 widget.set_text(question)
