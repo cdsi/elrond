@@ -78,15 +78,6 @@ typedef struct {
 #define XUL_ERROR_MAGIC 0xABCDEFFE
 #define XUL_ERROR_IS_VALID(x) ((x) && ((x)->magic == XUL_ERROR_MAGIC))
 
-typedef struct {
-        xul_prefs_t *prefs;
-        xul_time_t *time;
-        xul_verbose_t *verbose;
-        xul_error_t *error;
-        gpointer *userdata;
-        guint32 magic;
-} xul_t;
-
 #define XUL_MAGIC 0xDEADBEEF
 #define XUL_IS_VALID(x) ((x) && ((x)->magic == XUL_MAGIC))
 
@@ -96,11 +87,7 @@ typedef struct {
  * XUL Public API
  */
 
-XUL_APIEXPORT gpointer *xul_userdata_get(xul_t *);
-XUL_APIEXPORT void xul_userdata_set(xul_t *, gpointer *);
-XUL_APIEXPORT void xul_delete(xul_t *);
-XUL_APIEXPORT xul_t *xul_new();
-XUL_APIEXPORT void xul_init(xul_t *);
+#include "_xul.h"
 
 #include "xerror.h"
 #include "xprefs.h"
