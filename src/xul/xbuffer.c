@@ -8,7 +8,13 @@ xul_buffer_get_length(xul_t * xul, xul_buffer_t * buffer)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        return buffer->len;
+        guint64 length = 0;
+
+        if (buffer) {
+                length = buffer->len;
+        }
+        
+        return length;
 }
 
 XUL_APIEXPORT guint8 *
