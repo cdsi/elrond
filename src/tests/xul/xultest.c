@@ -2,6 +2,7 @@
 
 #include "xul.h"
 
+GTestCase *xul_test_xbuffer_case();
 GTestCase *xul_test_xprefs_case();
 GTestCase *xul_test_xtime_case();
 
@@ -12,6 +13,7 @@ main(int argc, char **argv)
 
         GTestSuite *ts = g_test_get_root();
 
+        g_test_suite_add(ts, xul_test_xbuffer_case());
         g_test_suite_add(ts, xul_test_xprefs_case());
         g_test_suite_add(ts, xul_test_xtime_case());
 
