@@ -7,6 +7,9 @@ xultest_SOURCES = xultest.c xbuffer.c xprefs.c xtime.c
 
 bin_PROGRAMS = $(TEST_PROGS)
 
+indent-local:
+	@indent *.[ch]
+
 coverage-local-clear:
 	@lcov --directory $(top_srcdir) --zerocounters
 
@@ -16,4 +19,4 @@ coverage-local: coverage-local-clear test
 coverage-report-local: coverage-local
 	@genhtml --output-directory coverage lcov.info
 
-.PHONY: coverage-local-clean coverage-local coveage-report-local
+.PHONY: indent-local coverage-local-clean coverage-local coveage-report-local

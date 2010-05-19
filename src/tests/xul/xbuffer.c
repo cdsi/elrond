@@ -16,7 +16,7 @@ test_xbuffer_setup(void)
         g_assert(XUL_IS_VALID(g_xul));
         g_buffer = xul_buffer_new(g_xul);
 
-        g_scratch = (guint8 *)g_malloc0(SCRATCH_SIZE);
+        g_scratch = (guint8 *) g_malloc0(SCRATCH_SIZE);
         g_scratch[SCRATCH_SIZE - 42] = 0x42;
 
         xul_buffer_append(g_xul, g_buffer, g_scratch, SCRATCH_SIZE);
@@ -29,7 +29,7 @@ test_xbuffer_teardown(void)
         xul_buffer_delete(g_xul, g_buffer);
         xul_delete(g_xul);
 
-        g_free((gpointer)g_scratch);
+        g_free((gpointer) g_scratch);
 }
 
 static void
@@ -45,7 +45,8 @@ test_xbuffer(void)
 GTestCase *
 xul_test_xbuffer_case(void)
 {
-        return g_test_create_case("xbuffer", 0, NULL, test_xbuffer_setup, test_xbuffer, test_xbuffer_teardown);
+        return g_test_create_case("xbuffer", 0, NULL, test_xbuffer_setup, test_xbuffer,
+                                  test_xbuffer_teardown);
 }
 
 /*
