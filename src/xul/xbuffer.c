@@ -38,10 +38,6 @@ xul_buffer_delete(xul_t * xul, xul_buffer_t * buffer)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        /* This frees the memory pointed to by the buffer structure. */
-        g_byte_array_free(buffer, TRUE);
-
-        /* This deletes the buffer structure. */
         g_byte_array_unref(buffer);
 }
 
