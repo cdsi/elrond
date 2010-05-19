@@ -13,7 +13,7 @@ xul_buffer_get_length(xul_t * xul, xul_buffer_t * buffer)
         if (buffer) {
                 length = buffer->len;
         }
-        
+
         return length;
 }
 
