@@ -75,6 +75,8 @@ typedef struct {
         guint32 magic;
 } xul_error_t;
 
+typedef GByteArray xul_buffer_t;
+
 #define XUL_ERROR_MAGIC 0xABCDEFFE
 #define XUL_ERROR_IS_VALID(x) ((x) && ((x)->magic == XUL_ERROR_MAGIC))
 
