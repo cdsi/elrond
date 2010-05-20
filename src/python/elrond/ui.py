@@ -457,6 +457,8 @@ class Console(Playable):
 
                 self.__filename = None
 
+                self.__textview.modify_font(pango.FontDescription('monospace 12'))
+
 class Dialog(Playable):
 
         @apply
