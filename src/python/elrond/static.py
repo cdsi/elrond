@@ -3,16 +3,16 @@ from __future__ import with_statement
 
 HEXFILT = ''.join([(len(repr(chr(x))) == 3) and chr(x) or '.' for x in range(256)])
 
-def hexdump(src, size, length=8):
+def hexdump(src, size, columns=32):
         """ http://code.activestate.com/recipes/142812/ """
 
         result = []
 
-        for i in xrange(0, size, length):
-                sub1 = src[i:i + length]
+        for i in xrange(0, size, columns):
+                sub1 = src[i:i + columns]
                 hexa = ' '.join(['%02X' % ord(x) for x in sub1])
                 sub2 = sub1.translate(HEXFILT)
-                result.append('%04X   %-*s   %s\n' % (i, length * 3, hexa, sub2))
+                result.append('%04X   %-*s   %s\n' % (i, columns * 3, hexa, sub2))
 
         return ''.join(result)
 
