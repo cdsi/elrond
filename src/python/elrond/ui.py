@@ -75,7 +75,11 @@ class Widget(Object):
                 widget.set(i, 1, not widget.get_value(i, 1))
 
         def on_changed(self, widget):
-                section, key = widget.get_name().split("__")
+                # https://bugzilla.gnome.org/show_bug.cgi?id=591085#c19
+                try:
+                        section, key = widget.get_name().split("__")
+                except:
+                        section, key = gtk.Buildable.get_name(widget).split("__")
                 
                 value = None
 
