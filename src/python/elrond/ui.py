@@ -257,10 +257,7 @@ class Widget(Object):
                                 novice = True
 
                         for widget in widgets:
-                                if not hasattr(widget, 'name'):
-                                        continue
-
-                                name = widget.name
+                                name = gtk.Buildable.get_name(widget)
 
                                 if name.endswith('expert'):
                                         if not expert:
