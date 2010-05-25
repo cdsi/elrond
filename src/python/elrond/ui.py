@@ -188,6 +188,9 @@ class Widget(Object):
                                         if type(widget) == gtk.RadioButton:
                                                 widget.set_active(self.to_bool(value))
 
+                                        if type(widget) == gtk.RadioToolButton:
+                                                widget.set_active(self.to_bool(value))
+
                                         if type(widget) == gtk.SpinButton:
                                                 widget.set_value(float(value))
 
