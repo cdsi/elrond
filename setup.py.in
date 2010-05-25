@@ -1,4 +1,7 @@
-from setuptools import setup, find_packages
+from setuptools import command, setup, find_packages
+
+# http://rhodesmill.org/brandon/2009/eby-magic/
+del command.sdist.finders[:]
 
 setup(name='@PACKAGE@', version='@VERSION@',
       packages=find_packages('src/python'), package_dir={'': 'src/python'})
