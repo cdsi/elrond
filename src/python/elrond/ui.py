@@ -34,6 +34,16 @@ class Colors(Object):
 
 class Widget(Object):
 
+        def get_name_of_widget(self, widget):
+                # https://bugzilla.gnome.org/show_bug.cgi?id=591085#c19
+
+                try:
+                        name = gtk.Buildable.get_name(widget)
+                except:
+                        name = widget.get_name()
+
+                return name
+
         def get_filename(self, option, default):
                 chooser = Chooser()
 
@@ -75,11 +85,7 @@ class Widget(Object):
                 widget.set(i, 1, not widget.get_value(i, 1))
 
         def on_changed(self, widget):
-                # https://bugzilla.gnome.org/show_bug.cgi?id=591085#c19
-                try:
-                        section, key = widget.get_name().split("__")
-                except:
-                        section, key = gtk.Buildable.get_name(widget).split("__")
+                section, key = self.get_name_of_widget(widget).split("__")
                 
                 value = None
 
@@ -257,7 +263,7 @@ class Widget(Object):
                                 novice = True
 
                         for widget in widgets:
-                                name = gtk.Buildable.get_name(widget)
+                                name = self.get_name_of_widget(widget)
 
                                 if name.endswith('expert'):
                                         if not expert:
