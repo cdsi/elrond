@@ -9,6 +9,7 @@ typedef GByteArray xul_buffer_t;
 
 typedef enum {
         XUL_ERROR_FILEIO,       /* (f)open failed */
+        XUL_ERROR_SHMEM,        /* shared memory operation failed */
         XUL_ERROR_FAILED,       /* unexplained fatal error */
 } xul_error_code_e;
 
@@ -36,9 +37,9 @@ typedef struct {
 #define XUL_PREFS_IS_VALID(x) ((x) && ((x)->magic == XUL_PREFS_MAGIC))
 
 typedef struct {
-        guint8 *handle;
-        const gchar *key;
-        gsize size;
+        gpointer addr;
+        gsize memsize;
+        gchar *memname;
         guint32 magic;
 } xul_shm_t;
 
