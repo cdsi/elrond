@@ -158,9 +158,7 @@ xul_verbose_free(xul_t * xul)
 xul_verbose_t *
 xul_verbose_alloc()
 {
-        xul_verbose_t *verbose = (xul_verbose_t *) malloc(sizeof(xul_verbose_t));
-
-        memset(verbose, 0, sizeof(xul_verbose_t));
+        xul_verbose_t *verbose = (xul_verbose_t *) g_malloc0(sizeof(xul_verbose_t));
         verbose->magic = XUL_VERBOSE_MAGIC;
 
         return verbose;

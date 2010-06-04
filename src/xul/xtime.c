@@ -99,9 +99,7 @@ xul_time_free(xul_t * xul)
 xul_time_t *
 xul_time_alloc()
 {
-        xul_time_t *xtime = (xul_time_t *) malloc(sizeof(xul_time_t));
-
-        memset(xtime, 0, sizeof(xul_time_t));
+        xul_time_t *xtime = (xul_time_t *) g_malloc0(sizeof(xul_time_t));
         xtime->magic = XUL_TIME_MAGIC;
 
         return xtime;

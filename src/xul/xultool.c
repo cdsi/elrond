@@ -133,7 +133,7 @@ main(int argc, char **argv)
 
         rc = xul_verbose_log_open(xul, output);
         if (rc) {
-                if (XUL_IS_ERROR(xul)) {
+                if (XUL_HAS_ERROR(xul)) {
                         g_fprintf(stderr, "ERROR: %s\n", xul_error_message_get(xul));
                 }
                 return 1;
@@ -143,7 +143,7 @@ main(int argc, char **argv)
 
         rc = test_foo(xul);
         if (rc) {
-                if (XUL_IS_ERROR(xul)) {
+                if (XUL_HAS_ERROR(xul)) {
                         g_fprintf(stderr, "ERROR: %s\n", xul_error_message_get(xul));
                         xul_error_clear(xul);
                 }
@@ -151,7 +151,7 @@ main(int argc, char **argv)
 
         rc = test_bar(xul);
         if (rc) {
-                if (XUL_IS_ERROR(xul)) {
+                if (XUL_HAS_ERROR(xul)) {
                         g_fprintf(stderr, "ERROR: %s\n", xul_error_message_get(xul));
                         xul_error_clear(xul);
                 }

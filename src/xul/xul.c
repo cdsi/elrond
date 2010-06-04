@@ -46,9 +46,7 @@ xul_free(xul_t * xul)
 xul_t *
 xul_alloc()
 {
-        xul_t *xul = (xul_t *) malloc(sizeof(xul_t));
-
-        memset(xul, 0, sizeof(xul_t));
+        xul_t *xul = (xul_t *) g_malloc0(sizeof(xul_t));
         xul->magic = XUL_MAGIC;
 
         return xul;
@@ -59,10 +57,11 @@ xul_delete(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
 
+        xul_error_delete(xul);
         xul_prefs_delete(xul);
+        xul_shm_delete(xul);
         xul_time_delete(xul);
         xul_verbose_delete(xul);
-        xul_error_delete(xul);
 
         xul_free(xul);
 }
@@ -72,10 +71,11 @@ xul_new()
 {
         xul_t *xul = xul_alloc();
 
+        xul->error = xul_error_new();
         xul->prefs = xul_prefs_new();
+        xul->shm = xul_shm_new();
         xul->time = xul_time_new();
         xul->verbose = xul_verbose_new();
-        xul->error = xul_error_new();
 
         return xul;
 }
@@ -85,10 +85,11 @@ xul_init(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
 
+        xul_error_init(xul);
         xul_prefs_init(xul);
+        xul_shm_init(xul);
         xul_time_init(xul);
         xul_verbose_init(xul);
-        xul_error_init(xul);
 }
 
 /*

@@ -251,9 +251,7 @@ xul_prefs_free(xul_t * xul)
 xul_prefs_t *
 xul_prefs_alloc()
 {
-        xul_prefs_t *prefs = (xul_prefs_t *) malloc(sizeof(xul_prefs_t));
-
-        memset(prefs, 0, sizeof(xul_prefs_t));
+        xul_prefs_t *prefs = (xul_prefs_t *) g_malloc0(sizeof(xul_prefs_t));
         prefs->magic = XUL_PREFS_MAGIC;
 
         return prefs;
