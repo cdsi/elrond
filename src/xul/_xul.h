@@ -47,6 +47,8 @@ XUL_APIEXPORT void xul_prefs_gstring_set(xul_t *, const gchar *, const gchar *, 
 XUL_APIEXPORT void xul_prefs_close(xul_t *);
 XUL_APIEXPORT xul_rc_e xul_prefs_open(xul_t *, const gchar *);
 
+XUL_APIEXPORT guint32 xul_shm_peek(xul_t *, guint64);
+XUL_APIEXPORT void xul_shm_poke(xul_t *, guint64, guint32);
 XUL_APIEXPORT void xul_shm_unmap(xul_t *);
 XUL_APIEXPORT xul_rc_e xul_shm_map(xul_t *, const gchar *, guint64);
 
