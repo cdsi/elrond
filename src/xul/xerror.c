@@ -107,9 +107,7 @@ xul_error_free(xul_t * xul)
 xul_error_t *
 xul_error_alloc()
 {
-        xul_error_t *error = (xul_error_t *) malloc(sizeof(xul_error_t));
-
-        memset(error, 0, sizeof(xul_error_t));
+        xul_error_t *error = (xul_error_t *) g_malloc0(sizeof(xul_error_t));
         error->magic = XUL_ERROR_MAGIC;
 
         return error;
@@ -123,8 +121,6 @@ xul_error_delete(xul_t * xul)
         xul_error_t *error = xul->error;
         g_assert(XUL_ERROR_IS_VALID(error));
 
-        /* xul_error_verbose_delete(xul); */
-
         xul_error_clear(xul);
         xul_error_free(xul);
 }
@@ -133,8 +129,6 @@ xul_error_t *
 xul_error_new()
 {
         xul_error_t *error = xul_error_alloc();
-
-        error->verbose = xul_verbose_new();
 
         return error;
 }
@@ -146,8 +140,6 @@ xul_error_init(xul_t * xul)
 
         xul_error_t *error = xul->error;
         g_assert(XUL_ERROR_IS_VALID(error));
-
-        /* xul_error_verbose_init(xul); */
 }
 
 /*
