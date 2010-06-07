@@ -3,16 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>xul</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="xul Reference Manual">
 <link rel="up" href="ch01.html" title="[Insert title here]">
 <link rel="prev" href="ch01.html" title="[Insert title here]">
 <link rel="next" href="xul-xerror.html" title="xerror">
-<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="ch01.html" title="[Insert title here]">
-<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="API Index">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -25,8 +22,8 @@
 </tr>
 <tr><td colspan="5" class="shortcuts">
 <a href="#xul-xul.synopsis" class="shortcut">Top</a>
-                 | 
-                <a href="#xul-xul.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#xul-xul.description" class="shortcut">Description</a>
 </td></tr>
 </table>
 <div class="refentry" title="xul">
@@ -40,70 +37,27 @@
 </tr></table></div>
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="xul-xul.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
-                    <a
-href="../xul/xul-xul.html#xul-prefs-t"
->xul_prefs_t</a>;
-#define             <a
-href="../xul/xul-xul.html#XUL-PREFS-MAGIC--CAPS"
->XUL_PREFS_MAGIC</a>
-                    <a
-href="../xul/xul-xul.html#xul-time-t"
->xul_time_t</a>;
-#define             <a
-href="../xul/xul-xul.html#XUL-TIME-MAGIC--CAPS"
->XUL_TIME_MAGIC</a>
-enum                <a
-href="../xul/xul-xul.html#xul-verbose-mask-e"
->xul_verbose_mask_e</a>;
-#define             <a
-href="../xul/xul-xul.html#xul-verbose-filter-f"
->xul_verbose_filter_f</a>
-                    <a
-href="../xul/xul-xul.html#xul-verbose-t"
->xul_verbose_t</a>;
-#define             <a
-href="../xul/xul-xul.html#XUL-VERBOSE-MAGIC--CAPS"
->XUL_VERBOSE_MAGIC</a>
-#define             <a
-href="../xul/xul-xul.html#XUL-VERBOSE-IS-VALID--CAPS"
->XUL_VERBOSE_IS_VALID</a>                (x)
-enum                <a
-href="../xul/xul-xul.html#xul-rc-e"
->xul_rc_e</a>;
-#define             <a
-href="../xul/xul-xul.html#XUL-ERROR--CAPS"
->XUL_ERROR</a>
-enum                <a
-href="../xul/xul-xul.html#xul-error-code-e"
->xul_error_code_e</a>;
-typedef             <a
-href="../xul/xul-xul.html#xul-error-raw-t"
->xul_error_raw_t</a>;
-typedef             <a
-href="../xul/xul-xul.html#xul-error-domain-t"
->xul_error_domain_t</a>;
-                    <a
-href="../xul/xul-xul.html#xul-error-t"
->xul_error_t</a>;
-#define             <a
-href="../xul/xul-xul.html#XUL-ERROR-MAGIC--CAPS"
->XUL_ERROR_MAGIC</a>
-#define             <a
-href="../xul/xul-xul.html#XUL-ERROR-IS-VALID--CAPS"
->XUL_ERROR_IS_VALID</a>                  (x)
-                    <a
-href="../xul/xul-xul.html#xul-t"
->xul_t</a>;
-#define             <a
-href="../xul/xul-xul.html#XUL-MAGIC--CAPS"
->XUL_MAGIC</a>
-#define             <a
-href="../xul/xul-xul.html#XUL-IS-VALID--CAPS"
->XUL_IS_VALID</a>                        (x)
-#define             <a
-href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
->XUL_APIEXPORT</a>
+<pre class="synopsis">                    <a class="link" href="xul-xul.html#xul-prefs-t" title="xul_prefs_t">xul_prefs_t</a>;
+#define             <a class="link" href="xul-xul.html#XUL-PREFS-MAGIC:CAPS" title="XUL_PREFS_MAGIC">XUL_PREFS_MAGIC</a>
+                    <a class="link" href="xul-xul.html#xul-time-t" title="xul_time_t">xul_time_t</a>;
+#define             <a class="link" href="xul-xul.html#XUL-TIME-MAGIC:CAPS" title="XUL_TIME_MAGIC">XUL_TIME_MAGIC</a>
+enum                <a class="link" href="xul-xul.html#xul-verbose-mask-e" title="enum xul_verbose_mask_e">xul_verbose_mask_e</a>;
+typedef             <a class="link" href="xul-xul.html#xul-verbose-filter-f" title="xul_verbose_filter_f">xul_verbose_filter_f</a>;
+                    <a class="link" href="xul-xul.html#xul-verbose-t" title="xul_verbose_t">xul_verbose_t</a>;
+#define             <a class="link" href="xul-xul.html#XUL-VERBOSE-MAGIC:CAPS" title="XUL_VERBOSE_MAGIC">XUL_VERBOSE_MAGIC</a>
+#define             <a class="link" href="xul-xul.html#XUL-VERBOSE-IS-VALID:CAPS" title="XUL_VERBOSE_IS_VALID()">XUL_VERBOSE_IS_VALID</a>                (x)
+enum                <a class="link" href="xul-xul.html#xul-rc-e" title="enum xul_rc_e">xul_rc_e</a>;
+#define             <a class="link" href="xul-xul.html#XUL-ERROR:CAPS" title="XUL_ERROR">XUL_ERROR</a>
+enum                <a class="link" href="xul-xul.html#xul-error-code-e" title="enum xul_error_code_e">xul_error_code_e</a>;
+typedef             <a class="link" href="xul-xul.html#xul-error-raw-t" title="xul_error_raw_t">xul_error_raw_t</a>;
+typedef             <a class="link" href="xul-xul.html#xul-error-domain-t" title="xul_error_domain_t">xul_error_domain_t</a>;
+                    <a class="link" href="xul-xul.html#xul-error-t" title="xul_error_t">xul_error_t</a>;
+#define             <a class="link" href="xul-xul.html#XUL-ERROR-MAGIC:CAPS" title="XUL_ERROR_MAGIC">XUL_ERROR_MAGIC</a>
+#define             <a class="link" href="xul-xul.html#XUL-ERROR-IS-VALID:CAPS" title="XUL_ERROR_IS_VALID()">XUL_ERROR_IS_VALID</a>                  (x)
+                    <a class="link" href="xul-xul.html#xul-t" title="xul_t">xul_t</a>;
+#define             <a class="link" href="xul-xul.html#XUL-MAGIC:CAPS" title="XUL_MAGIC">XUL_MAGIC</a>
+#define             <a class="link" href="xul-xul.html#XUL-IS-VALID:CAPS" title="XUL_IS_VALID()">XUL_IS_VALID</a>                        (x)
+#define             <a class="link" href="xul-xul.html#XUL-APIEXPORT:CAPS" title="XUL_APIEXPORT">XUL_APIEXPORT</a>
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -121,7 +75,7 @@ href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
 </div>
 <hr>
 <div class="refsect2" title="XUL_PREFS_MAGIC">
-<a name="XUL-PREFS-MAGIC--CAPS"></a><h3>XUL_PREFS_MAGIC</h3>
+<a name="XUL-PREFS-MAGIC:CAPS"></a><h3>XUL_PREFS_MAGIC</h3>
 <pre class="programlisting">#define XUL_PREFS_MAGIC 0xBABEFACE
 </pre>
 </div>
@@ -136,7 +90,7 @@ href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
 </div>
 <hr>
 <div class="refsect2" title="XUL_TIME_MAGIC">
-<a name="XUL-TIME-MAGIC--CAPS"></a><h3>XUL_TIME_MAGIC</h3>
+<a name="XUL-TIME-MAGIC:CAPS"></a><h3>XUL_TIME_MAGIC</h3>
 <pre class="programlisting">#define XUL_TIME_MAGIC 0xBEEFBABE
 </pre>
 </div>
@@ -167,7 +121,7 @@ href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
 <hr>
 <div class="refsect2" title="xul_verbose_filter_f">
 <a name="xul-verbose-filter-f"></a><h3>xul_verbose_filter_f</h3>
-<pre class="programlisting">#define xul_verbose_filter_f GLogFunc
+<pre class="programlisting">typedef GLogFunc xul_verbose_filter_f;
 </pre>
 </div>
 <hr>
@@ -184,13 +138,13 @@ href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
 </div>
 <hr>
 <div class="refsect2" title="XUL_VERBOSE_MAGIC">
-<a name="XUL-VERBOSE-MAGIC--CAPS"></a><h3>XUL_VERBOSE_MAGIC</h3>
+<a name="XUL-VERBOSE-MAGIC:CAPS"></a><h3>XUL_VERBOSE_MAGIC</h3>
 <pre class="programlisting">#define XUL_VERBOSE_MAGIC 0xDEADBABE
 </pre>
 </div>
 <hr>
 <div class="refsect2" title="XUL_VERBOSE_IS_VALID()">
-<a name="XUL-VERBOSE-IS-VALID--CAPS"></a><h3>XUL_VERBOSE_IS_VALID()</h3>
+<a name="XUL-VERBOSE-IS-VALID:CAPS"></a><h3>XUL_VERBOSE_IS_VALID()</h3>
 <pre class="programlisting">#define XUL_VERBOSE_IS_VALID(x) ((x) &amp;&amp; ((x)-&gt;magic == XUL_VERBOSE_MAGIC))
 </pre>
 </div>
@@ -205,7 +159,7 @@ href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
 </div>
 <hr>
 <div class="refsect2" title="XUL_ERROR">
-<a name="XUL-ERROR--CAPS"></a><h3>XUL_ERROR</h3>
+<a name="XUL-ERROR:CAPS"></a><h3>XUL_ERROR</h3>
 <pre class="programlisting">#define XUL_ERROR xul_error_domain_create("xul")
 </pre>
 </div>
@@ -214,6 +168,7 @@ href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
 <a name="xul-error-code-e"></a><h3>enum xul_error_code_e</h3>
 <pre class="programlisting">typedef enum {
         XUL_ERROR_FILEIO,       /* (f)open failed */
+        XUL_ERROR_SHMEM,        /* shared memory operation failed */
         XUL_ERROR_FAILED,       /* unexplained fatal error */
 } xul_error_code_e;
 </pre>
@@ -234,7 +189,6 @@ href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
 <div class="refsect2" title="xul_error_t">
 <a name="xul-error-t"></a><h3>xul_error_t</h3>
 <pre class="programlisting">typedef struct {
-        xul_verbose_t *verbose;
         xul_error_raw_t *rawerror;
         guint32 magic;
 } xul_error_t;
@@ -242,13 +196,13 @@ href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
 </div>
 <hr>
 <div class="refsect2" title="XUL_ERROR_MAGIC">
-<a name="XUL-ERROR-MAGIC--CAPS"></a><h3>XUL_ERROR_MAGIC</h3>
-<pre class="programlisting">#define XUL_ERROR_MAGIC 0xABCDEFFE
+<a name="XUL-ERROR-MAGIC:CAPS"></a><h3>XUL_ERROR_MAGIC</h3>
+<pre class="programlisting">#define XUL_ERROR_MAGIC 0xDEADCAFE
 </pre>
 </div>
 <hr>
 <div class="refsect2" title="XUL_ERROR_IS_VALID()">
-<a name="XUL-ERROR-IS-VALID--CAPS"></a><h3>XUL_ERROR_IS_VALID()</h3>
+<a name="XUL-ERROR-IS-VALID:CAPS"></a><h3>XUL_ERROR_IS_VALID()</h3>
 <pre class="programlisting">#define XUL_ERROR_IS_VALID(x) ((x) &amp;&amp; ((x)-&gt;magic == XUL_ERROR_MAGIC))
 </pre>
 </div>
@@ -257,6 +211,7 @@ href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
 <a name="xul-t"></a><h3>xul_t</h3>
 <pre class="programlisting">typedef struct {
         xul_prefs_t *prefs;
+        xul_shm_t *shm;
         xul_time_t *time;
         xul_verbose_t *verbose;
         xul_error_t *error;
@@ -267,19 +222,19 @@ href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
 </div>
 <hr>
 <div class="refsect2" title="XUL_MAGIC">
-<a name="XUL-MAGIC--CAPS"></a><h3>XUL_MAGIC</h3>
+<a name="XUL-MAGIC:CAPS"></a><h3>XUL_MAGIC</h3>
 <pre class="programlisting">#define XUL_MAGIC 0xDEADBEEF
 </pre>
 </div>
 <hr>
 <div class="refsect2" title="XUL_IS_VALID()">
-<a name="XUL-IS-VALID--CAPS"></a><h3>XUL_IS_VALID()</h3>
+<a name="XUL-IS-VALID:CAPS"></a><h3>XUL_IS_VALID()</h3>
 <pre class="programlisting">#define XUL_IS_VALID(x) ((x) &amp;&amp; ((x)-&gt;magic == XUL_MAGIC))
 </pre>
 </div>
 <hr>
 <div class="refsect2" title="XUL_APIEXPORT">
-<a name="XUL-APIEXPORT--CAPS"></a><h3>XUL_APIEXPORT</h3>
+<a name="XUL-APIEXPORT:CAPS"></a><h3>XUL_APIEXPORT</h3>
 <pre class="programlisting">#define XUL_APIEXPORT
 </pre>
 </div>
@@ -287,6 +242,6 @@ href="../xul/xul-xul.html#XUL-APIEXPORT--CAPS"
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.11</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

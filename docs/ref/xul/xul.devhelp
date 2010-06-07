@@ -14,31 +14,30 @@
   </chapters>
   <functions>
     <function name="xul_prefs_t" link="xul-xul.html#xul-prefs-t"/>
-    <function name="XUL_PREFS_MAGIC" link="xul-xul.html#XUL-PREFS-MAGIC--CAPS"/>
+    <function name="XUL_PREFS_MAGIC" link="xul-xul.html#XUL-PREFS-MAGIC:CAPS"/>
     <function name="xul_time_t" link="xul-xul.html#xul-time-t"/>
-    <function name="XUL_TIME_MAGIC" link="xul-xul.html#XUL-TIME-MAGIC--CAPS"/>
+    <function name="XUL_TIME_MAGIC" link="xul-xul.html#XUL-TIME-MAGIC:CAPS"/>
     <function name="enum xul_verbose_mask_e" link="xul-xul.html#xul-verbose-mask-e"/>
     <function name="xul_verbose_filter_f" link="xul-xul.html#xul-verbose-filter-f"/>
     <function name="xul_verbose_t" link="xul-xul.html#xul-verbose-t"/>
-    <function name="XUL_VERBOSE_MAGIC" link="xul-xul.html#XUL-VERBOSE-MAGIC--CAPS"/>
-    <function name="XUL_VERBOSE_IS_VALID()" link="xul-xul.html#XUL-VERBOSE-IS-VALID--CAPS"/>
+    <function name="XUL_VERBOSE_MAGIC" link="xul-xul.html#XUL-VERBOSE-MAGIC:CAPS"/>
+    <function name="XUL_VERBOSE_IS_VALID()" link="xul-xul.html#XUL-VERBOSE-IS-VALID:CAPS"/>
     <function name="enum xul_rc_e" link="xul-xul.html#xul-rc-e"/>
-    <function name="XUL_ERROR" link="xul-xul.html#XUL-ERROR--CAPS"/>
+    <function name="XUL_ERROR" link="xul-xul.html#XUL-ERROR:CAPS"/>
     <function name="enum xul_error_code_e" link="xul-xul.html#xul-error-code-e"/>
     <function name="xul_error_raw_t" link="xul-xul.html#xul-error-raw-t"/>
     <function name="xul_error_domain_t" link="xul-xul.html#xul-error-domain-t"/>
     <function name="xul_error_t" link="xul-xul.html#xul-error-t"/>
-    <function name="XUL_ERROR_MAGIC" link="xul-xul.html#XUL-ERROR-MAGIC--CAPS"/>
-    <function name="XUL_ERROR_IS_VALID()" link="xul-xul.html#XUL-ERROR-IS-VALID--CAPS"/>
+    <function name="XUL_ERROR_MAGIC" link="xul-xul.html#XUL-ERROR-MAGIC:CAPS"/>
+    <function name="XUL_ERROR_IS_VALID()" link="xul-xul.html#XUL-ERROR-IS-VALID:CAPS"/>
     <function name="xul_t" link="xul-xul.html#xul-t"/>
-    <function name="XUL_MAGIC" link="xul-xul.html#XUL-MAGIC--CAPS"/>
-    <function name="XUL_IS_VALID()" link="xul-xul.html#XUL-IS-VALID--CAPS"/>
-    <function name="XUL_APIEXPORT" link="xul-xul.html#XUL-APIEXPORT--CAPS"/>
-    <function name="XUL_ERROR_VERBOSE_DOMAIN" link="xul-xerror.html#XUL-ERROR-VERBOSE-DOMAIN--CAPS"/>
+    <function name="XUL_MAGIC" link="xul-xul.html#XUL-MAGIC:CAPS"/>
+    <function name="XUL_IS_VALID()" link="xul-xul.html#XUL-IS-VALID:CAPS"/>
+    <function name="XUL_APIEXPORT" link="xul-xul.html#XUL-APIEXPORT:CAPS"/>
     <function name="xul_error_delete ()" link="xul-xerror.html#xul-error-delete"/>
     <function name="xul_error_new ()" link="xul-xerror.html#xul-error-new"/>
     <function name="xul_error_init ()" link="xul-xerror.html#xul-error-init"/>
-    <function name="XUL_VERBOSE_DOMAIN" link="xul-xverbose.html#XUL-VERBOSE-DOMAIN--CAPS"/>
+    <function name="XUL_VERBOSE_DOMAIN" link="xul-xverbose.html#XUL-VERBOSE-DOMAIN:CAPS"/>
     <function name="xul_verbose_log_0x0000()" link="xul-xverbose.html#xul-verbose-log-0x0000"/>
     <function name="xul_verbose_log_0x0001()" link="xul-xverbose.html#xul-verbose-log-0x0001"/>
     <function name="xul_verbose_log_0x0002()" link="xul-xverbose.html#xul-verbose-log-0x0002"/>

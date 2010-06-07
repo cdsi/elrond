@@ -3,16 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>xverbose</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="xul Reference Manual">
 <link rel="up" href="ch01.html" title="[Insert title here]">
 <link rel="prev" href="xul-xerror.html" title="xerror">
 <link rel="next" href="xul-xtime.html" title="xtime">
-<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="ch01.html" title="[Insert title here]">
-<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="API Index">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -25,8 +22,8 @@
 </tr>
 <tr><td colspan="5" class="shortcuts">
 <a href="#xul-xverbose.synopsis" class="shortcut">Top</a>
-                 | 
-                <a href="#xul-xverbose.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#xul-xverbose.description" class="shortcut">Description</a>
 </td></tr>
 </table>
 <div class="refentry" title="xverbose">
@@ -40,79 +37,28 @@
 </tr></table></div>
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="xul-xverbose.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
-#define             <a
-href="../xul/xul-xverbose.html#XUL-VERBOSE-DOMAIN--CAPS"
->XUL_VERBOSE_DOMAIN</a>
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0000"
->xul_verbose_log_0x0000</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0001"
->xul_verbose_log_0x0001</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0002"
->xul_verbose_log_0x0002</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0004"
->xul_verbose_log_0x0004</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0008"
->xul_verbose_log_0x0008</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0010"
->xul_verbose_log_0x0010</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0020"
->xul_verbose_log_0x0020</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0040"
->xul_verbose_log_0x0040</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0080"
->xul_verbose_log_0x0080</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0100"
->xul_verbose_log_0x0100</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0200"
->xul_verbose_log_0x0200</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0400"
->xul_verbose_log_0x0400</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x0800"
->xul_verbose_log_0x0800</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x1000"
->xul_verbose_log_0x1000</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x2000"
->xul_verbose_log_0x2000</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x4000"
->xul_verbose_log_0x4000</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log-0x8000"
->xul_verbose_log_0x8000</a>              (...)
-#define             <a
-href="../xul/xul-xverbose.html#xul-verbose-log"
->xul_verbose_log</a>
-void                <a
-href="../xul/xul-xverbose.html#xul-verbose-delete"
->xul_verbose_delete</a>                  (<a
-href="../xul/xul-xul.html#xul-t"
->xul_t</a> *);
-<a
-href="../xul/xul-xul.html#xul-verbose-t"
->xul_verbose_t</a> *     <a
-href="../xul/xul-xverbose.html#xul-verbose-new"
->xul_verbose_new</a>                     ();
-void                <a
-href="../xul/xul-xverbose.html#xul-verbose-init"
->xul_verbose_init</a>                    (<a
-href="../xul/xul-xul.html#xul-t"
->xul_t</a> *);
+<pre class="synopsis">#define             <a class="link" href="xul-xverbose.html#XUL-VERBOSE-DOMAIN:CAPS" title="XUL_VERBOSE_DOMAIN">XUL_VERBOSE_DOMAIN</a>
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0000" title="xul_verbose_log_0x0000()">xul_verbose_log_0x0000</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0001" title="xul_verbose_log_0x0001()">xul_verbose_log_0x0001</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0002" title="xul_verbose_log_0x0002()">xul_verbose_log_0x0002</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0004" title="xul_verbose_log_0x0004()">xul_verbose_log_0x0004</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0008" title="xul_verbose_log_0x0008()">xul_verbose_log_0x0008</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0010" title="xul_verbose_log_0x0010()">xul_verbose_log_0x0010</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0020" title="xul_verbose_log_0x0020()">xul_verbose_log_0x0020</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0040" title="xul_verbose_log_0x0040()">xul_verbose_log_0x0040</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0080" title="xul_verbose_log_0x0080()">xul_verbose_log_0x0080</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0100" title="xul_verbose_log_0x0100()">xul_verbose_log_0x0100</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0200" title="xul_verbose_log_0x0200()">xul_verbose_log_0x0200</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0400" title="xul_verbose_log_0x0400()">xul_verbose_log_0x0400</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x0800" title="xul_verbose_log_0x0800()">xul_verbose_log_0x0800</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x1000" title="xul_verbose_log_0x1000()">xul_verbose_log_0x1000</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x2000" title="xul_verbose_log_0x2000()">xul_verbose_log_0x2000</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x4000" title="xul_verbose_log_0x4000()">xul_verbose_log_0x4000</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log-0x8000" title="xul_verbose_log_0x8000()">xul_verbose_log_0x8000</a>              (...)
+#define             <a class="link" href="xul-xverbose.html#xul-verbose-log" title="xul_verbose_log">xul_verbose_log</a>
+<span class="returnvalue">void</span>                <a class="link" href="xul-xverbose.html#xul-verbose-delete" title="xul_verbose_delete ()">xul_verbose_delete</a>                  (<em class="parameter"><code><a class="link" href="xul-xul.html#xul-t" title="xul_t"><span class="type">xul_t</span></a> *Param1</code></em>);
+<a class="link" href="xul-xul.html#xul-verbose-t" title="xul_verbose_t"><span class="returnvalue">xul_verbose_t</span></a> *     <a class="link" href="xul-xverbose.html#xul-verbose-new" title="xul_verbose_new ()">xul_verbose_new</a>                     ();
+<span class="returnvalue">void</span>                <a class="link" href="xul-xverbose.html#xul-verbose-init" title="xul_verbose_init ()">xul_verbose_init</a>                    (<em class="parameter"><code><a class="link" href="xul-xul.html#xul-t" title="xul_t"><span class="type">xul_t</span></a> *Param1</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -121,7 +67,7 @@ href="../xul/xul-xul.html#xul-t"
 <div class="refsect1" title="Details">
 <a name="xul-xverbose.details"></a><h2>Details</h2>
 <div class="refsect2" title="XUL_VERBOSE_DOMAIN">
-<a name="XUL-VERBOSE-DOMAIN--CAPS"></a><h3>XUL_VERBOSE_DOMAIN</h3>
+<a name="XUL-VERBOSE-DOMAIN:CAPS"></a><h3>XUL_VERBOSE_DOMAIN</h3>
 <pre class="programlisting">#define XUL_VERBOSE_DOMAIN "XUL"
 </pre>
 </div>
@@ -236,28 +182,22 @@ href="../xul/xul-xul.html#xul-t"
 <hr>
 <div class="refsect2" title="xul_verbose_delete ()">
 <a name="xul-verbose-delete"></a><h3>xul_verbose_delete ()</h3>
-<pre class="programlisting">void                xul_verbose_delete                  (<a
-href="../xul/xul-xul.html#xul-t"
->xul_t</a> *);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                xul_verbose_delete                  (<em class="parameter"><code><a class="link" href="xul-xul.html#xul-t" title="xul_t"><span class="type">xul_t</span></a> *Param1</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2" title="xul_verbose_new ()">
 <a name="xul-verbose-new"></a><h3>xul_verbose_new ()</h3>
-<pre class="programlisting"><a
-href="../xul/xul-xul.html#xul-verbose-t"
->xul_verbose_t</a> *     xul_verbose_new                     ();</pre>
+<pre class="programlisting"><a class="link" href="xul-xul.html#xul-verbose-t" title="xul_verbose_t"><span class="returnvalue">xul_verbose_t</span></a> *     xul_verbose_new                     ();</pre>
 </div>
 <hr>
 <div class="refsect2" title="xul_verbose_init ()">
 <a name="xul-verbose-init"></a><h3>xul_verbose_init ()</h3>
-<pre class="programlisting">void                xul_verbose_init                    (<a
-href="../xul/xul-xul.html#xul-t"
->xul_t</a> *);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                xul_verbose_init                    (<em class="parameter"><code><a class="link" href="xul-xul.html#xul-t" title="xul_t"><span class="type">xul_t</span></a> *Param1</code></em>);</pre>
 </div>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.11</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

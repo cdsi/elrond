@@ -14,31 +14,30 @@
   </chapters>
   <functions>
     <keyword type="struct" name="xul_prefs_t" link="xul-xul.html#xul-prefs-t"/>
-    <keyword type="macro" name="XUL_PREFS_MAGIC" link="xul-xul.html#XUL-PREFS-MAGIC--CAPS"/>
+    <keyword type="macro" name="XUL_PREFS_MAGIC" link="xul-xul.html#XUL-PREFS-MAGIC:CAPS"/>
     <keyword type="struct" name="xul_time_t" link="xul-xul.html#xul-time-t"/>
-    <keyword type="macro" name="XUL_TIME_MAGIC" link="xul-xul.html#XUL-TIME-MAGIC--CAPS"/>
+    <keyword type="macro" name="XUL_TIME_MAGIC" link="xul-xul.html#XUL-TIME-MAGIC:CAPS"/>
     <keyword type="enum" name="enum xul_verbose_mask_e" link="xul-xul.html#xul-verbose-mask-e"/>
-    <keyword type="macro" name="xul_verbose_filter_f" link="xul-xul.html#xul-verbose-filter-f"/>
+    <keyword type="typedef" name="xul_verbose_filter_f" link="xul-xul.html#xul-verbose-filter-f"/>
     <keyword type="struct" name="xul_verbose_t" link="xul-xul.html#xul-verbose-t"/>
-    <keyword type="macro" name="XUL_VERBOSE_MAGIC" link="xul-xul.html#XUL-VERBOSE-MAGIC--CAPS"/>
-    <keyword type="macro" name="XUL_VERBOSE_IS_VALID()" link="xul-xul.html#XUL-VERBOSE-IS-VALID--CAPS"/>
+    <keyword type="macro" name="XUL_VERBOSE_MAGIC" link="xul-xul.html#XUL-VERBOSE-MAGIC:CAPS"/>
+    <keyword type="macro" name="XUL_VERBOSE_IS_VALID()" link="xul-xul.html#XUL-VERBOSE-IS-VALID:CAPS"/>
     <keyword type="enum" name="enum xul_rc_e" link="xul-xul.html#xul-rc-e"/>
-    <keyword type="macro" name="XUL_ERROR" link="xul-xul.html#XUL-ERROR--CAPS"/>
+    <keyword type="macro" name="XUL_ERROR" link="xul-xul.html#XUL-ERROR:CAPS"/>
     <keyword type="enum" name="enum xul_error_code_e" link="xul-xul.html#xul-error-code-e"/>
     <keyword type="typedef" name="xul_error_raw_t" link="xul-xul.html#xul-error-raw-t"/>
     <keyword type="typedef" name="xul_error_domain_t" link="xul-xul.html#xul-error-domain-t"/>
     <keyword type="struct" name="xul_error_t" link="xul-xul.html#xul-error-t"/>
-    <keyword type="macro" name="XUL_ERROR_MAGIC" link="xul-xul.html#XUL-ERROR-MAGIC--CAPS"/>
-    <keyword type="macro" name="XUL_ERROR_IS_VALID()" link="xul-xul.html#XUL-ERROR-IS-VALID--CAPS"/>
+    <keyword type="macro" name="XUL_ERROR_MAGIC" link="xul-xul.html#XUL-ERROR-MAGIC:CAPS"/>
+    <keyword type="macro" name="XUL_ERROR_IS_VALID()" link="xul-xul.html#XUL-ERROR-IS-VALID:CAPS"/>
     <keyword type="struct" name="xul_t" link="xul-xul.html#xul-t"/>
-    <keyword type="macro" name="XUL_MAGIC" link="xul-xul.html#XUL-MAGIC--CAPS"/>
-    <keyword type="macro" name="XUL_IS_VALID()" link="xul-xul.html#XUL-IS-VALID--CAPS"/>
-    <keyword type="macro" name="XUL_APIEXPORT" link="xul-xul.html#XUL-APIEXPORT--CAPS"/>
-    <keyword type="macro" name="XUL_ERROR_VERBOSE_DOMAIN" link="xul-xerror.html#XUL-ERROR-VERBOSE-DOMAIN--CAPS"/>
+    <keyword type="macro" name="XUL_MAGIC" link="xul-xul.html#XUL-MAGIC:CAPS"/>
+    <keyword type="macro" name="XUL_IS_VALID()" link="xul-xul.html#XUL-IS-VALID:CAPS"/>
+    <keyword type="macro" name="XUL_APIEXPORT" link="xul-xul.html#XUL-APIEXPORT:CAPS"/>
     <keyword type="function" name="xul_error_delete ()" link="xul-xerror.html#xul-error-delete"/>
     <keyword type="function" name="xul_error_new ()" link="xul-xerror.html#xul-error-new"/>
     <keyword type="function" name="xul_error_init ()" link="xul-xerror.html#xul-error-init"/>
-    <keyword type="macro" name="XUL_VERBOSE_DOMAIN" link="xul-xverbose.html#XUL-VERBOSE-DOMAIN--CAPS"/>
+    <keyword type="macro" name="XUL_VERBOSE_DOMAIN" link="xul-xverbose.html#XUL-VERBOSE-DOMAIN:CAPS"/>
     <keyword type="macro" name="xul_verbose_log_0x0000()" link="xul-xverbose.html#xul-verbose-log-0x0000"/>
     <keyword type="macro" name="xul_verbose_log_0x0001()" link="xul-xverbose.html#xul-verbose-log-0x0001"/>
     <keyword type="macro" name="xul_verbose_log_0x0002()" link="xul-xverbose.html#xul-verbose-log-0x0002"/>
