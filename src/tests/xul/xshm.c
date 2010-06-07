@@ -32,8 +32,8 @@ static void
 test_xshm(void)
 {
         for (guint32 i = 0; i < 1024; i++) {
-                xul_shm_poke(g_xul, i, 0xBABECAFE);
-                g_assert_cmphex(xul_shm_peek(g_xul, i), ==, 0xBABECAFE);
+                xul_shm_poke(g_xul, i, 0x8C);
+                g_assert_cmphex(xul_shm_peek(g_xul, i), ==, 0x8C);
         }
 }
 
