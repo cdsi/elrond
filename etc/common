@@ -73,13 +73,13 @@ export LD_LIBRARY_PATH
 PYTHONPATH="${ELROND_LIB}":"${ELROND_LIB}"/python:"${PYTHONPATH}"
 export PYTHONPATH
 
-if [ "${GLADE_CATALOG_PATH}" = "" ]; then
-        GLADE_CATALOG_PATH="${ELROND_ETC}"/widget-catalog.d
+if [ "${GLADE_ENV_CATALOG_PATH}" = "" ]; then
+        GLADE_ENV_CATALOG_PATH="${ELROND_ETC}"/widget-catalog.d
 else
-        GLADE_CATALOG_PATH="${ELROND_ETC}"/widget-catalog.d:"${GLADE_CATALOG_PATH}"
+        GLADE_ENV_CATALOG_PATH="${ELROND_ETC}"/widget-catalog.d:"${GLADE_ENV_CATALOG_PATH}"
 fi
 
-export GLADE_CATALOG_PATH
+export GLADE_ENV_CATALOG_PATH
 
 if [ -d "${ELROND_HOME}"/dist ]; then
 	JARFILES="$(find "${ELROND_HOME}"/dist -name "*.jar")"
