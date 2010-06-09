@@ -17,49 +17,45 @@
 #include "xul.h"
 
 XUL_APIEXPORT guint32
-xul_shm_peek(xul_t * xul, guint64 offset)
+xul_shm_peek(xul_shm_t * shm, guint64 offset)
 {
-        g_assert(XUL_IS_VALID(xul));
-
-        xul_shm_t *shm = xul->shm;
         g_assert(XUL_SHM_IS_VALID(shm));
+
+        xul_t *xul = shm->xul;
+        g_assert(XUL_IS_VALID(xul));
 
         return *(guint32 *) (shm->addr + offset);
 }
 
 XUL_APIEXPORT void
-xul_shm_poke(xul_t * xul, guint64 offset, guint32 data)
+xul_shm_poke(xul_shm_t * shm, guint64 offset, guint32 data)
 {
-        g_assert(XUL_IS_VALID(xul));
-
-        xul_shm_t *shm = xul->shm;
         g_assert(XUL_SHM_IS_VALID(shm));
+
+        xul_t *xul = shm->xul;
+        g_assert(XUL_IS_VALID(xul));
 
         *(guint32 *) (shm->addr + offset) = data;
 }
 
 XUL_APIEXPORT void
-xul_shm_unmap(xul_t * xul)
+xul_shm_unmap(xul_shm_t * shm)
 {
-        g_assert(XUL_IS_VALID(xul));
-
-        xul_shm_t *shm = xul->shm;
         g_assert(XUL_SHM_IS_VALID(shm));
 
-        if (shm->addr) {
-                g_free(shm->memname);
-        }
+        xul_t *xul = shm->xul;
+        g_assert(XUL_IS_VALID(xul));
 
-        shm->addr = NULL;
+        /* NOOP */
 }
 
 XUL_APIEXPORT xul_rc_e
-xul_shm_map(xul_t * xul, const gchar * key, guint64 memsize)
+xul_shm_map(xul_shm_t * shm, const gchar * key, guint64 memsize)
 {
-        g_assert(XUL_IS_VALID(xul));
+        g_assert(XUL_SHM_IS_VALID(shm));
 
-        xul_shm_t *shm = xul->shm;
-        shm->addr = NULL;
+        xul_t *xul = shm->xul;
+        g_assert(XUL_IS_VALID(xul));
 
         shm->memname = g_strdup_printf("/%s", key);
 
@@ -85,13 +81,14 @@ xul_shm_map(xul_t * xul, const gchar * key, guint64 memsize)
 }
 
 void
-xul_shm_free(xul_t * xul)
+xul_shm_free(xul_shm_t * shm)
 {
-        g_assert(XUL_IS_VALID(xul));
-
-        xul_shm_t *shm = xul->shm;
         g_assert(XUL_SHM_IS_VALID(shm));
 
+        xul_t *xul = shm->xul;
+        g_assert(XUL_IS_VALID(xul));
+
+        g_free(shm->memname);
         g_free(shm);
 }
 
@@ -104,20 +101,19 @@ xul_shm_alloc()
         return shm;
 }
 
-void
-xul_shm_delete(xul_t * xul)
+XUL_APIEXPORT void
+xul_shm_delete(xul_shm_t * shm)
 {
-        g_assert(XUL_IS_VALID(xul));
-
-        xul_shm_t *shm = xul->shm;
         g_assert(XUL_SHM_IS_VALID(shm));
 
-        xul_shm_unmap(xul);
+        xul_t *xul = shm->xul;
+        g_assert(XUL_IS_VALID(xul));
 
-        xul_shm_free(xul);
+        xul_shm_unmap(shm);
+        xul_shm_free(shm);
 }
 
-xul_shm_t *
+XUL_APIEXPORT xul_shm_t *
 xul_shm_new()
 {
         xul_shm_t *shm = xul_shm_alloc();
@@ -125,15 +121,13 @@ xul_shm_new()
         return shm;
 }
 
-void
-xul_shm_init(xul_t * xul)
+XUL_APIEXPORT void
+xul_shm_init(xul_t * xul, xul_shm_t * shm)
 {
         g_assert(XUL_IS_VALID(xul));
-
-        xul_shm_t *shm = xul->shm;
         g_assert(XUL_SHM_IS_VALID(shm));
 
-        /* NOOP */
+        shm->xul = xul;
 }
 
 /*

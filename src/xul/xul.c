@@ -59,7 +59,6 @@ xul_delete(xul_t * xul)
 
         xul_error_delete(xul);
         xul_prefs_delete(xul);
-        xul_shm_delete(xul);
         xul_time_delete(xul);
         xul_verbose_delete(xul);
 
@@ -73,7 +72,6 @@ xul_new()
 
         xul->error = xul_error_new();
         xul->prefs = xul_prefs_new();
-        xul->shm = xul_shm_new();
         xul->time = xul_time_new();
         xul->verbose = xul_verbose_new();
 
@@ -87,7 +85,6 @@ xul_init(xul_t * xul)
 
         xul_error_init(xul);
         xul_prefs_init(xul);
-        xul_shm_init(xul);
         xul_time_init(xul);
         xul_verbose_init(xul);
 }
