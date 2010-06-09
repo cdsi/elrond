@@ -11,8 +11,8 @@ test_shm_setup(void)
         g_xul = xul_new();
         xul_init(g_xul);
 
-        g_shm = xul_shm_new();
-        xul_shm_init(g_xul, g_shm);
+        g_shm = xul_shm_new(g_xul);
+        xul_shm_init(g_shm);
 
         xul_rc_e rc;
 

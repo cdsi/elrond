@@ -48,8 +48,8 @@ XUL_APIEXPORT void xul_prefs_close(xul_t *);
 XUL_APIEXPORT xul_rc_e xul_prefs_open(xul_t *, const gchar *);
 
 XUL_APIEXPORT void xul_shm_delete(xul_shm_t *);
-XUL_APIEXPORT xul_shm_t *xul_shm_new();
-XUL_APIEXPORT void xul_shm_init(xul_t *, xul_shm_t *);
+XUL_APIEXPORT xul_shm_t *xul_shm_new(xul_t *);
+XUL_APIEXPORT void xul_shm_init(xul_shm_t *);
 
 XUL_APIEXPORT guint32 xul_shm_peek(xul_shm_t *, guint64);
 XUL_APIEXPORT void xul_shm_poke(xul_shm_t *, guint64, guint32);

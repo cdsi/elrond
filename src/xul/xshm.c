@@ -114,20 +114,22 @@ xul_shm_delete(xul_shm_t * shm)
 }
 
 XUL_APIEXPORT xul_shm_t *
-xul_shm_new()
+xul_shm_new(xul_t * xul)
 {
+        g_assert(XUL_IS_VALID(xul));
+
         xul_shm_t *shm = xul_shm_alloc();
+        shm->xul = xul;
 
         return shm;
 }
 
 XUL_APIEXPORT void
-xul_shm_init(xul_t * xul, xul_shm_t * shm)
+xul_shm_init(xul_shm_t * shm)
 {
-        g_assert(XUL_IS_VALID(xul));
         g_assert(XUL_SHM_IS_VALID(shm));
 
-        shm->xul = xul;
+        /* NOOP */
 }
 
 /*
