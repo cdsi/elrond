@@ -37,16 +37,6 @@ typedef struct {
 #define XUL_PREFS_IS_VALID(x) ((x) && ((x)->magic == XUL_PREFS_MAGIC))
 
 typedef struct {
-        gpointer addr;
-        gsize memsize;
-        gchar *memname;
-        guint32 magic;
-} xul_shm_t;
-
-#define XUL_SHM_MAGIC 0xF00DBABE
-#define XUL_SHM_IS_VALID(x) ((x) && ((x)->magic == XUL_SHM_MAGIC))
-
-typedef struct {
         GTimeVal tv;
         guint32 magic;
 } xul_time_t;
@@ -91,7 +81,6 @@ typedef struct {
 
 typedef struct {
         xul_prefs_t *prefs;
-        xul_shm_t *shm;
         xul_time_t *time;
         xul_verbose_t *verbose;
         xul_error_t *error;
@@ -101,6 +90,17 @@ typedef struct {
 
 #define XUL_MAGIC 0xDEADBEEF
 #define XUL_IS_VALID(x) ((x) && ((x)->magic == XUL_MAGIC))
+
+typedef struct {
+        xul_t *xul;
+        gpointer addr;
+        gsize memsize;
+        gchar *memname;
+        guint32 magic;
+} xul_shm_t;
+
+#define XUL_SHM_MAGIC 0xF00DBABE
+#define XUL_SHM_IS_VALID(x) ((x) && ((x)->magic == XUL_SHM_MAGIC))
 
 #define XUL_APIEXPORT
 
@@ -117,10 +117,6 @@ void xul_prefs_init(xul_t *);
 void xul_time_delete(xul_t *);
 xul_time_t *xul_time_new();
 void xul_time_init(xul_t *);
-
-void xul_shm_delete(xul_t *);
-xul_shm_t *xul_shm_new();
-void xul_shm_init(xul_t *);
 
 void xul_verbose_delete(xul_t *);
 xul_verbose_t *xul_verbose_new();

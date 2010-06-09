@@ -4,7 +4,7 @@
 
 GTestCase *xul_test_xbuffer_case();
 GTestCase *xul_test_xprefs_case();
-GTestCase *xul_test_xshm_case();
+GTestCase *xul_test_shm_case();
 GTestCase *xul_test_xtime_case();
 
 int
@@ -16,7 +16,7 @@ main(int argc, char **argv)
 
         g_test_suite_add(ts, xul_test_xbuffer_case());
         g_test_suite_add(ts, xul_test_xprefs_case());
-        g_test_suite_add(ts, xul_test_xshm_case());
+        g_test_suite_add(ts, xul_test_shm_case());
         g_test_suite_add(ts, xul_test_xtime_case());
 
         return g_test_run();
