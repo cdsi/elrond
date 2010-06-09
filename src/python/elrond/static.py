@@ -16,6 +16,21 @@ def hexdump(src, size, columns=32):
 
         return ''.join(result)
 
+def is_odd(x):
+        return bool(x & 0x01)
+
+def number_of_1_bits(x):
+        count = 0
+        while (x):
+                count = count + (x & 0x01)
+                x = x >> 1
+        return count
+
+def set_odd_parity(bits, paritybit=0x8000):
+        if not is_odd(number_of_1_bits(bits)):
+                bits = bits | paritybit
+        return bits
+
 def reverse_bits(value, nbits=32):
         """ Reverse the bits in an int. Assume 32-bits by default. """
 
