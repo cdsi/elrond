@@ -198,6 +198,21 @@ xul_verbose_init(xul_t * xul)
         xul_verbose_log_open(xul, "/dev/stdout");
 }
 
+void
+xul_log(xul_t * xul, const gchar * format, ...)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        xul_verbose_t *verbose = xul->verbose;
+        g_assert(XUL_VERBOSE_IS_VALID(verbose));
+
+        va_list args;
+
+        va_start(args, format);
+        xul_verbose_log(format, args);
+        va_end(args);
+}
+
 /*
  * $Id:$
  *

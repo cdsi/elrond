@@ -94,6 +94,7 @@ XUL_APIEXPORT xul_verbose_filter_f xul_verbose_filter_get(xul_t *);
 XUL_APIEXPORT void xul_verbose_filter_set(xul_t *, xul_verbose_filter_f);
 XUL_APIEXPORT void xul_verbose_log_close(xul_t *);
 XUL_APIEXPORT xul_rc_e xul_verbose_log_open(xul_t *, const gchar *);
+XUL_APIEXPORT void xul_log(xul_t *, const gchar *, ...);
 
 /*
  * $Id:$
