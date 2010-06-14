@@ -73,6 +73,27 @@ xul_verbose_filter_default(const gchar * domain, GLogLevelFlags masks, const gch
 }
 
 XUL_APIEXPORT void
+xul_verbose_filter_time0(const gchar * domain, GLogLevelFlags masks, const gchar * message, gpointer __xul)
+{
+        xul_t *xul = (xul_t *) __xul;
+
+        g_assert(XUL_IS_VALID(xul));
+
+        if (masks != XUL_VERBOSE_MASK_0x0000) {
+                if (!(xul_verbose_mask_get(xul) & masks)) {
+                        return;
+                }
+        }
+
+        if (!xul->verbose->fp) {
+                return;
+        }
+
+        g_fprintf(xul->verbose->fp, "[%.08lf] %s\n", xul_time0(xul), message);
+        fflush(xul->verbose->fp);
+}
+
+XUL_APIEXPORT void
 xul_verbose_filter_iso8601(const gchar * domain, GLogLevelFlags masks, const gchar * message, gpointer __xul)
 {
         xul_t *xul = (xul_t *) __xul;

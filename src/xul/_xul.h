@@ -89,6 +89,7 @@ XUL_APIEXPORT xul_verbose_mask_e xul_verbose_mask_conv(xul_t *, guint32);
 XUL_APIEXPORT xul_verbose_mask_e xul_verbose_mask_get(xul_t *);
 XUL_APIEXPORT void xul_verbose_mask_set(xul_t *, xul_verbose_mask_e);
 XUL_APIEXPORT void xul_verbose_filter_default(const gchar *, GLogLevelFlags, const gchar *, gpointer);
+XUL_APIEXPORT void xul_verbose_filter_time0(const gchar *, GLogLevelFlags, const gchar *, gpointer);
 XUL_APIEXPORT void xul_verbose_filter_iso8601(const gchar *, GLogLevelFlags, const gchar *, gpointer);
 XUL_APIEXPORT xul_verbose_filter_f xul_verbose_filter_get(xul_t *);
 XUL_APIEXPORT void xul_verbose_filter_set(xul_t *, xul_verbose_filter_f);
