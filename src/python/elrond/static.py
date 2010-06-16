@@ -1,6 +1,8 @@
 from __future__ import division
 from __future__ import with_statement
 
+import numpy as np
+
 HEXFILT = ''.join([(len(repr(chr(x))) == 3) and chr(x) or '.' for x in range(256)])
 
 def hexdump(src, size, columns=32):
@@ -15,6 +17,9 @@ def hexdump(src, size, columns=32):
                 result.append('%04X   %-*s   %s\n' % (i, columns * 3, hexa, sub2))
 
         return ''.join(result)
+
+def rms(values):
+        return np.sqrt(np.mean((values**2)))
 
 def is_odd(x):
         return bool(x & 0x01)
