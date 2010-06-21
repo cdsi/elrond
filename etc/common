@@ -1,5 +1,3 @@
-# elrond
-
 ELROND_HOME=${TOPLEVEL:="${ELROND_HOME}"}
 ELROND_HOME=$(cd "${ELROND_HOME}"; pwd)
 export ELROND_HOME
@@ -125,12 +123,39 @@ export ELROND_JAVAFLAGS
 ELROND_ANTFLAGS=
 export ELROND_ANTFLAGS
 
-# extras
+ELROND_EXTRAS=
 
-ELROND_EXTRAS=" \
-"
+EXTRAS="$(cat "${ELROND_HOME}"/.extras)"
 
-for x in ${ELROND_EXTRAS}; do
-        TOPLEVEL=${ELROND_HOME}/extras/${x}
-        . ${TOPLEVEL}/etc/common
+for extra in ${EXTRAS}; do
+        TOPLEVEL=
+
+        LOCATIONS=" \
+                ${ELROND_HOME}/extras/${extra} \
+                $(cd "${ELROND_HOME}"/..; pwd) \
+                /opt \
+        "
+
+        for location in ${LOCATIONS}; do
+                if [ -d "${location}/${extra}" ]; then
+                        TOPLEVEL="${location}/${extra}"
+                fi
+        done
+
+        ELROND_EXTRAS=" \
+                ${ELROND_EXTRAS} \
+                ${TOPLEVEL} \
+        "
+        export ELROND_EXTRAS
+
+        . "${TOPLEVEL}"/etc/common
 done
+
+# $Id:$
+#
+# Local Variables:
+# indent-tabs-mode: nil
+# mode: sh
+# sh-basic-offset: 8
+# End:
+# vim: ai et si sw=8 ts=8
