@@ -3,6 +3,18 @@
 #define XUL_EXPORT_SYMBOLS 1
 #include "xul.h"
 
+XUL_APIEXPORT void
+xul_buffer_dump(xul_t * xul, xul_buffer_t * buffer, const gchar * filename)
+{
+        g_assert(XUL_IS_VALID(xul));
+
+        /* 
+         * Assume that guint8 and gchar are the same size (i.e. buffer->len is the same for both).
+         */
+
+        g_file_set_contents(filename, (const gchar *)buffer->data, buffer->len, NULL);
+}
+
 XUL_APIEXPORT guint64
 xul_buffer_get_length(xul_t * xul, xul_buffer_t * buffer)
 {
