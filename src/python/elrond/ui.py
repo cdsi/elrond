@@ -37,10 +37,15 @@ class Widget(Object):
         def get_name_of_widget(self, widget):
                 # https://bugzilla.gnome.org/show_bug.cgi?id=591085#c19
 
+                name = None
+
                 try:
                         name = gtk.Buildable.get_name(widget)
                 except:
-                        name = widget.get_name()
+                        try:
+                                name = widget.get_name()
+                        except:
+                                pass
 
                 return name
 
@@ -264,6 +269,9 @@ class Widget(Object):
 
                         for widget in widgets:
                                 name = self.get_name_of_widget(widget)
+
+                                if not name:
+                                        continue
 
                                 if name.endswith('expert'):
                                         if not expert:
