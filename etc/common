@@ -131,7 +131,7 @@ for extra in ${EXTRAS}; do
         TOPLEVEL=
 
         LOCATIONS=" \
-                ${ELROND_HOME}/extras/${extra} \
+                ${ELROND_HOME}/extras/ \
                 $(cd "${ELROND_HOME}"/..; pwd) \
                 /opt \
         "
