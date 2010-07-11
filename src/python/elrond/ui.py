@@ -177,8 +177,8 @@ class Widget(Object):
                         container = self.builder.get_object('container')
                         container.add(self.__subwidget.widget)
 
-        def loaddb(self, path, name):
-                self.prefs = Preferences(path + os.sep + name + '.ini')
+        def loadprefs(self, prefs):
+                self.prefs = prefs
 
                 for section in self.prefs.keys():
                         for key, value in self.prefs[section].items():
@@ -211,6 +211,10 @@ class Widget(Object):
                                         widget.toggled()
                                 except:
                                         pass
+
+        def loaddb(self, path, name):
+                prefs = Preferences(path + os.sep + name + '.ini')
+                self.loadprefs(prefs)
 
         @Property
         def title():
