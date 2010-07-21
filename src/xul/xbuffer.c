@@ -4,33 +4,36 @@
 #include "xul.h"
 
 XUL_APIEXPORT void
-xul_buffer_dump(xul_t * xul, xul_buffer_t * buffer, const gchar * filename)
+xul_buffer_dump(xul_t * xul, xul_buffer_t * wrapper, const gchar * filename)
 {
         g_assert(XUL_IS_VALID(xul));
 
         /* 
-         * Assume that guint8 and gchar are the same size (i.e. buffer->len is the same for both).
+         * Assume that guint8 and gchar are the same size (i.e. nbytes is the same for both).
          */
 
-        g_file_set_contents(filename, (const gchar *)buffer->data, buffer->len, NULL);
+        guint8 *buffer = xul_buffer_get_buffer(xul, wrapper);
+        guint64 nbytes = xul_buffer_get_nbytes(xul, wrapper);
+
+        g_file_set_contents(filename, (const gchar *)buffer, nbytes, NULL);
 }
 
 XUL_APIEXPORT guint64
-xul_buffer_get_length(xul_t * xul, xul_buffer_t * buffer)
+xul_buffer_get_nbytes(xul_t * xul, xul_buffer_t * buffer)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        guint64 length = 0;
+        guint64 nbytes = 0;
 
         if (buffer) {
-                length = buffer->len;
+                nbytes = buffer->len;
         }
 
-        return length;
+        return nbytes;
 }
 
 XUL_APIEXPORT guint8 *
-xul_buffer_get_data(xul_t * xul, xul_buffer_t * buffer)
+xul_buffer_get_buffer(xul_t * xul, xul_buffer_t * buffer)
 {
         g_assert(XUL_IS_VALID(xul));
 
@@ -38,11 +41,11 @@ xul_buffer_get_data(xul_t * xul, xul_buffer_t * buffer)
 }
 
 XUL_APIEXPORT xul_buffer_t *
-xul_buffer_append(xul_t * xul, xul_buffer_t * buffer, const guint8 * data, guint64 length)
+xul_buffer_append(xul_t * xul, xul_buffer_t * wrapper, const guint8 * buffer, guint64 nbytes)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        return g_byte_array_append(buffer, data, length);
+        return g_byte_array_append(wrapper, buffer, nbytes);
 }
 
 XUL_APIEXPORT void

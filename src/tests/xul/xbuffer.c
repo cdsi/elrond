@@ -37,9 +37,9 @@ test_xbuffer(void)
 {
         g_assert(XUL_IS_VALID(g_xul));
 
-        guint8 *data = xul_buffer_get_data(g_xul, g_buffer);
+        guint8 *buffer = xul_buffer_get_buffer(g_xul, g_buffer);
 
-        g_assert_cmphex(data[SCRATCH_SIZE - 42], ==, 0x42);
+        g_assert_cmphex(buffer[SCRATCH_SIZE - 42], ==, 0x42);
 }
 
 GTestCase *
