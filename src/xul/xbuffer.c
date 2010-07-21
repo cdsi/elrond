@@ -57,7 +57,7 @@ xul_buffer_delete(xul_t * xul, xul_buffer_t * buffer)
 }
 
 XUL_APIEXPORT xul_buffer_t *
-xul_buffer_new_with_size(xul_t * xul, guint64 size)
+xul_buffer_new_with_nbytes(xul_t * xul, guint64 size)
 {
         g_assert(XUL_IS_VALID(xul));
 
@@ -69,7 +69,7 @@ xul_buffer_new(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        return xul_buffer_new_with_size(xul, 1024 * 1024);
+        return xul_buffer_new_with_nbytes(xul, 1024 * 1024);
 }
 
 /*
