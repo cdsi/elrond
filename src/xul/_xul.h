@@ -10,11 +10,11 @@ XUL_APIEXPORT xul_t *xul_new();
 XUL_APIEXPORT void xul_init(xul_t *);
 
 XUL_APIEXPORT void xul_buffer_dump(xul_t *, xul_buffer_t *, const gchar *);
-XUL_APIEXPORT guint64 xul_buffer_get_length(xul_t *, xul_buffer_t *);
-XUL_APIEXPORT guint8 *xul_buffer_get_data(xul_t *, xul_buffer_t *);
+XUL_APIEXPORT guint64 xul_buffer_get_nbytes(xul_t *, xul_buffer_t *);
+XUL_APIEXPORT guint8 *xul_buffer_get_buffer(xul_t *, xul_buffer_t *);
 XUL_APIEXPORT xul_buffer_t *xul_buffer_append(xul_t *, xul_buffer_t *, const guint8 *, guint64);
 XUL_APIEXPORT void xul_buffer_delete(xul_t *, xul_buffer_t *);
-XUL_APIEXPORT xul_buffer_t *xul_buffer_new_with_size(xul_t *, guint64);
+XUL_APIEXPORT xul_buffer_t *xul_buffer_new_with_nbytes(xul_t *, guint64);
 XUL_APIEXPORT xul_buffer_t *xul_buffer_new(xul_t *);
 
 XUL_APIEXPORT xul_error_domain_t xul_error_domain_create(const gchar *);
