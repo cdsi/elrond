@@ -119,9 +119,6 @@ for extra in ${EXTRAS}; do
         . "${TOPLEVEL}"/etc/common
 done
 
-ELROND_SVNFLAGS=
-export ELROND_SVNFLAGS
-
 ELROND_ACLOCALFLAGS="-I ${SAM_SHARE}/aclocal"
 export ELROND_ACLOCALFLAGS
 
