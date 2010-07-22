@@ -1,4 +1,4 @@
-include $(top_srcdir)/share/Makefile.decl
+include $(top_srcdir)/share/Makefile.include
 
 lib_LTLIBRARIES = libxul.la
 libxul_la_CFLAGS = $(GLIB_CFLAGS) $(GMODULE_CFLAGS) $(COVERAGE_CFLAGS)

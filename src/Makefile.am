@@ -1,3 +1,3 @@
-include $(top_srcdir)/share/Makefile.decl
+include $(top_srcdir)/share/Makefile.include
 
 SUBDIRS = xul ref tests
