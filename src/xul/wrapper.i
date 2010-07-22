@@ -3,7 +3,7 @@
 #include "xul.h"
 %}
 
-%include "glib.i"
+%include "glib-types.i"
 
 #define XUL_APIEXPORT
 
