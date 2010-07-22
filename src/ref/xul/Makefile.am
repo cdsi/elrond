@@ -1,4 +1,4 @@
-include $(top_srcdir)/share/Makefile.decl
+include $(top_srcdir)/share/Makefile.include
 
 ## Process this file with automake to produce Makefile.in
 

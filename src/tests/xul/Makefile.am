@@ -1,4 +1,4 @@
-include $(top_srcdir)/share/Makefile.decl
+include $(top_srcdir)/share/Makefile.include
 
 TEST_PROGS += xultest
 xultest_CFLAGS = $(GLIB_CFLAGS) $(XUL_CFLAGS)
