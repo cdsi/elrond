@@ -14,9 +14,6 @@ export ELROND_ETC
 ELROND_LIB="${ELROND_HOME}"/lib
 export ELROND_LIB
 
-ELROND_SHARE="${ELROND_HOME}"/share
-export ELROND_SHARE
-
 ELROND_SRC="${ELROND_HOME}"/src
 export ELROND_SRC
 
@@ -95,13 +92,37 @@ if [ -d "${ELROND_LIB}"/java ]; then
 	done
 fi
 
-DEPENDS_HOME="${ELROND_SHARE}"
-. "${DEPENDS_HOME}"/depends
+ELROND_EXTRAS=
+
+EXTRAS="$(cat "${ELROND_HOME}"/.extras)"
+
+for extra in ${EXTRAS}; do
+        TOPLEVEL=
+
+        LOCATIONS=" \
+                $(cd "${ELROND_HOME}"/../..; pwd) \
+                /opt \
+        "
+
+        for location in ${LOCATIONS}; do
+                if [ -d "${location}/${extra}" ]; then
+                        TOPLEVEL="${location}/${extra}"
+                fi
+        done
+
+        ELROND_EXTRAS=" \
+                ${ELROND_EXTRAS} \
+                ${TOPLEVEL} \
+        "
+        export ELROND_EXTRAS
+
+        . "${TOPLEVEL}"/etc/common
+done
 
 ELROND_SVNFLAGS=
 export ELROND_SVNFLAGS
 
-ELROND_ACLOCALFLAGS="-I ${DEPENDS_HOME}/aclocal"
+ELROND_ACLOCALFLAGS="-I ${SAM_SHARE}/aclocal"
 export ELROND_ACLOCALFLAGS
 
 ELROND_MAKEFLAGS=
@@ -122,34 +143,6 @@ export ELROND_JAVAFLAGS
 
 ELROND_ANTFLAGS=
 export ELROND_ANTFLAGS
-
-ELROND_EXTRAS=
-
-EXTRAS="$(cat "${ELROND_HOME}"/.extras)"
-
-for extra in ${EXTRAS}; do
-        TOPLEVEL=
-
-        LOCATIONS=" \
-                ${ELROND_HOME}/extras/ \
-                $(cd "${ELROND_HOME}"/..; pwd) \
-                /opt \
-        "
-
-        for location in ${LOCATIONS}; do
-                if [ -d "${location}/${extra}" ]; then
-                        TOPLEVEL="${location}/${extra}"
-                fi
-        done
-
-        ELROND_EXTRAS=" \
-                ${ELROND_EXTRAS} \
-                ${TOPLEVEL} \
-        "
-        export ELROND_EXTRAS
-
-        . "${TOPLEVEL}"/etc/common
-done
 
 # $Id:$
 #
