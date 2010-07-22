@@ -94,7 +94,7 @@ fi
 
 ELROND_EXTRAS=
 
-EXTRAS="$(cat "${ELROND_HOME}"/.extras)"
+EXTRAS="$(cat "${ELROND_HOME}"/extras)"
 
 for extra in ${EXTRAS}; do
         TOPLEVEL=
