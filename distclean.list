@@ -1,5 +1,5 @@
 aclocal.m4
-autom4te.cache
+autom4te.cache/
 bin/xultest
 bin/xultool
 config.guess
@@ -38,10 +38,10 @@ src/Makefile
 src/Makefile.in
 src/python/elrond/backends/__init__.pyc
 src/python/elrond/backends/xul.py
-src/python/elrond/cover
+src/python/elrond/cover/
 src/python/elrond/.coverage
 src/python/elrond/db.pyc
-src/python/elrond.egg-info
+src/python/elrond.egg-info/
 src/python/elrond/__init__.pyc
 src/python/elrond/static.pyc
 src/python/elrond/test.pyc
@@ -49,7 +49,7 @@ src/python/elrond/util.pyc
 src/python/elrond/www/__init__.pyc
 src/ref/Makefile
 src/ref/Makefile.in
-src/ref/xul/html
+src/ref/xul/html/
 src/ref/xul/html-build.stamp
 src/ref/xul/html.stamp
 src/ref/xul/Makefile
@@ -57,7 +57,7 @@ src/ref/xul/Makefile.in
 src/ref/xul/scan-build.stamp
 src/ref/xul/sgml-build.stamp
 src/ref/xul/sgml.stamp
-src/ref/xul/xml
+src/ref/xul/xml/
 src/ref/xul/xul.args
 src/ref/xul/xul-decl-list.txt
 src/ref/xul/xul-decl.txt
@@ -74,10 +74,10 @@ src/TAGS
 src/tests/Makefile
 src/tests/Makefile.in
 src/tests/TAGS
-src/tests/xul/coverage
-src/tests/xul/.deps
+src/tests/xul/coverage/
+src/tests/xul/.deps/
 src/tests/xul/lcov.info
-src/tests/xul/.libs
+src/tests/xul/.libs/
 src/tests/xul/Makefile
 src/tests/xul/Makefile.in
 src/tests/xul/TAGS
@@ -87,10 +87,10 @@ src/tests/xul/xultest-xprefs.o
 src/tests/xul/xultest-xshm.o
 src/tests/xul/xultest-xtime.o
 src/tests/xul/xultest-xultest.o
-src/xul/.deps
+src/xul/.deps/
 src/xul/libpyxul.la
 src/xul/libpyxul_la-python.lo
-src/xul/.libs
+src/xul/.libs/
 src/xul/libxul.la
 src/xul/libxul_la-xbuffer.lo
 src/xul/libxul_la-xerror.lo

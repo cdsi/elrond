@@ -15,4 +15,4 @@ done
 # cd "${ELROND_HOME}"
 # git clean -d -f x
 # yes | ./build.sh && ./test.sh
-# git status -s | grep -e ^[?] | sort > distclean.list
+# git status -s | grep -e ^[?] | sed 's/^.. \+//' | sort > distclean.list
