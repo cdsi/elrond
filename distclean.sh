@@ -13,7 +13,6 @@ done
 # To re-create distclean.list:
 #
 # cd "${ELROND_HOME}"
-# svn-clean
-# yes | ./build.sh
-# ./test.sh
-# svn st --no-ignore | grep -e ^[I?] | grep -v 'extras/' | sed 's/^. \+//' | sort > distclean.list
+# git clean -d -f x
+# yes | ./build.sh && ./test.sh
+# git status -s | grep -e ^[?] | sort > distclean.list
