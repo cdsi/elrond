@@ -54,7 +54,7 @@ MEDIA_URL = ''
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = THIS BREAKS! REPLACE ME! USE: random-string.py
+SECRET_KEY = '3*=c6lc+#rto)1((gmecx5&!p(x805&65w7zr+d*_c5%+gdt06'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
