@@ -5,4 +5,4 @@ export ELROND_HOME
 
 . ${ELROND_HOME}/etc/common
 
-exec elrond-django-manage.sh loaddata "${ELROND_DATA}"/elrond-django-load.json
+exec elrond-django-manage.sh loaddata "${ELROND_DB}"/elrond-django-db.json
