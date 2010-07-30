@@ -3,26 +3,18 @@ from __future__ import with_statement
 
 import numpy as np
 
-HEXFILT = ''.join([(len(repr(chr(x))) == 3) and chr(x) or '.' for x in range(256)])
-
-def hexdump(src, size, columns=32):
-        """ http://code.activestate.com/recipes/142812/ """
-
-        result = []
-
-        for i in xrange(0, size, columns):
-                sub1 = src[i:i + columns]
-                hexa = ' '.join(['%02X' % ord(x) for x in sub1])
-                sub2 = sub1.translate(HEXFILT)
-                result.append('%04X   %-*s   %s\n' % (i, columns * 3, hexa, sub2))
-
-        return ''.join(result)
-
-def rms(values):
-        return np.sqrt(np.mean((values**2)))
-
 def is_odd(x):
         return bool(x & 0x01)
+
+def clamp(x, l=None, u=None):
+        """return value limited by lower and/or upper bounds"""
+
+        if u is not None:
+                x = min(x, u)
+        if l is not None:
+                x = max(x, l)
+
+        return x
 
 def number_of_1_bits(x):
         count = 0
@@ -47,6 +39,24 @@ def reverse_bits(value, nbits=32):
         value = int(''.join(value), 2)
 
         return value
+
+def rms(values):
+        return np.sqrt(np.mean((values**2)))
+
+HEXFILT = ''.join([(len(repr(chr(x))) == 3) and chr(x) or '.' for x in range(256)])
+
+def hexdump(src, size, columns=32):
+        """ http://code.activestate.com/recipes/142812/ """
+
+        result = []
+
+        for i in xrange(0, size, columns):
+                sub1 = src[i:i + columns]
+                hexa = ' '.join(['%02X' % ord(x) for x in sub1])
+                sub2 = sub1.translate(HEXFILT)
+                result.append('%04X   %-*s   %s\n' % (i, columns * 3, hexa, sub2))
+
+        return ''.join(result)
 
 # $Id:$
 #
