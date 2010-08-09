@@ -1,6 +1,8 @@
 from __future__ import division
 from __future__ import with_statement
 
+import math
+
 import numpy as np
 
 def is_odd(x):
@@ -39,6 +41,38 @@ def reverse_bits(value, nbits=32):
         value = int(''.join(value), 2)
 
         return value
+
+def dB2P(x):
+        """decibels to power"""
+        return math.pow(10, x / 10)
+
+def P2dB(x):
+        """power to decibels"""
+        return math.log10(x) * 10
+
+def dB2V(x):
+        """decibels to volts"""
+        return math.pow(10, x / 20)
+
+def V2dB(x):
+        """volts to decibels"""
+        return math.log10(x) * 20
+
+def deg2r(x):
+        """degrees to radians"""
+        return x * math.pi / 180
+
+def r2deg(x):
+        """radians to degrees"""
+        return x / math.pi * 180
+
+def deg2mr(x):
+        """degrees to milliradians"""
+        return deg2r(x) * 1000
+
+def mr2deg(x):
+        """milliradians to degrees"""
+        return r2deg(x / 1000)
 
 def rms(values):
         return np.sqrt(np.mean((values**2)))
