@@ -101,7 +101,7 @@ for extra in ${EXTRAS}; do
 
         LOCATIONS=" \
                 $(cd "${ELROND_HOME}"/../..; pwd) \
-                /opt \
+                /opt/cdsi \
         "
 
         for location in ${LOCATIONS}; do
