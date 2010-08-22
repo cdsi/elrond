@@ -285,6 +285,11 @@ class Widget(Object):
                                         if not novice:
                                                 widget.hide()
 
+                                # TODO: this probably should not be set on *all* widgets. but rather
+                                # only set on "widgets". which means we need some sort of convention
+                                # to tell if a widget is a "widget" e.g. its name ends with "-widget"
+                                widget.mode = mode
+
                 return locals()
 
         def __init__(self, widget=None):
