@@ -78,7 +78,7 @@ xul_new()
         return xul;
 }
 
-XUL_APIEXPORT void
+XUL_APIEXPORT xul_rc_e
 xul_init(xul_t * xul)
 {
         g_assert(XUL_IS_VALID(xul));
@@ -87,6 +87,8 @@ xul_init(xul_t * xul)
         xul_prefs_init(xul);
         xul_time_init(xul);
         xul_verbose_init(xul);
+
+        return XUL_SUCCESS;
 }
 
 /*

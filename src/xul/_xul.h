@@ -7,7 +7,7 @@ XUL_APIEXPORT gpointer *xul_userdata_get(xul_t *);
 XUL_APIEXPORT void xul_userdata_set(xul_t *, gpointer *);
 XUL_APIEXPORT void xul_delete(xul_t *);
 XUL_APIEXPORT xul_t *xul_new();
-XUL_APIEXPORT void xul_init(xul_t *);
+XUL_APIEXPORT xul_rc_e xul_init(xul_t *);
 
 XUL_APIEXPORT void xul_buffer_dump(xul_t *, xul_buffer_t *, const gchar *);
 XUL_APIEXPORT guint64 xul_buffer_get_nbytes(xul_t *, xul_buffer_t *);
