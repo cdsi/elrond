@@ -21,6 +21,10 @@ installed into well-known locations using [Semantic
 Versioning](http://semver.org) where "unstable", "stable", and
 "testing" are links to appropriate tags and/or branches.
 
+## REQUIREMENTS
+
+ * [Sam](http://github.com/cdsi/sam)
+
 ## CONTRIBUTE
 
 [cdsi-lotr@googlegroups.com](mailto:cdsi-lotr@googlegroups.com)
