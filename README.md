@@ -21,6 +21,11 @@ installed into well-known locations using [Semantic
 Versioning](http://semver.org) where "unstable", "stable", and
 "testing" are links to appropriate tags and/or branches.
 
+## BUILD
+
+    cd elrond/unstable
+    yes | ./build.sh
+
 ## REQUIREMENTS
 
  * [Sam](http://github.com/cdsi/sam)
