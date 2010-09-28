@@ -13,9 +13,10 @@ pipe.
 ## INSTALLATION
 
     git clone git@github.com:cdsi/elrond.git elrond/git-repo
-    ln -s elrond/git-repo elrond/unstable
+    cd elrond
+    git-new-workdir git-repo v1.0.0 v1.0.0
 
-Please note that "elrond/unstable" is required by the packages that
+Please note that "elrond/v1.0.0" is required by the packages that
 depend upon elrond. This allows multiple versions of elrond to be
 installed into well-known locations using [Semantic
 Versioning](http://semver.org) where "unstable", "stable", and
@@ -23,7 +24,7 @@ Versioning](http://semver.org) where "unstable", "stable", and
 
 ## BUILD
 
-    cd elrond/unstable
+    cd elrond/v1.0.0
     yes | ./build.sh
 
 ## REQUIREMENTS
