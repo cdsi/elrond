@@ -6,7 +6,7 @@ AC_INIT
 AC_CONFIG_SRCDIR([configure.in])
 AM_INIT_AUTOMAKE(elrond, 0.0.1)
 AM_SILENT_RULES
-AM_CONFIG_HEADER(src/include/elrond_config.h)
+AM_CONFIG_HEADER([src/include/elrond_config.h])
 
 XX_ENABLE_CDS
 GTK_DOC_CHECK(1.11)
