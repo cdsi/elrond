@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <glade-catalog library="gladepython" depends="gtk+" domain="glade-3" name="ElrondWidgets">
-  
+
   <init-function>glade_python_init</init-function>
-  
+
   <glade-widget-classes>
     <glade-widget-class generic-name="ConsoleWidget" name="ConsoleWidget"
                         title="Console Widget"/>
@@ -13,7 +13,7 @@
     <glade-widget-class generic-name="WindowWidget" name="WindowWidget"
                         title="Window Widget"/>
   </glade-widget-classes>
-  
+
   <glade-widget-group name="Elrond" title="Elrond">
     <glade-widget-class-ref name="ConsoleWidget"/>
     <glade-widget-class-ref name="DialogWidget"/>
