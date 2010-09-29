@@ -48,6 +48,7 @@ AC_CONFIG_FILES([
         etc/xultest.ini
         Makefile
         src/Makefile
+        src/include/Makefile
         src/flusher/Makefile
         src/xul/Makefile
         src/ref/Makefile

@@ -13,6 +13,9 @@
 #define atoff(x)	strtof(x, NULL)
 #endif                          /* ! HAVE_ATOFF */
 
+/* TODO: This could also be __FUNCTION__ which is a GCC extension...  */
+#define __FUNC__ __func__
+
 #endif                          /* ! ELROND_COMMON_H */
 
 /*
