@@ -5,4 +5,4 @@ export ELROND_HOME
 
 . ${ELROND_HOME}/etc/common
 
-exec python.sh ${PYLINT} ${PYLINTFLAGS} ${ELROND_PYLINTFLAGS} "$@"
+exec "${ELROND_BIN}"/python.sh ${PYLINT} ${PYLINTFLAGS} ${ELROND_PYLINTFLAGS} "$@"

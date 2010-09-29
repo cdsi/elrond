@@ -5,4 +5,4 @@ export ELROND_HOME
 
 . ${ELROND_HOME}/etc/common
 
-exec python.sh ${NOSETESTS} ${NOSETESTSFLAGS} ${ELROND_NOSETESTSFLAGS} "$@"
+exec "${ELROND_BIN}"/python.sh ${NOSETESTS} ${NOSETESTSFLAGS} ${ELROND_NOSETESTSFLAGS} "$@"
