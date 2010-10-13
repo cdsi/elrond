@@ -10,6 +10,8 @@
 
 #include "xul.h"
 
+#include "xultest.h"
+
 #define BUFFER_LENGTH 128
 gchar g_buffer[BUFFER_LENGTH];
 
@@ -90,7 +92,7 @@ test_xprefs(void)
 GTestCase *
 xul_test_xprefs_case(void)
 {
-        return g_test_create_case("xprefs", 0, NULL, test_xprefs_setup, test_xprefs, test_xprefs_teardown);
+        return TESTCASE("xul-prefs", test_xprefs_setup, test_xprefs, test_xprefs_teardown);
 }
 
 /*

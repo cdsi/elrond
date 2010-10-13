@@ -2,6 +2,8 @@
 
 #include "xul.h"
 
+#include "xultest.h"
+
 xul_t *g_xul;
 
 static void
@@ -26,7 +28,7 @@ test_xtime(void)
 GTestCase *
 xul_test_xtime_case(void)
 {
-        return g_test_create_case("xtime", 0, NULL, test_xtime_setup, test_xtime, test_xtime_teardown);
+        return TESTCASE("xul-time", test_xtime_setup, test_xtime, test_xtime_teardown);
 }
 
 /*

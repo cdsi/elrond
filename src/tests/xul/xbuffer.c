@@ -2,6 +2,8 @@
 
 #include "xul.h"
 
+#include "xultest.h"
+
 xul_t *g_xul;
 
 xul_buffer_t *g_buffer;
@@ -45,8 +47,7 @@ test_xbuffer(void)
 GTestCase *
 xul_test_xbuffer_case(void)
 {
-        return g_test_create_case("xbuffer", 0, NULL, test_xbuffer_setup, test_xbuffer,
-                                  test_xbuffer_teardown);
+        return TESTCASE("xul-buffer", test_xbuffer_setup, test_xbuffer, test_xbuffer_teardown);
 }
 
 /*

@@ -2,6 +2,8 @@
 
 #include "xul.h"
 
+#include "xultest.h"
+
 xul_t *g_xul;
 xul_shm_t *g_shm;
 
@@ -45,7 +47,7 @@ test_shm(void)
 GTestCase *
 xul_test_shm_case(void)
 {
-        return g_test_create_case("xul-shm", 0, NULL, test_shm_setup, test_shm, test_shm_teardown);
+        return TESTCASE("xul-shm", test_shm_setup, test_shm, test_shm_teardown);
 }
 
 /*
