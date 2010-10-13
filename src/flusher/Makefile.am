@@ -8,4 +8,8 @@ libflusher_la_SOURCES = flusher.c
 indent-local:
 	@indent *.[ch]
 
+quick-install-local: $(lib_LTLIBRARIES) $(bin_PROGRAMS)
+	$(MAKE) $(AM_MAKEFLAGS) install
+	@touch quick-install-local
+
 .PHONY: indent-local

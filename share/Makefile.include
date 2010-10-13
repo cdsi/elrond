@@ -99,3 +99,18 @@ indent: indent-recursive indent-am
 indent-am: indent-local
 
 indent-local:
+
+### quick-install rules
+
+quick-install-recursive:
+
+ifneq ($(RECURSIVE_TARGETS),quick-install-recursive)
+quick-install-recursive:
+	$(MAKE) $(AM_MAKEFLAGS) RECURSIVE_TARGETS=quick-install-recursive quick-install-recursive
+@ENDIF@
+
+quick-install: quick-install-recursive quick-install-am
+
+quick-install-am: quick-install-local
+
+quick-install-local:
