@@ -134,13 +134,6 @@ export ELROND_PYLINTFLAGS
 ELROND_NOSETESTSFLAGS="--xunit-file=${ELROND_HOME}/test-report-python.xml --cover-html --cover-package=elrond -w ${ELROND_SRC}/python/elrond"
 export ELROND_NOSETESTSFLAGS
 
-ELROND_JAVAFLAGS="-Delrond.home=${ELROND_HOME} \
-	-Djava.util.logging.config.file=${ELROND_ETC}/elrond.properties"
-export ELROND_JAVAFLAGS
-
-ELROND_ANTFLAGS=
-export ELROND_ANTFLAGS
-
 # $Id:$
 #
 # Local Variables:
