@@ -2,10 +2,7 @@
 
 #include "xul.h"
 
-GTestCase *xul_test_xbuffer_case();
-GTestCase *xul_test_xprefs_case();
-GTestCase *xul_test_shm_case();
-GTestCase *xul_test_xtime_case();
+#include "xultest.h"
 
 int
 main(int argc, char **argv)
