@@ -10,13 +10,17 @@ bin_PROGRAMS = $(TEST_PROGS)
 indent-local:
 	@indent *.[ch]
 
-coverage-local-clear:
+quick-install-local: $(lib_LTLIBRARIES) $(bin_PROGRAMS)
+	$(MAKE) $(AM_MAKEFLAGS) install
+	@touch quick-install-local
+
+coverage-clean-local:
 	@lcov --directory $(top_srcdir) --zerocounters
 
-coverage-local: coverage-local-clear test
+coverage-local: coverage-clean-local test
 	@lcov --directory $(top_srcdir) --output-file lcov.info --capture
 
 coverage-report-local: coverage-local
 	@genhtml --output-directory coverage lcov.info
 
-.PHONY: indent-local coverage-local-clean coverage-local coveage-report-local
+.PHONY: indent-local coverage-clean-local coverage-local coveage-report-local

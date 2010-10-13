@@ -37,7 +37,7 @@ if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	[ "${FORCE:=0}" != "0" ] || [ ! -f Makefile.in ] && ./bootstrap.sh
 	[ "${FORCE:=0}" != "0" ] || [ ! -f Makefile    ] && ./run-configure.sh
 
-	${ELROND_BIN}/make.sh tags install
+	${ELROND_BIN}/make.sh tags quick-install
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then

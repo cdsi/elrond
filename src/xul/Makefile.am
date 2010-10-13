@@ -28,11 +28,12 @@ endif
 
 CLEANFILES = $(BUILT_SOURCES)
 
-check-local:
-	@test ! -d .libs || (cd .libs ; test ! -f libpyxul.so || ln -fs libpyxul.so _xul.so)
-
 indent-local:
 	@indent *.[ch]
+
+quick-install-local: $(lib_LTLIBRARIES) $(bin_PROGRAMS)
+	$(MAKE) $(AM_MAKEFLAGS) install
+	@touch quick-install-local
 
 install-exec-hook:
 	@test ! -d $(DESTDIR)$(libdir) || (cd $(DESTDIR)$(libdir) ; \
@@ -41,4 +42,7 @@ install-exec-hook:
 uninstall-hook:
 	@rm -f $(DESTDIR)$(libdir)/_xul.so
 
-.PHONY: check-local indent-local
+check-local:
+	@test ! -d .libs || (cd .libs ; test ! -f libpyxul.so || ln -fs libpyxul.so _xul.so)
+
+.PHONY: indent-local check-local
