@@ -163,8 +163,9 @@ class Widget(Object):
         def on_run(self, widget):
                 self.run()
 
-        def on_exit(self, widget):
+        def on_exit(self, widget, event):
                 self.exit()
+                return self.embedded
 
         def loadui(self, path, name):
                 self.builder = gtk.Builder()
