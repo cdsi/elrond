@@ -329,6 +329,7 @@ class SaveAs(Widget):
         def __callback(self, filename):
                 if self.callback is not None:
                         self.callback(filename)
+                self.hide()
 
         def on_cancel(self, widget):
                 self.__callback(None)
@@ -479,7 +480,6 @@ class Console(Playable):
                 self.__buffer = self.__textview.get_buffer()
 
                 self.__chooser = SaveAs()
-                self.__chooser.deletable = False
                 self.__chooser.embedded = True
                 self.__chooser.callback = self.__save
 

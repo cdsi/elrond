@@ -6,6 +6,7 @@
     <property name="border_width">5</property>
     <property name="type_hint">normal</property>
     <property name="action">save</property>
+    <signal name="destroy" handler="on_exit"/>
     <signal name="delete_event" handler="on_exit"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox">
