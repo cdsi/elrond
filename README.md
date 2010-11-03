@@ -29,7 +29,7 @@ Versioning](http://semver.org) where "unstable", "stable", and
 
 ## REQUIREMENTS
 
- * [Sam v1.0.1](http://github.com/cdsi/sam)
+ * [Sam unstable](http://github.com/cdsi/sam)
 
 ## CONTRIBUTE
 
