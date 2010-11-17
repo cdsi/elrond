@@ -416,10 +416,10 @@ class Console(Playable):
                 # end_iter is updated by the draw calls so don't attempt to re-use it...
 
                 self.__buffer.insert(self.__buffer.get_end_iter(), text)
-                self.draw()
+                #self.draw()
 
                 self.__textview.scroll_to_mark(self.__buffer.get_insert(), 0)
-                self.draw()
+                #self.draw()
 
         def appendln(self, text):
                 self.append(text + "\n")
