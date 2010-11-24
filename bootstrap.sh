@@ -12,7 +12,7 @@ else
         echo "EXTRA_DIST=" > "${ELROND_HOME}"/gtk-doc.make
 fi
 libtoolize --automake --copy --force
-aclocal ${ACLOCALFLAGS} ${ELROND_ACLOCALFLAGS}
+aclocal ${ACLOCALFLAGS}
 autoheader
 automake --add-missing --copy --force-missing --foreign
 autoconf
