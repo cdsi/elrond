@@ -1,9 +1,9 @@
-#define printf x
+#define printf foobar
 
 #include <stdarg.h>
 #include <stdio.h>
 
-#undef printf
+#undef foobar
 
 int
 printf(const char *fmt, ...)
