@@ -21,8 +21,9 @@ main(int argc, char **argv)
         snprintf(buffer, sizeof(buffer), "%s/libflusher%s.so", getenv("ELROND_LIB"), target);
         setenv("LD_PRELOAD", buffer, 1);
 
-        const char *prog = argv[1];
-        char *const params[] = { NULL };        /* TODO: */
+        char *prog = argv[1];
+        char *params[] = { NULL, NULL };        /* TODO: */
+        params[0] = prog;
         execv(prog, params);
 
         fprintf(stderr, "ERROR: Unable to execve %s: %s\n", prog, strerror(errno));
