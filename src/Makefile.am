@@ -1,3 +1,3 @@
 include $(top_srcdir)/share/Makefile.include
 
-SUBDIRS = include flusher xul ref tests
+SUBDIRS = include misc xul ref tests

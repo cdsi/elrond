@@ -49,7 +49,7 @@ AC_CONFIG_FILES([
         Makefile
         src/Makefile
         src/include/Makefile
-        src/flusher/Makefile
+        src/misc/Makefile
         src/xul/Makefile
         src/ref/Makefile
         src/ref/xul/Makefile
