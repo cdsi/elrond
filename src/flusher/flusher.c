@@ -1,9 +1,5 @@
-#define printf foobar
-
 #include <stdarg.h>
 #include <stdio.h>
-
-#undef foobar
 
 int
 printf(const char *fmt, ...)
