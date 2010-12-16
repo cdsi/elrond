@@ -22,3 +22,13 @@ fprintf(FILE * stream, const char *fmt, ...)
         fflush(stream);
         return rc;
 }
+
+/*
+ * $Id:$
+ *
+ * Local Variables:
+ * c-file-style: "linux"
+ * indent-tabs-mode: nil
+ * End:
+ * vim: ai et si sw=8 ts=8
+ */
