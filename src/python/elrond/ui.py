@@ -396,11 +396,13 @@ class Playable(Widget):
 
         def stop(self):
                 self.__is_running = False
-                self.__task.stop()
+                if self.__task:
+                        self.__task.stop()
 
         def kill(self):
                 self.stop()
-                self.__task.kill()
+                if self.__task:
+                        self.__task.kill()
 
         def __init__(self, tasklette):
                 Widget.__init__(self)
@@ -409,6 +411,8 @@ class Playable(Widget):
 
                 self.__tasklette = tasklette
                 self.__is_running = False
+
+                self.__task = None
 
 class Console(Playable):
 
