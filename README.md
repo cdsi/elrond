@@ -14,9 +14,9 @@ pipe.
 
     git clone git@github.com:cdsi/elrond.git elrond/git-repo
     cd elrond
-    git-new-workdir git-repo v1.2.0 v1.2.0
+    git-new-workdir git-repo v1.2.1 v1.2.1
 
-Please note that "elrond/v1.2.0" is required by the packages that
+Please note that "elrond/v1.2.1" is required by the packages that
 depend upon elrond. This allows multiple versions of elrond to be
 installed into well-known locations using [Semantic
 Versioning](http://semver.org) where "unstable", "stable", and
@@ -24,7 +24,7 @@ Versioning](http://semver.org) where "unstable", "stable", and
 
 ## BUILD
 
-    cd elrond/v1.2.0
+    cd elrond/v1.2.1
     yes | ./build.sh
 
 ## REQUIREMENTS
