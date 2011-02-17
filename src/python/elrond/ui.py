@@ -302,6 +302,40 @@ class Widget(Object):
 
                 self.embedded = False
 
+class MultiWidget(Widget):
+
+        def show(self):
+                self.widget.show()
+                if self.__subwidgets:
+                        for widget, container in self.__subwidgets:
+                                widget.show()
+
+        def hide(self):
+                self.widget.hide()
+                if self.__subwidgets:
+                        for widget, container in self.__subwidgets:
+                                widget.hide()
+
+        def delete(self):
+                if self.__subwidgets:
+                        for widget, container in self.__subwidgets:
+                                widget.delete()
+
+        def loadui(self, path, name):
+                self.builder = gtk.Builder()
+                self.builder.add_from_file(path + os.sep + name + '.ui')
+                self.builder.connect_signals(self)
+
+                self.widget = self.builder.get_object(name)
+
+                if self.__subwidgets:
+                        for widget, container in self.__subwidgets:
+                                c = self.builder.get_object(container)
+                                c.add(widget.widget)
+
+        def __init__(self, widgets=[]):
+                self.__subwidgets = widgets
+
 class Window(Widget):
 
         def __init__(self, *args, **kwargs):
