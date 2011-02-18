@@ -589,7 +589,7 @@ class Dialog(Playable):
                 self.loadui(path, name)
                 self.loaddb(path, name)
 
-class Plane(Widget):
+class Plane(Playable):
 
         def plot(self, x, y, z, color='white', name=None, text=None, vector=None):
                 x_limit = 40000
@@ -770,8 +770,20 @@ class Plane(Widget):
         def on_drawingarea_realize(self, widget):
                 pass
 
+        def __tasklette(self, producer):
+                for line in producer():
+                        gtk.gdk.threads_enter()
+
+                        try:
+                                # TODO:
+                                pass
+                        except:
+                                continue
+                        finally:
+                                gtk.gdk.threads_leave()
+
         def __init__(self, *args, **kwargs):
-                Widget.__init__(self, *args, **kwargs)
+                Playable.__init__(self, self.__tasklette)
 
                 path = os.environ['ELROND_ETC']
                 name = 'elrond-plane'
