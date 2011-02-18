@@ -1,5 +1,7 @@
 from optparse import OptionParser
 
+import elrond.widgets
+
 from elrond.ui import Console, Window
 from elrond.util import Object
 

@@ -15,6 +15,8 @@ class ConsoleWidget(gtk.Alignment):
                 self.console = Console()
                 self.add(self.console.widget)
 
+gobject.type_register(ConsoleWidget)
+
 class DialogWidget(gtk.Alignment):
         __gtype_name__ = 'DialogWidget'
 
@@ -24,6 +26,8 @@ class DialogWidget(gtk.Alignment):
                 self.dialog = Dialog()
                 self.add(self.dialog.widget)
 
+gobject.type_register(DialogWidget)
+
 class PlaneWidget(gtk.Alignment):
         __gtype_name__ = 'PlaneWidget'
 
@@ -32,6 +36,8 @@ class PlaneWidget(gtk.Alignment):
 
                 self.plane = Plane()
                 self.add(self.plane.widget)
+
+gobject.type_register(PlaneWidget)
 
 class WindowWidget(gtk.Alignment):
         __gtype_name__ = 'WindowWidget'
