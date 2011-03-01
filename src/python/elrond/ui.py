@@ -49,6 +49,10 @@ class Widget(Object):
 
                 return name
 
+        def get_subwidget(self, name):
+                widget = self.builder.get_object(name)
+                return widget.subwidget
+
         def get_filename(self, option, default):
                 chooser = Chooser()
 
@@ -524,6 +528,17 @@ class Console(Playable):
                 self.__filename = None
 
                 self.__textview.modify_font(pango.FontDescription('monospace 12'))
+
+class ConsoleApp(Widget):
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-console-app'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
 
 class Dialog(Playable):
 

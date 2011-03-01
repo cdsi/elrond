@@ -2,7 +2,7 @@ from optparse import OptionParser
 
 import elrond.widgets
 
-from elrond.ui import Console, Window
+from elrond.ui import ConsoleApp
 from elrond.util import Object
 
 class Callback(Object):
@@ -41,16 +41,15 @@ if not options.socket:
 callback = Callback()
 callback.socket = options.socket
 
-console = Console()
+app = ConsoleApp()
+app.title = options.title
+app.deletable = options.deletable
 
-window = Window(widget=console)
-window.title = options.title
-window.deletable = options.deletable
-
+console = app.get_subwidget('elrond-console-widget')
 console.play(callback.f)
 
-window.show()
-window.run()
+app.show()
+app.run()
 
 # $Id:$
 #
