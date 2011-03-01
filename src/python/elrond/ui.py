@@ -509,7 +509,7 @@ class Console(Playable):
                 Playable.__init__(self, self.__tasklette)
 
                 path = os.environ['ELROND_ETC']
-                name = 'elrond-console'
+                name = 'elrond-console-widget'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
