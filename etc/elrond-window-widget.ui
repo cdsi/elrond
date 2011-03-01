@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkWindow" id="elrond-window">
+  <object class="GtkWindow" id="elrond-window-widget">
     <signal name="delete_event" handler="on_exit"/>
     <child>
       <object class="GtkVBox" id="vbox">

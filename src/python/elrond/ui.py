@@ -342,7 +342,7 @@ class Window(Widget):
                 Widget.__init__(self, *args, **kwargs)
 
                 path = os.environ['ELROND_ETC']
-                name = 'elrond-window'
+                name = 'elrond-window-widget'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
