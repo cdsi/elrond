@@ -711,6 +711,52 @@ class PlaneApp(Widget):
                 self.loadui(path, name)
                 self.loaddb(path, name)
 
+class YesNo(Widget):
+
+        def get_answer(self, question):
+                widget = self.builder.get_object('textview')
+                widget.modify_font(pango.FontDescription('monospace 12'))
+
+                widget = self.builder.get_object('textbuffer')
+                widget.set_text(question)
+
+                widget = self.builder.get_object('yes-button')
+                widget.grab_focus()
+
+                self.show()
+
+        def __callback(self, answer):
+                if self.callback is not None:
+                        self.callback(answer)
+
+        def on_no(self, widget):
+                self.__callback(False)
+
+        def on_yes(self, widget):
+                self.__callback(True)
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-yesno-widget'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+                self.callback = None
+
+class YesNoApp(Widget):
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-yesno-app'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
 # TODO: these widgets require clean-up
 
 class Window(Widget):
@@ -753,41 +799,6 @@ class SaveAs(Widget):
 
                 path = os.environ['ELROND_ETC']
                 name = 'elrond-saveas-widget'
-
-                self.loadui(path, name)
-                self.loaddb(path, name)
-
-                self.callback = None
-
-class YesNo(Widget):
-
-        def get_answer(self, question):
-                widget = self.builder.get_object('textview')
-                widget.modify_font(pango.FontDescription('monospace 12'))
-
-                widget = self.builder.get_object('textbuffer')
-                widget.set_text(question)
-
-                widget = self.builder.get_object('yes-button')
-                widget.grab_focus()
-
-                self.show()
-
-        def __callback(self, answer):
-                if self.callback is not None:
-                        self.callback(answer)
-
-        def on_no(self, widget):
-                self.__callback(False)
-
-        def on_yes(self, widget):
-                self.__callback(True)
-
-        def __init__(self, *args, **kwargs):
-                Widget.__init__(self, *args, **kwargs)
-
-                path = os.environ['ELROND_ETC']
-                name = 'elrond-yesno-widget'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)

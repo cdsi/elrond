@@ -2,14 +2,14 @@ import os
 
 from optparse import OptionParser
 
-from elrond.ui import Window, YesNo
+import elrond.widgets
+
+from elrond.ui import YesNoApp
 from elrond.util import Object
 
-class Callback(Object):
-
-        def f(self, answer):
-                print 'answer =', answer
-                window.exit()
+def callback(answer):
+        print 'answer =', answer
+        app.exit()
 
 op = OptionParser('%prog [options]')
 
@@ -26,19 +26,17 @@ op.add_option('--deletable', action='store', dest='deletable', default=True,
 if not options.question:
         op.error('--question=... is required')
 
-callback = Callback()
+app = YesNoApp()
+app.title = options.title
+app.deletable = options.deletable
 
-yesno = YesNo()
-yesno.callback = callback.f
-
-window = Window(widget=yesno)
-window.title = options.title
-window.deletable = options.deletable
+yesno = app.get_subwidget('elrond-yesno-widget')
+yesno.callback = callback
 
 yesno.get_answer(options.question)
 
-window.show()
-window.run()
+app.show()
+app.run()
 
 # $Id:$
 #

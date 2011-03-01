@@ -4,7 +4,7 @@ from __future__ import with_statement
 import gobject
 import gtk
 
-from elrond.ui import Console, Dialog, Plane, Window
+from elrond.ui import Console, Dialog, Plane, Window, YesNo
 
 class Alignment(gtk.Alignment):
 
@@ -58,6 +58,17 @@ class WindowWidget(gtk.Window):
                 self.add(self.subwidget.widget)
 
 gobject.type_register(WindowWidget)
+
+class YesNoWidget(Alignment):
+        __gtype_name__ = 'YesNoWidget'
+
+        def __init__(self):
+                Alignment.__init__(self)
+
+                self.subwidget = YesNo()
+                self.add(self.subwidget.widget)
+
+gobject.type_register(YesNoWidget)
 
 # $Id:$
 #
