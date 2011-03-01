@@ -822,6 +822,17 @@ class Plane(Playable):
 
                 self.boresight = 0
 
+class PlaneApp(Widget):
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-plane-app'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
 # $Id:$
 #
 # Local Variables:

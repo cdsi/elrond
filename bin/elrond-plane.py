@@ -2,7 +2,7 @@ from optparse import OptionParser
 
 import elrond.widgets
 
-from elrond.ui import Plane, Window
+from elrond.ui import PlaneApp
 from elrond.util import Object
 
 class Callback(Object):
@@ -41,16 +41,15 @@ if not options.socket:
 callback = Callback()
 callback.socket = options.socket
 
-plane = Plane()
+app = PlaneApp()
+app.title = options.title
+app.deletable = options.deletable
 
-window = Window(widget=plane)
-window.title = options.title
-window.deletable = options.deletable
-
+plane = app.get_subwidget('elrond-plane-widget')
 plane.play(callback.f)
 
-window.show()
-window.run()
+app.show()
+app.run()
 
 # $Id:$
 #
