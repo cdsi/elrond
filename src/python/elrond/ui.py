@@ -786,7 +786,7 @@ class Plane(Playable):
                 Playable.__init__(self, self.__tasklette)
 
                 path = os.environ['ELROND_ETC']
-                name = 'elrond-plane'
+                name = 'elrond-plane-widget'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)

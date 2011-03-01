@@ -9,13 +9,13 @@ OPTION="$1"
 
 case "${OPTION}" in
         *restore-defaults)
-                rm -f "${ELROND_ETC}"/elrond-plane.ini
+                rm -f "${ELROND_ETC}"/elrond-plane-widget.ini
                 shift
         ;;
 esac
 
-if [ ! -f "${ELROND_ETC}"/elrond-plane.ini ]; then
-        cp "${ELROND_ETC}"/elrond-plane.ini.in "${ELROND_ETC}"/elrond-plane.ini
+if [ ! -f "${ELROND_ETC}"/elrond-plane-widget.ini ]; then
+        cp "${ELROND_ETC}"/elrond-plane-widget.ini.in "${ELROND_ETC}"/elrond-plane-widget.ini
 fi
 
 echo $$ > "${ELROND_RUN}"/elrond-plane.pid
