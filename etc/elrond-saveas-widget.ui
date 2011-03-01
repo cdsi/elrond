@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkFileChooserDialog" id="elrond-saveas">
+  <object class="GtkFileChooserDialog" id="elrond-saveas-widget">
     <property name="border_width">5</property>
     <property name="type_hint">normal</property>
     <property name="action">save</property>

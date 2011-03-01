@@ -9,13 +9,15 @@ OPTION="$1"
 
 case "${OPTION}" in
         *restore-defaults)
-                rm -f "${ELROND_ETC}"/elrond-saveas.ini
+                rm -f "${ELROND_ETC}"/elrond-saveas-widget.ini
                 shift
         ;;
 esac
 
-if [ ! -f "${ELROND_ETC}"/elrond-saveas.ini ]; then
-        cp "${ELROND_ETC}"/elrond-saveas.ini.in "${ELROND_ETC}"/elrond-saveas.ini
+if [ ! -f "${ELROND_ETC}"/elrond-saveas-widget.ini ]; then
+        cp "${ELROND_ETC}"/elrond-saveas-widget.ini.in "${ELROND_ETC}"/elrond-saveas-widget.ini
 fi
+
+echo $$ > "${ELROND_RUN}"/elrond-saveas.pid
 
 exec python.sh "${ELROND_BIN}"/elrond-saveas.py "$@"

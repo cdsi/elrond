@@ -375,7 +375,7 @@ class SaveAs(Widget):
                 Widget.__init__(self, *args, **kwargs)
 
                 path = os.environ['ELROND_ETC']
-                name = 'elrond-saveas'
+                name = 'elrond-saveas-widget'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
