@@ -39,10 +39,17 @@ class PlaneWidget(gtk.Alignment):
 
 gobject.type_register(PlaneWidget)
 
-class WindowWidget(gtk.Alignment):
+class WindowWidget(gtk.Window):
         __gtype_name__ = 'WindowWidget'
 
-        # TODO: top-level widgets need some tlc...
+        def __init__(self):
+                gtk.Window.__init__(self)
+
+                # TODO: "window" is used by gtk.Window
+                self.embedded = Window()
+                self.add(self.embedded.widget)
+
+gobject.type_register(WindowWidget)
 
 # $Id:$
 #
