@@ -604,6 +604,17 @@ class Dialog(Playable):
                 self.loadui(path, name)
                 self.loaddb(path, name)
 
+class DialogApp(Widget):
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-dialog-app'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
 class Plane(Playable):
 
         def plot(self, x, y, z, color='white', name=None, text=None, vector=None):
