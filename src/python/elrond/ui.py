@@ -584,7 +584,7 @@ class Dialog(Playable):
                 Playable.__init__(self, self.__tasklette)
 
                 path = os.environ['ELROND_ETC']
-                name = 'elrond-dialog'
+                name = 'elrond-dialog-widget'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
