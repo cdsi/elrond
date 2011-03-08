@@ -57,8 +57,7 @@ xul_shm_map(xul_shm_t * shm, const gchar * key, guint64 memsize)
         xul_t *xul = shm->xul;
         g_assert(XUL_IS_VALID(xul));
 
-        /* TODO: use glib routine to obtain pid */
-        shm->memname = g_strdup_printf("/%s-%" G_GUINT64_FORMAT, key, (guint64) getpid());
+        shm->memname = g_strdup_printf("/%s", key);
 
         int fd = shm_open(shm->memname, O_CREAT | O_RDWR, 0600);
         if (fd == -1) {
