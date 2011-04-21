@@ -12,13 +12,6 @@ import pango
 from elrond.tasks import Task
 from elrond.util import Object, Preferences, Property
 
-class Chooser(gtk.FileChooserDialog):
-
-        def __init__(self):
-                buttons = (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK)
-                gtk.FileChooserDialog.__init__(self, title=None, action=gtk.FILE_CHOOSER_ACTION_OPEN,
-                                               buttons=buttons)
-
 class Colors(Object):
 
         BLACK = gtk.gdk.Color(red=0x0000, green=0x0000, blue=0x0000)
@@ -48,6 +41,10 @@ class Widget(Object):
                                 pass
 
                 return name
+
+        def get_subwidget(self, name):
+                widget = self.builder.get_object(name)
+                return widget.subwidget
 
         def get_filename(self, option, default):
                 chooser = Chooser()
@@ -302,121 +299,6 @@ class Widget(Object):
 
                 self.embedded = False
 
-class MultiWidget(Widget):
-
-        def show(self):
-                self.widget.show()
-                if self.__subwidgets:
-                        for widget, container in self.__subwidgets:
-                                widget.show()
-
-        def hide(self):
-                self.widget.hide()
-                if self.__subwidgets:
-                        for widget, container in self.__subwidgets:
-                                widget.hide()
-
-        def delete(self):
-                if self.__subwidgets:
-                        for widget, container in self.__subwidgets:
-                                widget.delete()
-
-        def loadui(self, path, name):
-                self.builder = gtk.Builder()
-                self.builder.add_from_file(path + os.sep + name + '.ui')
-                self.builder.connect_signals(self)
-
-                self.widget = self.builder.get_object(name)
-
-                if self.__subwidgets:
-                        for widget, container in self.__subwidgets:
-                                c = self.builder.get_object(container)
-                                c.add(widget.widget)
-
-        def __init__(self, widgets=[]):
-                self.__subwidgets = widgets
-
-class Window(Widget):
-
-        def __init__(self, *args, **kwargs):
-                Widget.__init__(self, *args, **kwargs)
-
-                path = os.environ['ELROND_ETC']
-                name = 'elrond-window'
-
-                self.loadui(path, name)
-                self.loaddb(path, name)
-
-class SaveAs(Widget):
-
-        def get_selection(self, path=None, filename=None):
-                if filename is None:
-                        filename = '.PHONY'
-
-                if path is not None:
-                        filename = path + os.sep + filename
-
-                self.widget.set_filename(filename)
-
-                self.show()
-
-        def __callback(self, filename):
-                if self.callback is not None:
-                        self.callback(filename)
-                self.hide()
-
-        def on_cancel(self, widget):
-                self.__callback(None)
-
-        def on_ok(self, widget):
-                self.__callback(self.widget.get_filename())
-
-        def __init__(self, *args, **kwargs):
-                Widget.__init__(self, *args, **kwargs)
-
-                path = os.environ['ELROND_ETC']
-                name = 'elrond-saveas'
-
-                self.loadui(path, name)
-                self.loaddb(path, name)
-
-                self.callback = None
-
-class YesNo(Widget):
-
-        def get_answer(self, question):
-                widget = self.builder.get_object('textview')
-                widget.modify_font(pango.FontDescription('monospace 12'))
-
-                widget = self.builder.get_object('textbuffer')
-                widget.set_text(question)
-
-                widget = self.builder.get_object('yes-button')
-                widget.grab_focus()
-
-                self.show()
-
-        def __callback(self, answer):
-                if self.callback is not None:
-                        self.callback(answer)
-
-        def on_no(self, widget):
-                self.__callback(False)
-
-        def on_yes(self, widget):
-                self.__callback(True)
-
-        def __init__(self, *args, **kwargs):
-                Widget.__init__(self, *args, **kwargs)
-
-                path = os.environ['ELROND_ETC']
-                name = 'elrond-yesno'
-
-                self.loadui(path, name)
-                self.loaddb(path, name)
-
-                self.callback = None
-
 class Playable(Widget):
 
         def play(self, *args, **kwargs):
@@ -509,7 +391,7 @@ class Console(Playable):
                 Playable.__init__(self, self.__tasklette)
 
                 path = os.environ['ELROND_ETC']
-                name = 'elrond-console'
+                name = 'elrond-console-widget'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
@@ -524,6 +406,17 @@ class Console(Playable):
                 self.__filename = None
 
                 self.__textview.modify_font(pango.FontDescription('monospace 12'))
+
+class ConsoleApp(Widget):
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-console-app'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
 
 class Dialog(Playable):
 
@@ -584,12 +477,23 @@ class Dialog(Playable):
                 Playable.__init__(self, self.__tasklette)
 
                 path = os.environ['ELROND_ETC']
-                name = 'elrond-dialog'
+                name = 'elrond-dialog-widget'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
 
-class Plane(Widget):
+class DialogApp(Widget):
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-dialog-app'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+class Plane(Playable):
 
         def plot(self, x, y, z, color='white', name=None, text=None, vector=None):
                 x_limit = 40000
@@ -770,11 +674,23 @@ class Plane(Widget):
         def on_drawingarea_realize(self, widget):
                 pass
 
+        def __tasklette(self, producer):
+                for line in producer():
+                        gtk.gdk.threads_enter()
+
+                        try:
+                                # TODO:
+                                pass
+                        except:
+                                continue
+                        finally:
+                                gtk.gdk.threads_leave()
+
         def __init__(self, *args, **kwargs):
-                Widget.__init__(self, *args, **kwargs)
+                Playable.__init__(self, self.__tasklette)
 
                 path = os.environ['ELROND_ETC']
-                name = 'elrond-plane'
+                name = 'elrond-plane-widget'
 
                 self.loadui(path, name)
                 self.loaddb(path, name)
@@ -783,6 +699,154 @@ class Plane(Widget):
                 self.__layout = self.__drawingarea.create_pango_layout('')
 
                 self.boresight = 0
+
+class PlaneApp(Widget):
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-plane-app'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+class YesNo(Widget):
+
+        def get_answer(self, question):
+                widget = self.builder.get_object('textview')
+                widget.modify_font(pango.FontDescription('monospace 12'))
+
+                widget = self.builder.get_object('textbuffer')
+                widget.set_text(question)
+
+                widget = self.builder.get_object('yes-button')
+                widget.grab_focus()
+
+                self.show()
+
+        def __callback(self, answer):
+                if self.callback is not None:
+                        self.callback(answer)
+
+        def on_no(self, widget):
+                self.__callback(False)
+
+        def on_yes(self, widget):
+                self.__callback(True)
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-yesno-widget'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+                self.callback = None
+
+class YesNoApp(Widget):
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-yesno-app'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+# TODO: these widgets require clean-up
+
+class Window(Widget):
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-window-widget'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+class SaveAs(Widget):
+
+        def get_selection(self, path=None, filename=None):
+                if filename is None:
+                        filename = '.PHONY'
+
+                if path is not None:
+                        filename = path + os.sep + filename
+
+                self.widget.set_filename(filename)
+
+                self.show()
+
+        def __callback(self, filename):
+                if self.callback is not None:
+                        self.callback(filename)
+                self.hide()
+
+        def on_cancel(self, widget):
+                self.__callback(None)
+
+        def on_ok(self, widget):
+                self.__callback(self.widget.get_filename())
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-saveas-widget'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+                self.callback = None
+
+# TODO: these widgets are depricated
+
+class Chooser(gtk.FileChooserDialog):
+
+        def __init__(self):
+                buttons = (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_OPEN, gtk.RESPONSE_OK)
+                gtk.FileChooserDialog.__init__(self, title=None, action=gtk.FILE_CHOOSER_ACTION_OPEN,
+                                               buttons=buttons)
+
+class MultiWidget(Widget):
+
+        def show(self):
+                self.widget.show()
+                if self.__subwidgets:
+                        for widget, container in self.__subwidgets:
+                                widget.show()
+
+        def hide(self):
+                self.widget.hide()
+                if self.__subwidgets:
+                        for widget, container in self.__subwidgets:
+                                widget.hide()
+
+        def delete(self):
+                if self.__subwidgets:
+                        for widget, container in self.__subwidgets:
+                                widget.delete()
+
+        def loadui(self, path, name):
+                self.builder = gtk.Builder()
+                self.builder.add_from_file(path + os.sep + name + '.ui')
+                self.builder.connect_signals(self)
+
+                self.widget = self.builder.get_object(name)
+
+                if self.__subwidgets:
+                        for widget, container in self.__subwidgets:
+                                c = self.builder.get_object(container)
+                                c.add(widget.widget)
+
+        def __init__(self, widgets=[]):
+                self.__subwidgets = widgets
 
 # $Id:$
 #

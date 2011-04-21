@@ -10,7 +10,7 @@
     <releaseinfo>
       for xul @VERSION@
       The latest version of this documentation can be found on-line at
-      <ulink role="online-location" url="https://dev.creativedigitalsys.com/svn/Elrond/trunk/docs/ref/xul/">https://dev.creativedigitalsys.com/svn/Elrond/trunk/docs/ref/xul/</ulink>.
+      <ulink role="online-location" url="https://github.com/cdsi/elrond">https://github.com/cdsi/elrond</ulink>.
     </releaseinfo>
   </bookinfo>
 

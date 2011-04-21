@@ -9,13 +9,13 @@ OPTION="$1"
 
 case "${OPTION}" in
         *restore-defaults)
-                rm -f "${ELROND_ETC}"/elrond-console.ini
+                rm -f "${ELROND_ETC}"/elrond-console-widget.ini
                 shift
         ;;
 esac
 
-if [ ! -f "${ELROND_ETC}"/elrond-console.ini ]; then
-        cp "${ELROND_ETC}"/elrond-console.ini.in "${ELROND_ETC}"/elrond-console.ini
+if [ ! -f "${ELROND_ETC}"/elrond-console-widget.ini ]; then
+        cp "${ELROND_ETC}"/elrond-console-widget.ini.in "${ELROND_ETC}"/elrond-console-widget.ini
 fi
 
 echo $$ > "${ELROND_RUN}"/elrond-console.pid

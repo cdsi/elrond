@@ -1,15 +1,14 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
-  <object class="GtkAlignment" id="elrond-plane">
+  <object class="GtkAlignment" id="elrond-plane-widget">
     <property name="width_request">500</property>
     <property name="height_request">500</property>
     <property name="visible">True</property>
     <child>
       <object class="GtkVBox" id="vbox">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <child>
           <object class="GtkToolbar" id="toolbar">
             <property name="visible">True</property>

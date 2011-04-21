@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkTextBuffer" id="textbuffer"/>
-  <object class="GtkAlignment" id="elrond-yesno">
+  <object class="GtkAlignment" id="elrond-yesno-widget">
     <property name="visible">True</property>
     <property name="top_padding">6</property>
     <property name="bottom_padding">6</property>
@@ -12,12 +12,10 @@
     <child>
       <object class="GtkVBox" id="vbox">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">6</property>
         <child>
           <object class="GtkVBox" id="dialog-vbox">
             <property name="visible">True</property>
-            <property name="orientation">vertical</property>
             <child>
               <object class="GtkAlignment" id="container">
                 <property name="visible">True</property>

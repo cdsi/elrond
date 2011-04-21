@@ -1,6 +1,8 @@
 from optparse import OptionParser
 
-from elrond.ui import Dialog, Window
+import elrond.widgets
+
+from elrond.ui import DialogApp
 from elrond.util import Object
 
 class Callback(Object):
@@ -43,17 +45,17 @@ if not options.labels:
 callback = Callback()
 callback.socket = options.socket
 
-dialog = Dialog()
-dialog.labels = options.labels
+app = DialogApp()
+app.title = options.title
+app.deletable = options.deletable
 
-window = Window(widget=dialog)
-window.title = options.title
-window.deletable = options.deletable
+dialog = app.get_subwidget('elrond-dialog-widget')
+dialog.labels = options.labels
 
 dialog.play(callback.f)
 
-window.show()
-window.run()
+app.show()
+app.run()
 
 # $Id:$
 #

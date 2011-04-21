@@ -9,13 +9,15 @@ OPTION="$1"
 
 case "${OPTION}" in
         *restore-defaults)
-                rm -f "${ELROND_ETC}"/elrond-yesno.ini
+                rm -f "${ELROND_ETC}"/elrond-yesno-widget.ini
                 shift
         ;;
 esac
 
-if [ ! -f "${ELROND_ETC}"/elrond-yesno.ini ]; then
-        cp "${ELROND_ETC}"/elrond-yesno.ini.in "${ELROND_ETC}"/elrond-yesno.ini
+if [ ! -f "${ELROND_ETC}"/elrond-yesno-widget.ini ]; then
+        cp "${ELROND_ETC}"/elrond-yesno-widget.ini.in "${ELROND_ETC}"/elrond-yesno-widget.ini
 fi
+
+echo $$ > "${ELROND_RUN}"/elrond-yesno.pid
 
 exec python.sh "${ELROND_BIN}"/elrond-yesno.py "$@"
