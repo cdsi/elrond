@@ -116,6 +116,15 @@ for extra in ${EXTRAS}; do
         "
         export ELROND_EXTRAS
 
+        if [ ! -f "${TOPLEVEL}"/etc/common ]; then
+                echo -n "ERROR: Unable to locate ${extra} in any one of"
+                for location in ${LOCATIONS}; do
+                        echo -n " ${location}"
+                done
+                echo
+                exit 1
+        fi
+
         . "${TOPLEVEL}"/etc/common
 done
 
