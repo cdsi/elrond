@@ -4,8 +4,6 @@ from __future__ import with_statement
 import thread
 import threading
 
-import gobject
-
 from elrond.util import APIDepricated, Object
 
 class Task(Object):
