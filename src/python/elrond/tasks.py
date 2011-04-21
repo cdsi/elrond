@@ -26,9 +26,9 @@ class Task(Object):
                 for rc in self.__producer(*args, **kwargs):
                         if not self.__running:
                                 break
-                        gobject.idle_add(self.__loop, rc)
+                        self.__loop(rc)
                 if self.__complete:
-                        gobject.idle_add(self.__complete)
+                        self.__complete()
 
         def start(self, *args, **kwargs):
                 thread = threading.Thread(target=self.__start, args=args, kwargs=kwargs)
