@@ -52,7 +52,8 @@ xul_verbose_mask_set(xul_t * xul, xul_verbose_mask_e mask)
 }
 
 XUL_APIEXPORT void
-xul_verbose_filter_default(const gchar * domain, xul_verbose_mask_e masks, const gchar * message, gpointer __xul)
+xul_verbose_filter_default(const gchar * domain, xul_verbose_mask_e masks, const gchar * message,
+                           gpointer __xul)
 {
         xul_t *xul = (xul_t *) __xul;
 
@@ -73,7 +74,8 @@ xul_verbose_filter_default(const gchar * domain, xul_verbose_mask_e masks, const
 }
 
 XUL_APIEXPORT void
-xul_verbose_filter_time0(const gchar * domain, xul_verbose_mask_e masks, const gchar * message, gpointer __xul)
+xul_verbose_filter_time0(const gchar * domain, xul_verbose_mask_e masks, const gchar * message,
+                         gpointer __xul)
 {
         xul_t *xul = (xul_t *) __xul;
 
@@ -94,7 +96,8 @@ xul_verbose_filter_time0(const gchar * domain, xul_verbose_mask_e masks, const g
 }
 
 XUL_APIEXPORT void
-xul_verbose_filter_iso8601(const gchar * domain, xul_verbose_mask_e masks, const gchar * message, gpointer __xul)
+xul_verbose_filter_iso8601(const gchar * domain, xul_verbose_mask_e masks, const gchar * message,
+                           gpointer __xul)
 {
         xul_t *xul = (xul_t *) __xul;
 
@@ -132,7 +135,7 @@ xul_verbose_filter_set(xul_t * xul, xul_verbose_filter_f filter)
 {
         g_assert(XUL_IS_VALID(xul));
 
-        g_log_set_handler(XUL_VERBOSE_DOMAIN, G_LOG_LEVEL_MASK, (GLogFunc)filter, xul);
+        g_log_set_handler(XUL_VERBOSE_DOMAIN, G_LOG_LEVEL_MASK, (GLogFunc) filter, xul);
 }
 
 XUL_APIEXPORT void

@@ -66,7 +66,7 @@ typedef enum {
         XUL_VERBOSE_MASK_0x8000 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x000F),
 } xul_verbose_mask_e;
 
-typedef XUL_APIEXPORT void (*xul_verbose_filter_f)(const gchar *, xul_verbose_mask_e,  const gchar *, void *);
+typedef XUL_APIEXPORT void (*xul_verbose_filter_f) (const gchar *, xul_verbose_mask_e, const gchar *, void *);
 
 typedef struct {
         gboolean enabled;
