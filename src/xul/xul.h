@@ -1,6 +1,8 @@
 #ifndef XUL_H
 #define XUL_H 1
 
+#define XUL_APIEXPORT
+
 #include <glib.h>
 #include <glib/gprintf.h>
 #include <glib/gstdio.h>
@@ -44,8 +46,6 @@ typedef struct {
 #define XUL_TIME_MAGIC 0xBEEFBABE
 #define XUL_TIME_IS_VALID(x) ((x) && ((x)->magic == XUL_TIME_MAGIC))
 
-typedef GLogFunc xul_verbose_filter_f;
-
 typedef enum {
         XUL_VERBOSE_MASK_0x0000 = G_LOG_LEVEL_DEBUG,
         XUL_VERBOSE_MASK_0x0001 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x0000),
@@ -65,6 +65,8 @@ typedef enum {
         XUL_VERBOSE_MASK_0x4000 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x000E),
         XUL_VERBOSE_MASK_0x8000 = 1 << (G_LOG_LEVEL_USER_SHIFT + 0x000F),
 } xul_verbose_mask_e;
+
+typedef XUL_APIEXPORT void (*xul_verbose_filter_f)(const gchar *, xul_verbose_mask_e,  const gchar *, void *);
 
 typedef struct {
         gboolean enabled;
@@ -101,8 +103,6 @@ typedef struct {
 
 #define XUL_SHM_MAGIC 0xF00DBABE
 #define XUL_SHM_IS_VALID(x) ((x) && ((x)->magic == XUL_SHM_MAGIC))
-
-#define XUL_APIEXPORT
 
 #include "_xul.h"
 

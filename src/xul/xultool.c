@@ -32,7 +32,7 @@ userdata_t userdata;
 gchar g_buffer[BUFFER_LENGTH];
 
 void
-verbose_filter_redacted(const gchar * domain, GLogLevelFlags masks, const gchar * message, gpointer __xul)
+verbose_filter_redacted(const gchar * domain, xul_verbose_mask_e masks, const gchar * message, gpointer __xul)
 {
         xul_t *xul = (xul_t *) __xul;
 
