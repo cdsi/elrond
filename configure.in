@@ -2,11 +2,11 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT
+AC_INIT([elrond], [0.0.1])
 AC_CONFIG_SRCDIR([configure.in])
-AM_INIT_AUTOMAKE(elrond, 0.0.1)
+AC_CONFIG_HEADER([src/include/elrond_config.h])
+AM_INIT_AUTOMAKE([foreign])
 AM_SILENT_RULES
-AM_CONFIG_HEADER([src/include/elrond_config.h])
 
 XX_ENABLE_CDS
 GTK_DOC_CHECK(1.11)

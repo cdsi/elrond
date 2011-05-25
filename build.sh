@@ -44,7 +44,7 @@ if [ "${EVERYTHING}" = "1" ] || [ "${BACKENDS}" = "1" ]; then
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_PYTHON}" = "1" ]; then
-	${ELROND_BIN}/python.sh setup.py develop
+	${ELROND_BIN}/python.sh setup.py --quiet develop
 	[ $? != 0 ] && echo "ERROR!!!" && exit 1
 fi
 if [ "${EVERYTHING}" = "1" ] || [ "${JUST_JAVA}" = "1" ]; then

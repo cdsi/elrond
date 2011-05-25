@@ -11,4 +11,4 @@ if [ "${FILENAME}" = "" ]; then
     FILENAME="${ELROND_DATA}"/elrond-django-load.json
 fi
 
-exec elrond-django-manage.sh loaddata "${FILENAME}"
+exec elrond-django-manage.sh dumpdata --natural | python.sh -mjson.tool > "${FILENAME}"
