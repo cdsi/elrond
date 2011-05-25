@@ -83,7 +83,12 @@ INSTALLED_APPS = (
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'debug_toolbar',
+        'south',
 )
+
+DEBUG_TOOLBAR_CONFIG = {
+        'INTERCEPT_REDIRECTS': False,
+}
 
 # $Id:$
 #
