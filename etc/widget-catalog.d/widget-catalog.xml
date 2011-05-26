@@ -4,6 +4,8 @@
   <init-function>glade_python_init</init-function>
 
   <glade-widget-classes>
+    <glade-widget-class generic-name="ExampleWidget" name="ExampleWidget"
+                        title="Example Widget"/>
     <glade-widget-class generic-name="ConsoleWidget" name="ConsoleWidget"
                         title="Console Widget"/>
     <glade-widget-class generic-name="DialogWidget" name="DialogWidget"
@@ -17,6 +19,7 @@
   </glade-widget-classes>
 
   <glade-widget-group name="Elrond" title="Elrond">
+    <glade-widget-class-ref name="ExampleWidget"/>
     <glade-widget-class-ref name="ConsoleWidget"/>
     <glade-widget-class-ref name="DialogWidget"/>
     <glade-widget-class-ref name="PlaneWidget"/>
