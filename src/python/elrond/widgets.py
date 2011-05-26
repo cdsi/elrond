@@ -15,8 +15,8 @@ class Alignment(gtk.Alignment):
         def do_size_allocate(self, allocation):
                 self.subwidget.widget.size_allocate(allocation)
 
-class ExampleWidget(Alignment):
-        __gtype_name__ = 'ExampleWidget'
+class ElrondExampleWidget(Alignment):
+        __gtype_name__ = 'ElrondExampleWidget'
 
         def __init__(self):
                 Alignment.__init__(self)
@@ -24,7 +24,7 @@ class ExampleWidget(Alignment):
                 self.subwidget = Example()
                 self.add(self.subwidget.widget)
 
-gobject.type_register(ExampleWidget)
+gobject.type_register(ElrondExampleWidget)
 
 class ConsoleWidget(Alignment):
         __gtype_name__ = 'ConsoleWidget'
