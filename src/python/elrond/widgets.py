@@ -4,7 +4,7 @@ from __future__ import with_statement
 import gobject
 import gtk
 
-from elrond.ui import Console, Dialog, Plane, Window, YesNo
+from elrond.ui import Example, Console, Dialog, Plane, Window, YesNo
 
 class Alignment(gtk.Alignment):
 
@@ -14,6 +14,17 @@ class Alignment(gtk.Alignment):
 
         def do_size_allocate(self, allocation):
                 self.subwidget.widget.size_allocate(allocation)
+
+class ExampleWidget(Alignment):
+        __gtype_name__ = 'ExampleWidget'
+
+        def __init__(self):
+                Alignment.__init__(self)
+
+                self.subwidget = Example()
+                self.add(self.subwidget.widget)
+
+gobject.type_register(ExampleWidget)
 
 class ConsoleWidget(Alignment):
         __gtype_name__ = 'ConsoleWidget'

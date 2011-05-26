@@ -330,6 +330,28 @@ class Playable(Widget):
 
                 self.__task = None
 
+class Example(Widget):
+
+        def __init__(self):
+                Widget.__init__(self)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-example-widget'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+class ExampleApp(Widget):
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-example-app'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
 class Console(Playable):
 
         def append(self, text):
