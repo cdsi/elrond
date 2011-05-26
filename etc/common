@@ -65,7 +65,7 @@ elrond_record()
 
 elrond_recorde()
 {
-        elrond_record           "$@"
+        elrond_record        "$@"
         echo                    "$@"
 }
 
