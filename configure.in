@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT([elrond], [0.0.1])
+AC_INIT([elrond], [1.4.0])
 AC_CONFIG_SRCDIR([configure.in])
 AC_CONFIG_HEADER([src/include/elrond_config.h])
 AM_INIT_AUTOMAKE([foreign])
