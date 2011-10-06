@@ -30,6 +30,7 @@ class Task(Object):
 
         def start(self, *args, **kwargs):
                 thread = threading.Thread(target=self.__start, args=args, kwargs=kwargs)
+                thread.daemon = self._daemon
                 thread.start()
 
         def stop(self):
@@ -42,10 +43,11 @@ class Task(Object):
                 except SystemExit:
                         pass
 
-        def __init__(self, producer, callback=None, complete=None):
+        def __init__(self, producer, callback=None, complete=None, **kwargs):
                 self.__producer = producer
                 self.__callback = callback
                 self.__complete = complete
+                self._daemon = kwargs.get('daemon', False)
 
 # $Id:$
 #
