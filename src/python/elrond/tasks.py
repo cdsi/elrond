@@ -36,6 +36,9 @@ class Task(Object):
         def stop(self):
                 self.__running = False
 
+        def poll(self):
+                return self.__running
+
         def kill(self):
                 self.stop()
                 try:
@@ -48,6 +51,7 @@ class Task(Object):
                 self.__callback = callback
                 self.__complete = complete
                 self._daemon = kwargs.get('daemon', False)
+                self.__running = False
 
 # $Id:$
 #
