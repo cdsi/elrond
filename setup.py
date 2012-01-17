@@ -11,4 +11,5 @@ setup(
     url='http://www.creativedigitalsys.com',
     package_dir={'': 'src/python'},
     packages=['elrond'],
+    requires=['configobj'],
 )
