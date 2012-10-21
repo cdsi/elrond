@@ -4,7 +4,7 @@ from __future__ import with_statement
 import gobject
 import gtk
 
-from elrond.ui import Example, Console, Dialog, Plane, Window, YesNo
+import elrond.ui as subwidgets
 
 class Alignment(gtk.Alignment):
 
@@ -21,7 +21,7 @@ class ElrondExampleWidget(Alignment):
         def __init__(self):
                 Alignment.__init__(self)
 
-                self.subwidget = Example()
+                self.subwidget = subwidgets.Example()
                 self.add(self.subwidget.widget)
 
 gobject.type_register(ElrondExampleWidget)
@@ -32,7 +32,7 @@ class ConsoleWidget(Alignment):
         def __init__(self):
                 Alignment.__init__(self)
 
-                self.subwidget = Console()
+                self.subwidget = subwidgets.Console()
                 self.add(self.subwidget.widget)
 
 gobject.type_register(ConsoleWidget)
@@ -43,7 +43,7 @@ class DialogWidget(Alignment):
         def __init__(self):
                 Alignment.__init__(self)
 
-                self.subwidget = Dialog()
+                self.subwidget = subwidgets.Dialog()
                 self.add(self.subwidget.widget)
 
 gobject.type_register(DialogWidget)
@@ -54,7 +54,7 @@ class PlaneWidget(Alignment):
         def __init__(self):
                 Alignment.__init__(self)
 
-                self.subwidget = Plane()
+                self.subwidget = subwidgets.Plane()
                 self.add(self.subwidget.widget)
 
 gobject.type_register(PlaneWidget)
@@ -65,7 +65,7 @@ class WindowWidget(gtk.Window):
         def __init__(self):
                 gtk.Window.__init__(self)
 
-                self.subwidget = Window()
+                self.subwidget = subwidgets.Window()
                 self.add(self.subwidget.widget)
 
 gobject.type_register(WindowWidget)
@@ -76,10 +76,21 @@ class YesNoWidget(Alignment):
         def __init__(self):
                 Alignment.__init__(self)
 
-                self.subwidget = YesNo()
+                self.subwidget = subwidgets.YesNo()
                 self.add(self.subwidget.widget)
 
 gobject.type_register(YesNoWidget)
+
+class QNAWidget(Alignment):
+        __gtype_name__ = 'QNAWidget'
+
+        def __init__(self):
+                Alignment.__init__(self)
+
+                self.subwidget = subwidgets.QNA()
+                self.add(self.subwidget.widget)
+
+gobject.type_register(QNAWidget)
 
 # $Id:$
 #

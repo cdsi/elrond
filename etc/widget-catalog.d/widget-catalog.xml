@@ -16,6 +16,8 @@
                         title="Window Widget"/>
     <glade-widget-class generic-name="YesNoWidget" name="YesNoWidget"
                         title="YesNo Widget"/>
+    <glade-widget-class generic-name="QNAWidget" name="QNAWidget"
+                        title="QNA Widget"/>
   </glade-widget-classes>
 
   <glade-widget-group name="Elrond" title="Elrond">
@@ -25,6 +27,7 @@
     <glade-widget-class-ref name="PlaneWidget"/>
     <glade-widget-class-ref name="WindowWidget"/>
     <glade-widget-class-ref name="YesNoWidget"/>
+    <glade-widget-class-ref name="QNAWidget"/>
   </glade-widget-group>
 
 </glade-catalog>

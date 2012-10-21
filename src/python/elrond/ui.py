@@ -779,6 +779,55 @@ class YesNoApp(Widget):
                 self.loadui(path, name)
                 self.loaddb(path, name)
 
+class QNA(Widget):
+
+        def get_answer(self, question, answer=None):
+                if answer == None:
+                        answer = ''
+
+                widget = self.builder.get_object('question-label')
+                widget.set_text(question)
+
+                widget = self.builder.get_object('answer-entry')
+                widget.set_text(answer)
+                widget.grab_focus()
+
+                self.show()
+
+        def __callback(self, answer):
+                if self.callback is not None:
+                        self.callback(answer)
+
+        def on_cancel(self, widget):
+                self.__callback(None)
+
+        def on_ok(self, widget):
+                widget = self.builder.get_object('answer-entry')
+                answer = widget.get_text()
+                self.__callback(answer)
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-qna-widget'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
+                self.callback = None
+
+class QNAApp(Widget):
+
+        def __init__(self, *args, **kwargs):
+                Widget.__init__(self, *args, **kwargs)
+
+                path = os.environ['ELROND_ETC']
+                name = 'elrond-qna-app'
+
+                self.loadui(path, name)
+                self.loaddb(path, name)
+
 # TODO: these widgets require clean-up
 
 class Window(Widget):
