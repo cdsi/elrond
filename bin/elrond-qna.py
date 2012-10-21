@@ -14,7 +14,7 @@ def callback(answer):
 op = OptionParser('%prog [options]')
 
 op.add_option('--question', action='store', dest='question',
-              help='A question that requires a answer other than yes or no.')
+              help='A question that requires a answer other than Yes/No.')
 op.add_option('--answer', action='store', dest='answer',
               help='A default answer. [optional]')
 
