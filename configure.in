@@ -8,7 +8,7 @@ AC_CONFIG_HEADER([src/include/elrond_config.h])
 AM_INIT_AUTOMAKE([foreign])
 AM_SILENT_RULES
 
-XX_ENABLE_CDS
+XX_ENABLE_CDSI
 GTK_DOC_CHECK(1.11)
 
 # Checks for programs.
