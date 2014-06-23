@@ -8,12 +8,12 @@ if [ "${SKIP_QUESTIONS}" = "" ]; then
         read answer
         case "${answer}" in
                 [yY]*)
-                        elrond-db-delete.sh
+                        elrond-db-delete.sh || true
                 ;;
         esac
 fi
 
-elrond-db-load.sh
+elrond-db-load.sh || true
 # TODO: [ $? != 0 ] && exit 1
 
 exit 0
