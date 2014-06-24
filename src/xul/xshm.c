@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200112L
 #include "elrond_common.h"
 
 #include <errno.h>
@@ -66,7 +67,12 @@ xul_shm_map(xul_shm_t * shm, const gchar * key, guint64 memsize)
                 return XUL_ERROR;
         }
 
-        ftruncate(fd, memsize);
+        int rc = ftruncate(fd, memsize);
+        if (rc != 0) {
+                xul_error_add(xul, XUL_ERROR, XUL_ERROR_SHMEM,
+                              g_strdup_printf("%s:%d:xul_shm_map: %s", __FILE__, __LINE__, strerror(errno)));
+                return XUL_ERROR;
+        }
 
         shm->addr = mmap(NULL, memsize, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
         if (shm->addr == MAP_FAILED) {
