@@ -1,9 +1,19 @@
+# -*- coding utf-8; mode: sh -*-
+
 ELROND_HOME=${TOPLEVEL:="${ELROND_HOME}"}
 ELROND_HOME=$(cd "${ELROND_HOME}"; pwd)
 export ELROND_HOME
 
 ELROND_PERM="${HOME}"/.elrond
 export ELROND_PERM
+
+ELROND_CACHE="${ELROND_PERM}"/cache
+export ELROND_CACHE
+mkdir -p "${ELROND_CACHE}"
+
+ELROND_DB="${ELROND_PERM}"/db
+export ELROND_DB
+mkdir -p "${ELROND_DB}"
 
 ELROND_BIN="${ELROND_HOME}"/bin
 export ELROND_BIN
@@ -26,14 +36,8 @@ export ELROND_VAR
 ELROND_ARCHIVE="${ELROND_VAR}"/archive
 export ELROND_ARCHIVE
 
-ELROND_CACHE="${ELROND_PERM}"/cache
-export ELROND_CACHE
-
 ELROND_DATA="${ELROND_VAR}"/data
 export ELROND_DATA
-
-ELROND_DB="${ELROND_PERM}"/db
-export ELROND_DB
 
 ELROND_LOG="${ELROND_VAR}"/log
 export ELROND_LOG
@@ -52,10 +56,6 @@ export ELROND_CONFIGUREFLAGS
 
 ELROND_LOGFILE="${ELROND_LOG}"/elrond.log
 export ELROND_LOGFILE
-
-# create directories located in "${ELROND_PERM}"
-mkdir -p "${ELROND_CACHE}"
-mkdir -p "${ELROND_DB}"
 
 elrond_record()
 {
