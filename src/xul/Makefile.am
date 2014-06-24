@@ -1,12 +1,12 @@
 include $(top_srcdir)/share/Makefile.include
 
 lib_LTLIBRARIES = libxul.la
-libxul_la_CFLAGS = $(GLIB_CFLAGS) $(GMODULE_CFLAGS) $(COVERAGE_CFLAGS)
+libxul_la_CFLAGS = $(EXTRA_CFLAGS) $(GLIB_CFLAGS) $(GMODULE_CFLAGS) $(COVERAGE_CFLAGS)
 libxul_la_LIBADD = $(GLIB_LIBS) $(GMODULE_LIBS) $(COVERAGE_LIBS)
 libxul_la_SOURCES = xul.c xbuffer.c xerror.c xprefs.c xshm.c xtime.c xtrace.c xverbose.c
 
 bin_PROGRAMS = xultool
-xultool_CFLAGS = $(GLIB_CFLAGS) $(GMODULE_CFLAGS) $(XUL_CFLAGS)
+xultool_CFLAGS = $(EXTRA_CFLAGS) $(GLIB_CFLAGS) $(GMODULE_CFLAGS) $(XUL_CFLAGS)
 xultool_LDADD = $(GLIB_LIBS) $(GMODULE_LIBS) $(XUL_LIBS) libxul.la
 
 BUILT_SOURCES =
