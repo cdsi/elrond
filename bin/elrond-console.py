@@ -1,27 +1,23 @@
+from functools import partial
 from optparse import OptionParser
 
 import elrond.widgets
 
 from elrond.ui import ConsoleApp
-from elrond.util import Object
 
-class Callback(Object):
-
-        def f(self):
-                # This will block indefinitely until something is written to the pipe.
-                # As soon as something is written to the pipe, and this writer closes (or exits)
-                # (e.g. echo "foo:bar" > /path/to/socket) then the open call will terminate.
-                # This is why we loop indefinitely. If the socket is opened by a long-lived
-                # application, then this is not an issue. And since there is no timeout on this
-                # "read", there is no way to cleanly terminate this application.
-                while True:
-                        for line in open(self.socket, 'r'):
+def callback(socket):
+        # This will block indefinitely until something is written to the pipe.
+        # As soon as something is written to the pipe, and this writer closes (or exits)
+        # (e.g. echo "foo:bar" > /path/to/socket) then the open call will terminate.
+        # This is why we loop indefinitely. If the socket is opened by a long-lived
+        # application, then this is not an issue. And since there is no timeout on this
+        # "read", there is no way to cleanly terminate this application.
+        while True:
+                try:
+                        for line in open(socket, 'r'):
                                 yield line
-
-        def __init__(self, *args, **kwargs):
-                Object.__init__(self, *args, **kwargs)
-
-                self.socket = None
+                except FileNotFoundError as e:
+                        pass
 
 op = OptionParser('%prog [options]')
 
@@ -38,15 +34,12 @@ op.add_option('--deletable', action='store', dest='deletable', default=True,
 if not options.socket:
         op.error('--socket=... is required')
 
-callback = Callback()
-callback.socket = options.socket
-
 app = ConsoleApp()
 app.title = options.title
 app.deletable = options.deletable
 
 console = app.get_subwidget('elrond-console-widget')
-console.play(callback.f)
+console.play(partial(callback, options.socket))
 
 app.show()
 app.run()
