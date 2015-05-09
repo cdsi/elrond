@@ -110,7 +110,7 @@ for extra in ${EXTRAS}; do
         TOPLEVEL=
 
         LOCATIONS=" \
-                $(cd "${ELROND_HOME}"/../..; pwd) \
+                "${ELROND_HOME}"/../.. \
                 /opt/cdsi \
         "
 
